@@ -129,11 +129,11 @@ package Components
   model EMF "Electro-Motoric Force"
     extends Interfaces.PartialSource(final potentialReference = synchronous);
     parameter Boolean synchronous = PhaseSystem.m > 0 "synchronous machine";
-    parameter PhaseSystem.Frequency w_ref = 50 "reference value of frequency" 
+    parameter PhaseSystem.Frequency w_ref = 50 "reference value of frequency"
       annotation (Dialog(group="Reference Parameters"));
-    parameter PhaseSystem.Voltage V_ref = 10e3 "reference value of voltage" 
+    parameter PhaseSystem.Voltage V_ref = 10e3 "reference value of voltage"
       annotation (Dialog(group="Reference Parameters"));
-    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange 
+    Modelica.Mechanics.Rotational.Interfaces.Flange_a flange
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
             rotation=0)));
     PhaseSystem.Frequency w = der(flange.phi);
@@ -195,11 +195,11 @@ package Components
     extends Interfaces.PartialSource(final potentialReference = true);
     package PhaseSystem_dc = PowerFlow.PhaseSystems.DirectCurrent;
     PowerFlow.Interfaces.Terminal_p terminal_dc(
-      redeclare package PhaseSystem = PhaseSystem_dc) 
+      redeclare package PhaseSystem = PhaseSystem_dc)
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}}, rotation=0)));
     parameter PhaseSystem_dc.Voltage V_dc = 150e3 "voltage of dc system";
     parameter PhaseSystem.Frequency w_ref = 50
-      "frequency of sinusoidal voltage" 
+      "frequency of sinusoidal voltage"
       annotation (Dialog(group="Reference Parameters"));
     PhaseSystem.Current I "value of current";
   equation

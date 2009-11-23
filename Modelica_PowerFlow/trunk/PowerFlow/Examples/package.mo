@@ -1,8 +1,4 @@
 within PowerFlow;
-package Examples 
-
-
-
-
+package Examples
 
 end Examples;

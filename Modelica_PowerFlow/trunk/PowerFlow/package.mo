@@ -2,18 +2,10 @@ within ;
 package PowerFlow "Library for electrical power flow calculations"
 
 
-  annotation (version="0.3", uses(Modelica(version="3.0")));
-
-
-  replaceable package PackagePhaseSystem = 
-      PowerFlow.PhaseSystems.ThreePhaseSymmetric "Default phase system" 
+  replaceable package PackagePhaseSystem =
+      PowerFlow.PhaseSystems.ThreePhaseSymmetric "Default phase system"
     annotation (choicesAllMatching=true);
 
 
-
-
-
-
-
-
+  annotation (version="0.3", uses(Modelica(version="3.1")));
 end PowerFlow;

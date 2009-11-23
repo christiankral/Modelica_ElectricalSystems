@@ -2,7 +2,7 @@ within PowerFlow;
 package Interfaces
   connector Terminal "General power terminal"
     replaceable package PhaseSystem = PhaseSystems.PartialPhaseSystem
-      "Phase system" 
+      "Phase system"
       annotation (choicesAllMatching=true);
     PhaseSystem.Voltage v[PhaseSystem.n] "voltage vector";
     flow PhaseSystem.Current i[PhaseSystem.n] "current vector";
@@ -68,15 +68,15 @@ package Interfaces
 
   partial model PartialTwoTerminal
     replaceable package PhaseSystem = PackagePhaseSystem constrainedby
-      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system" 
+      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system"
       annotation (choicesAllMatching=true);
     function j = PhaseSystem.j;
     PowerFlow.Interfaces.Terminal_p terminal_p(
-                                      redeclare package PhaseSystem = 
+                                      redeclare package PhaseSystem =
           PhaseSystem)                                           annotation (Placement(
           transformation(extent={{-110,-10},{-90,10}}, rotation=0)));
     PowerFlow.Interfaces.Terminal_n terminal_n(
-                                      redeclare package PhaseSystem = 
+                                      redeclare package PhaseSystem =
           PhaseSystem)                                           annotation (Placement(
           transformation(extent={{90,-10},{110,10}}, rotation=0)));
     PhaseSystem.Voltage v[:] = terminal_p.v - terminal_n.v;
@@ -91,19 +91,19 @@ package Interfaces
 
   partial model PartialSource
     replaceable package PhaseSystem = PackagePhaseSystem constrainedby
-      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system" 
+      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system"
       annotation (choicesAllMatching=true);
     function j = PhaseSystem.j;
     PowerFlow.Interfaces.Terminal_n terminal(
-                                    redeclare package PhaseSystem = 
-          PhaseSystem) 
+                                    redeclare package PhaseSystem =
+          PhaseSystem)
       annotation (Placement(transformation(extent={{90,-10},{110,10}},
             rotation=0)));
     PhaseSystem.Power S[PhaseSystem.n] = -PhaseSystem.systemPower(PhaseSystem.phasePowers_vi(terminal.v, terminal.i));
     PhaseSystem.PhaseAngle phi = PhaseSystem.phase(terminal.v) - PhaseSystem.phase(-terminal.i);
-    parameter Boolean potentialReference = true "serve as potential root" 
+    parameter Boolean potentialReference = true "serve as potential root"
        annotation (Evaluate=true, Dialog(group="Reference Parameters"));
-    parameter Boolean definiteReference = false "serve as definite root" 
+    parameter Boolean definiteReference = false "serve as definite root"
        annotation (Evaluate=true, Dialog(group="Reference Parameters"));
   equation
     if potentialReference then
@@ -117,12 +117,12 @@ package Interfaces
 
   partial model PartialLoad
     replaceable package PhaseSystem = PackagePhaseSystem constrainedby
-      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system" 
+      PowerFlow.PhaseSystems.PartialPhaseSystem "Phase system"
       annotation (choicesAllMatching=true);
     function j = PhaseSystem.j;
     PowerFlow.Interfaces.Terminal_p terminal(
-                                    redeclare package PhaseSystem = 
-          PhaseSystem) 
+                                    redeclare package PhaseSystem =
+          PhaseSystem)
       annotation (Placement(transformation(extent={{-110,-10},{-90,10}},
             rotation=0)));
     PhaseSystem.Voltage v[:] = terminal.v;

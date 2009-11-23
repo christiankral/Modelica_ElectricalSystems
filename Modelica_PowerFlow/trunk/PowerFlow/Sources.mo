@@ -4,7 +4,7 @@ package Sources
     extends Interfaces.PartialSource;
     parameter PhaseSystem.Voltage V = 10e3 "value of constant voltage";
     parameter PhaseSystem.Frequency w_ref = 50
-      "frequency of sinusoidal voltage" 
+      "frequency of sinusoidal voltage"
       annotation (Dialog(group="Reference Parameters"));
   equation
     terminal.v = PhaseSystem.phaseVoltages(V, 0);
@@ -47,7 +47,7 @@ package Sources
   model FixedCurrent
     extends Interfaces.PartialLoad;
     parameter Modelica.SIunits.Current I = 0 "rms value of constant current";
-    parameter Modelica.SIunits.Angle phi = 0 "phase angle" 
+    parameter Modelica.SIunits.Angle phi = 0 "phase angle"
     annotation (Dialog(group="Reference Parameters", enable = definiteReference));
   equation
     terminal.i = PhaseSystem.phaseCurrents(I, phi);
@@ -77,7 +77,7 @@ package Sources
     extends Interfaces.PartialSource(
       final potentialReference=true);
     parameter PhaseSystem.Frequency w_ref = 50
-      "frequency of sinusoidal voltage" 
+      "frequency of sinusoidal voltage"
       annotation (Dialog(group="Reference Parameters"));
     Modelica.Blocks.Interfaces.RealInput P(unit="MW") annotation (Placement(
           transformation(extent={{-130,-20},{-90,20}}, rotation=0)));

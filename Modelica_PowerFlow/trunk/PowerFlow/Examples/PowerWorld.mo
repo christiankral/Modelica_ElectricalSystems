@@ -2,75 +2,39 @@ within PowerFlow.Examples;
 model PowerWorld "Interoperation of wind power and thermal power"
   extends Modelica.Icons.Example;
 
-  PowerFlow.Units.WindFarm windFarm(redeclare package PhaseSystem = 
-        PowerFlow.PhaseSystems.DirectCurrent) 
+  PowerFlow.Units.WindFarm windFarm(redeclare package PhaseSystem =
+        PowerFlow.PhaseSystems.DirectCurrent)
                                annotation (Placement(transformation(extent={{-50,60},
             {-30,80}},           rotation=0)));
-  PowerFlow.Units.City city 
+  PowerFlow.Units.City city
                        annotation (                      Placement(
         transformation(extent={{60,-50},{80,-30}},
                                                 rotation=0)));
-  PowerFlow.Units.LoadDispatcher dispatcher 
+  PowerFlow.Units.LoadDispatcher dispatcher
     annotation (                           Placement(transformation(extent={{-90,-60},
             {-70,-40}}, rotation=0)));
-  PowerFlow.Units.PowerPlant powerPlant(primaryControlMax=40) 
+  PowerFlow.Units.PowerPlant powerPlant(primaryControlMax=40)
                                    annotation (
       Placement(transformation(extent={{-62,-10},{-40,12}},
                                                           rotation=0)));
-  annotation (
-    experiment(StopTime=86400),
-    Commands(file(ensureSimulated=true)="plot summary.mos" "plot summary",
-             file(ensureSimulated=true)="plot powerPlant.mos" "plot powerPlant",
-             file(ensureSimulated=true)="plot hydroPlant.mos" "plot hydroPlant"),
-    Documentation(info="<html>
-<p>
-This example models a control area for power distribution in island mode, i.e. without connection to a larger net.
-It contains the following consumers and producers:
-<ul>
-<li>a city with a load of about 1000 MW, i.e. 1 Mio inhabitants,</li>
-<li>a thermal power plant with
-   <ul>
-   <li>800 MW nominal power</li>
-   <li>60 MW for secondary frequency control</li>
-   <li>40 MW for primary frequency control</li>
-   </ul></li>
-<li>a wind park with a max power of 300 MW,</li>
-<li>a hydro plant providing:
-   <ul> 
-   <li>50 MW base load using a river turbine</li>
-   <li>+-25 MW pumping power to support the day/night load cycle</li>
-   <li>up to 200 MW peak power on demand.</li>
-   </ul></li>
-</ul>
-</p>
-<p>
-The following switches/features are provided:
-<ul>
-<li><b>powerPlant.Modakond</b>: enhance the frequency/power control of the power plant to reduce throttle losses by utilizing condensate stop (see powerPlant.hotwellLevel.y, powerPlant.throttleReserve.y, powerPlant.pressureLoss.y, powerPlant.throttleCosts.y)</li>
-<li><b>windForm.cut_off</b>: suddenly take off the wind farm as the wind speed exceeds the cut-off speed, e.g. in case of a storm</li>
-</ul>
-</p>
-    </html>"),
-    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
-            {100,100}}), graphics));
-  Components.VoltageConverter trafoPlant(ratio=10/380) 
+  Components.VoltageConverter trafoPlant(ratio=10/380)
     annotation (Placement(transformation(extent={{-36,-6},{-24,6}})));
-  Components.VoltageConverter distribution(ratio=380/50) 
+  Components.VoltageConverter distribution(ratio=380/50)
     annotation (Placement(transformation(extent={{44,-46},{56,-34}})));
-  Components.Inverter HVDC 
+  Components.Inverter HVDC
     annotation (Placement(transformation(extent={{-16,34},{-4,46}})));
-  PowerFlow.Units.HydroPlant hydroPlant(primaryControlMax=200) 
+  PowerFlow.Units.HydroPlant hydroPlant(primaryControlMax=200)
     annotation (Placement(transformation(extent={{80,20},{60,40}})));
-  Components.VoltageConverter trafoHydro(ratio=380/10) 
+  Components.VoltageConverter trafoHydro(ratio=380/10)
     annotation (Placement(transformation(extent={{44,24},{56,36}})));
-  Components.Impedance linePlant(               R=1, L=1/50) 
+  Components.Impedance linePlant(               R=1, L=1/50)
     annotation (Placement(transformation(extent={{-16,-46},{-4,-34}})));
-  Components.Impedance lineWind(R=1, L=1/50) 
+  Components.Impedance lineWind(R=1, L=1/50)
                                      annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
         origin={10,10})));
-  Components.Impedance lineHydro(               R=1, L=1/50) 
+  Components.Impedance lineHydro(               R=1, L=1/50)
                                       annotation (Placement(transformation(
         extent={{-6,-6},{6,6}},
         rotation=-90,
@@ -83,10 +47,10 @@ The following switches/features are provided:
         rotation=-90,
         origin={-80,-20})));
 equation
-  connect(powerPlant.terminal, trafoPlant.terminal_p) 
+  connect(powerPlant.terminal, trafoPlant.terminal_p)
                                                  annotation (Line(
       points={{-40,6.10623e-16},{-39,6.10623e-16},{-39,4.21885e-16},{-38,
-          4.21885e-16},{-38,0},{-36,0}},
+          4.21885e-16},{-38,-1.88738e-16},{-36,-1.88738e-16}},
       color={0,0,0},
       smooth=Smooth.None));
   connect(distribution.terminal_n, city.terminal) annotation (Line(
@@ -137,4 +101,43 @@ equation
       points={{44,30},{40,30},{40,-4}},
       color={0,0,0},
       smooth=Smooth.None));
+  annotation (
+    experiment(StopTime=86400),
+    __Dymola_Commands(file(ensureSimulated=true)="Scripts/plot summary.mos"
+        "plot summary",
+             file(ensureSimulated=true)="Scripts/plot powerPlant.mos"
+        "plot powerPlant",
+             file(ensureSimulated=true)="Scripts/plot hydroPlant.mos"
+        "plot hydroPlant"),
+    Documentation(info="<html>
+<p>
+This example models a control area for power distribution in island mode, i.e. without connection to a larger net.
+It contains the following consumers and producers:
+<ul>
+<li>a city with a load of about 1000 MW, i.e. 1 Mio inhabitants,</li>
+<li>a thermal power plant with
+   <ul>
+   <li>800 MW nominal power</li>
+   <li>60 MW for secondary frequency control</li>
+   <li>40 MW for primary frequency control</li>
+   </ul></li>
+<li>a wind park with a max power of 300 MW,</li>
+<li>a hydro plant providing:
+   <ul>
+   <li>50 MW base load using a river turbine</li>
+   <li>+-25 MW pumping power to support the day/night load cycle</li>
+   <li>up to 200 MW peak power on demand.</li>
+   </ul></li>
+</ul>
+</p>
+<p>
+The following switches/features are provided:
+<ul>
+<li><b>powerPlant.Modakond</b>: enhance the frequency/power control of the power plant to reduce throttle losses by utilizing condensate stop (see powerPlant.hotwellLevel.y, powerPlant.throttleReserve.y, powerPlant.pressureLoss.y, powerPlant.throttleCosts.y)</li>
+<li><b>windForm.cut_off</b>: suddenly take off the wind farm as the wind speed exceeds the cut-off speed, e.g. in case of a storm</li>
+</ul>
+</p>
+    </html>"),
+    Diagram(coordinateSystem(preserveAspectRatio=true, extent={{-100,-100},
+            {100,100}}), graphics));
 end PowerWorld;
