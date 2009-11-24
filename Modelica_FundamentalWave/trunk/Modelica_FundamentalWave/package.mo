@@ -12,14 +12,14 @@ This library contains components for modelling of electromagnetic fundamental wa
 </p>
 
 <p>
-For more details see the <a href=Modelica_FundamentalWave.UsersGuide.Concept>concept</a>
+For more details see the <a href=Modelica_FundamentalWave.UsersGuide.Concept>concept.</a>
 </html>"));
   
     class Concept "Fundamental wave concept" 
     
       annotation (Documentation(info="<html>
 
-<h3><font color=\"#008000\" size=5>Overview of the concept of fundamental waves</font></h3>
+<h4>Overview of the concept of fundamental waves</h4>
 
 <p>
 In the fundamental wave theory only a pure sinusoidal distribution of magnetic quantities is assumed. It is thus assumed that all other harmonic wave effects are not taken into account. The potential and flow quantities of this library are the complex magnetic potential difference and the complex magnetic flux as defined in the basic <a href=\"Modelica_FundamentalWave.Interfaces.MagneticPort\">magnetic port</a>. Due to the sinusoidal distribution of magnetic potential and flux, such a complex phasor representation can be used. This way, the FundamentalWave library can be seen as a spatial extension of the <a href=\"Modelica.Magnetics.FluxTubes\">FluxTubes</a> library.
@@ -36,7 +36,7 @@ The main components of an electric machine model based on the FundamentalWave li
 The electric machine models provided in this library are based on symmetrical three phase windings in the stator and equivalent two or three phase windings in the rotor. 
 </p>
 
-<h3><font color=\"#008000\" size=5>Assumptions</font></h3>
+<h4>Assumptions</h4>
 
 <p> 
 The machine models of the FundamentalWave library are currently based on the following assumptions
@@ -64,7 +64,7 @@ The machine models of the FundamentalWave library are currently based on the fol
     class References "References" 
     
       annotation (Documentation(info="<html>
-<h3><font color=\"#008000\" size=5>References</font></h3>
+<h4>References</h4>
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
     <tr>
@@ -115,7 +115,7 @@ The machine models of the FundamentalWave library are currently based on the fol
     class Contact "Contact" 
     
       annotation (Documentation(info="<html>
-<h3><font color=\"#008000\" size=5>Contact</font></h3>
+<h4>Contact</h4>
  
 <p>
 Christian Kral<br>
@@ -132,7 +132,7 @@ Anton Haumer<br>
 email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br></dd>
 </p>
 
-<h3><font color=\"#008000\" size=5>Acknowledgements</font></h3>
+<h4>Acknowledgements</h4>
 
 <p>
 Based on an original idea of Michael Beuschel this library was revised and modified. The authors of the FundamentalWave library would like to thanks Michael Beuschel for contributing his source code to this library.
