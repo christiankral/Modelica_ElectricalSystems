@@ -3914,7 +3914,7 @@ This function determines the winding angles of a symmetrical winding with <img s
 
 
   annotation (uses(Modelica(version="2.2.2")),
-    version="0.X.0",versionDate="2009-11-XX",
+    version="0.6.0",versionDate="2009-12-04",
     Documentation(revisions="<html>
 <table border=\"1\" rules=\"groups\">
 <thead>
