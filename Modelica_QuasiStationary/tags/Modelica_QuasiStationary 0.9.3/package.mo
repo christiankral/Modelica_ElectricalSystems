@@ -479,8 +479,8 @@ In this equation <sup>*</sup> represents the conjugate complex operator
 
 
     annotation (uses(Modelica(version="2.2.2")),
-                version="0.9.X",
-                versionDate="2009-XX-XX",
+                version="0.9.3",
+                versionDate="2009-12-04",
                 preferedView="info", Documentation(info="<HTML>
 <p>
 <dl>
