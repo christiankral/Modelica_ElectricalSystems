@@ -486,8 +486,9 @@ In this equation <sup>*</sup> represents the conjugate complex operator
 
 
     annotation (uses(Modelica(version="2.2.2")),
-                version="0.9.X",
-                versionDate="2009-XX-XX",
+                version="0.9.3",
+                versionDate="2010-01-10",
+                versionBuild = 2,
                 preferedView="info", Documentation(info="<HTML>
 <p>
 <dl>
@@ -523,9 +524,16 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
       <th>Comment</th>
     </tr>
     <tr>
-      <td valign=\"top\">1.0.0</td>
-      <td valign=\"top\">XXX</td>
-      <td valign=\"top\">2009-XX-XX</td>
+      <td valign=\"top\">0.9.3 build 2</td>
+      <td valign=\"top\">3244</td>
+      <td valign=\"top\">2010-01-10</td>
+      <td valign=\"top\">C. Kral</td>
+      <td valign=\"top\">Changed connector color from dark green to light blue</td>
+    </tr>
+    <tr>
+      <td valign=\"top\">0.9.3</td>
+      <td valign=\"top\"></td>
+      <td valign=\"top\">2009-12-04</td>
       <td valign=\"top\">A. Haumer<br>C. Kral</td>
       <td valign=\"top\"></td>
     </tr>
