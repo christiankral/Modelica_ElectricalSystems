@@ -1,8 +1,10 @@
 within ;
 package Modelica_QuasiStationary "Library for quasi-stationary electrical singlephase and multiphase AC simulation"
   package UsersGuide "User's guide" 
+  
     annotation (DocumentationClass=true);
     package Overview "Overview" 
+    
       annotation (Documentation(info="<html>
 <p>
 The <a href=\"Modelica://Modelica_QuasiStationary\">Modelica_QuasiStationary</a>
@@ -215,6 +217,7 @@ as illustraed in the phasor diagram of Fig. 2.
       end ACCircuit;
     
       class Power "Real and reactive power" 
+      
         annotation (Documentation(info="<html>
  
 <p>For periodic waveforms, the average value of the instantaneous power is <b>real power</b> <i>P</i>. 
@@ -351,6 +354,7 @@ In this equation <sup>*</sup> represents the conjugate complex operator
     end Overview;
   
     class ReleaseNotes "Release notes" 
+    
       annotation (Documentation(revisions="<html>
 <h4>Version 1.0.0</h4>
  
@@ -359,6 +363,7 @@ In this equation <sup>*</sup> represents the conjugate complex operator
     end ReleaseNotes;
   
     class References 
+    
       annotation (Documentation(info="<html>
  
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
@@ -417,6 +422,7 @@ In this equation <sup>*</sup> represents the conjugate complex operator
     end References;
   
     class Contact 
+    
       annotation (Documentation(info="<html>
  
 <p>This package is developed an maintained by the following contributors</p>
@@ -455,6 +461,7 @@ In this equation <sup>*</sup> represents the conjugate complex operator
     end Contact;
   
     class Glossar 
+    
       annotation (Documentation(info="<html>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
   <tr>
@@ -544,9 +551,11 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
       connect(phi.y, polarToComplex.phi) annotation (points=[-59,-20; -50,-20;
           -50,-7.8; -40,-7.8],   style(color=74, rgbcolor={0,0,127}));
       connect(polarToComplex.y, complexToReal.u) 
-        annotation (points=[-19,0; 0,0], style(color=58, rgbcolor={0,127,0}));
-      connect(rms.y, polarToComplex.rms) annotation (points=[-59,20; -50,20;
-            -50,8; -40,8], style(color=74, rgbcolor={0,0,127}));
+        annotation (points=[-19,6.10623e-16; -14.25,6.10623e-16; -14.25,1.27676e-15;
+            -9.5,1.27676e-15; -9.5,6.66134e-16; -5.55112e-16,6.66134e-16],
+          style(color=71, rgbcolor={85,170,255}));
+      connect(rms.y, polarToComplex.rms) annotation (points=[-59,20; -50,20; -50,
+            8; -40,8],     style(color=74, rgbcolor={0,0,127}));
     end TestConversionBlock;
   
     model SeriesResonance "Series resonance circuit" 
@@ -579,27 +588,31 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
     equation 
       connect(f.y, voltageSource.f) annotation (points=[-60,-39; -60,-24; -40,
             -24], style(color=74, rgbcolor={0,0,127}));
-      connect(polarToComplex.y, voltageSource.V) annotation (points=[-60,-1;
-            -60,-16; -40,-16], style(color=58, rgbcolor={0,127,0}));
+      connect(polarToComplex.y, voltageSource.V) annotation (points=[-60,-1; -60,
+            -16; -40,-16], style(color=71, rgbcolor={85,170,255}));
       connect(ground.pin, voltageSource.pin_n) annotation (points=[-30,-40; -30,
-            -30], style(color=58, rgbcolor={0,127,0}));
+            -30], style(color=71, rgbcolor={85,170,255}));
       connect(voltageSource.pin_p, currentSensor.pin_p) annotation (points=[-30,-10;
-            -30,0; -20,0],      style(color=58, rgbcolor={0,127,0}));
+            -30,-6.10623e-16; -20,-6.10623e-16], style(color=71, rgbcolor={85,170,
+              255}));
       connect(currentSensor.pin_n, resistor.pin_p) 
-        annotation (points=[0,0; 2.5,0; 2.5,-3.36456e-022; 5,-3.36456e-022; 5,0; 10,
-            0],                         style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[5.55112e-16,-6.10623e-16; 2.5,-6.10623e-16; 2.5,-3.36456e-22;
+            5,-3.36456e-22; 5,6.10623e-16; 10,6.10623e-16], style(color=71,
+            rgbcolor={85,170,255}));
       connect(resistor.pin_n, inductor.pin_p) 
-        annotation (points=[30,0; 32.5,0; 32.5,1.22125e-015; 35,1.22125e-015; 35,0;
-            40,0],                       style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[30,6.10623e-16; 32.5,6.10623e-16; 32.5,1.22125e-15;
+            35,1.22125e-15; 35,6.10623e-16; 40,6.10623e-16], style(color=71,
+            rgbcolor={85,170,255}));
       connect(inductor.pin_n, capacitor.pin_p) 
-        annotation (points=[60,0; 62.5,0; 62.5,1.22125e-015; 65,1.22125e-015; 65,0;
-            70,0],                       style(color=58, rgbcolor={0,127,0}));
-      connect(capacitor.pin_n, ground.pin) annotation (points=[90,0; 90,-40; -30,
-            -40],     style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[60,6.10623e-16; 62.5,6.10623e-16; 62.5,1.22125e-15;
+            65,1.22125e-15; 65,6.10623e-16; 70,6.10623e-16], style(color=71,
+            rgbcolor={85,170,255}));
+      connect(capacitor.pin_n, ground.pin) annotation (points=[90,6.10623e-16; 90,
+            -40; -30,-40], style(color=71, rgbcolor={85,170,255}));
       connect(complexToPolar.u, currentSensor.y) annotation (points=[-10,20;
-            -10,11], style(color=58, rgbcolor={0,127,0}));
-      connect(phi.y, polarToComplex.phi) annotation (points=[-80,39; -80,30;
-            -67.8,30; -67.8,20], style(color=74, rgbcolor={0,0,127}));
+            -10,11], style(color=71, rgbcolor={85,170,255}));
+      connect(phi.y, polarToComplex.phi) annotation (points=[-80,39; -80,30; -67.8,
+            30; -67.8,20],       style(color=74, rgbcolor={0,0,127}));
       connect(V.y, polarToComplex.rms) annotation (points=[-40,39; -40,30; -52,
             30; -52,20], style(color=74, rgbcolor={0,0,127}));
     end SeriesResonance;
@@ -617,7 +630,7 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
       SinglePhase.Sources.VariableCurrentSource currentSource 
         annotation (extent=[-20,30; -40,10],  rotation=-90);
       Modelica_QuasiStationary.SinglePhase.Basic.Ground ground 
-        annotation (extent=[-40,-20; -20,0]);
+        annotation (extent=[-40,-20; -20,0], style(color=71, rgbcolor={85,170,255}));
       Modelica_QuasiStationary.SinglePhase.Basic.Resistor resistor(R_ref=10) 
         annotation (extent=[-20,10; 0,30],    rotation=-90);
       Modelica_QuasiStationary.SinglePhase.Basic.Inductor inductor(L=1/(2*Modelica.Constants.pi)) 
@@ -632,29 +645,34 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
       Blocks.ComplexToPolar complexToPolar annotation (extent=[70,10; 90,30]);
     equation 
       connect(currentSource.pin_n, resistor.pin_p) annotation (points=[-30,30;
-            -30,40; -10,40; -10,30], style(color=58, rgbcolor={0,127,0}));
+            -30,40; -10,40; -10,30], style(color=71, rgbcolor={85,170,255}));
       connect(currentSource.pin_n, inductor.pin_p) annotation (points=[-30,30;
-            -30,40; 10,40; 10,30], style(color=58, rgbcolor={0,127,0}));
+            -30,40; 10,40; 10,30], style(color=71, rgbcolor={85,170,255}));
       connect(currentSource.pin_n, capacitor.pin_p) annotation (points=[-30,30;
-            -30,40; 30,40; 30,30], style(color=58, rgbcolor={0,127,0}));
+            -30,40; 30,40; 30,30], style(color=71, rgbcolor={85,170,255}));
       connect(currentSource.pin_n, voltageSensor.pin_p) annotation (points=[-30,
-            30; -30,40; 50,40; 50,30], style(color=58, rgbcolor={0,127,0}));
+            30; -30,40; 50,40; 50,30], style(color=71, rgbcolor={85,170,255}));
       connect(currentSource.pin_p, ground.pin) annotation (points=[-30,10; -30,
-            0], style(color=58, rgbcolor={0,127,0}));
-      connect(resistor.pin_n, ground.pin) annotation (points=[-10,10; -10,0;
-            -30,0], style(color=58, rgbcolor={0,127,0}));
-      connect(inductor.pin_n, ground.pin) annotation (points=[10,10; 10,0; -30,
-            0], style(color=58, rgbcolor={0,127,0}));
-      connect(capacitor.pin_n, ground.pin) annotation (points=[30,10; 30,0; -30,
-            0], style(color=58, rgbcolor={0,127,0}));
-      connect(voltageSensor.pin_n, ground.pin) annotation (points=[50,10; 50,0;
-            -30,0], style(color=58, rgbcolor={0,127,0}));
+          5.55112e-16],
+          style(color=71, rgbcolor={85,170,255}));
+      connect(resistor.pin_n, ground.pin) annotation (points=[-10,10; -10,
+          5.55112e-16; -30,5.55112e-16],
+                              style(color=71, rgbcolor={85,170,255}));
+      connect(inductor.pin_n, ground.pin) annotation (points=[10,10; 10,
+          5.55112e-16; -30,5.55112e-16],
+                              style(color=71, rgbcolor={85,170,255}));
+      connect(capacitor.pin_n, ground.pin) annotation (points=[30,10; 30,
+          5.55112e-16; -30,5.55112e-16],
+                              style(color=71, rgbcolor={85,170,255}));
+      connect(voltageSensor.pin_n, ground.pin) annotation (points=[50,10; 50,
+          5.55112e-16; -30,5.55112e-16],
+                              style(color=71, rgbcolor={85,170,255}));
       connect(f.y, currentSource.f) annotation (points=[-60,39; -60,24; -40,24],
           style(color=74, rgbcolor={0,0,127}));
       connect(polarToComplex.y, currentSource.I) annotation (points=[-60,1; -60,
-            16; -40,16], style(color=58, rgbcolor={0,127,0}));
+          16; -40,16],   style(color=71, rgbcolor={85,170,255}));
       connect(voltageSensor.y, complexToPolar.u) annotation (points=[61,20; 70,
-            20], style(color=58, rgbcolor={0,127,0}));
+            20], style(color=58, rgbcolor={85,170,255}));
       connect(phi.y, polarToComplex.phi) annotation (points=[-40,-39; -40,-32;
             -52.2,-32; -52.2,-20], style(color=74, rgbcolor={0,0,127}));
       connect(I.y, polarToComplex.rms) annotation (points=[-80,-39; -80,-32;
@@ -683,82 +701,93 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
         f=f,
         V=fill(V, m),
         phi={-(j - 1)*2*Modelica.Constants.pi/m for j in 1:m}) 
-        annotation (extent=[-90,-30; -70,-10], rotation=270);
+        annotation (extent=[-90,-30; -70,-10], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.Star star(m=m) 
-        annotation (extent=[-90,-60; -70,-40], rotation=270);
+        annotation (extent=[-90,-60; -70,-40], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Ground ground 
-        annotation (extent=[-90,-90; -70,-70]);
+        annotation (extent=[-90,-90; -70,-70], style(color=71, rgbcolor={85,170,
+              255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p1(m=m, k=1) 
-        annotation (extent=[-10,40; 10,60]);
+        annotation (extent=[-10,40; 10,60], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p2(k=2, m=m) 
-        annotation (extent=[-10,0; 10,20]);
+        annotation (extent=[-10,0; 10,20], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p3(k=3, m=m) 
-        annotation (extent=[-10,-40; 10,-20]);
+        annotation (extent=[-10,-40; 10,-20], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Sensors.PowerSensor powerSensor(m=m) 
-        annotation (extent=[-70,0; -50,20]);
+        annotation (extent=[-70,0; -50,20], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Sensors.CurrentSensor currentSensor(m=m) 
-        annotation (extent=[-40,0; -20,20]);
+        annotation (extent=[-40,0; -20,20], style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Resistor resistor(R_ref=R) 
-        annotation (extent=[20,-40; 40,-20], rotation=0);
+        annotation (extent=[20,-40; 40,-20], rotation=0,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Capacitor capacitor(C=C) 
-        annotation (extent=[20,0; 40,20],  rotation=0);
+        annotation (extent=[20,0; 40,20],  rotation=0,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Inductor inductor(L=L) 
-        annotation (extent=[20,40; 40,60],   rotation=0);
+        annotation (extent=[20,40; 40,60],   rotation=0,
+        style(color=71, rgbcolor={85,170,255}));
       annotation (Diagram(Text(
             extent=[-100,-80; 100,-100],
-            style(color=3, rgbcolor={0,0,255}),
-            string="L and C are choosen such way that the neutral current is 0")));
+            string="L and C are choosen such way that the neutral current is 0",
+            style(color=3, rgbcolor={0,0,255}))));
       MultiPhase.Basic.Star star2(m=m) 
-        annotation (extent=[70,-60; 90,-40],   rotation=270);
+        annotation (extent=[70,-60; 90,-40],   rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_n plugToPin_n1(m=m, k=1) 
-        annotation (extent=[50,40; 70,60], rotation=180);
+        annotation (extent=[50,40; 70,60], rotation=180,
+        style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_n plugToPin_n2(k=2, m=m) 
-        annotation (extent=[50,0; 70,20], rotation=180);
+        annotation (extent=[50,0; 70,20], rotation=180,
+        style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_n plugToPin_n3(k=3, m=m) 
-        annotation (extent=[50,-40; 70,-20], rotation=180);
+        annotation (extent=[50,-40; 70,-20], rotation=180,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Sensors.CurrentSensor currentSensor0 
-        annotation (extent=[-40,-70; -20,-50], rotation=180);
+        annotation (extent=[-40,-70; -20,-50], rotation=180,
+        style(color=71, rgbcolor={85,170,255}));
     equation 
       connect(ground.pin, star.pin_n) annotation (points=[-80,-70; -80,-60], style(
-            color=58, rgbcolor={0,127,0}));
+            color=71, rgbcolor={85,170,255}));
       connect(star.plug_p, voltageSource.plug_n) annotation (points=[-80,-40; -80,
-            -30], style(color=58, rgbcolor={0,127,0}));
+            -30], style(color=71, rgbcolor={85,170,255}));
       connect(voltageSource.plug_p, powerSensor.currentP) annotation (points=[-80,-10;
-            -80,10; -70,10],      style(color=58, rgbcolor={0,127,0}));
+            -80,10; -70,10], style(color=71, rgbcolor={85,170,255}));
       connect(powerSensor.currentN, currentSensor.plug_p) 
-        annotation (points=[-50,10; -40,10], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[-50,10; -40,10], style(color=71, rgbcolor={85,170,255}));
       connect(powerSensor.voltageP, powerSensor.currentP) annotation (points=[-60,20;
-            -70,20; -70,10],     style(color=58, rgbcolor={0,127,0}));
-      connect(powerSensor.voltageN, star.plug_p) annotation (points=[-60,0; -60,-40;
-            -80,-40], style(color=58, rgbcolor={0,127,0}));
+            -70,20; -70,10], style(color=71, rgbcolor={85,170,255}));
+      connect(powerSensor.voltageN, star.plug_p) annotation (points=[-60,-5.55112e-16;
+            -60,-40; -80,-40], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p2.plug_p) 
-        annotation (points=[-20,10; -2,10], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[-20,10; -2,10], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p3.plug_p) annotation (points=[-20,10;
-            -20,-30; -2,-30], style(color=58, rgbcolor={0,127,0}));
+            -20,-30; -2,-30], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p1.plug_p) annotation (points=[-20,10;
-            -20,50; -2,50], style(color=58, rgbcolor={0,127,0}));
+            -20,50; -2,50], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_p1.pin_p, inductor.pin_p) 
-        annotation (points=[2,50; 20,50], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[2,50; 20,50], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_p2.pin_p, capacitor.pin_p) 
-        annotation (points=[2,10; 20,10], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[2,10; 20,10], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_p3.pin_p, resistor.pin_p) 
-        annotation (points=[2,-30; 20,-30], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[2,-30; 20,-30], style(color=71, rgbcolor={85,170,255}));
       connect(inductor.pin_n, plugToPin_n1.pin_n) 
-        annotation (points=[40,50; 58,50], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[40,50; 58,50], style(color=71, rgbcolor={85,170,255}));
       connect(capacitor.pin_n, plugToPin_n2.pin_n) 
-        annotation (points=[40,10; 58,10], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[40,10; 58,10], style(color=71, rgbcolor={85,170,255}));
       connect(resistor.pin_n, plugToPin_n3.pin_n) 
-        annotation (points=[40,-30; 58,-30], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[40,-30; 58,-30], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_n1.plug_n, star2.plug_p) annotation (points=[62,50; 80,50;
-            80,-40], style(color=58, rgbcolor={0,127,0}));
+            80,-40], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_n2.plug_n, star2.plug_p) annotation (points=[62,10; 80,10;
-            80,-40], style(color=58, rgbcolor={0,127,0}));
+            80,-40], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_n3.plug_n, star2.plug_p) annotation (points=[62,-30; 80,-30;
-            80,-40], style(color=58, rgbcolor={0,127,0}));
+            80,-40], style(color=71, rgbcolor={85,170,255}));
       connect(star2.pin_n, currentSensor0.pin_p) 
-        annotation (points=[80,-60; -20,-60], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[80,-60; -20,-60], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor0.pin_n, star.pin_n) annotation (points=[-40,-60; -80,
-            -60], style(color=58, rgbcolor={0,127,0}));
+            -60], style(color=71, rgbcolor={85,170,255}));
     end BalancingStar;
   
     model BalancingDelta "Balancing an unsymmetrical delta-connected load" 
@@ -775,86 +804,90 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
         f=f,
         V=fill(V_LL, m),
         phi={-(j - 1)*2*Modelica.Constants.pi/m for j in 1:m}) 
-        annotation (extent=[-80,-30; -60,-10], rotation=270);
+        annotation (extent=[-80,-30; -60,-10], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.Star star(m=m) 
-        annotation (extent=[-80,-60; -60,-40], rotation=270);
+        annotation (extent=[-80,-60; -60,-40], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Ground ground 
-        annotation (extent=[-80,-90; -60,-70]);
+        annotation (extent=[-80,-90; -60,-70], style(color=71, rgbcolor={85,170,
+              255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p1(m=m, k=1) 
-        annotation (extent=[12,70; 32,90]);
+        annotation (extent=[12,70; 32,90], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p2(k=2, m=m) 
-        annotation (extent=[10,0; 30,20]);
+        annotation (extent=[10,0; 30,20], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Basic.PlugToPin_p plugToPin_p3(k=3, m=m) 
-        annotation (extent=[10,-70; 30,-50]);
+        annotation (extent=[10,-70; 30,-50], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Sensors.PowerSensor powerSensor(m=m) 
-        annotation (extent=[-60,0; -40,20]);
+        annotation (extent=[-60,0; -40,20], style(color=71, rgbcolor={85,170,255}));
       MultiPhase.Sensors.CurrentSensor currentSensor(m=m) 
-        annotation (extent=[-30,0; -10,20]);
+        annotation (extent=[-30,0; -10,20], style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Resistor resistor(R_ref=R) 
-        annotation (extent=[60,20; 80,40], rotation=90);
+        annotation (extent=[60,20; 80,40], rotation=90,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Capacitor capacitor(C=C) 
-        annotation (extent=[30,22; 50,42], rotation=270);
+        annotation (extent=[30,22; 50,42], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Basic.Inductor inductor(L=L) 
-        annotation (extent=[30,-48; 50,-28], rotation=270);
+        annotation (extent=[30,-48; 50,-28], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Sensors.CurrentSensor currentSensor12 
-        annotation (extent=[50,52; 30,72], rotation=270);
+        annotation (extent=[50,52; 30,72], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Sensors.CurrentSensor currentSensor23 
-        annotation (extent=[50,-18; 30,2],   rotation=270);
+        annotation (extent=[50,-18; 30,2],   rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
       SinglePhase.Sensors.CurrentSensor currentSensor31 
-        annotation (extent=[60,-20; 80,0],   rotation=90);
+        annotation (extent=[60,-20; 80,0],   rotation=90,
+        style(color=71, rgbcolor={85,170,255}));
       annotation (Diagram(Text(
             extent=[-100,-80; 100,-100],
             style(color=3, rgbcolor={0,0,255}),
             string=
                 "L and C are choosen such way that the 3 source currents are balanced")));
       Blocks.ComplexToPolar complexToPolar[m] 
-        annotation (extent=[-30,-30; -10,-10], rotation=270);
+        annotation (extent=[-30,-30; -10,-10], rotation=270,
+        style(color=71, rgbcolor={85,170,255}));
     equation 
-      connect(ground.pin, star.pin_n) annotation (points=[-70,-70; -70,-60], style(color=58,
-            rgbcolor={0,127,0}));
+      connect(ground.pin, star.pin_n) annotation (points=[-70,-70; -70,-60], style(
+            color=71, rgbcolor={85,170,255}));
       connect(star.plug_p, voltageSource.plug_n) annotation (points=[-70,-40;
-            -70,-30],
-                  style(color=58, rgbcolor={0,127,0}));
+            -70,-30], style(color=71, rgbcolor={85,170,255}));
       connect(voltageSource.plug_p, powerSensor.currentP) annotation (points=[-70,-10;
-            -70,10; -60,10],      style(color=58, rgbcolor={0,127,0}));
+            -70,10; -60,10], style(color=71, rgbcolor={85,170,255}));
       connect(powerSensor.currentP, powerSensor.voltageP) annotation (points=[-60,10;
-            -60,20; -50,20],     style(color=58, rgbcolor={0,127,0}));
+            -60,20; -50,20], style(color=71, rgbcolor={85,170,255}));
       connect(powerSensor.currentN, currentSensor.plug_p) 
-        annotation (points=[-40,10; -30,10], style(color=58, rgbcolor={0,127,0}));
-      connect(powerSensor.voltageN, star.plug_p) annotation (points=[-50,0; -50,
-            -40; -70,-40],
-                      style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[-40,10; -30,10], style(color=71, rgbcolor={85,170,255}));
+      connect(powerSensor.voltageN, star.plug_p) annotation (points=[-50,-5.55112e-16;
+            -50,-40; -70,-40], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p2.plug_p) 
-        annotation (points=[-10,10; 18,10], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[-10,10; 18,10], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p1.plug_p) annotation (points=[-10,10;
-            0,10; 0,80; 20,80],
-                            style(color=58, rgbcolor={0,127,0}));
+            0,10; 0,80; 20,80], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor.plug_n, plugToPin_p3.plug_p) annotation (points=[-10,10;
-            0,10; 0,-60; 18,-60],
-                              style(color=58, rgbcolor={0,127,0}));
+            0,10; 0,-60; 18,-60], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor12.pin_p, plugToPin_p1.pin_p) annotation (points=[40,72;
-            40,80; 24,80],style(color=58, rgbcolor={0,127,0}));
+            40,80; 24,80], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor12.pin_n, capacitor.pin_p) annotation (points=[40,52;
-            40,42],     style(color=58, rgbcolor={0,127,0}));
+            40,42], style(color=71, rgbcolor={85,170,255}));
       connect(capacitor.pin_n, plugToPin_p2.pin_p) annotation (points=[40,22;
-            40,10; 22,10],
-                   style(color=58, rgbcolor={0,127,0}));
+            40,10; 22,10], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_p2.pin_p, currentSensor23.pin_p) annotation (points=[22,10;
-            40,10; 40,2], style(color=58, rgbcolor={0,127,0}));
+            40,10; 40,2], style(color=71, rgbcolor={85,170,255}));
       connect(currentSensor23.pin_n, inductor.pin_p) annotation (points=[40,-18;
-            40,-28],                              style(color=58, rgbcolor={0,127,0}));
+            40,-28], style(color=71, rgbcolor={85,170,255}));
       connect(inductor.pin_n, plugToPin_p3.pin_p) annotation (points=[40,-48;
-            40,-60; 22,-60],
-                         style(color=58, rgbcolor={0,127,0}));
+            40,-60; 22,-60], style(color=71, rgbcolor={85,170,255}));
       connect(plugToPin_p1.pin_p, resistor.pin_n) annotation (points=[24,80; 70,
-            80; 70,40],
-                    style(color=58, rgbcolor={0,127,0}));
+            80; 70,40], style(color=71, rgbcolor={85,170,255}));
       connect(resistor.pin_p, currentSensor31.pin_n) 
-        annotation (points=[70,20; 70,0], style(color=58, rgbcolor={0,127,0}));
+        annotation (points=[70,20; 70,5.55112e-16], style(color=71, rgbcolor={85,
+              170,255}));
       connect(currentSensor31.pin_p, plugToPin_p3.pin_p) annotation (points=[70,-20;
-            70,-60; 22,-60],style(color=58, rgbcolor={0,127,0}));
-      connect(currentSensor.y, complexToPolar.u) annotation (points=[-20,-1;
-          -20,-5.5; -20,-10; -20,-10],   style(color=58, rgbcolor={0,127,0}));
+            70,-60; 22,-60], style(color=71, rgbcolor={85,170,255}));
+      connect(currentSensor.y, complexToPolar.u) annotation (points=[-20,-1; -20,
+            -1; -20,-10; -20,-10], style(color=71, rgbcolor={85,170,255}));
     end BalancingDelta;
   end Examples;
 
@@ -966,16 +999,17 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
           scale=0.2),
       Icon(coordinateSystem(extent=[-100,-100; 100,100]),
            Polygon(points=[-100,100; 100,0; -100,-100; -100,100], style(
-              color=58,
-              rgbcolor={0,127,0},
-              fillColor=58,
-              rgbfillColor={0,127,0}))),
+              color=71,
+              rgbcolor={85,170,255},
+              fillColor=71,
+              rgbfillColor={85,170,255},
+              fillPattern=1))),
       Diagram(Polygon(points=[0,50; 100,0; 0,-50; 0,50], style(
-              color=58,
-              rgbcolor={0,127,0},
-              fillColor=58,
-              rgbfillColor={0,127,0})),
-                                      Text(
+              color=71,
+              rgbcolor={85,170,255},
+              fillColor=71,
+              rgbfillColor={85,170,255},
+              fillPattern=1)),        Text(
           extent=[-100,100; 99,60],
           string="%name",
             style(color=74, rgbcolor={0,0,127}))));
@@ -986,15 +1020,15 @@ Copyright &copy; 2009 Anton Haumer &amp; Christian Kral.
         grid=[1,1],
         component=[20,20]),
       Icon(Polygon(points=[-100, 100; 100, 0; -100, -100; -100, 100], style(
-            color=58,
-            rgbcolor={0,127,0},
-            fillColor=7,
-            rgbfillColor={255,255,255}))),
+              color=71,
+              rgbcolor={85,170,255},
+              fillColor=7,
+              rgbfillColor={255,255,255}))),
       Diagram(Polygon(points=[-100,50; 0,0; -100,-50; -100,50], style(
-            color=58,
-            rgbcolor={0,127,0},
-            fillColor=7,
-            rgbfillColor={255,255,255})),
+              color=71,
+              rgbcolor={85,170,255},
+              fillColor=7,
+              rgbfillColor={255,255,255})),
           Text(
           extent=[-100,100; 100,60],
           string="%name",
@@ -1545,16 +1579,15 @@ derived from this base connector.
                 rgbfillColor={0,0,255},
                 fillPattern=1),
               string="%name"), Rectangle(extent=[-40,40; 40,-40], style(
-                color=58,
-                rgbcolor={0,127,0},
-                fillColor=58,
-                rgbfillColor={0,127,0}))),
-                                  Icon(Rectangle(extent=[-100,100; 100,-100],
-                style(
-                color=58,
-                rgbcolor={0,127,0},
-                fillColor=58,
-                rgbfillColor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
+                fillColor=71,
+                rgbfillColor={85,170,255},
+                fillPattern=1))), Icon(Rectangle(extent=[-100,100; 100,-100], style(
+                color=71,
+                rgbcolor={85,170,255},
+                fillColor=71,
+                rgbfillColor={85,170,255},
                 fillPattern=1))),
         Documentation(info="<html>
 
@@ -1587,14 +1620,13 @@ Additionally the reference angle is specified in the connector. The time derivat
                 rgbfillColor={0,0,255},
                 fillPattern=1),
               string="%name"), Rectangle(extent=[-40,40; 40,-40], style(
-                color=58,
-                rgbcolor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
-                fillPattern=1))), Icon(Rectangle(extent=[-100,100; 100,-100],
-                style(
-                color=58,
-                rgbcolor={0,127,0},
+                fillPattern=1))), Icon(Rectangle(extent=[-100,100; 100,-100], style(
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))),
@@ -1688,9 +1720,9 @@ This model is intended to be used with textual representation of user models.
                 fillColor=79,
                 rgbfillColor={170,85,255},
                 fillPattern=1)),
-            Line(points=[70,0; 80,0; 90,0; 100,0],     style(
-                color=58,
-                rgbcolor={0,127,0},
+            Line(points=[70,0; 80,0; 90,0; 100,0], style(
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))),
@@ -1732,7 +1764,7 @@ The absolute sensor partial model provides a single
                 fillPattern=1)),
             Line(points=[0,-70; 0,-80; 0,-90; 0,-100],     style(
                 color=58,
-                rgbcolor={0,127,0},
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))),
@@ -1907,9 +1939,9 @@ This sensor can be used to measure the complex current.
               extent=[-29,-11; 30,-70],
               style(color=0),
               string="P"),
-            Line(points=[-80,-100; -80,0],   style(
-                color=58,
-                rgbcolor={0,127,0},
+            Line(points=[-80,-100; -80,0], style(
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))),
@@ -2205,7 +2237,8 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
           connect(plugToPins_p.pin_p[j], pin_n);
         end for;
         connect(plug_p, plugToPins_p.plug_p) 
-          annotation (points=[-100,0; -72,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-100,5.55112e-16; -93,5.55112e-16; -93,1.16573e-15;
+              -86,1.16573e-15; -86,0; -72,0], style(color=58, rgbcolor={85,170,255}));
       end Star;
     
       model Delta "Delta (polygon) connection" 
@@ -2244,9 +2277,13 @@ Delta (polygon) connection of a multi phase circuit.
           end if;
         end for;
         connect(plug_p, plugToPins_p.plug_p) 
-          annotation (points=[-100,0; -72,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-100,5.55112e-16; -93,5.55112e-16; -93,1.16573e-15;
+              -86,1.16573e-15; -86,6.10623e-16; -72,6.10623e-16],
+                                              style(color=58, rgbcolor={85,170,255}));
         connect(plugToPins_n.plug_n, plug_n) 
-          annotation (points=[72,0; 100,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[72,6.10623e-16; 79,6.10623e-16; 79,1.16573e-15; 86,
+              1.16573e-15; 86,5.55112e-16; 100,5.55112e-16],
+                                            style(color=58, rgbcolor={85,170,255}));
       end Delta;
     
       model PlugToPin_p "Connect one (positive) pin" 
@@ -2477,14 +2514,20 @@ A linear temperature dependency of the resistances for enabled heat ports is als
           final alpha_ref=alpha_ref,
           each final useHeatPort=useHeatPort,
           final T=T) 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
         connect(plugToPins_p.pin_p, resistor.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(resistor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
         connect(resistor.heatPort, heatPort) 
-          annotation (points=[0,-10; 0,-100], style(color=42, rgbcolor={191,0,0}));
+          annotation (points=[6.10623e-16,-10; 6.10623e-16,-32.5; 1.16573e-15,-32.5;
+              1.16573e-15,-55; 5.55112e-16,-55; 5.55112e-16,-100],
+                                              style(color=42, rgbcolor={191,0,0}));
       end Resistor;
     
       model Conductor "Multiphase linear conductor" 
@@ -2536,14 +2579,20 @@ A linear temperature dependency of the conductances for enabled heat ports is al
           final alpha_ref=alpha_ref,
           each final useHeatPort=useHeatPort,
           final T=T) 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
         connect(plugToPins_p.pin_p, conductor.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(conductor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
         connect(conductor.heatPort, heatPort) 
-          annotation (points=[0,-10; 0,-100], style(color=42, rgbcolor={191,0,0}));
+          annotation (points=[6.10623e-16,-10; 6.10623e-16,-32.5; 1.16573e-15,-32.5;
+              1.16573e-15,-55; 5.55112e-16,-55; 5.55112e-16,-100],
+                                              style(color=42, rgbcolor={191,0,0}));
       end Conductor;
     
       model Capacitor "Multiphase linear capacitor" 
@@ -2579,12 +2628,16 @@ using <i>m</i> <a href=Modelica://Modelica_QuasiStationary.SinglePhase.Basic.Cap
 </p>
 </html>"));
         SinglePhase.Basic.Capacitor capacitor[m](final C=C) 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
         connect(plugToPins_p.pin_p, capacitor.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(capacitor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
       end Capacitor;
     
       model Inductor "Multiphase linear inductor" 
@@ -2623,14 +2676,16 @@ using <i>m</i> <a href=Modelica://Modelica_QuasiStationary.SinglePhase.Basic.Ind
 </p>
 </html>"));
         SinglePhase.Basic.Inductor inductor[m](final L=L) 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
       
-        connect(plugToPins_p.pin_p, inductor.pin_p) annotation (points=[-68,0;
-              -10,0], style(color=58, rgbcolor={0,127,0}));
-        connect(inductor.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,
-            0; 39,2.44921e-016; 68,2.44921e-016],      style(color=58, rgbcolor=
-               {0,127,0}));
+        connect(plugToPins_p.pin_p, inductor.pin_p) annotation (points=[-68,6.10623e-16;
+              -53.5,6.10623e-16; -53.5,1.22125e-15; -39,1.22125e-15; -39,6.10623e-16;
+              -10,6.10623e-16], style(color=71, rgbcolor={85,170,255}));
+        connect(inductor.pin_n, plugToPins_n.pin_n) annotation (points=[10,6.10623e-16;
+              39,6.10623e-16; 39,7.44522e-16; 68,7.44522e-16], style(color=71,
+              rgbcolor={85,170,255}));
       end Inductor;
     
       model VariableResistor "Multiphase variable resistor" 
@@ -2687,17 +2742,33 @@ A linear temperature dependency of the resistances for enabled heat ports is als
           final T_ref=T_ref,
           final alpha_ref=alpha_ref,
           each final useHeatPort=useHeatPort,
-          final T=T) annotation (extent=[-10,-10; 10,10]);
+          final T=T) annotation (extent=[-10,-10; 10,10], style(color=71,
+              rgbcolor={85,170,255}));
       equation 
       
-        connect(variableResistor.R_ref, R_ref) 
-          annotation (points=[0,11; 0,110], style(color=74, rgbcolor={0,0,127}));
         connect(variableResistor.pin_p, plugToPins_p.pin_p) 
-          annotation (points=[-10,0; -68,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-10,6.10623e-16; -24.5,6.10623e-16; -24.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -68,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(variableResistor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
-        connect(variableResistor.heatPort, heatPort) 
-          annotation (points=[0,-10; 0,-100], style(color=42, rgbcolor={191,0,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
+        connect(variableResistor.heatPort, heatPort) annotation (points=[6.10623e-16,
+              -10; 5.55112e-16,-10; 5.55112e-16,-100], style(
+            color=42,
+            rgbcolor={191,0,0},
+            smooth=0,
+            fillColor=71,
+            rgbfillColor={85,170,255},
+            fillPattern=1));
+        connect(R_ref, variableResistor.R_ref) annotation (points=[1.11022e-15,110;
+              1.11022e-15,62; 6.66134e-16,62; 6.66134e-16,11], style(
+            color=74,
+            rgbcolor={0,0,127},
+            smooth=0,
+            fillColor=71,
+            rgbfillColor={85,170,255},
+            fillPattern=1));
       end VariableResistor;
     
       model VariableConductor "Multiphase variable conductor" 
@@ -2754,16 +2825,24 @@ A linear temperature dependency of the conductances for enabled heat ports is al
           final T_ref=T_ref,
           final alpha_ref=alpha_ref,
           each final useHeatPort=useHeatPort,
-          final T=T) annotation (extent=[-10,-10; 10,10]);
+          final T=T) annotation (extent=[-10,-10; 10,10], style(color=71,
+              rgbcolor={85,170,255}));
       equation 
         connect(variableResistor.pin_p, plugToPins_p.pin_p) 
-          annotation (points=[-10,0; -68,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-10,6.10623e-16; -24.5,6.10623e-16; -24.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -68,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(variableResistor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
         connect(variableResistor.heatPort, heatPort) 
-          annotation (points=[0,-10; 0,-100], style(color=42, rgbcolor={191,0,0}));
+          annotation (points=[6.10623e-16,-10; 6.10623e-16,-32.5; 1.16573e-15,-32.5;
+              1.16573e-15,-55; 5.55112e-16,-55; 5.55112e-16,-100],
+                                              style(color=42, rgbcolor={191,0,0}));
         connect(G_ref, variableResistor.G_ref) 
-          annotation (points=[0,110; 0,11], style(color=74, rgbcolor={0,0,127}));
+          annotation (points=[1.11022e-15,110; 1.11022e-15,85.25; 1.77635e-15,85.25;
+              1.77635e-15,60.5; 6.66134e-16,60.5; 6.66134e-16,11],
+                                            style(color=74, rgbcolor={0,0,127}));
       end VariableConductor;
     
       model VariableCapacitor "Multiphase variable capacitor" 
@@ -2802,14 +2881,24 @@ The capacitances <i>C</i> are given as <i>m</i> input signals.
         Modelica.Blocks.Interfaces.RealInput C[m] 
           annotation (extent=[-20,90; 20,130],   rotation=-90);
         SinglePhase.Basic.VariableCapacitor variableCapacitor[m] 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
-        connect(C, variableCapacitor.C) 
-          annotation (points=[0,110; 0,11], style(color=74, rgbcolor={0,0,127}));
         connect(variableCapacitor.pin_p, plugToPins_p.pin_p) 
-          annotation (points=[-10,0; -68,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-10,6.10623e-16; -24.5,6.10623e-16; -24.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -68,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(variableCapacitor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
+        connect(C, variableCapacitor.C) annotation (points=[1.11022e-15,110; 1.11022e-15,
+              61; 6.66134e-16,61; 6.66134e-16,11], style(
+            color=74,
+            rgbcolor={0,0,127},
+            smooth=0,
+            fillColor=71,
+            rgbfillColor={85,170,255},
+            fillPattern=1));
       end VariableCapacitor;
     
       model VariableInductor "Multiphase variable inductor" 
@@ -2851,14 +2940,19 @@ The inductances <i>L</i> are given as <i>m</i> input signals.
         Modelica.Blocks.Interfaces.RealInput L[m] 
           annotation (extent=[-20,90; 20,130],   rotation=-90);
         SinglePhase.Basic.VariableInductor variableInductor[m] 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
       equation 
         connect(variableInductor.pin_p, plugToPins_p.pin_p) 
-          annotation (points=[-10,0; -68,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-10,6.10623e-16; -24.5,6.10623e-16; -24.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -68,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(variableInductor.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16], style(color=71, rgbcolor={85,170,255}));
         connect(variableInductor.L, L) 
-          annotation (points=[0,10.8; 0,110],
+          annotation (points=[6.66134e-16,10.8; 6.66134e-16,35.6; 1.77636e-15,35.6;
+              1.77636e-15,60.4; 1.11022e-15,60.4; 1.11022e-15,110],
                                             style(color=74, rgbcolor={0,0,127}));
       end VariableInductor;
     end Basic;
@@ -2904,6 +2998,7 @@ and other
         extends Interfaces.TwoPlug;
       
       SinglePhase.Ideal.Idle idle[m] annotation (extent=[-10,-10; 10,10]);
+      
       annotation (
         Diagram,
         Icon(
@@ -2925,7 +3020,7 @@ it uses <i>m</i> <a href=\"Modelica://Modelica_QuasiStationary.SinglePhase.Ideal
 </html>"));
       equation 
       connect(plugToPins_p.pin_p, idle.pin_p) annotation (points=[-68,0; -10,0],
-          style(color=58, rgbcolor={0,127,0}));
+          style(color=58, rgbcolor={85,170,255}));
       connect(idle.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,0;
             39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,
               0}));
@@ -2935,6 +3030,7 @@ it uses <i>m</i> <a href=\"Modelica://Modelica_QuasiStationary.SinglePhase.Ideal
         extends Interfaces.TwoPlug;
       
       SinglePhase.Ideal.Short short[m] annotation (extent=[-10,-10; 10,10]);
+      
       annotation (
         Diagram,
         Icon(
@@ -2955,7 +3051,7 @@ it uses <i>m</i> <a href=\"Modelica://Modelica_QuasiStationary.SinglePhase.Ideal
 </html>"));
       equation 
       connect(plugToPins_p.pin_p, short.pin_p) annotation (points=[-68,0; -10,0],
-          style(color=58, rgbcolor={0,127,0}));
+          style(color=58, rgbcolor={85,170,255}));
       connect(short.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,0;
             39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,
               0}));
@@ -3010,15 +3106,15 @@ derived from this base connector.
         extends Plug;
         Types.Reference reference;
         annotation (Icon(Ellipse(extent=[-100,100; 100,-100], style(
-                color=58,
-                rgbcolor={0,127,0},
-                fillColor=58,
-                rgbfillColor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
+                fillColor=71,
+                rgbfillColor={85,170,255},
                 fillPattern=1))), Diagram(Ellipse(extent=[-40,40; 40,-40], style(
-                color=58,
-                rgbcolor={0,127,0},
-                fillColor=58,
-                rgbfillColor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
+                fillColor=71,
+                rgbfillColor={85,170,255},
                 fillPattern=1)),          Text(
               extent=[-100,100; 100,60],
               style(
@@ -3051,13 +3147,13 @@ Additionally the reference angle is specified in the connector. The time derivat
         extends Plug;
         Types.Reference reference;
         annotation (Icon(Ellipse(extent=[-100,100; 100,-100], style(
-                color=58,
-                rgbcolor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))), Diagram(Ellipse(extent=[-40,40; 40,-40], style(
-                color=58,
-                rgbcolor={0,127,0},
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1)),          Text(
@@ -3120,9 +3216,12 @@ a <a href=\"Modelica://Modelica_QuasiStationary.MultiPhase.Basic.PlugToPins_n\">
         v.im = plug_p.pin.v.im - plug_n.pin.v.im;
         i = plug_p.pin.i;
         connect(plug_p, plugToPins_p.plug_p) 
-          annotation (points=[-100,0; -72,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-100,5.55112e-16; -93,5.55112e-16; -93,1.16573e-15;
+              -86,1.16573e-15; -86,6.10623e-16; -72,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(plugToPins_n.plug_n, plug_n) 
-          annotation (points=[72,-2.44921e-016; 86,-2.44921e-016; 86,0; 100,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[72,2.54679e-16; 86,2.54679e-16; 86,5.55112e-16; 100,
+              5.55112e-16], style(color=71, rgbcolor={85,170,255}));
       end TwoPlug;
     
       partial model AbsoluteSensor "Partial potential sensor" 
@@ -3141,9 +3240,9 @@ a <a href=\"Modelica://Modelica_QuasiStationary.MultiPhase.Basic.PlugToPins_n\">
                 fillColor=79,
                 rgbfillColor={170,85,255},
                 fillPattern=1)),
-            Line(points=[70,0; 80,0; 90,0; 100,0],   style(
-                color=58,
-                rgbcolor={0,127,0},
+            Line(points=[70,0; 80,0; 90,0; 100,0], style(
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1)),
@@ -3176,9 +3275,10 @@ The absolute sensor partial model relies on the a
           annotation (extent=[-80,-10; -60,10]);
       equation 
         connect(plug_p, plugToPins_p.plug_p) 
-            annotation (points=[-100,0; -72,0], style(
-            color=58,
-            rgbcolor={0,127,0},
+            annotation (points=[-100,5.55112e-16; -93,5.55112e-16; -93,1.16573e-15;
+              -86,1.16573e-15; -86,6.10623e-16; -72,6.10623e-16], style(
+            color=71,
+            rgbcolor={85,170,255},
             smooth=0));
       end AbsoluteSensor;
     
@@ -3198,7 +3298,7 @@ The absolute sensor partial model relies on the a
                 fillPattern=1)),
             Line(points=[0,-70; 0,-80; 0,-90; 0,-100],   style(
                 color=58,
-                rgbcolor={0,127,0},
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1)),
@@ -3336,10 +3436,13 @@ This sensor can be used to measure <i>m</i> complex potentials, using <i>m</i>
 </p>
 
 </html>"));
-        connect(plugToPins_p.pin_p, potentialSensor.pin) annotation (points=[
-              -68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
-        connect(potentialSensor.y, y) annotation (points=[11,0; 110,0], style(
-              color=58, rgbcolor={0,127,0}));
+        connect(plugToPins_p.pin_p, potentialSensor.pin) annotation (points=[-68,
+              6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15; -39,1.22125e-15;
+              -39,6.10623e-16; -10,6.10623e-16], style(color=71, rgbcolor={85,170,
+                255}));
+        connect(potentialSensor.y, y) annotation (points=[11,6.10623e-16; 35.75,
+              6.10623e-16; 35.75,1.16573e-15; 60.5,1.16573e-15; 60.5,5.55112e-16;
+              110,5.55112e-16], style(color=71, rgbcolor={85,170,255}));
       end PotentialSensor;
     
       model VoltageSensor 
@@ -3370,11 +3473,16 @@ This sensor can be used to measure <i>m</i> complex voltages, using <i>m</i>
 </html>"));
       equation 
         connect(plugToPins_p.pin_p, voltageSensor.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
-        connect(voltageSensor.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,
-            0; 39,2.44921e-016; 68,2.44921e-016],   style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(voltageSensor.pin_n, plugToPins_n.pin_n) annotation (points=[10,
+              6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,7.44522e-16],
+            style(color=71, rgbcolor={85,170,255}));
         connect(voltageSensor.y, y) 
-          annotation (points=[0,-11; 0,-110], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[6.10623e-16,-11; 6.10623e-16,-35.75; 1.16573e-15,-35.75;
+              1.16573e-15,-60.5; 5.55112e-16,-60.5; 5.55112e-16,-110], style(
+              color=71, rgbcolor={85,170,255}));
       end VoltageSensor;
     
       model CurrentSensor 
@@ -3405,11 +3513,16 @@ This sensor can be used to measure <i>m</i> complex currents, using <i>m</i>
 </html>"));
       equation 
         connect(plugToPins_p.pin_p,currentSensor. pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
-        connect(currentSensor.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,
-            0; 39,2.44921e-016; 68,2.44921e-016],   style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(currentSensor.pin_n, plugToPins_n.pin_n) annotation (points=[10,
+              6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,7.44522e-16],
+            style(color=71, rgbcolor={85,170,255}));
         connect(currentSensor.y, y) 
-          annotation (points=[0,-11; 0,-110], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[6.10623e-16,-11; 6.10623e-16,-35.75; 1.16573e-15,-35.75;
+              1.16573e-15,-60.5; 5.55112e-16,-60.5; 5.55112e-16,-110], style(
+              color=71, rgbcolor={85,170,255}));
       end CurrentSensor;
     
       model PowerSensor 
@@ -3439,9 +3552,9 @@ This sensor can be used to measure <i>m</i> complex currents, using <i>m</i>
               extent=[-29,-11; 30,-70],
               style(color=0),
               string="P"),
-            Line(points=[-80,-100; -80,0],   style(
-                color=58,
-                rgbcolor={0,127,0},
+            Line(points=[-80,-100; -80,0], style(
+                color=71,
+                rgbcolor={85,170,255},
                 fillColor=7,
                 rgbfillColor={255,255,255},
                 fillPattern=1))),
@@ -3481,35 +3594,46 @@ This sensor can be used to measure <i>m</i> complex apparent power values, using
         Basic.PlugToPins_n plugToPinsVoltageN(final m=m) 
           annotation (extent=[10,-80; -10,-60], rotation=90);
         SinglePhase.Sensors.PowerSensor powerSensor[m] 
-          annotation (extent=[-10,-10; 10,10]);
+          annotation (extent=[-10,-10; 10,10], style(color=71, rgbcolor={85,170,
+                255}));
         Blocks.Sum sum(final nin=m) 
           annotation (extent=[-90,-80; -70,-60], rotation=270);
       equation 
         connect(plugToPinsCurrentP.plug_p, currentP) 
-          annotation (points=[-72,0; -100,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-72,6.10623e-16; -79,6.10623e-16; -79,1.16573e-15;
+              -86,1.16573e-15; -86,5.55112e-16; -100,5.55112e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(currentN, plugToPinsCurrentN.plug_n) 
-          annotation (points=[100,0; 72,0], style(color=58, rgbcolor={0,127,0}));
-        connect(voltageP, plugToPinsVoltageP.plug_p) annotation (points=[0,100; 0,
-            86; 0,72; 3.67382e-016,72],
-                                      style(color=58, rgbcolor={0,127,0}));
-        connect(plugToPinsVoltageN.plug_n, voltageN) annotation (points=[
-            1.22461e-016,-72; 0,-72; 0,-100],
-                                   style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[100,5.55112e-16; 93,5.55112e-16; 93,1.16573e-15; 86,
+              1.16573e-15; 86,6.10623e-16; 72,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(voltageP, plugToPinsVoltageP.plug_p) annotation (points=[5.55112e-16,
+              100; 5.55112e-16,86; 0,72; 9.78005e-16,72], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(plugToPinsVoltageN.plug_n, voltageN) annotation (points=[-3.7714e-16,
+              -72; 5.55112e-16,-72; 5.55112e-16,-100], style(color=71, rgbcolor=
+               {85,170,255}));
         connect(plugToPinsCurrentP.pin_p, powerSensor.currentP) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
         connect(powerSensor.currentN, plugToPinsCurrentN.pin_n) 
-          annotation (points=[10,0; 68,0], style(color=58, rgbcolor={0,127,0}));
-        connect(powerSensor.voltageP, plugToPinsVoltageP.pin_p) annotation (points=[0,10; 0,
-            39; 0,68; -3.67382e-016,68],         style(color=58, rgbcolor={0,127,0}));
-        connect(powerSensor.voltageN, plugToPinsVoltageN.pin_n) annotation (points=[0,-10; 0,
-            -39; 0,-68; -1.22461e-016,-68],          style(color=58, rgbcolor={0,127,
-                0}));
+          annotation (points=[10,6.10623e-16; 24.5,6.10623e-16; 24.5,1.22125e-15;
+              39,1.22125e-15; 39,6.10623e-16; 68,6.10623e-16], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(powerSensor.voltageP, plugToPinsVoltageP.pin_p) annotation (points=[
+              6.10623e-16,10; 6.10623e-16,39; 0,68; 2.43241e-16,68], style(
+              color=71, rgbcolor={85,170,255}));
+        connect(powerSensor.voltageN, plugToPinsVoltageN.pin_n) annotation (points=[
+              6.10623e-16,-10; 6.10623e-16,-39; 0,-68; -6.22061e-16,-68], style(
+              color=71, rgbcolor={85,170,255}));
         connect(powerSensor.y, sum.u) annotation (points=[-8,-11; -8,-40; -80,-40;
-              -80,-58], style(color=58, rgbcolor={0,127,0}));
-        connect(sum.y, y) annotation (points=[-80,-81; -80,-110], style(color=58,
-              rgbcolor={0,127,0}));
-        connect(currentP, currentP) annotation (points=[-100,0; -100,0; -100,0],
-            style(color=58, rgbcolor={0,127,0}));
+              -80,-58], style(color=71, rgbcolor={85,170,255}));
+        connect(sum.y, y) annotation (points=[-80,-81; -80,-110], style(color=71,
+              rgbcolor={85,170,255}));
+        connect(currentP, currentP) annotation (points=[-100,5.55112e-16; -100,5.55112e-16;
+              -100,5.55112e-16],
+            style(color=58, rgbcolor={85,170,255}));
       end PowerSensor;
     end Sensors;
   
@@ -3557,9 +3681,11 @@ This model describes <i>m</i> constant voltage sources, specifying the complex v
 </html>"));
       equation 
         connect(plugToPins_p.pin_p, voltageSource.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
-        connect(voltageSource.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,
-            0; 39,2.44921e-016; 68,2.44921e-016],   style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,0; -10,0],style(color=58, rgbcolor={85,170,255}));
+        connect(voltageSource.pin_n, plugToPins_n.pin_n) annotation (points=[10,
+              6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,7.44522e-16],
+                                                    style(color=58, rgbcolor={85,170,255}));
       end VoltageSource;
     
       model VariableVoltageSource 
@@ -3601,11 +3727,13 @@ Additionally, the frequency of the voltage source is defined by a real signal in
             annotation (points=[40,100; 40,60; 4,60; 4,10], style(color=74, rgbcolor={0,0,127}));
         end for;
         connect(plugToPins_p.pin_p, variableVoltageSource.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,0; -10,0],style(color=58, rgbcolor={85,170,255}));
         connect(variableVoltageSource.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16],                                                  style(color=58, rgbcolor={85,170,255}));
         connect(V, variableVoltageSource.V) 
-          annotation (points=[-40,100; -40,60; -4,60; -4,10], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-40,100; -40,60; -4,60; -4,10], style(color=58, rgbcolor={85,170,255}));
       end VariableVoltageSource;
     
       model CurrentSource 
@@ -3645,9 +3773,9 @@ This model describes <i>m</i> constant current sources, specifying the complex c
 </html>"));
       equation 
         connect(plugToPins_p.pin_p,currentSource. pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={85,170,255}));
         connect(currentSource.pin_n, plugToPins_n.pin_n) annotation (points=[10,0; 39,
-            0; 39,2.44921e-016; 68,2.44921e-016],   style(color=58, rgbcolor={0,127,0}));
+            0; 39,2.44921e-016; 68,2.44921e-016],   style(color=58, rgbcolor={85,170,255}));
       end CurrentSource;
     
       model VariableCurrentSource 
@@ -3656,7 +3784,7 @@ This model describes <i>m</i> constant current sources, specifying the complex c
                                 m] 
           annotation (extent=[-10,-10; 10,10]);
         annotation (Icon(
-            Line(points=[-60,60; 60,60],   style(color=3, rgbcolor={0,0,255})),
+            Line(points=[-60,60; 60,60], style(color=71, rgbcolor={85,170,255})),
             Polygon(points=[60,60; 30,70; 30,50; 60,60],
               style(color=3, rgbcolor={0,0,255}, fillColor=3, rgbfillColor={0,0,255})),
             Line(points=[0,-50; 0,50],   style(color=0, rgbcolor={0,0,0}))),
@@ -3689,11 +3817,15 @@ Additionally, the frequency of the current source is defined by a real signal in
             annotation (points=[40,100; 40,60; 4,60; 4,10], style(color=74, rgbcolor={0,0,127}));
         end for;
         connect(plugToPins_p.pin_p, variableCurrentSource.pin_p) 
-          annotation (points=[-68,0; -10,0], style(color=58, rgbcolor={0,127,0}));
+          annotation (points=[-68,6.10623e-16; -53.5,6.10623e-16; -53.5,1.22125e-15;
+              -39,1.22125e-15; -39,6.10623e-16; -10,6.10623e-16],
+                                             style(color=58, rgbcolor={85,170,255}));
         connect(variableCurrentSource.pin_n, plugToPins_n.pin_n) 
-          annotation (points=[10,0; 39,0; 39,2.44921e-016; 68,2.44921e-016], style(color=58, rgbcolor={0,127,0}));
-        connect(I, variableCurrentSource.I) annotation (points=[-40,100; -40,60; -4,60; -4,10], style(color=58, rgbcolor=
-               {0,127,0}));
+          annotation (points=[10,6.10623e-16; 39,6.10623e-16; 39,7.44522e-16; 68,
+              7.44522e-16],                                                  style(color=58, rgbcolor={85,170,255}));
+        connect(I, variableCurrentSource.I) annotation (points=[-40,100; -40,60;
+              -4,60; -4,10],                                                                    style(color=58, rgbcolor=
+               {85,170,255}));
       end VariableCurrentSource;
     end Sources;
   end MultiPhase;
@@ -3755,6 +3887,7 @@ and an imaginary part.
           "Partial model to include a conditional HeatPort in order to describe the power loss via a thermal network" 
           parameter Boolean useHeatPort = false "=true, if HeatPort is enabled"
           annotation(Evaluate=true, HideResult=true);
+          
           parameter Modelica.SIunits.Temperature T=293.15 
             "Fixed device temperature if useHeatPort = false" annotation(Dialog(enable=not useHeatPort));
           Modelica.SIunits.Power LossPower 
@@ -3777,9 +3910,11 @@ and an imaginary part.
           parameter Integer mh(min=1)=3 "Number of heatPorts=number of phases";
           parameter Boolean useHeatPort = false "=true, if HeatPort is enabled"
           annotation(Evaluate=true, HideResult=true);
+          
           parameter Modelica.SIunits.Temperature T[mh]=fill(293.15, mh);
           Modelica.Thermal.HeatTransfer.Interfaces.HeatPort_a heatPort[mh] if useHeatPort 
             annotation (extent=[-10,-110; 10,-90]);
+          
           annotation (Diagram);
         end ConditionalHeatPort;
         end Interfaces;
@@ -3790,7 +3925,7 @@ and an imaginary part.
       type LinearTemperatureCoefficient = Real(final quantity = "LinearTemperatureCoefficient",
         final unit="1/K");
     end SIunits;
-
+  
     package Math "Definiton of complex data and operations" 
       extends Modelica.Icons.Library2;
     
