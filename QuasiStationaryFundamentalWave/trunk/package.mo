@@ -746,13 +746,14 @@ In this example the eddy current losses are implemented in two different ways. C
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-130,-30})));
-        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R, m))
+        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R*
+              m/3, m))
                      annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,60})));
-        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m,
-            R_ref=fill(R, m))             annotation (Placement(transformation(
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m, R_ref=
+              fill(R*m/3, m))             annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,-20})));
@@ -966,13 +967,14 @@ In this example the eddy current losses are implemented in two different ways. C
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-130,-30})));
-        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R, m))
+        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R*
+              m/3, m))
                      annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,60})));
-        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m,
-            R_ref=fill(R, m))             annotation (Placement(transformation(
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m, R_ref=
+              fill(R*m/3, m))             annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-110,-20})));
@@ -1018,12 +1020,13 @@ In this example the eddy current losses are implemented in two different ways. C
           annotation (Placement(transformation(extent={{-40,0},{-20,20}})));
         Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistorq_f(
                                                                                  m=m, R_ref=
-              fill(Rq, m))                annotation (Placement(transformation(
+              fill(Rq*m/3, m))            annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-120,-30})));
         Modelica.Electrical.MultiPhase.Basic.Resistor resistor_qt(
-                                                                 m=m, R=fill(Rq, m))
+                                                                 m=m, R=fill(Rq
+              *m/3, m))
                      annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -1201,13 +1204,13 @@ In this example the eddy current losses are implemented in two different ways. C
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-120,-30})));
-        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R, m))
+        Modelica.Electrical.MultiPhase.Basic.Resistor resistor_t(m=m, R=fill(R*m/3, m))
                      annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-100,60})));
-        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m,
-            R_ref=fill(R, m))             annotation (Placement(transformation(
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor_f(m=m, R_ref=
+              fill(R*m/3, m))             annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-100,-20})));
@@ -1223,8 +1226,7 @@ In this example the eddy current losses are implemented in two different ways. C
           orientation=Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m))
           annotation (Placement(transformation(extent={{-40,40},{-20,60}})));
         QuasiStationaryFundamentalWave.Components.MultiPhaseElectroMagneticConverter
-          converter_f(
-          effectiveTurns=N)
+          converter_f(           final effectiveTurns=N)
           annotation (Placement(transformation(extent={{-40,-40},{-20,-20}})));
         Modelica.Magnetic.FundamentalWave.Components.Ground groundM_t
           annotation (Placement(transformation(extent={{-30,0},{-10,20}})));
@@ -1552,7 +1554,6 @@ relationship of the voltage and current space phasor.
         Diagram(graphics));
     end EddyCurrent;
 
-
     model MultiPhaseElectroMagneticConverter
     "Multi phase electro magnetic converter"
 
@@ -1582,7 +1583,7 @@ relationship of the voltage and current space phasor.
         annotation (Placement(transformation(extent={{90,-110},{110,-90}}, rotation=
                0)));
 
-      constant Integer m = 3 "Number of phases";
+      final parameter Integer m = 3 "Number of phases";
       parameter Real effectiveTurns "Effective number of turns";
       // IMPORTANT NOTE
       // This parameter may be removed in the final version of the library
@@ -1601,11 +1602,6 @@ relationship of the voltage and current space phasor.
       "Complex magnetic potential difference";
       Modelica.SIunits.ComplexMagneticFlux Phi "Complex magnetic flux";
 
-      // Transformation matrix for symmetrical components
-      final parameter Complex T[m,m]= 1/m *
-        {{Modelica.ComplexMath.exp(Complex(0,2*pi/m*((k-1)*(l-1))))
-          for k in 1:m} for l in 1:m};
-
       Modelica.SIunits.AngularVelocity omega = der(port_p.reference.gamma);
 
       // A technical solution with a rotator cannot be applied to the equations below
@@ -1613,9 +1609,9 @@ relationship of the voltage and current space phasor.
         effectiveTurns*Modelica.ComplexMath.exp(Complex(0,orientation))
       "Complex effective number of turns";
 
-      Modelica.SIunits.ComplexVoltage vSymmetricalComponent[m] = T*v
+      Modelica.SIunits.ComplexVoltage vSymmetricalComponent[m] = QuasiStationaryFundamentalWave.Functions.symmetricTransformationMatrix(m)*v
       "Symmetrical components of voltages";
-      Modelica.SIunits.ComplexCurrent iSymmetricalComponent[m] = T*i
+      Modelica.SIunits.ComplexCurrent iSymmetricalComponent[m] = QuasiStationaryFundamentalWave.Functions.symmetricTransformationMatrix(m)*i
       "Symmetrical components of currents";
 
       // NOTE
@@ -1636,17 +1632,19 @@ relationship of the voltage and current space phasor.
       i = plug_p.pin.i;
       plug_p.pin.i + plug_n.pin.i = {Complex(0,0) for k in 1:m};
 
-      V_m.re = sqrt(2) * (2.0/pi) * Modelica.ComplexMath.real(N*iSymmetricalComponent[2])*m/2;
-      V_m.im = sqrt(2) * (2.0/pi) * Modelica.ComplexMath.imag(N*iSymmetricalComponent[2])*m/2;
+      V_m.re = sqrt(2) * (2.0/pi) * Modelica.ComplexMath.real(N*iSymmetricalComponent[1])*m/2;
+      V_m.im = sqrt(2) * (2.0/pi) * Modelica.ComplexMath.imag(N*iSymmetricalComponent[1])*m/2;
 
-      iSymmetricalComponent[1] = Complex(0,0);
-      for k in 3:m loop
+      for k in 2:3 loop
         iSymmetricalComponent[k] = Complex(0,0);
+        // iSymmetricalComponent[k+3] = Complex(0,0);
       end for;
+
+      // vSymmetricalComponent[1] = vSymmetricalComponent[4];
 
       // Induced voltages from complex magnetic flux, number of turns
       // and angles of orientation of winding
-      -sqrt(2) * vSymmetricalComponent[2] = Modelica.ComplexMath.conj(N)*j*omega*Phi;
+      -sqrt(2) * sum(vSymmetricalComponent[1]) = Modelica.ComplexMath.conj(N)*j*omega*Phi;
 
       Connections.potentialRoot(plug_p.reference);
       Connections.potentialRoot(port_p.reference);
@@ -1731,8 +1729,6 @@ The voltages <img src=\"modelica://Modelica/Images/Magnetic/FundamentalWave/v_k.
 </html>"));
     end MultiPhaseElectroMagneticConverter;
 
-
-
     model Idle "Salient reluctance"
       extends
       QuasiStationaryFundamentalWave.Interfaces.PartialTwoPortElementary;
@@ -1807,6 +1803,79 @@ This is a simple short cut branch.
 located at <a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.Components\">Machines.Components</a>.</p>
 </html>"));
   end Components;
+
+
+  package Functions "Functions"
+    extends Modelica.Icons.Package;
+    function symmetricOrientationMatrix
+    "Matrix symmetric orientation angles for creating the symmetric transformation matrix"
+      extends Modelica.Icons.Function;
+      import Modelica.Constants.pi;
+
+      input Integer m "Number of phases";
+      output Modelica.SIunits.Angle orientation[m,m]
+      "Angles of symmetric transformation matrix";
+
+    algorithm
+      // Init transformation matrix with zeros
+      orientation :=zeros(m, m);
+
+      // Insert non zero coefficients
+      if mod(m, 2) == 0 then
+        // Even number of phases
+        if m == 2 then
+          // Special case two phase machine
+          orientation := {{0,pi/2},{0,0}};
+        else
+          orientation[1:integer(m/2),1:integer(m/2)] :=
+              symmetricOrientationMatrix(integer(m/2));
+          orientation[1+integer(m/2):m,1+integer(m/2):m] :=
+              symmetricOrientationMatrix(integer(m/2))
+            - fill(pi/m,integer(m/2),integer(m/2));
+        end if;
+      else
+        // Odd number of phases
+        for k in 1:m loop
+          orientation[k,:]:=
+            Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m)*k;
+        end for;
+      end if;
+      annotation (Documentation(info="<html>
+<p>
+This function determines the orientation of the symmetrical winding with <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> phases. For an odd number of phases the difference of the windings angles of two adjacent phases is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/2pi_over_m.png\">. In case of an even number of phases the aligned orientation of winding is not modeled since they do not add any information. Instead the <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> windings are divided into two different groups. The first group refers to the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_le_m_over_2.png\">. The second group covers the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_gt_m_over_2.png\">. The difference of the windings angles of two adjacent phases - of both the first and the second group, respectively - is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/4pi_over_m.png\">. The phase shift of the two groups is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/pi_over_m.png\">.
+</p>
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.MultiPhase\">User's guide on multi phase winding</a>,
+</p>
+</html>"));
+    end symmetricOrientationMatrix;
+
+    function symmetricTransformationMatrix
+    "Transformation matrix for symmetrical components"
+      extends Modelica.Icons.Function;
+      import Modelica.Constants.pi;
+
+      input Integer m "Number of phases";
+      output Complex transformation[m,m]
+      "Transformation matrix for m phase symmetrical components";
+
+    algorithm
+      // Init transformation matrix with zeros
+      transformation := Modelica.ComplexMath.fromPolar(
+        fill(1,m,m),
+        QuasiStationaryFundamentalWave.Functions.symmetricOrientationMatrix(m))/m;
+      annotation (Documentation(info="<html>
+<p>
+This function determines the orientation of the symmetrical winding with <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> phases. For an odd number of phases the difference of the windings angles of two adjacent phases is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/2pi_over_m.png\">. In case of an even number of phases the aligned orientation of winding is not modeled since they do not add any information. Instead the <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> windings are divided into two different groups. The first group refers to the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_le_m_over_2.png\">. The second group covers the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_gt_m_over_2.png\">. The difference of the windings angles of two adjacent phases - of both the first and the second group, respectively - is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/4pi_over_m.png\">. The phase shift of the two groups is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/pi_over_m.png\">.
+</p>
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.MultiPhase\">User's guide on multi phase winding</a>,
+</p>
+</html>"));
+    end symmetricTransformationMatrix;
+  end Functions;
 
 
   package Sources "Sources to supply magnetic networks"
