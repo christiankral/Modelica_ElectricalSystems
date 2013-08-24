@@ -1349,6 +1349,311 @@ In this example the eddy current losses are implemented in two different ways. C
                 -100},{100,100}}),   graphics),
           Icon(coordinateSystem(extent={{-100,-100},{100,100}})));
       end Example4;
+
+      model Example_AirGap1
+        import QuasiStationaryFundamentalWave;
+        extends Modelica.Icons.Example;
+        parameter Modelica.SIunits.Frequency f = 1 "Supply frequency";
+        Sources.ConstantMagneticPotentialDifference
+          constantMagneticPotentialDifference(f=f, V_m=Complex(re=0, im=1))
+                                                   annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={-40,0})));
+        QuasiStationaryFundamentalWave.Components.Ground grounds
+          annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+        QuasiStationaryFundamentalWave.Components.Ground groundr
+          annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.RotorSaliencyAirGap
+          rotorSaliencyAirGap(p=1, L0(d=1, q=1))
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        Modelica.Mechanics.Rotational.Components.Fixed fixeds
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=2
+              *Modelica.Constants.pi*f/3)
+          annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+        QuasiStationaryFundamentalWave.Components.Reluctance reluctance(R_m(d=1,
+              q=1))
+          annotation (Placement(transformation(extent={{20,0},{40,20}})));
+      equation
+        connect(rotorSaliencyAirGap.port_rn, groundr.port_p) annotation (Line(
+            points={{10,-10},{40,-10},{40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.support, fixeds.flange)
+                                                           annotation (Line(
+            points={{0,-10},{0,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, grounds.port_p)
+          annotation (Line(
+            points={{-40,-10},{-40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, rotorSaliencyAirGap.port_sp)
+          annotation (Line(
+            points={{-40,-10},{-10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_n, rotorSaliencyAirGap.port_sn)
+          annotation (Line(
+            points={{-40,10},{-10,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantSpeed.flange, rotorSaliencyAirGap.flange_a) annotation (Line(
+            points={{0,40},{4.44089e-16,40},{4.44089e-16,10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.port_rp, reluctance.port_p) annotation (
+            Line(
+            points={{10,10},{20,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(reluctance.port_n, rotorSaliencyAirGap.port_rn) annotation (
+            Line(
+            points={{40,10},{40,-10},{10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end Example_AirGap1;
+
+      model Example_AirGap2
+        import QuasiStationaryFundamentalWave;
+        extends Modelica.Icons.Example;
+        parameter Modelica.SIunits.Frequency fs = 1 "Stator supply frequency";
+        parameter Modelica.SIunits.Frequency fr = 2/3 "Rotor supply frequency";
+        Sources.ConstantMagneticPotentialDifference
+          constantMagneticPotentialDifference(     V_m=Complex(re=0, im=1), f=fs)
+                                                   annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={-40,0})));
+        QuasiStationaryFundamentalWave.Components.Ground grounds
+          annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+        QuasiStationaryFundamentalWave.Components.Ground groundr
+          annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.RotorSaliencyAirGap
+          rotorSaliencyAirGap(p=1, L0(d=1, q=1))
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        Modelica.Mechanics.Rotational.Components.Fixed fixeds
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=2
+              *Modelica.Constants.pi*(fs - fr))
+          annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+        QuasiStationaryFundamentalWave.Sources.ConstantFlux  reluctance(Phi=Complex(
+              re=1, im=1), f=fr)
+          annotation (Placement(transformation(extent={{20,0},{40,20}})));
+      equation
+        connect(rotorSaliencyAirGap.port_rn, groundr.port_p) annotation (Line(
+            points={{10,-10},{40,-10},{40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.support, fixeds.flange)
+                                                           annotation (Line(
+            points={{0,-10},{0,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, grounds.port_p)
+          annotation (Line(
+            points={{-40,-10},{-40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, rotorSaliencyAirGap.port_sp)
+          annotation (Line(
+            points={{-40,-10},{-10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_n, rotorSaliencyAirGap.port_sn)
+          annotation (Line(
+            points={{-40,10},{-10,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantSpeed.flange, rotorSaliencyAirGap.flange_a) annotation (Line(
+            points={{0,40},{4.44089e-16,40},{4.44089e-16,10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.port_rp, reluctance.port_p) annotation (Line(
+            points={{10,10},{20,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(reluctance.port_n, rotorSaliencyAirGap.port_rn) annotation (Line(
+            points={{40,10},{40,-10},{10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end Example_AirGap2;
+
+      model Example_AirGap3
+        import QuasiStationaryFundamentalWave;
+        extends Modelica.Icons.Example;
+        extends Modelica.Icons.UnderConstruction;
+
+        parameter Modelica.SIunits.Frequency fs = 0 "Stator supply frequency";
+        parameter Modelica.SIunits.Frequency fr = 0 "Rotor supply frequency";
+        Modelica.SIunits.ComplexCurrent is[3]={Complex(0,0) for k in 1:3};
+        Sources.ConstantMagneticPotentialDifference
+          constantMagneticPotentialDifference(     V_m=Complex(re=1, im=0), f=fs)
+                                                   annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={-40,0})));
+        QuasiStationaryFundamentalWave.Components.Ground grounds
+          annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+        QuasiStationaryFundamentalWave.Components.Ground groundr
+          annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.RotorSaliencyAirGap
+          rotorSaliencyAirGap(p=1, L0(d=1, q=1))
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.PermanentMagnet
+                                                                                permanentMagnet(
+            is=is,
+            permanentMagnetLossParameters(IRef=1, wRef=0.10471975511966))
+          annotation (Placement(transformation(extent={{20,0},{40,20}})));
+        Modelica.Mechanics.Rotational.Components.Fixed fixeds
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Modelica.Mechanics.Rotational.Components.Fixed fixedr
+          annotation (Placement(transformation(extent={{-10,40},{10,20}})));
+      equation
+        connect(rotorSaliencyAirGap.port_rn, groundr.port_p) annotation (Line(
+            points={{10,-10},{40,-10},{40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.port_rp, permanentMagnet.port_p)
+                                                                annotation (Line(
+            points={{10,10},{20,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(permanentMagnet.port_n, rotorSaliencyAirGap.port_rn)
+                                                                annotation (Line(
+            points={{40,10},{40,-10},{10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.support, fixeds.flange)
+                                                           annotation (Line(
+            points={{4.44089e-16,-10},{4.44089e-16,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, grounds.port_p)
+          annotation (Line(
+            points={{-40,-10},{-40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, rotorSaliencyAirGap.port_sp)
+          annotation (Line(
+            points={{-40,-10},{-10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_n, rotorSaliencyAirGap.port_sn)
+          annotation (Line(
+            points={{-40,10},{-10,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(permanentMagnet.support, fixeds.flange) annotation (Line(
+            points={{30,-4.44089e-16},{30,-20},{4.44089e-16,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.flange_a, permanentMagnet.flange) annotation (
+            Line(
+            points={{6.66134e-16,10},{0,10},{0,20},{30,20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(fixedr.flange, rotorSaliencyAirGap.flange_a) annotation (Line(
+            points={{0,30},{0,10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end Example_AirGap3;
+
+      model Example_AirGap4
+        import QuasiStationaryFundamentalWave;
+        extends Modelica.Icons.Example;
+        extends Modelica.Icons.UnderConstruction;
+
+        parameter Modelica.SIunits.Frequency fs = 0 "Stator supply frequency";
+        parameter Modelica.SIunits.Frequency fr = 0 "Rotor supply frequency";
+        Modelica.SIunits.ComplexCurrent is[3]={Complex(0,0) for k in 1:3};
+        Sources.ConstantMagneticPotentialDifference
+          constantMagneticPotentialDifference(     V_m=Complex(re=1, im=0), f=fs)
+                                                   annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={-40,0})));
+        QuasiStationaryFundamentalWave.Components.Ground grounds
+          annotation (Placement(transformation(extent={{-50,-40},{-30,-20}})));
+        QuasiStationaryFundamentalWave.Components.Ground groundr
+          annotation (Placement(transformation(extent={{30,-40},{50,-20}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.RotorSaliencyAirGap
+          rotorSaliencyAirGap(p=1, L0(d=1, q=1))
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.PermanentMagnet
+                                                                                permanentMagnet(
+            is=is,
+            permanentMagnetLossParameters(IRef=1, wRef=0.10471975511966))
+          annotation (Placement(transformation(extent={{20,0},{40,20}})));
+        Modelica.Mechanics.Rotational.Components.Fixed fixeds
+          annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Modelica.Mechanics.Rotational.Components.Inertia inertia(J=1e-3) annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={0,30})));
+      equation
+        connect(rotorSaliencyAirGap.port_rn, groundr.port_p) annotation (Line(
+            points={{10,-10},{40,-10},{40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.port_rp, permanentMagnet.port_p)
+                                                                annotation (Line(
+            points={{10,10},{20,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(permanentMagnet.port_n, rotorSaliencyAirGap.port_rn)
+                                                                annotation (Line(
+            points={{40,10},{40,-10},{10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(rotorSaliencyAirGap.support, fixeds.flange)
+                                                           annotation (Line(
+            points={{4.44089e-16,-10},{4.44089e-16,-16},{0,-16},{0,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, grounds.port_p)
+          annotation (Line(
+            points={{-40,-10},{-40,-20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_p, rotorSaliencyAirGap.port_sp)
+          annotation (Line(
+            points={{-40,-10},{-10,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantMagneticPotentialDifference.port_n, rotorSaliencyAirGap.port_sn)
+          annotation (Line(
+            points={{-40,10},{-10,10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(permanentMagnet.support, fixeds.flange) annotation (Line(
+            points={{30,-4.44089e-16},{30,-20},{0,-20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(inertia.flange_b, rotorSaliencyAirGap.flange_a) annotation (Line(
+            points={{-1.33227e-15,20},{4.44089e-16,20},{4.44089e-16,10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(permanentMagnet.flange, inertia.flange_b) annotation (Line(
+            points={{30,20},{0,20}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end Example_AirGap4;
     end ToBeRemovedLater;
 
     package BasicMachines "Examples of basic machines"
@@ -1360,6 +1665,7 @@ In this example the eddy current losses are implemented in two different ways. C
 
         parameter Integer m=3 "Number of phases";
         parameter Modelica.SIunits.Frequency f = 50 "Supply frequency";
+        parameter Modelica.SIunits.Frequency fslip = 1e-3 "Supply frequency";
         parameter Modelica.SIunits.Voltage V = 100 "Suppy voltage";
         Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
                                                          voltageSource(
@@ -1368,64 +1674,150 @@ In this example the eddy current losses are implemented in two different ways. C
           V=fill(V, m),
           phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m))
           annotation (Placement(transformation(
-              origin={-70,-10},
+              origin={-80,-10},
               extent={{-10,-10},{10,10}},
               rotation=270)));
         Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
                                               star(m=m)
           annotation (Placement(transformation(
-              origin={-70,-40},
+              origin={-80,-40},
               extent={{-10,-10},{10,10}},
               rotation=270)));
         Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
                                                  ground
-          annotation (Placement(transformation(extent={{-80,-80},{-60,-60}}, rotation=
+          annotation (Placement(transformation(extent={{-90,-80},{-70,-60}}, rotation=
                  0)));
         Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor
                                                        powerSensor(
                       m=m)
-          annotation (Placement(transformation(extent={{-60,10},{-40,30}},rotation=0)));
+          annotation (Placement(transformation(extent={{-70,30},{-50,50}},rotation=0)));
         Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentSensor
                                                          currentSensor(
                         m=m)
-          annotation (Placement(transformation(extent={{-30,10},{-10,30}},rotation=0)));
-        MoveTo_Modelica.QuasiStationary_MultiPhase.TerminalBox terminalBox
-          annotation (Placement(transformation(extent={{2,0},{22,20}})));
+          annotation (Placement(transformation(extent={{-40,30},{-20,50}},rotation=0)));
         QuasiStationaryFundamentalWave.BasicMachines.SynchronousInductionMachines.SM_PermanentMagnet
           smpm(
           m=m,
           p=2,
           fsNominal=50,
-          wMechanical(start=Modelica.Constants.pi*f/smpm.p))
-               annotation (Placement(transformation(extent={{2,-20},{22,0}})));
+          wMechanical(start=2*Modelica.Constants.pi*f/smpm.p))
+               annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
+        Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=2
+              *Modelica.Constants.pi*(f + fslip)/smpm.p)
+          annotation (Placement(transformation(extent={{90,-20},{70,0}})));
+        Modelica.Mechanics.Rotational.Sensors.TorqueSensor torqueSensor
+          annotation (Placement(transformation(extent={{40,-20},{60,0}})));
+        Modelica.Mechanics.Rotational.Components.Spring spring(c=0.1)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=0,
+              origin={20,-10})));
       equation
-        connect(ground.pin,star. pin_n) annotation (Line(points={{-70,-60},{-70,-50}},
+        connect(ground.pin,star. pin_n) annotation (Line(points={{-80,-60},{-80,
+                -50}},
               color={85,170,255}));
-        connect(star.plug_p,voltageSource. plug_n) annotation (Line(points={{-70,-30},
-                {-70,-20}}, color={85,170,255}));
-        connect(voltageSource.plug_p,powerSensor. currentP) annotation (Line(points={{-70,0},
-                {-70,20},{-60,20}},           color={85,170,255}));
+        connect(star.plug_p,voltageSource. plug_n) annotation (Line(points={{-80,-30},
+                {-80,-20}}, color={85,170,255}));
+        connect(voltageSource.plug_p,powerSensor. currentP) annotation (Line(points={{-80,
+                4.44089e-16},{-80,40},{-70,40}},
+                                              color={85,170,255}));
         connect(powerSensor.currentN,currentSensor. plug_p)
-          annotation (Line(points={{-40,20},{-30,20}}, color={85,170,255}));
-        connect(powerSensor.voltageP,powerSensor. currentP) annotation (Line(points={{-50,30},
-                {-60,30},{-60,20}},          color={85,170,255}));
-        connect(powerSensor.voltageN,star. plug_p) annotation (Line(points={{-50,10},{
-                -50,-30},{-70,-30}},                 color={85,170,255}));
-        connect(currentSensor.plug_n, terminalBox.plugSupply) annotation (Line(
-            points={{-10,20},{12,20},{12,2}},
+          annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
+        connect(powerSensor.voltageP,powerSensor. currentP) annotation (Line(points={{-60,50},
+                {-70,50},{-70,40}},          color={85,170,255}));
+        connect(powerSensor.voltageN,star. plug_p) annotation (Line(points={{-60,30},
+                {-60,-30},{-80,-30}},                color={85,170,255}));
+        connect(torqueSensor.flange_b, constantSpeed.flange) annotation (Line(
+            points={{60,-10},{70,-10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(spring.flange_b, torqueSensor.flange_a) annotation (Line(
+            points={{30,-10},{40,-10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(spring.flange_a, smpm.flange) annotation (Line(
+            points={{10,-10},{-10,-10}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(currentSensor.plug_n, smpm.plug_sp) annotation (Line(
+            points={{-20,40},{-16,40},{-16,4.44089e-16},{-14,4.44089e-16}},
             color={85,170,255},
             smooth=Smooth.None));
-        connect(terminalBox.plug_sn, smpm.plug_sn) annotation (Line(
-            points={{6,0},{6,0}},
-            color={85,170,255},
-            smooth=Smooth.None));
-        connect(terminalBox.plug_sp, smpm.plug_sp) annotation (Line(
-            points={{18,0},{18,0}},
+        connect(smpm.plug_sn, star.plug_p) annotation (Line(
+            points={{-26,0},{-60,0},{-60,-30},{-80,-30}},
             color={85,170,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics));
       end SMPM_Mains;
+
+      model AIMC_Mains
+      "Asynchronous induction machine with squirrel cage operated at mains"
+        import QuasiStationaryFundamentalWave;
+        extends Modelica.Icons.Example;
+
+        parameter Integer m=3 "Number of phases";
+        parameter Modelica.SIunits.Frequency f = 50 "Supply frequency";
+        // parameter Modelica.SIunits.Frequency fslip = 1e-3 "Supply frequency";
+        parameter Modelica.SIunits.Voltage V = 100 "Suppy voltage";
+        Modelica.Electrical.QuasiStationary.MultiPhase.Sources.VoltageSource
+          voltageSource(
+          m=m,
+          f=f,
+          V=fill(V, m),
+          phi=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m))
+          annotation (Placement(transformation(
+              origin={-80,-10},
+              extent={{-10,-10},{10,10}},
+              rotation=270)));
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star
+          star(m=m)
+          annotation (Placement(transformation(
+              origin={-80,-40},
+              extent={{-10,-10},{10,10}},
+              rotation=270)));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground
+          ground
+          annotation (Placement(transformation(extent={{-90,-80},{-70,-60}}, rotation=
+                 0)));
+        Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PowerSensor
+         powerSensor(m=m)
+          annotation (Placement(transformation(extent={{-70,30},{-50,50}},rotation=0)));
+        Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.CurrentSensor
+          currentSensor(m=m)
+          annotation (Placement(transformation(extent={{-40,30},{-20,50}},rotation=0)));
+        QuasiStationaryFundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
+          aimc(
+          m=m,
+          p=2,
+          fsNominal=50,
+          wMechanical(start=0))
+               annotation (Placement(transformation(extent={{-30,-30},{-10,-10}})));
+      equation
+        connect(ground.pin,star. pin_n) annotation (Line(points={{-80,-60},{-80,-50}},
+              color={85,170,255}));
+        connect(star.plug_p,voltageSource. plug_n) annotation (Line(points={{-80,-30},
+                {-80,-20}}, color={85,170,255}));
+        connect(voltageSource.plug_p,powerSensor. currentP) annotation (Line(points={{-80,
+                4.44089e-16},{-80,40},{-70,40}},
+                                              color={85,170,255}));
+        connect(powerSensor.currentN,currentSensor. plug_p)
+          annotation (Line(points={{-50,40},{-40,40}}, color={85,170,255}));
+        connect(powerSensor.voltageP,powerSensor. currentP) annotation (Line(points={{-60,50},
+                {-70,50},{-70,40}},          color={85,170,255}));
+        connect(powerSensor.voltageN,star. plug_p) annotation (Line(points={{-60,30},{
+                -60,-30},{-80,-30}},                 color={85,170,255}));
+        connect(currentSensor.plug_n, aimc.plug_sp) annotation (Line(
+            points={{-20,40},{-16,40},{-16,-10},{-14,-10}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(aimc.plug_sn, star.plug_p) annotation (Line(
+            points={{-26,-10},{-38,-10},{-38,-30},{-80,-30}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end AIMC_Mains;
     end BasicMachines;
   end Examples;
 
@@ -1629,7 +2021,6 @@ relationship of the voltage and current space phasor.
         Diagram(graphics));
     end EddyCurrent;
 
-
     model MultiPhaseElectroMagneticConverter
     "Multi phase electro magnetic converter"
 
@@ -1720,7 +2111,6 @@ relationship of the voltage and current space phasor.
 
       for k in 1:size(indexNonPos,1) loop
         iSymmetricalComponent[indexNonPos[k]] = Complex(0,0);
-        // iSymmetricalComponent[k+3] = Complex(0,0);
       end for;
 
       for k in 2:size(indexPos,1) loop
@@ -1892,10 +2282,243 @@ located at <a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.
   end Components;
 
 
-
   package BasicMachines "Basic quasi stationary machine models"
     extends Modelica.Icons.Package;
-    extends Modelica.Icons.UnderConstruction;
+
+    package AsynchronousInductionMachines
+    "Quasi stationary asynchronous induction machines"
+      extends Modelica.Icons.Package;
+      model AIM_SquirrelCage
+      "Asynchronous induction machine with squirrel cage"
+        // Removed form extension of FUNDAMENTAL WAVE model: is(start=zeros(m)) ##
+
+        extends
+        QuasiStationaryFundamentalWave.Interfaces.PartialBasicInductionMachine(
+          Rs(start=0.03),
+          Lssigma(start=3*(1 - sqrt(1 - 0.0667))/(2*pi*fsNominal)),
+          final L0(d=2.0*Lm/m/effectiveStatorTurns^2, q=2.0*Lm/m/
+                effectiveStatorTurns^2),
+          redeclare final
+          Modelica.Electrical.Machines.Thermal.AsynchronousInductionMachines.ThermalAmbientAIMC
+            thermalAmbient(final Tr=TrOperational),
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortAIMC
+            thermalPort,
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortAIMC
+            internalThermalPort,
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.PowerBalanceAIMC
+            powerBalance(final lossPowerRotorWinding=sum(rotorCage.resistor.resistor.LossPower),
+              final lossPowerRotorCore=0));
+        parameter Modelica.SIunits.Inductance Lm(start=3*sqrt(1 - 0.0667)/(2*pi
+              *fsNominal)) "Stator main field inductance"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter Modelica.SIunits.Inductance Lrsigma(start=3*(1 - sqrt(1 -
+              0.0667))/(2*pi*fsNominal))
+        "Rotor leakage inductance of equivalent m phase winding w.r.t. stator side"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter Modelica.SIunits.Resistance Rr(start=0.04)
+        "Rotor resistance of equivalent m phase winding w.r.t. stator side"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter Modelica.SIunits.Temperature TrRef(start=293.15)
+        "Reference temperature of rotor resistance"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter
+        Modelica.Electrical.Machines.Thermal.LinearTemperatureCoefficient20
+          alpha20r(start=0)
+        "Temperature coefficient of rotor resistance at 20 degC"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter Modelica.SIunits.Temperature TrOperational(start=293.15)
+        "Operational temperature of rotor resistance"   annotation (Dialog(
+              group="Operational temperatures", enable=not useThermalPort));
+        output Modelica.SIunits.ComplexCurrent ir[m] = rotorCage.winding.plug_p.pin.i
+        "Rotor cage currents";
+        Components.SymmetricMultiPhaseCageWinding
+          rotorCage(
+          final Lsigma=Lrsigma,
+          final effectiveTurns=effectiveStatorTurns,
+          final useHeatPort=true,
+          final RRef=Rr,
+          final TRef=TrRef,
+          final TOperational=TrRef,
+          final m=m,
+          final alpha20=alpha20r)
+        "Symmetric rotor cage winding including resistances and stray inductances"
+          annotation (Placement(transformation(extent={{-10,-40},{10,-20}},
+                rotation=0)));
+      equation
+        connect(rotorCage.heatPortWinding, internalThermalPort.heatPortRotorWinding)
+          annotation (Line(
+            points={{-6.10623e-16,-40},{-40,-40},{-40,-90}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(airGap.port_rn, rotorCage.port_p) annotation (Line(
+            points={{-10,-10},{-10,-30}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(airGap.port_rp, rotorCage.port_n) annotation (Line(
+            points={{10,-10},{10,-30}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        annotation (
+          defaultComponentName="aimc",
+          Documentation(info="<html>
+<p>
+Resistances and stray inductances of the machine refer to an <code>m</code> phase stator. The symmetry of the stator and rotor is assumed. The machine models take the following loss effects into account:
+</p>
+
+<ul>
+<li>heat losses in the temperature dependent stator winding resistances</li>
+<li>heat losses in the temperature dependent cage resistances</li>
+<li>friction losses</li>
+<li>core losses (only eddy current losses, no hysteresis losses)</li>
+<li>stray load losses</li>
+</ul>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SlipRing\">AIM_SlipRing</a>,
+</p>
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
+      end AIM_SquirrelCage;
+
+    end AsynchronousInductionMachines;
+
+    package SynchronousInductionMachines
+    "Quasi stationary synchronous induction machines"
+    extends Modelica.Icons.Package;
+      model SM_PermanentMagnet
+      "Permanent magnet synchronous machine with optional damper cage"
+
+        // Removed     is(start=zeros(m)) form extension of PartialBasicInductionMachine ##
+        extends Modelica.Icons.UnderConstruction;
+        extends
+        QuasiStationaryFundamentalWave.Interfaces.PartialBasicInductionMachine(
+          Rs(start=0.03),
+          Lssigma(start=0.1/(2*pi*fsNominal)),
+          final L0(d=2.0*Lmd/m/effectiveStatorTurns^2, q=2.0*Lmq/m/
+                effectiveStatorTurns^2),
+          redeclare final
+          Modelica.Electrical.Machines.Thermal.SynchronousInductionMachines.ThermalAmbientSMPM
+            thermalAmbient(
+              final Tr=273.15,
+              final Tpm=TpmOperational,
+            final useDamperCage=false),
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
+            thermalPort(final useDamperCage=false),
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
+            internalThermalPort(final useDamperCage=false),
+          redeclare final
+          Modelica.Electrical.Machines.Interfaces.InductionMachines.PowerBalanceSMPM
+            powerBalance(
+            final lossPowerRotorWinding=0,
+            final lossPowerRotorCore=0,
+            final lossPowerPermanentMagnet=permanentMagnet.lossPower));
+        parameter Modelica.SIunits.Inductance Lmd(start=0.3/(2*pi*fsNominal))
+        "Stator main field inductance, d-axis"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+        parameter Modelica.SIunits.Inductance Lmq(start=0.3/(2*pi*fsNominal))
+        "Stator main field inductance, q-axis"
+          annotation (Dialog(tab="Nominal resistances and inductances"));
+
+        parameter Modelica.SIunits.Voltage VsOpenCircuit(start=112.3)
+        "Open circuit RMS voltage per phase @ fsNominal";
+        final parameter Modelica.SIunits.Temperature TpmOperational=293.15
+        "Operational temperature of permanent magnet"
+           annotation(Dialog(group="Operational temperatures"));
+        parameter
+        Modelica.Electrical.Machines.Losses.PermanentMagnetLossParameters
+          permanentMagnetLossParameters(IRef(start=100), wRef(start=2*pi*
+                fsNominal/p)) "Permanent magnet loss losses"
+          annotation (Dialog(tab="Losses"));
+        // Rotor currents possibly have to be re-inserted correctly in the final version ##
+        /* 
+  Modelica.Blocks.Interfaces.RealOutput ir[2](
+    start=zeros(2),
+    each final quantity="ElectricCurrent", each final unit="A") if useDamperCage 
+    "Damper cage currents" annotation(Dialog(showStartAttribute=true));
+  */
+        Components.PermanentMagnet permanentMagnet(
+          final V_m=Complex(V_mPM, 0),
+          final m=m,
+          final permanentMagnetLossParameters=permanentMagnetLossParameters,
+          final useHeatPort=true,
+          final is=is) "Magnetic potential difference of permanent magnet"
+            annotation (
+            Placement(transformation(
+              origin={0,-40},
+              extent={{-10,-10},{10,10}},
+              rotation=0)));
+    protected
+        final parameter Modelica.SIunits.MagneticPotentialDifference V_mPM=
+           (2/pi)*sqrt(2)*(m/2)*VsOpenCircuit/effectiveStatorTurns/
+           (Lmd/effectiveStatorTurns^2*2*pi*fsNominal)
+        "Equivalent excitation magnetic potential difference";
+      equation
+        connect(permanentMagnet.port_p, airGap.port_rn) annotation (Line(
+            points={{-10,-40},{-10,-10}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(permanentMagnet.support, airGap.support) annotation (Line(
+            points={{4.44089e-16,-50},{0,-50},{0,-70},{-50,-70},{-50,2.22045e-15},{-10,
+                2.22045e-15}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(permanentMagnet.heatPort, internalThermalPort.heatPortPermanentMagnet)
+          annotation (Line(
+            points={{-10,-50},{-40,-50},{-40,-90}},
+            color={191,0,0},
+            smooth=Smooth.None));
+        connect(permanentMagnet.flange, inertiaRotor.flange_b) annotation (Line(
+            points={{4.44089e-16,-30},{4.44089e-16,-20},{90,-20},{90,-1.33227e-15}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(airGap.port_rp, permanentMagnet.port_n) annotation (Line(
+            points={{10,-10},{10,-40}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        annotation (
+          defaultComponentName="smpm",
+          Icon(graphics={
+              Rectangle(
+                extent={{-130,10},{-100,-10}},
+                lineColor={0,0,0},
+                fillColor={0,255,0},
+                fillPattern=FillPattern.Solid),
+              Rectangle(
+                extent={{-100,10},{-70,-10}},
+                lineColor={0,0,0},
+                fillColor={255,0,0},
+                fillPattern=FillPattern.Solid),
+              Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255})}),
+          Documentation(info="<html>
+<p>
+Resistances and stray inductances of the machine refer to an <code>m</code> phase stator. The symmetry of the stator is assumed. For rotor asymmetries can be taken into account by different resistances and stray inductances in the d- and q-axis. The machine models take the following loss effects into account:
+</p>
+
+<ul>
+<li>heat losses in the temperature dependent stator winding resistances</li>
+<li>optional, when enabled: heat losses in the temperature dependent damper cage resistances</li>
+<li>friction losses</li>
+<li>core losses (only eddy current losses, no hysteresis losses)</li>
+<li>stray load losses</li>
+<li>permanent magnet losses</li>
+</ul>
+
+<h4>See also</h4>
+<p>
+<a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited\">SM_ElectricalExcited</a>,
+<a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ReluctanceRotor\">SM_ReluctanceRotor</a>,
+</p>
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}),            graphics));
+      end SM_PermanentMagnet;
+    end SynchronousInductionMachines;
+
     package Components "Components for quasi stationary machine models"
     extends Modelica.Icons.Package;
       model SymmetricMultiPhaseWinding
@@ -2357,6 +2980,10 @@ according to the following figure.
             points={{50,-20},{60,-20}},
             color={85,170,255},
             smooth=Smooth.None));
+        connect(starAuxiliary.pin_n, ground.pin) annotation (Line(
+            points={{50,-80},{60,-80},{60,-20}},
+            color={85,170,255},
+            smooth=Smooth.None));
         annotation (Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics={Ellipse(
                       extent={{-80,80},{80,-80}},
@@ -2407,8 +3034,8 @@ The symmetric rotor cage model of this library does not consist of rotor bars an
 <a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.Components.SaliencyCageWinding\">SaliencyCageWinding</a>,
 <a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.Components.RotorSaliencyAirGap\">RotorSaliencyAirGap</a>
 </p>
-</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                  100}}),            graphics));
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics));
       end SymmetricMultiPhaseCageWinding;
 
       model SaliencyCageWinding "Rotor cage with saliency in d- and q-axis"
@@ -2581,9 +3208,31 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
 
       model PermanentMagnet
       "Permanent magnet model without intrinsic reluctance, represeted by magnetic potential difference"
-        extends
-        QuasiStationaryFundamentalWave.Sources.ConstantMagneticPotentialDifference;
+        extends QuasiStationaryFundamentalWave.Interfaces.PartialTwoPort;
+        extends Modelica.Icons.UnderConstruction;
+
+        parameter Modelica.SIunits.ComplexMagneticPotentialDifference V_m=
+          Complex(re=1, im=0) "Complex magnetic potential difference";
+        Modelica.SIunits.ComplexMagneticFlux Phi "Complex magnetic flux";
+        Modelica.SIunits.Angle theta "Variable angle of PM magnetic voltage";
+
         extends QuasiStationaryFundamentalWave.Losses.PermanentMagnetLosses;
+
+      equation
+        // Flux into positive port
+        port_p.V_m - port_n.V_m = V_m*Modelica.ComplexMath.fromPolar(1,theta);
+
+        // Magneto motive force
+        port_p.Phi = Phi;
+
+        // Local flux balance
+        port_p.Phi + port_n.Phi = Complex(0,0);
+
+        // Reference angle is variable with (small) movement of rotor
+        port_p.reference.gamma = theta;
+
+        Connections.root(port_p.reference);
+
         annotation (Documentation(info="<html>
 <p>
 Simple model of a permanent magnet, containing:
@@ -2592,143 +3241,12 @@ Simple model of a permanent magnet, containing:
 <li><a href=\"modelica://Modelica.Magnetic.FundamentalWave.Sources.ConstantMagneticPotentialDifference\">constant magnetomotive force</a></li>
 <li><a href=\"modelica://Modelica.Electrical.Machines.Losses.InductionMachines.PermanentMagnetLosses\">loss model</a></li>
 </ul>
-</html>"));
+</html>"),       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}), graphics));
       end PermanentMagnet;
     end Components;
-
-    package SynchronousInductionMachines
-    "Quasi stationary synchronous induction machines"
-    extends Modelica.Icons.Package;
-      model SM_PermanentMagnet
-      "Permanent magnet synchronous machine with optional damper cage"
-
-        // Removed     is(start=zeros(m)) form extension of PartialBasicInductionMachine ##
-        extends Modelica.Icons.UnderConstruction;
-        extends
-        QuasiStationaryFundamentalWave.Interfaces.PartialBasicInductionMachine(
-          Rs(start=0.03),
-          Lssigma(start=0.1/(2*pi*fsNominal)),
-          final L0(d=2.0*Lmd/m/effectiveStatorTurns^2, q=2.0*Lmq/m/
-                effectiveStatorTurns^2),
-          redeclare final
-          Modelica.Electrical.Machines.Thermal.SynchronousInductionMachines.ThermalAmbientSMPM
-            thermalAmbient(
-              final Tr=273.15,
-              final Tpm=TpmOperational,
-            final useDamperCage=false),
-          redeclare final
-          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
-            thermalPort(final useDamperCage=false),
-          redeclare final
-          Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
-            internalThermalPort(final useDamperCage=false),
-          redeclare final
-          Modelica.Electrical.Machines.Interfaces.InductionMachines.PowerBalanceSMPM
-            powerBalance(
-            final lossPowerRotorWinding=0,
-            final lossPowerRotorCore=0,
-            final lossPowerPermanentMagnet=permanentMagnet.lossPower));
-        parameter Modelica.SIunits.Inductance Lmd(start=0.3/(2*pi*fsNominal))
-        "Stator main field inductance, d-axis"
-          annotation (Dialog(tab="Nominal resistances and inductances"));
-        parameter Modelica.SIunits.Inductance Lmq(start=0.3/(2*pi*fsNominal))
-        "Stator main field inductance, q-axis"
-          annotation (Dialog(tab="Nominal resistances and inductances"));
-
-        parameter Modelica.SIunits.Voltage VsOpenCircuit(start=112.3)
-        "Open circuit RMS voltage per phase @ fsNominal";
-        final parameter Modelica.SIunits.Temperature TpmOperational=293.15
-        "Operational temperature of permanent magnet"
-           annotation(Dialog(group="Operational temperatures"));
-        parameter
-        Modelica.Electrical.Machines.Losses.PermanentMagnetLossParameters
-          permanentMagnetLossParameters(IRef(start=100), wRef(start=2*pi*
-                fsNominal/p)) "Permanent magnet loss losses"
-          annotation (Dialog(tab="Losses"));
-        // Rotor currents possibly have to be re-inserted correctly in the final version ##
-        /* 
-  Modelica.Blocks.Interfaces.RealOutput ir[2](
-    start=zeros(2),
-    each final quantity="ElectricCurrent", each final unit="A") if useDamperCage 
-    "Damper cage currents" annotation(Dialog(showStartAttribute=true));
-  */
-        Components.PermanentMagnet                                                 permanentMagnet(
-          final V_m=Complex(V_mPM, 0),
-          final m=m,
-          final permanentMagnetLossParameters=permanentMagnetLossParameters,
-          final useHeatPort=true,
-          final is=is) "Magnetic potential difference of permanent magnet"
-            annotation (
-            Placement(transformation(
-              origin={0,-40},
-              extent={{-10,-10},{10,10}},
-              rotation=0)));
-    protected
-        final parameter Modelica.SIunits.MagneticPotentialDifference V_mPM=
-           (2/pi)*sqrt(2)*(m/2)*VsOpenCircuit/effectiveStatorTurns/
-           (Lmd/effectiveStatorTurns^2*2*pi*fsNominal)
-        "Equivalent excitation magnetic potential difference";
-      equation
-        connect(permanentMagnet.port_p, airGap.port_rn) annotation (Line(
-            points={{-10,-40},{-10,-10}},
-            color={255,128,0},
-            smooth=Smooth.None));
-        connect(permanentMagnet.support, airGap.support) annotation (Line(
-            points={{4.44089e-16,-50},{0,-50},{0,-70},{-50,-70},{-50,2.22045e-15},{-10,
-                2.22045e-15}},
-            color={0,0,0},
-            smooth=Smooth.None));
-        connect(permanentMagnet.heatPort, internalThermalPort.heatPortPermanentMagnet)
-          annotation (Line(
-            points={{-10,-50},{-40,-50},{-40,-90}},
-            color={191,0,0},
-            smooth=Smooth.None));
-        connect(permanentMagnet.flange, inertiaRotor.flange_b) annotation (Line(
-            points={{4.44089e-16,-30},{4.44089e-16,-20},{90,-20},{90,-1.33227e-15}},
-            color={0,0,0},
-            smooth=Smooth.None));
-        connect(airGap.port_rp, permanentMagnet.port_n) annotation (Line(
-            points={{10,-10},{10,-40}},
-            color={255,170,85},
-            smooth=Smooth.None));
-        annotation (
-          defaultComponentName="smpm",
-          Icon(graphics={
-              Rectangle(
-                extent={{-130,10},{-100,-10}},
-                lineColor={0,0,0},
-                fillColor={0,255,0},
-                fillPattern=FillPattern.Solid),
-              Rectangle(
-                extent={{-100,10},{-70,-10}},
-                lineColor={0,0,0},
-                fillColor={255,0,0},
-                fillPattern=FillPattern.Solid),
-              Ellipse(extent={{-134,34},{-66,-34}}, lineColor={0,0,255})}),
-          Documentation(info="<html>
-<p>
-Resistances and stray inductances of the machine refer to an <code>m</code> phase stator. The symmetry of the stator is assumed. For rotor asymmetries can be taken into account by different resistances and stray inductances in the d- and q-axis. The machine models take the following loss effects into account:
-</p>
-
-<ul>
-<li>heat losses in the temperature dependent stator winding resistances</li>
-<li>optional, when enabled: heat losses in the temperature dependent damper cage resistances</li>
-<li>friction losses</li>
-<li>core losses (only eddy current losses, no hysteresis losses)</li>
-<li>stray load losses</li>
-<li>permanent magnet losses</li>
-</ul>
-
-<h4>See also</h4>
-<p>
-<a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ElectricalExcited\">SM_ElectricalExcited</a>,
-<a href=\"modelica://Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ReluctanceRotor\">SM_ReluctanceRotor</a>,
-</p>
-</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                  100}}),            graphics));
-      end SM_PermanentMagnet;
-    end SynchronousInductionMachines;
   end BasicMachines;
+
 
   package Losses "Loss models"
   extends Modelica.Icons.Package;
@@ -2848,6 +3366,7 @@ If it is desired to neglect permanent magnet losses, set <code>strayLoadParamete
 </html>"));
     end PermanentMagnetLosses;
   end Losses;
+
 
   package Sources "Sources to supply magnetic networks"
     extends Modelica.Icons.SourcesPackage;
@@ -3332,7 +3851,8 @@ Additionally the reference angle is specified in the connector. The time derivat
 
     partial model PartialBasicInductionMachine
     "Partial model for induction machine"
-      extends Modelica.Electrical.Machines.Icons.FundamentalWaveMachine;
+      extends
+      QuasiStationaryFundamentalWave.Icons.QuasiStationaryFundamentalWaveMachine;
       constant Modelica.SIunits.Angle pi=Modelica.Constants.pi;
       parameter Integer m(min=3) = 3 "Number of stator phases";
       // Mechanical parameters
@@ -3878,7 +4398,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -3938,7 +4458,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString =                        "%name"),
+                textString=                         "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -3946,7 +4466,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -4052,6 +4572,44 @@ choosing Y-connection (StarDelta=Y) or D-connection (StarDelta=D).
       end BaseTerminalBox;
     end QuasiStationary_MultiPhase;
   end MoveTo_Modelica;
+
+
+  package Icons "Icons"
+    extends Modelica.Icons.Package;
+    partial model QuasiStationaryFundamentalWaveMachine
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-40,60},{80,-60}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={255,170,85}),
+            Rectangle(
+              extent={{-40,60},{-60,-60}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={128,128,128}),
+            Rectangle(
+              extent={{80,10},{100,-10}},
+              lineColor={0,0,0},
+              fillPattern=FillPattern.HorizontalCylinder,
+              fillColor={95,95,95}),
+            Rectangle(
+              extent={{-40,70},{40,50}},
+              lineColor={95,95,95},
+              fillColor={95,95,95},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-50,-90},{-40,-90},{-10,-20},{40,-20},{70,-90},{80,-90},{80,
+                  -100},{-50,-100},{-50,-90}},
+              lineColor={0,0,0},
+              fillColor={0,0,0},
+              fillPattern=FillPattern.Solid)}), Documentation(info="<html>
+<p>
+This icon is designed for a <b>FundamentalWave machine</b> model.
+</p>
+</html>"));
+    end QuasiStationaryFundamentalWaveMachine;
+  end Icons;
 
   annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1"),
     Drives(version="0.9.13")));
