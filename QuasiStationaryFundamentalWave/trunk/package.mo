@@ -1698,8 +1698,8 @@ In this example the eddy current losses are implemented in two different ways. C
         Modelica.Electrical.QuasiStationary.MultiPhase.Ideal.IdealClosingSwitch
                                                                                 idealCloserQS(
           final m=m,
-        Ron=fill(1e-5*m/3, m),
-        Goff=fill(1e-5*3/m, m))
+          Ron=fill(1e-5*m/3, m),
+          Goff=fill(1e-5*3/m, m))
                               annotation (Placement(transformation(
               origin={-60,70},
               extent={{10,10},{-10,-10}},
@@ -1726,8 +1726,8 @@ In this example the eddy current losses are implemented in two different ways. C
               rotation=90)));
         Modelica.Electrical.MultiPhase.Ideal.IdealClosingSwitch idealCloser(
           final m=m,
-        Ron=fill(1e-5*m/3, m),
-        Goff=fill(1e-5*3/m, m))
+          Ron=fill(1e-5*m/3, m),
+          Goff=fill(1e-5*3/m, m))
                               annotation (Placement(transformation(
               origin={-60,-40},
               extent={{10,10},{-10,-10}},
@@ -1735,14 +1735,15 @@ In this example the eddy current losses are implemented in two different ways. C
         Modelica.Blocks.Sources.BooleanStep booleanStep[m](each startTime=tOn, each
             startValue=false) annotation (Placement(transformation(extent={{-100,-50},
                   {-80,-30}},    rotation=0)));
-        Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentRMSsensor
+        Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor
+                                                                   currentRMSsensor(final m=m)
                             annotation (Placement(transformation(
               origin={-10,-20},
               extent={{-10,-10},{10,10}},
               rotation=0)));
         Modelica.Electrical.Machines.Utilities.TerminalBox terminalBoxM(m=m,
             terminalConnection="Y") annotation (Placement(transformation(extent={{10,-40},
-                {30,-20}},            rotation=0)));
+                  {30,-20}},          rotation=0)));
         Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
           aimc(
           Jr=aimcData.Jr,
@@ -1767,7 +1768,7 @@ In this example the eddy current losses are implemented in two different ways. C
           m=m,
           TsOperational=293.15,
           TrOperational=293.15) annotation (Placement(transformation(extent={{10,-60},
-                {30,-40}},        rotation=0)));
+                  {30,-40}},      rotation=0)));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
           annotation (Placement(transformation(extent={{40,-60},{60,-40}},
                 rotation=0)));
@@ -1777,7 +1778,7 @@ In this example the eddy current losses are implemented in two different ways. C
           TorqueDirection=false,
           useSupport=false) annotation (Placement(transformation(extent={{90,-60},{70,
                   -40}},     rotation=0)));
-        Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor
+        Modelica.Electrical.MultiPhase.Sensors.PowerSensor powerSensor(final m=m)
           annotation (Placement(transformation(extent={{-50,-30},{-30,-10}})));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertiaQS(J=J_Load)
           annotation (Placement(transformation(extent={{40,50},{60,70}},
@@ -1815,13 +1816,13 @@ In this example the eddy current losses are implemented in two different ways. C
           TrRef=aimcData.TrRef,
           m=m,
           TsOperational=293.15,
-          TrOperational=293.15) annotation (Placement(transformation(extent={{10,50},
-                {30,70}},         rotation=0)));
-      QuasiStationaryFundamentalWave.MoveTo_Modelica.QuasiStationary_MultiPhase.SymmetricalComponents
-        symmetricalComponents(m=m) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-20,50})));
+          TrOperational=293.15) annotation (Placement(transformation(extent={{10,50},{
+                  30,70}},        rotation=0)));
+        QuasiStationaryFundamentalWave.MoveTo_Modelica.QuasiStationary_MultiPhase.SymmetricalComponents
+          symmetricalComponents(m=m) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-20,50})));
       equation
         connect(groundQS.pin, starQS.pin_n)
                                         annotation (Line(points={{-90,10},{-92,10},{-90,
@@ -1851,7 +1852,7 @@ In this example the eddy current losses are implemented in two different ways. C
         connect(sineVoltage.plug_n, star.plug_p) annotation (Line(points={{-60,-80},{-60,
                 -90}},                  color={0,0,255}));
         connect(aimc.flange, loadInertia.flange_a)   annotation (Line(points={{30,-50},
-              {30,-50},{40,-50}},           color={0,0,0}));
+                {30,-50},{40,-50}},         color={0,0,0}));
         connect(loadInertia.flange_b, quadraticLoadTorque.flange)
           annotation (Line(points={{60,-50},{70,-50}}, color={0,0,0}));
         connect(terminalBoxM.plug_sn, aimc.plug_sn)
@@ -1884,10 +1885,10 @@ In this example the eddy current losses are implemented in two different ways. C
             color={0,0,255},
             smooth=Smooth.None));
         connect(currentRMSsensor.plug_n, terminalBoxM.plugSupply) annotation (Line(
-            points={{4.44089e-16,-20},{0,-20},{0,-20},{14,-20},{20,-20},{20,-38}},
+            points={{4.44089e-16,-20},{20,-20},{20,-38}},
             color={0,0,255},
             smooth=Smooth.None));
-      connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange)
+        connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange)
           annotation (Line(points={{60,60},{70,60}},   color={0,0,0}));
         connect(powerSensor.pv, powerSensor.pc) annotation (Line(
             points={{-40,-10},{-50,-10},{-50,-20}},
@@ -1905,18 +1906,18 @@ In this example the eddy current losses are implemented in two different ways. C
             points={{14,70},{0,70},{0,10},{-70,10}},
             color={85,170,255},
             smooth=Smooth.None));
-      connect(aimcQS.flange, loadInertiaQS.flange_a)    annotation (Line(
+        connect(aimcQS.flange, loadInertiaQS.flange_a)  annotation (Line(
             points={{30,60},{40,60}},
             color={0,0,0},
             smooth=Smooth.None));
-      connect(currentSensorQS.y, symmetricalComponents.u) annotation (Line(
-          points={{-10,79},{-10,70},{-20,70},{-20,62}},
-          color={85,170,255},
-          smooth=Smooth.None));
+        connect(currentSensorQS.y, symmetricalComponents.u) annotation (Line(
+            points={{-10,79},{-10,70},{-20,70},{-20,62}},
+            color={85,170,255},
+            smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),   graphics),
-        experiment,
-        __Dymola_experimentSetupOutput);
+                  -100},{100,100}}), graphics),
+          experiment,
+          __Dymola_experimentSetupOutput);
       end AIMC_Mains;
 
       model SMPM_Mains "Permanent magnet synchronous machine operated at mains"
@@ -1963,16 +1964,6 @@ In this example the eddy current losses are implemented in two different ways. C
           fsNominal=50,
           wMechanical(start=2*Modelica.Constants.pi*f/smpm.p))
                annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
-        Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(w_fixed=2
-              *Modelica.Constants.pi*(f + fslip)/smpm.p)
-          annotation (Placement(transformation(extent={{90,-20},{70,0}})));
-        Modelica.Mechanics.Rotational.Sensors.TorqueSensor torqueSensor
-          annotation (Placement(transformation(extent={{40,-20},{60,0}})));
-        Modelica.Mechanics.Rotational.Components.Spring spring(c=0.1)
-          annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=0,
-              origin={20,-10})));
       equation
         connect(ground.pin,star. pin_n) annotation (Line(points={{-80,-60},{-80,
                 -50}},
@@ -1988,18 +1979,6 @@ In this example the eddy current losses are implemented in two different ways. C
                 {-70,50},{-70,40}},          color={85,170,255}));
         connect(powerSensor.voltageN,star. plug_p) annotation (Line(points={{-60,30},
                 {-60,-30},{-80,-30}},                color={85,170,255}));
-        connect(torqueSensor.flange_b, constantSpeed.flange) annotation (Line(
-            points={{60,-10},{70,-10}},
-            color={0,0,0},
-            smooth=Smooth.None));
-        connect(spring.flange_b, torqueSensor.flange_a) annotation (Line(
-            points={{30,-10},{40,-10}},
-            color={0,0,0},
-            smooth=Smooth.None));
-        connect(spring.flange_a, smpm.flange) annotation (Line(
-            points={{10,-10},{-10,-10}},
-            color={0,0,0},
-            smooth=Smooth.None));
         connect(currentSensor.plug_n, smpm.plug_sp) annotation (Line(
             points={{-20,40},{-16,40},{-16,4.44089e-16},{-14,4.44089e-16}},
             color={85,170,255},
@@ -3415,7 +3394,7 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
         port_p.V_m - port_n.V_m = V_m*Modelica.ComplexMath.fromPolar(1,theta);
 
         // Magneto motive force
-        port_p.Phi = Phi;
+        port_p.Phi = Phi*Modelica.ComplexMath.fromPolar(1,theta);
 
         // Local flux balance
         port_p.Phi + port_n.Phi = Complex(0,0);
