@@ -1741,8 +1741,8 @@ In this example the eddy current losses are implemented in two different ways. C
               extent={{-10,-10},{10,10}},
               rotation=0)));
         Modelica.Electrical.Machines.Utilities.TerminalBox terminalBoxM(m=m,
-            terminalConnection="Y") annotation (Placement(transformation(extent={{-10,-40},
-                  {10,-20}},          rotation=0)));
+            terminalConnection="Y") annotation (Placement(transformation(extent={{10,-40},
+                {30,-20}},            rotation=0)));
         Modelica.Magnetic.FundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
           aimc(
           Jr=aimcData.Jr,
@@ -1766,8 +1766,8 @@ In this example the eddy current losses are implemented in two different ways. C
           TrRef=aimcData.TrRef,
           m=m,
           TsOperational=293.15,
-          TrOperational=293.15) annotation (Placement(transformation(extent={{-10,-60},
-                  {10,-40}},      rotation=0)));
+          TrOperational=293.15) annotation (Placement(transformation(extent={{10,-60},
+                {30,-40}},        rotation=0)));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
           annotation (Placement(transformation(extent={{40,-60},{60,-40}},
                 rotation=0)));
@@ -1815,8 +1815,13 @@ In this example the eddy current losses are implemented in two different ways. C
           TrRef=aimcData.TrRef,
           m=m,
           TsOperational=293.15,
-          TrOperational=293.15) annotation (Placement(transformation(extent={{-10,50},
-                  {10,70}},       rotation=0)));
+          TrOperational=293.15) annotation (Placement(transformation(extent={{10,50},
+                {30,70}},         rotation=0)));
+      QuasiStationaryFundamentalWave.MoveTo_Modelica.QuasiStationary_MultiPhase.SymmetricalComponents
+        symmetricalComponents(m=m) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-20,50})));
       equation
         connect(groundQS.pin, starQS.pin_n)
                                         annotation (Line(points={{-90,10},{-92,10},{-90,
@@ -1845,14 +1850,15 @@ In this example the eddy current losses are implemented in two different ways. C
                                                        color={0,0,255}));
         connect(sineVoltage.plug_n, star.plug_p) annotation (Line(points={{-60,-80},{-60,
                 -90}},                  color={0,0,255}));
-        connect(aimc.flange, loadInertia.flange_a)   annotation (Line(points={{10,-50},
-                {10,-50},{40,-50}},         color={0,0,0}));
+        connect(aimc.flange, loadInertia.flange_a)   annotation (Line(points={{30,-50},
+              {30,-50},{40,-50}},           color={0,0,0}));
         connect(loadInertia.flange_b, quadraticLoadTorque.flange)
           annotation (Line(points={{60,-50},{70,-50}}, color={0,0,0}));
         connect(terminalBoxM.plug_sn, aimc.plug_sn)
-          annotation (Line(points={{-6,-40},{-6,-40}}, color={0,0,255}));
+          annotation (Line(points={{14,-40},{14,-40}}, color={0,0,255}));
         connect(terminalBoxM.plug_sp, aimc.plug_sp)
-          annotation (Line(points={{6,-40},{6,-40}}, color={0,0,255}));
+          annotation (Line(points={{26,-40},{26,-40}},
+                                                     color={0,0,255}));
         connect(booleanStep.y, idealCloser.control) annotation (Line(
             points={{-79,-40},{-67,-40}},
             color={255,0,255},
@@ -1878,7 +1884,7 @@ In this example the eddy current losses are implemented in two different ways. C
             color={0,0,255},
             smooth=Smooth.None));
         connect(currentRMSsensor.plug_n, terminalBoxM.plugSupply) annotation (Line(
-            points={{4.44089e-16,-20},{0,-20},{0,-38}},
+            points={{4.44089e-16,-20},{0,-20},{0,-20},{14,-20},{20,-20},{20,-38}},
             color={0,0,255},
             smooth=Smooth.None));
       connect(loadInertiaQS.flange_b, quadraticLoadTorqueQS.flange)
@@ -1892,19 +1898,23 @@ In this example the eddy current losses are implemented in two different ways. C
             color={0,0,255},
             smooth=Smooth.None));
         connect(currentSensorQS.plug_n, aimcQS.plug_sp) annotation (Line(
-            points={{4.44089e-16,90},{6,90},{6,70}},
+            points={{4.44089e-16,90},{26,90},{26,70}},
             color={85,170,255},
             smooth=Smooth.None));
         connect(aimcQS.plug_sn, starQS.plug_p) annotation (Line(
-            points={{-6,70},{-40,70},{-40,10},{-70,10}},
+            points={{14,70},{0,70},{0,10},{-70,10}},
             color={85,170,255},
             smooth=Smooth.None));
       connect(aimcQS.flange, loadInertiaQS.flange_a)    annotation (Line(
-            points={{10,60},{40,60}},
+            points={{30,60},{40,60}},
             color={0,0,0},
             smooth=Smooth.None));
+      connect(currentSensorQS.y, symmetricalComponents.u) annotation (Line(
+          points={{-10,79},{-10,70},{-20,70},{-20,62}},
+          color={85,170,255},
+          smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}), graphics),
+                -100},{100,100}}),   graphics),
         experiment,
         __Dymola_experimentSetupOutput);
       end AIMC_Mains;
@@ -4576,7 +4586,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -4636,7 +4646,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString=                         "%name"),
+                textString =                        "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -4644,7 +4654,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -4748,6 +4758,19 @@ choosing Y-connection (StarDelta=Y) or D-connection (StarDelta=D).
                   -100},{100,100}}),
                                graphics));
       end BaseTerminalBox;
+
+      block SymmetricalComponents
+      "Creates symmetrical components from signals representing quasi stationary phasors"
+        extends Modelica.ComplexBlocks.Interfaces.ComplexMIMO(final nin=m,final nout=m);
+        parameter Integer m = 3 "Number of phases";
+      equation
+
+        y = QuasiStationaryFundamentalWave.MoveTo_Modelica.Functions.symmetricTransformationMatrix(m)*u;
+
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), Icon(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics));
+      end SymmetricalComponents;
     end QuasiStationary_MultiPhase;
   end MoveTo_Modelica;
 
@@ -4757,10 +4780,10 @@ choosing Y-connection (StarDelta=Y) or D-connection (StarDelta=D).
     partial model QuasiStationaryFundamentalWaveMachine
       annotation (Icon(graphics={
             Rectangle(
-              extent={{-40,60},{80,-60}},
-              lineColor={0,0,0},
-              fillPattern=FillPattern.HorizontalCylinder,
-              fillColor={255,170,85}),
+            extent={{-40,60},{80,-60}},
+            lineColor={0,0,0},
+            fillPattern=FillPattern.HorizontalCylinder,
+            fillColor={255,206,120}),
             Rectangle(
               extent={{-40,60},{-60,-60}},
               lineColor={0,0,0},
