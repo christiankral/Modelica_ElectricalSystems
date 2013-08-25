@@ -1570,7 +1570,6 @@ In this example the eddy current losses are implemented in two different ways. C
       model Example_AirGap4
         import QuasiStationaryFundamentalWave;
         extends Modelica.Icons.Example;
-        extends Modelica.Icons.UnderConstruction;
 
         parameter Modelica.SIunits.Frequency fs = 1 "Stator supply frequency";
         parameter Modelica.SIunits.Frequency fr = 1e-5 "Rotor supply frequency";
@@ -1919,14 +1918,12 @@ In this example the eddy current losses are implemented in two different ways. C
       model SMPM_Mains "Permanent magnet synchronous machine operated at mains"
         import QuasiStationaryFundamentalWave;
         extends Modelica.Icons.Example;
-        extends Modelica.Icons.UnderConstruction;
 
         parameter Integer m=3 "Number of phases";
         parameter Modelica.SIunits.Frequency f = 50 "Supply frequency";
         // parameter Modelica.SIunits.Frequency fslip = 1e-3 "Supply frequency";
         parameter Modelica.SIunits.Voltage V = 112.3 "Suppy voltage";
-        parameter Modelica.SIunits.Torque T_Load=0.1*181.4
-          "Nominal load torque";
+        parameter Modelica.SIunits.Torque T_Load=181.4 "Nominal load torque";
         parameter Modelica.SIunits.Time tStep=0.5 "Time of load torque step";
         parameter Modelica.SIunits.Inertia J_Load=0.29 "Load inertia";
 
@@ -2580,9 +2577,7 @@ Resistances and stray inductances of the machine refer to an <code>m</code> phas
     extends Modelica.Icons.Package;
       model SM_PermanentMagnet
         "Permanent magnet synchronous machine with optional damper cage"
-
-        // Removed     is(start=zeros(m)) form extension of PartialBasicInductionMachine ##
-        extends Modelica.Icons.UnderConstruction;
+        // Initial condition of FundamentalWaves implementation is(start=zeros(m)) removed ##
 
         Modelica.SIunits.Angle gammas = airGap.gammas
           "Angle of stator reference frame";
@@ -2600,83 +2595,170 @@ Resistances and stray inductances of the machine refer to an <code>m</code> phas
           redeclare final
             Modelica.Electrical.Machines.Thermal.SynchronousInductionMachines.ThermalAmbientSMPM
             thermalAmbient(
-              final Tr=273.15,
-              final Tpm=TpmOperational,
-            final useDamperCage=false),
+              final useDamperCage=useDamperCage,
+              final Tr=TrOperational,
+              final Tpm=TpmOperational),
           redeclare final
             Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
-            thermalPort(final useDamperCage=false),
+            thermalPort(final useDamperCage=useDamperCage),
           redeclare final
             Modelica.Electrical.Machines.Interfaces.InductionMachines.ThermalPortSMPM
-            internalThermalPort(final useDamperCage=false),
+            internalThermalPort(final useDamperCage=useDamperCage),
           redeclare final
             Modelica.Electrical.Machines.Interfaces.InductionMachines.PowerBalanceSMPM
             powerBalance(
-            final lossPowerRotorWinding=0,
+            final lossPowerRotorWinding=damperCageLossPower,
             final lossPowerRotorCore=0,
             final lossPowerPermanentMagnet=permanentMagnet.lossPower));
+
         parameter Modelica.SIunits.Inductance Lmd(start=0.3/(2*pi*fsNominal))
           "Stator main field inductance, d-axis"
           annotation (Dialog(tab="Nominal resistances and inductances"));
         parameter Modelica.SIunits.Inductance Lmq(start=0.3/(2*pi*fsNominal))
           "Stator main field inductance, q-axis"
           annotation (Dialog(tab="Nominal resistances and inductances"));
-
+        // Rotor cage parameters
+        parameter Boolean useDamperCage(start=true)
+          "Enable/disable damper cage" annotation (Dialog(tab=
+                "Nominal resistances and inductances", group="Damper cage"));
+        parameter Modelica.SIunits.Inductance Lrsigmad(start=0.05/(2*pi*
+              fsNominal))
+          "Rotor leakage inductance, d-axis, w.r.t. stator side" annotation (
+            Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
+        parameter Modelica.SIunits.Inductance Lrsigmaq=Lrsigmad
+          "Rotor leakage inductance, q-axis, w.r.t. stator side" annotation (
+            Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
+        parameter Modelica.SIunits.Resistance Rrd(start=0.04)
+          "Rotor resistance, d-axis, w.r.t. stator side" annotation (Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
+        parameter Modelica.SIunits.Resistance Rrq=Rrd
+          "Rotor resistance , q-axis, w.r.t. stator side" annotation (Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
+        parameter Modelica.SIunits.Temperature TrRef(start=293.15)
+          "Reference temperature of damper resistances in d- and q-axis"
+          annotation (Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
+        parameter
+          Modelica.Electrical.Machines.Thermal.LinearTemperatureCoefficient20
+          alpha20r(start=0)
+          "Temperature coefficient of damper resistances in d- and q-axis"
+          annotation (Dialog(
+            tab="Nominal resistances and inductances",
+            group="Damper cage",
+            enable=useDamperCage));
         parameter Modelica.SIunits.Voltage VsOpenCircuit(start=112.3)
           "Open circuit RMS voltage per phase @ fsNominal";
         final parameter Modelica.SIunits.Temperature TpmOperational=293.15
           "Operational temperature of permanent magnet"
            annotation(Dialog(group="Operational temperatures"));
+        parameter Modelica.SIunits.Temperature TrOperational(start=293.15)
+          "Operational temperature of (optional) damper cage" annotation (
+            Dialog(group="Operational temperatures",
+                   enable=not useThermalPort and useDamperCage));
         parameter
           Modelica.Electrical.Machines.Losses.PermanentMagnetLossParameters
           permanentMagnetLossParameters(IRef(start=100), wRef(start=2*pi*
                 fsNominal/p)) "Permanent magnet loss losses"
           annotation (Dialog(tab="Losses"));
-        // Rotor currents possibly have to be re-inserted correctly in the final version ##
-        /* 
-  Modelica.Blocks.Interfaces.RealOutput ir[2](
-    start=zeros(2),
-    each final quantity="ElectricCurrent", each final unit="A") if useDamperCage 
-    "Damper cage currents" annotation(Dialog(showStartAttribute=true));
-  */
-        Components.PermanentMagnet permanentMagnet(
+      // Removed in QS implementation
+      //   Modelica.Blocks.Interfaces.Output ir[2](
+      //     start=zeros(2),
+      //     each final quantity="ElectricCurrent", each final unit="A") if useDamperCage
+      //     "Damper cage currents" annotation(Dialog(showStartAttribute=true));
+        QuasiStationaryFundamentalWave.Components.Short    short if not
+          useDamperCage
+          "Magnetic connection in case the damper cage is not present"
+          annotation (Placement(transformation(
+              origin={10,-40},
+              extent={{10,10},{-10,-10}},
+              rotation=270)));
+        Components.SaliencyCageWinding
+          rotorCage(
+          final RRef(d=Rrd, q=Rrq),
+          final Lsigma(d=Lrsigmad, q=Lrsigmaq),
+          final effectiveTurns=sqrt(3.0/2.0)*effectiveStatorTurns,
+          final useHeatPort=true,
+          final TRef=TrRef,
+          final alpha20=alpha20r,
+          final TOperational=TrOperational) if useDamperCage
+          "Symmetric rotor cage winding including resistances and stray inductances"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={20,-40})));
+        QuasiStationaryFundamentalWave.BasicMachines.Components.PermanentMagnet
+                                                                                   permanentMagnet(
           final V_m=Complex(V_mPM, 0),
           final m=m,
           final permanentMagnetLossParameters=permanentMagnetLossParameters,
           final useHeatPort=true,
           final is=is) "Magnetic potential difference of permanent magnet"
-            annotation (
+                                                              annotation (
             Placement(transformation(
-              origin={0,-40},
+              origin={-10,-40},
               extent={{-10,-10},{10,10}},
-              rotation=0)));
+              rotation=270)));
       protected
         final parameter Modelica.SIunits.MagneticPotentialDifference V_mPM=
            (2/pi)*sqrt(2)*(m/2)*VsOpenCircuit/effectiveStatorTurns/
            (Lmd/effectiveStatorTurns^2*2*pi*fsNominal)
           "Equivalent excitation magnetic potential difference";
+        Modelica.Blocks.Interfaces.RealOutput damperCageLossPower(
+          final quantity="Power", final unit="W") "Damper losses";
       equation
+        connect(damperCageLossPower, rotorCage.lossPower);
+        if not useDamperCage then
+          damperCageLossPower=0;
+        end if;
         connect(permanentMagnet.port_p, airGap.port_rn) annotation (Line(
-            points={{-10,-40},{-10,-10}},
+            points={{-10,-30},{-10,-10}},
             color={255,128,0},
             smooth=Smooth.None));
         connect(permanentMagnet.support, airGap.support) annotation (Line(
-            points={{4.44089e-16,-50},{0,-50},{0,-70},{-50,-70},{-50,2.22045e-15},{-10,
-                2.22045e-15}},
+            points={{-20,-40},{-50,-40},{-50,0},{-10,0}},
             color={0,0,0},
             smooth=Smooth.None));
         connect(permanentMagnet.heatPort, internalThermalPort.heatPortPermanentMagnet)
           annotation (Line(
-            points={{-10,-50},{-40,-50},{-40,-90}},
+            points={{-20,-30},{-40,-30},{-40,-90}},
             color={191,0,0},
             smooth=Smooth.None));
         connect(permanentMagnet.flange, inertiaRotor.flange_b) annotation (Line(
-            points={{4.44089e-16,-30},{4.44089e-16,-20},{90,-20},{90,-1.33227e-15}},
+            points={{0,-40},{0,-20},{90,-20},{90,-1.33227e-015}},
             color={0,0,0},
             smooth=Smooth.None));
-        connect(airGap.port_rp, permanentMagnet.port_n) annotation (Line(
-            points={{10,-10},{10,-40}},
-            color={255,170,85},
+        connect(airGap.port_rp, rotorCage.port_n) annotation (Line(
+            points={{10,-10},{10,-30},{20,-30}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(short.port_n, airGap.port_rp) annotation (Line(
+            points={{10,-30},{10,-10}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(short.port_p, permanentMagnet.port_n) annotation (Line(
+            points={{10,-50},{-10,-50}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(rotorCage.port_p, permanentMagnet.port_n) annotation (Line(
+            points={{20,-50},{-10,-50}},
+            color={255,128,0},
+            smooth=Smooth.None));
+        connect(rotorCage.heatPortWinding, internalThermalPort.heatPortRotorWinding)
+          annotation (Line(
+            points={{30,-40},{40,-40},{40,-80},{-40,-80},{-40,-90}},
+            color={191,0,0},
             smooth=Smooth.None));
         annotation (
           defaultComponentName="smpm",
@@ -3264,7 +3346,7 @@ The symmetric rotor cage model of this library does not consist of rotor bars an
         parameter Modelica.Magnetic.FundamentalWave.Types.SalientInductance
           Lsigma(d(start=1), q(start=1)) "Salient cage stray inductance";
         parameter Real effectiveTurns=1 "Effective number of turns";
-        // To inserted in final version
+        // To be re-inserted in final version ##
         /*
   Modelica.ComplexBlocks.Interfaces.ComplexOutput i[2](
     each final quantity="Modelica.SIunits.ComplexCurrent", each final unit="A")=-strayInductor.i 
@@ -3411,7 +3493,6 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
       model PermanentMagnet
         "Permanent magnet model without intrinsic reluctance, represeted by magnetic potential difference"
         extends QuasiStationaryFundamentalWave.Losses.PermanentMagnetLosses;
-        extends Modelica.Icons.UnderConstruction;
         extends QuasiStationaryFundamentalWave.Interfaces.PartialTwoPort;
         parameter Modelica.SIunits.ComplexMagneticPotentialDifference V_m=
           Complex(re=1, im=0) "Complex magnetic potential difference";
