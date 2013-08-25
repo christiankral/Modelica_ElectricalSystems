@@ -6251,6 +6251,5 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
     end QuasiStationaryFundamentalWaveMachine;
   end Icons;
 
-  annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1"),
-    Drives(version="0.9.13")));
+  annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1")));
 end QuasiStationaryFundamentalWave;
