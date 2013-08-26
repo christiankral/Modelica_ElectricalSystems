@@ -1745,6 +1745,57 @@ In this example the eddy current losses are implemented in two different ways. C
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics));
       end Example_AirGap5;
+
+      model TestQS "Series resonance circuit"
+        extends Modelica.Icons.Example;
+        Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VoltageSource voltageSource1(
+          f=1,
+          V=1,
+          phi=0)
+          annotation (Placement(transformation(
+              origin={-20,0},
+              extent={{-10,10},{10,-10}},
+              rotation=270)));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground1
+          annotation (Placement(transformation(extent={{-30,-40},{-10,-20}}, rotation=
+                 0)));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Resistor resistor(R_ref=1)
+          annotation (Placement(transformation(extent={{-8,10},{12,30}},  rotation=0)));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Sources.VoltageSource voltageSource2(
+          f=1,
+          V=1,
+          phi=0)
+          annotation (Placement(transformation(
+              origin={20,0},
+              extent={{-10,10},{10,-10}},
+              rotation=270)));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground ground2
+          annotation (Placement(transformation(extent={{10,-40},{30,-20}},   rotation=
+                 0)));
+      initial equation
+        voltageSource1.pin_p.reference.gamma=0;
+        voltageSource2.pin_p.reference.gamma=0;
+
+      equation
+        connect(ground1.pin, voltageSource1.pin_n)
+                                                 annotation (Line(points={{-20,-20},{-20,
+                -15},{-20,-10}},           color={85,170,255}));
+        connect(ground2.pin, voltageSource2.pin_n)
+                                                 annotation (Line(points={{20,-20},{20,
+                -15},{20,-10}},            color={85,170,255}));
+        connect(voltageSource1.pin_p, resistor.pin_p) annotation (Line(
+            points={{-20,10},{-20,20},{-8,20}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(resistor.pin_n, voltageSource2.pin_p) annotation (Line(
+            points={{12,20},{20,20},{20,10}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        annotation (
+          experiment(StopTime=1.0, Interval=0.001),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}), graphics));
+      end TestQS;
     end ToBeRemovedLater;
 
     package BasicMachines "Examples of basic machines"
@@ -2657,6 +2708,166 @@ Simulate for 1.5 seconds and plot (versus time):
                   100}}), graphics),
           __Dymola_experimentSetupOutput);
       end SMR_Inverter;
+
+      model SMPM_OpenCircuit
+        "Test example: PermanentMagnetSynchronousInductionMachine with inverter"
+        extends Modelica.Icons.Example;
+        import Modelica.Constants.pi;
+        parameter Integer m=3 "Number of phases";
+        QuasiStationaryFundamentalWave.BasicMachines.SynchronousInductionMachines.SM_PermanentMagnet
+          smpmQS(
+          p=smpmData.p,
+          fsNominal=smpmData.fsNominal,
+          Rs=smpmData.Rs,
+          TsRef=smpmData.TsRef,
+          Lssigma=smpmData.Lssigma,
+          Jr=smpmData.Jr,
+          Js=smpmData.Js,
+          frictionParameters=smpmData.frictionParameters,
+          statorCoreParameters=smpmData.statorCoreParameters,
+          strayLoadParameters=smpmData.strayLoadParameters,
+          VsOpenCircuit=smpmData.VsOpenCircuit,
+          Lmd=smpmData.Lmd,
+          Lmq=smpmData.Lmq,
+          useDamperCage=smpmData.useDamperCage,
+          Lrsigmad=smpmData.Lrsigmad,
+          Lrsigmaq=smpmData.Lrsigmaq,
+          Rrd=smpmData.Rrd,
+          Rrq=smpmData.Rrq,
+          TrRef=smpmData.TrRef,
+          permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
+          phiMechanical(start=0),
+          m=m,
+          TsOperational=293.15,
+          alpha20s=smpmData.alpha20s,
+          alpha20r=smpmData.alpha20r,
+          TrOperational=293.15)
+          annotation (Placement(transformation(extent={{-20,-50},{0,-30}},
+                rotation=0)));
+        Modelica.Mechanics.Rotational.Sources.ConstantSpeed constantSpeed(useSupport=
+              false, w_fixed(displayUnit="rad/s") = 2*pi*smpmData.fsNominal/
+            smpmData.p)
+                      annotation (Placement(transformation(extent={{80,-10},{60,10}},
+                         rotation=0)));
+        parameter
+          Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
+          smpmData(useDamperCage=false)
+          annotation (Placement(transformation(extent={{-20,0},{0,20}})));
+
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Star starQS(m=m)
+                                                              annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-30,-20})));
+        Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundQS
+                                                                   annotation (
+            Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-60,-20})));
+        Modelica.Electrical.QuasiStationary.MultiPhase.Sensors.PotentialSensor potentialSensorQS(m=m)
+          annotation (Placement(transformation(extent={{0,-30},{20,-10}})));
+        Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_PermanentMagnet
+          smpm(
+          p=smpmData.p,
+          fsNominal=smpmData.fsNominal,
+          Rs=smpmData.Rs,
+          TsRef=smpmData.TsRef,
+          Lssigma=smpmData.Lssigma,
+          Jr=smpmData.Jr,
+          Js=smpmData.Js,
+          frictionParameters=smpmData.frictionParameters,
+          statorCoreParameters=smpmData.statorCoreParameters,
+          strayLoadParameters=smpmData.strayLoadParameters,
+          VsOpenCircuit=smpmData.VsOpenCircuit,
+          Lmd=smpmData.Lmd,
+          Lmq=smpmData.Lmq,
+          useDamperCage=smpmData.useDamperCage,
+          Lrsigmad=smpmData.Lrsigmad,
+          Lrsigmaq=smpmData.Lrsigmaq,
+          Rrd=smpmData.Rrd,
+          Rrq=smpmData.Rrq,
+          TrRef=smpmData.TrRef,
+          permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
+          phiMechanical(start=0),
+          m=m,
+          TsOperational=293.15,
+          alpha20s=smpmData.alpha20s,
+          alpha20r=smpmData.alpha20r,
+          TrOperational=293.15)
+          annotation (Placement(transformation(extent={{-20,30},{0,50}},
+                rotation=0)));
+        Modelica.Electrical.MultiPhase.Basic.Star star(m=m)
+                                               annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-30,60})));
+        Modelica.Electrical.Analog.Basic.Ground ground
+                                               annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-60,60})));
+        Modelica.Electrical.MultiPhase.Sensors.PotentialSensor potentialSensor(m=m)
+          annotation (Placement(transformation(extent={{0,50},{20,70}})));
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistorQS(m=m,
+            R_ref=fill(1e6, m))
+          annotation (Placement(transformation(extent={{-20,-20},{0,0}})));
+      equation
+        connect(starQS.plug_p, smpmQS.plug_sn)
+                                           annotation (Line(
+            points={{-20,-20},{-20,-30},{-16,-30}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(groundQS.pin, starQS.pin_n)
+                                        annotation (Line(
+            points={{-50,-20},{-40,-20}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(potentialSensorQS.plug_p, smpmQS.plug_sp)
+                                                      annotation (Line(
+            points={{0,-20},{0,-30},{-4,-30}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(constantSpeed.flange, smpm.flange)  annotation (Line(
+            points={{60,0},{40,0},{40,40},{0,40}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(constantSpeed.flange, smpmQS.flange)
+                                                   annotation (Line(
+            points={{60,0},{40,0},{40,-40},{0,-40}},
+            color={0,0,0},
+            smooth=Smooth.None));
+        connect(ground.p, star.pin_n)   annotation (Line(
+            points={{-50,60},{-40,60}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(star.plug_p, smpm.plug_sn)   annotation (Line(
+            points={{-20,60},{-20,50},{-16,50}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(potentialSensor.plug_p, smpm.plug_sp)   annotation (Line(
+            points={{0,60},{0,50},{-4,50}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(resistorQS.plug_p, smpmQS.plug_sn)
+                                               annotation (Line(
+            points={{-20,-10},{-20,-30},{-16,-30}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(resistorQS.plug_n, smpmQS.plug_sp)
+                                               annotation (Line(
+            points={{0,-10},{0,-30},{-4,-30}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        annotation (
+          experiment(StopTime=0.1, Interval=0.001),
+          Documentation(info="<html>
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+                  100,100}}),
+                          graphics),
+          __Dymola_experimentSetupOutput);
+      end SMPM_OpenCircuit;
     end BasicMachines;
   end Examples;
 
@@ -2961,8 +3172,8 @@ relationship of the voltage and current space phasor.
                          sum(Modelica.ComplexMath.imag(vSymmetricalComponent[indexPos])))
                = Modelica.ComplexMath.conj(N)*j*omega*Phi;
 
-      Connections.potentialRoot(plug_p.reference);
-      Connections.potentialRoot(port_p.reference);
+    //Connections.potentialRoot(plug_p.reference);
+    //Connections.potentialRoot(port_p.reference);
 
       Connections.branch(port_p.reference, port_n.reference);
       port_p.reference.gamma = port_n.reference.gamma;
@@ -4386,7 +4597,7 @@ The single phase winding consists of a
         support.tau = tauElectrical;
 
         Connections.potentialRoot(port_sp.reference);
-        Connections.potentialRoot(port_rp.reference);
+      //Connections.potentialRoot(port_rp.reference);
 
         Connections.branch(port_sp.reference, port_sn.reference);
         port_sp.reference.gamma = port_sn.reference.gamma;
@@ -4394,6 +4605,10 @@ The single phase winding consists of a
         port_rp.reference.gamma = port_rn.reference.gamma;
         Connections.branch(port_sp.reference, port_rp.reference);
         gammas = gammar + gamma;
+        if Connections.isRoot(port_sp.reference) then
+          gammar=0;
+        end if;
+
         // Angles
         gamma = p*(flange_a.phi - support.phi);
         gammas = port_sp.reference.gamma;
@@ -4796,7 +5011,7 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
         extends QuasiStationaryFundamentalWave.Interfaces.PartialTwoPort;
         parameter Modelica.SIunits.ComplexMagneticPotentialDifference V_m=
           Complex(re=1, im=0) "Complex magnetic potential difference";
-        Modelica.SIunits.Angle gammar "Angle of V_m fixed reference frame";
+        Modelica.SIunits.Angle gamma "Angle of V_m fixed reference frame";
         Modelica.SIunits.ComplexMagneticFlux Phi "Complex magnetic flux";
 
       equation
@@ -4844,6 +5059,7 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
 
       y = Modelica.ComplexMath.fromPolar(fill(amplitude,m),orientation + fill(BasePhase,m));
 
+
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,100}}),
                             graphics={
@@ -4875,10 +5091,9 @@ The sine-waves are intended to feed a m-phase SignalVoltage.<br>
 Phase shifts between sine-waves may be chosen by the user; default values are <i>(k-1)/m*pi for k in 1:m</i>.
 </HTML>"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                100}}), graphics));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                100}}), graphics),
+                  Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics));
-
     end VfController;
   end Utilities;
 
@@ -6026,7 +6241,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -6086,7 +6301,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString =                        "%name"),
+                textString=                         "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -6094,7 +6309,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
