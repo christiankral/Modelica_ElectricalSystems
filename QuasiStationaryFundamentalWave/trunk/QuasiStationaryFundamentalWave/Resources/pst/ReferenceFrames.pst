@@ -1,0 +1,138 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Mon Aug 26 23:02:24 CEST 2013
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="4" x-max="58" y-min="-4" y-max="40.04" auto-bounding="true">
+%<g>
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(22,16);(22,16);(56,16);(56,16)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(58,16)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%(s)
+%</text>
+%</g>
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(22.21,15.11);(22.21,15.11);(52.62,30.31);(52.62,30.31)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(54.41,31.2)"
+%	 text-rotation= "30"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%(r)
+%</text>
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(22.59,14.59);(22.59,14.59);(46.63,38.63);(46.63,38.63)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(48.04,40.04)"
+%	 text-rotation= "45"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%ref
+%</text>
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(24,16);(24,16);(32,36);(32,36)"
+%	 stroke-width= "0.6"
+%	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(32,38)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$\underline{A}$
+%</text>
+%<ellipse right-arrow= "disk-centered"
+%	 p3= "(38,2)"
+%	 p2= "(38,30)"
+%	 fill-style= "none"
+%	 p1= "(10,30)"
+%	 closure= "open"
+%	 angle-end= "0"
+%	 angle-start= "-23.96"
+%	 left-arrow= "head"
+%	 />
+%<ellipse right-arrow= "disk-centered"
+%	 p3= "(40,0)"
+%	 p2= "(40,32)"
+%	 fill-style= "none"
+%	 p1= "(8,32)"
+%	 closure= "open"
+%	 angle-end= "0"
+%	 angle-start= "-45"
+%	 left-arrow= "head"
+%	 />
+%<ellipse right-arrow= "disk-centered"
+%	 p3= "(44,-4)"
+%	 p2= "(44,36)"
+%	 fill-style= "none"
+%	 p1= "(4,36)"
+%	 closure= "open"
+%	 angle-end= "-26.57"
+%	 angle-start= "-45"
+%	 left-arrow= "head"
+%	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(41,19)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%$\gamma_s$
+%</text>
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(41,29)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%$\gamma_r$
+%</text>
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(36,19)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "right"
+%	 >
+%$\gamma$
+%</text>
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(58,40.04)
+\psline{->}(22,16)(56,16)
+\rput[l](58,16){(s)}
+\psline{->}(22.21,15.11)(52.62,30.31)
+\rput[l]{30}(54.41,31.2){(r)}
+\psline{->}(22.59,14.59)(46.63,38.63)
+\rput[l]{45}(48.04,40.04){ref}
+\psline[linewidth=0.6]{->}(24,16)(32,36)
+\rput(32,38){$\underline{A}$}
+\rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(14,-14){-23.96}{-0}}
+\rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(16,-16){-45}{-0}}
+\rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(20,-20){-45}{-26.57}}
+\rput[l](41,19){$\gamma_s$}
+\rput[l](41,29){$\gamma_r$}
+\rput[r](36,19){$\gamma$}
+\end{pspicture}
