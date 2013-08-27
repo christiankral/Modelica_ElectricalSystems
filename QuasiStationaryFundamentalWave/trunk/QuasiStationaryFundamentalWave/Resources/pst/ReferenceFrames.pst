@@ -1,8 +1,12 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Mon Aug 26 23:02:24 CEST 2013
+%%Tue Aug 27 09:42:40 CEST 2013
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
-%<jpic x-min="4" x-max="58" y-min="-4" y-max="40.04" auto-bounding="true">
+%<jpic x-min="3" x-max="58" y-min="-5" y-max="40.04" auto-bounding="true">
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(23.96,15.96);(23.96,15.96);(48,40);(48,40)"
+%	 />
 %<g>
 %<multicurve right-arrow= "head"
 %	 fill-style= "none"
@@ -30,10 +34,6 @@
 %	 >
 %(r)
 %</text>
-%<multicurve right-arrow= "head"
-%	 fill-style= "none"
-%	 points= "(22.59,14.59);(22.59,14.59);(46.63,38.63);(46.63,38.63)"
-%	 />
 %<text text-vert-align= "center-v"
 %	 fill-style= "none"
 %	 anchor-point= "(48.04,40.04)"
@@ -46,15 +46,16 @@
 %<multicurve right-arrow= "head"
 %	 fill-style= "none"
 %	 points= "(24,16);(24,16);(32,36);(32,36)"
+%	 stroke-color= "#009900"
 %	 stroke-width= "0.6"
 %	 />
 %<text text-vert-align= "center-v"
 %	 fill-style= "none"
-%	 anchor-point= "(32,38)"
+%	 anchor-point= "(28,31)"
 %	 text-frame= "noframe"
-%	 text-hor-align= "center-h"
+%	 text-hor-align= "right"
 %	 >
-%$\underline{A}$
+%$\underline{\Phi}$
 %</text>
 %<ellipse right-arrow= "disk-centered"
 %	 p3= "(38,2)"
@@ -77,10 +78,10 @@
 %	 left-arrow= "head"
 %	 />
 %<ellipse right-arrow= "disk-centered"
-%	 p3= "(44,-4)"
-%	 p2= "(44,36)"
+%	 p3= "(45,-5)"
+%	 p2= "(45,37)"
 %	 fill-style= "none"
-%	 p1= "(4,36)"
+%	 p1= "(3,37)"
 %	 closure= "open"
 %	 angle-end= "-26.57"
 %	 angle-start= "-45"
@@ -96,7 +97,7 @@
 %</text>
 %<text text-vert-align= "center-v"
 %	 fill-style= "none"
-%	 anchor-point= "(41,29)"
+%	 anchor-point= "(42,29)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
 %	 >
@@ -110,6 +111,36 @@
 %	 >
 %$\gamma$
 %</text>
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(38,30);(38,30);(32,36);(32,36)"
+%	 stroke-color= "#009900"
+%	 stroke-width= "0.6"
+%	 />
+%<multicurve right-arrow= "head"
+%	 fill-style= "none"
+%	 points= "(23.96,15.96);(23.96,15.96);(38,30);(38,30)"
+%	 stroke-color= "#009900"
+%	 stroke-width= "0.6"
+%	 />
+%<text text-vert-align= "baseline"
+%	 fill-style= "none"
+%	 anchor-point= "(32,26)"
+%	 text-rotation= "45"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$\Phi_\mathrm{re}$
+%</text>
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(37,34)"
+%	 text-rotation= "45"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%$\mathrm{j}\Phi_\mathrm{im}$
+%</text>
 %</jpic>
 %%End JPIC-XML
 %PSTricks content-type (pstricks.sty package needed)
@@ -121,18 +152,25 @@
 \psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
 \psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
 \begin{pspicture}(0,0)(58,40.04)
+\psline{->}(23.96,15.96)(48,40)
 \psline{->}(22,16)(56,16)
 \rput[l](58,16){(s)}
 \psline{->}(22.21,15.11)(52.62,30.31)
 \rput[l]{30}(54.41,31.2){(r)}
-\psline{->}(22.59,14.59)(46.63,38.63)
 \rput[l]{45}(48.04,40.04){ref}
-\psline[linewidth=0.6]{->}(24,16)(32,36)
-\rput(32,38){$\underline{A}$}
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linewidth=0.6,linecolor=userLineColour]{->}(24,16)(32,36)
+\rput[r](28,31){$\underline{\Phi}$}
 \rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(14,-14){-23.96}{-0}}
 \rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(16,-16){-45}{-0}}
-\rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(20,-20){-45}{-26.57}}
+\rput{0}(24,16){\psellipticarc[]{<-*}(0,0)(21,-21){-45}{-26.57}}
 \rput[l](41,19){$\gamma_s$}
-\rput[l](41,29){$\gamma_r$}
+\rput[l](42,29){$\gamma_r$}
 \rput[r](36,19){$\gamma$}
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linewidth=0.6,linecolor=userLineColour]{->}(38,30)(32,36)
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linewidth=0.6,linecolor=userLineColour]{->}(23.96,15.96)(38,30)
+\rput[B]{45}(32,26){$\Phi_\mathrm{re}$}
+\rput[l]{45}(37,34){$\mathrm{j}\Phi_\mathrm{im}$}
 \end{pspicture}
