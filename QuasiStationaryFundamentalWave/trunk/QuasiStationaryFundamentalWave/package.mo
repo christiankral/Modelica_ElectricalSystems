@@ -6441,5 +6441,5 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
                    Complex(version="3.2.1")),
     version="0.1.0",
     versionDate="2013-08-27",
-    versionBuild=0);
+    versionBuild=1);
 end QuasiStationaryFundamentalWave;
