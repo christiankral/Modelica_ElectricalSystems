@@ -2589,11 +2589,11 @@ Simulate for 1.5 seconds and plot (versus time):
           TrRef=smpmData.TrRef,
           VsOpenCircuit=smpmData.VsOpenCircuit,
           permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
-        wMechanical(fixed=true, start=2*pi*smpmData.fsNominal*smpmData.p),
-        TsOperational=293.15,
-        alpha20s=smpmData.alpha20s,
         gammar(start=pi/2, fixed=true),
         gamma(start=-pi/2, fixed=true),
+        TsOperational=293.15,
+        alpha20s=smpmData.alpha20s,
+        wMechanical(fixed=true, start=2*pi*smpmData.fsNominal/smpmData.p),
         alpha20r=smpmData.alpha20r,
         TrOperational=293.15)
                annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
@@ -2608,7 +2608,7 @@ Simulate for 1.5 seconds and plot (versus time):
                              rotation=0)));
         parameter
         Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
-          smpmData(useDamperCage=false)
+          smpmData(useDamperCage=true)
           annotation (Placement(transformation(extent={{80,80},{100,100}})));
         Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundMachineQS
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},   rotation=0,
@@ -3299,7 +3299,7 @@ Simulate for 1.5 seconds and plot (versus time):
         QuasiStationaryFundamentalWave.MoveTo_Modelica.QuasiStationary_MultiPhase.TerminalBox
           terminalBoxQS(m=m, terminalConnection="Y")
                                     annotation (Placement(transformation(extent={{-10,50},
-                  {10,70}},            rotation=0)));
+                {10,70}},              rotation=0)));
       initial equation
         smee.is[1:2] = zeros(2);
 
@@ -3400,8 +3400,9 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
 <li><code>speedM|E.tauElectrical</code>: machine torque</li>
 <li><code>mechanicalPowerSensorM|E.P</code>: mechanical power</li>
 </ul>
-</HTML>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                  100}}), graphics));
+</HTML>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),
+                          graphics));
       end SMEE_Generator;
 
       model SMR_Inverter
