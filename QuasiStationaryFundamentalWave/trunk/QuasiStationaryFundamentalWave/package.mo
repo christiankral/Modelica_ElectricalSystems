@@ -2,7 +2,6 @@ within ;
 package QuasiStationaryFundamentalWave 
   extends Modelica.Icons.Package;
 
-
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
     class Concept "Fundamental wave concept"
@@ -110,8 +109,8 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
     class ReleaseNotes "Release Notes"
       extends Modelica.Icons.ReleaseNotes;
       annotation (Documentation(info="<html>
-<p><h5>Version 0.1.0, 2013-08-27</h5></p>
-<p><ul>
+<h5>Version 0.1.0, 2013-08-27</h5>
+<ul>
 <li>Documentation of <a href=\"modelica://QuasiStationaryFundamentalWave.UsersGuide.Concept\">phasor concept</a></li>
 <li>Connections.branch between electric and magnetic quasi stationary connectors to handle open circuit and motor operation of machines</li>
 <li>Saliency effects are properly considered</li>
@@ -123,28 +122,34 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 <li>Electrical excited synchronous machine with optional damper cage (may be removed in first release) </li>
 <li>Synchronous reluctance machine with optional damper cage (may be removed in first release) </li>
 </ul></li>
-</ul></p>
-<p><h5>Version 0.2.0, 2013-09-01</h5></p>
-<p><ul>
+</ul>
+
+<h5>Version 0.2.0, 2013-09-01</h5>
+<ul>
 <li>Implemented asynchronous induction machine with slip ring rotor including example</li>
 <li>Implemented magnetic crossing </li>
-</ul></p>
-<p><h5>Version 0.2.1, 2013-09-23</h5></p>
-<p><ul>
+</ul>
+
+<h5>Vrsion 0.2.1, 2013-09-23</h5>
+<ul>
 <li>Implemented pemanent magnet synchronous machine example with inverter</li>
-</ul></p>
-<p><h5>Version 0.2.2, 2013-09-24</h5></p>
-<p><ul>
+</ul>
+
+<h5>Version 0.2.2, 2013-09-24</h5>
+<ul>
 <li>Fixed initialization of examples (changed implementation of QuasiStationary.Sources, added start values for gamma, gammas, gammar)</li>
-</ul></p>
-<p><h5>Version 0.2.3, 2013-09-25</h5></p>
-<p><ul>
-<li>Adapted sine / cosine of WS V/f-convverter</li>
-</ul></p>
-<p><h5>Version 0.2.4, 2013-09</h5></p>
-<p><ul>
+</ul>
+
+<h5>Version 0.2.3, 2013-09-25</h5>
+<ul>
+<li>Adapted sine / cosine of QS V/f-convverter to match transient behavior</li>
+</ul>
+
+<h5>Version 0.2.4, 2013-10-02</h5>
+<ul>
 <li>Implemented asynchronous induction machine with squirrel cage example with inverter</li>
-</ul></p>
+<li>Alternative implementation of transformation matrix for faster compilation in Dymola</li>
+</ul>
 </html>"));
     end ReleaseNotes;
 
@@ -165,11 +170,9 @@ This library on quasi stationary fundamental wave models for the application in 
 
   package Examples "Examples"
   extends Modelica.Icons.ExamplesPackage;
-
     package Components
     "Examples for testing quasi stationary fundamental wave components"
       extends Modelica.Icons.ExamplesPackage;
-
       model ThreePhaseInductance "Three phase inductance"
       import QuasiStationaryFundamentalWave;
         extends Modelica.Icons.Example;
@@ -1877,7 +1880,6 @@ In this example the eddy current losses are implemented in two different ways. C
       initial equation
         voltageSource1.pin_p.reference.gamma=0;
         voltageSource2.pin_p.reference.gamma=0;
-
       equation
         connect(ground1.pin, voltageSource1.pin_n)
                                                  annotation (Line(points={{-20,-20},{-20,
@@ -2083,7 +2085,6 @@ In this example the eddy current losses are implemented in two different ways. C
       initial equation
         aimc.is[1:m-1]=zeros(m-1);
         aimc.ir[1:m-1]=zeros(m-1);
-
       equation
         connect(groundQS.pin, starQS.pin_n)
                                         annotation (Line(points={{-90,10},{-92,10},{-90,
@@ -2275,9 +2276,10 @@ In this example the eddy current losses are implemented in two different ways. C
         Modelica.Electrical.Machines.Utilities.ParameterRecords.AIM_SquirrelCageData
           aimcData
           annotation (Placement(transformation(extent={{80,80},{100,100}})));
-        Modelica.Electrical.Machines.Sensors.CurrentQuasiRMSSensor currentQuasiRMSSensor
+        Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor
+                                                                   currentQuasiRMSSensor(final m=m)
           annotation (Placement(transformation(
-              origin={20,-50},
+              origin={22,-50},
               extent={{-10,10},{10,-10}},
               rotation=0)));
         QuasiStationaryFundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
@@ -2377,12 +2379,12 @@ In this example the eddy current losses are implemented in two different ways. C
             color={0,0,0},
             smooth=Smooth.None));
         connect(signalVoltage.plug_n, currentQuasiRMSSensor.plug_p) annotation (Line(
-            points={{0,-50},{10,-50}},
+            points={{0,-50},{12,-50}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(currentQuasiRMSSensor.plug_n, terminalBox.plugSupply) annotation (
             Line(
-            points={{30,-50},{30,-68}},
+            points={{32,-50},{32,-60},{30,-60},{30,-68}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(ground.p, star.pin_n) annotation (Line(
@@ -2426,7 +2428,7 @@ In this example the eddy current losses are implemented in two different ways. C
             color={85,170,255},
             smooth=Smooth.None));
         connect(groundQS.pin, starQS.pin_n) annotation (Line(
-            points={{-60,50},{-56,50},{-56,50},{-50,50}},
+            points={{-60,50},{-50,50}},
             color={85,170,255},
             smooth=Smooth.None));
         connect(starQS.plug_p, signalVoltageQS.plug_n) annotation (Line(
@@ -2679,7 +2681,6 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
       initial equation
         aims.is[1:m-1]=zeros(m-1);
         aims.ir[1:m]=zeros(m);
-
       equation
         connect(star.pin_n, ground.p)
           annotation (Line(points={{-80,-80},{-80,-80}},
@@ -3295,7 +3296,6 @@ Simulate for 1.5 seconds and plot (versus time):
       initial equation
         smpm.is[1:2]=zeros(2);
       //conditional damper cage currents are defined as fixed start values
-
       equation
         connect(signalVoltage.plug_n, star.plug_p)
           annotation (Line(points={{-20,-50},{-20,-50},{-30,-50}},
@@ -3610,7 +3610,6 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
               origin={-50,60})));
       initial equation
         smee.is[1:2] = zeros(2);
-
       equation
         connect(star.pin_n, grounde.p)
           annotation (Line(points={{-70,-10},{-80,-10}},
@@ -3886,7 +3885,6 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
                   {40,50}},            rotation=0)));
       initial equation
         smr.is[1:2] = zeros(2);
-
       equation
         connect(signalVoltage.plug_n, star.plug_p) annotation (Line(points={{-20,-50},
                 {-20,-50},{-30,-50}},                       color={0,0,255}));
@@ -4357,11 +4355,9 @@ The voltages <img src=\"modelica://Modelica/Images/Magnetic/FundamentalWave/v_k.
 
     model QuasiStionaryAnalogElectroMagneticConverter
     "Electro magnetic converter to only (!) quasi stationary analog, neglecting induced voltage"
-
       // Note: It has not whether the transient voltage induction and the
       //   leakage induction shall be considered in this model or not.
       //   This model is required for electrical excited synchronous machines (SMEE)
-
       import Modelica.Constants.pi;
       Modelica.Electrical.Analog.Interfaces.PositivePin pin_p "Positive pin"
         annotation (Placement(transformation(
@@ -4550,7 +4546,6 @@ This is a simple short cut branch.
     end Short;
 
     model Crossing "Crossing of connections"
-
     Interfaces.PositiveMagneticPort port_p1
       annotation (Placement(transformation(extent={{-110,90},{-90,110}})));
     Interfaces.NegativeMagneticPort port_n1
@@ -5778,7 +5773,6 @@ The single phase winding consists of a
         Modelica.Mechanics.Rotational.Interfaces.Flange_a support
         "Support at which the reaction torque is acting"   annotation (
             Placement(transformation(extent={{-10,-110},{10,-90}}, rotation=0)));
-
         parameter Integer p "Number of pole pairs";
         parameter Modelica.Magnetic.FundamentalWave.Types.SalientInductance L0(
           d(start=1), q(start=1))
@@ -5795,7 +5789,6 @@ The single phase winding consists of a
         "Complex magnetic potential difference of rotor w.r.t. rotor reference frame";
         Modelica.SIunits.ComplexMagneticPotentialDifference V_mrr = V_mr * Modelica.ComplexMath.fromPolar(1,gammar)
         "Complex magnetic potential difference of rotor w.r.t. rotor fixed reference frame";
-
         // Complex phasors of magnetic fluxes
         Modelica.SIunits.ComplexMagneticFlux Phi_s
         "Complex magnetic flux of stator w.r.t. stator reference frame";
@@ -5805,7 +5798,6 @@ The single phase winding consists of a
         "Complex magnetic flux of rotor w.r.t. rotor refernce frame";
         Modelica.SIunits.ComplexMagneticFlux Phi_rr = Phi_r * Modelica.ComplexMath.fromPolar(1,gammar)
         "Complex magnetic flux of rotor w.r.t. rotor fixed reference frame";
-
         // Electrical torque and mechanical angle
         Modelica.SIunits.Torque tauElectrical "Electrical torque";
         // Modelica.SIunits.Torque tauTemp "Electrical torque";
@@ -5824,23 +5816,19 @@ The single phase winding consists of a
         port_rp.Phi = Phi_r;
         // Balance of rotor flux
         port_rp.Phi + port_rn.Phi = Complex(0, 0);
-
         // Magneto motive force of stator
         port_sp.V_m - port_sn.V_m = V_ms;
         // Magneto motive force of stator
         port_rp.V_m - port_rn.V_m = V_mr;
-
         // Stator and rotor flux are equal with respect to different reference frames
         Phi_s = Phi_r;
         // Local balance of magneto motive force
         (pi/2.0)*(V_mrr.re + V_msr.re) = Phi_rr.re*R_m.d;
         (pi/2.0)*(V_mrr.im + V_msr.im) = Phi_rr.im*R_m.q;
-
         // Torque
         tauElectrical = -(pi*p/2.0)*(Phi_s.im*V_ms.re - Phi_s.re*V_ms.im);
         flange_a.tau = -tauElectrical;
         support.tau = tauElectrical;
-
         // Potential root of rotor has been removed. Only the stator positive
         //   plug is a potential root so that being a root determines that not
         //   electrical stator root is connected from outside; in this case the
@@ -7080,14 +7068,12 @@ Additionally the reference angle is specified in the connector. The time derivat
       parameter Modelica.Electrical.Machines.Losses.StrayLoadParameters
         strayLoadParameters(IRef(start=100), wRef=2*pi*fsNominal/p)
       "Stray load losses"   annotation (Dialog(tab="Losses"));
-
       output Modelica.SIunits.Angle gammas(start=0) = airGap.gammas
       "Angle of stator reference frame";
       output Modelica.SIunits.Angle gammar(start=0) = airGap.gammar
       "Angle of stator reference frame";
       output Modelica.SIunits.Angle gamma(start=0) = airGap.gamma
       "Electrical angle between stator and rotor";
-
       // Mechanical quantities
       output Modelica.SIunits.Angle phiMechanical = flange.phi -
         internalSupport.phi "Mechanical angle of rotor against stator";
@@ -7207,7 +7193,6 @@ Additionally the reference angle is specified in the connector. The time derivat
     initial algorithm
       assert(not Modelica.Math.isPowerOf2(m), String(m) +
         " phases are currently not supported in this version of FundametalWave");
-
     equation
       connect(stator.plug_n, plug_sn) annotation (Line(
         points={{-10,50},{-10,70},{-60,70},{-60,100}},
@@ -7403,11 +7388,11 @@ This function determines the orientation of the symmetrical winding with <img sr
       algorithm
         // Init transformation matrix with zeros
         transformation := Modelica.ComplexMath.fromPolar(fill(
-              1,
+              1/m,
               m,
               m),
           QuasiStationaryFundamentalWave.MoveTo_Modelica.Functions.symmetricOrientationMatrix(
-          m))/m;
+          m));
         annotation (Documentation(info="<html>
 <p>
 This function determines the orientation of the symmetrical winding with <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> phases. For an odd number of phases the difference of the windings angles of two adjacent phases is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/2pi_over_m.png\">. In case of an even number of phases the aligned orientation of winding is not modeled since they do not add any information. Instead the <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/m.png\"> windings are divided into two different groups. The first group refers to the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_le_m_over_2.png\">. The second group covers the indices <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/k_gt_m_over_2.png\">. The difference of the windings angles of two adjacent phases - of both the first and the second group, respectively - is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/4pi_over_m.png\">. The phase shift of the two groups is <img src=\"modelica://Modelica/Resources/Images/Magnetic/FundamentalWave/pi_over_m.png\">.
@@ -7563,7 +7548,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -7623,7 +7608,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString=                         "%name"),
+                textString =                        "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -7631,7 +7616,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -7787,10 +7772,9 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
     end QuasiStationaryFundamentalWaveMachine;
   end Icons;
 
-
   annotation (uses(Modelica(version="3.2.1"),
                    Complex(version="3.2.1")),
     version="0.2.4",
-    versionDate="2013-09-30",
-    versionBuild=0);
+    versionDate="2013-10-02",
+    versionBuild=1);
 end QuasiStationaryFundamentalWave;
