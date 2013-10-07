@@ -2,6 +2,7 @@ within ;
 package QuasiStationaryFundamentalWave 
   extends Modelica.Icons.Package;
 
+
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
     class Concept "Fundamental wave concept"
@@ -2083,8 +2084,9 @@ In this example the eddy current losses are implemented in two different ways. C
                                     annotation (Placement(transformation(extent={{20,40},
                 {40,60}},              rotation=0)));
       initial equation
-        aimc.is[1:m-1]=zeros(m-1);
+        aimc.is[1:2]=zeros(2);
         aimc.ir[1:m-1]=zeros(m-1);
+
       equation
         connect(groundQS.pin, starQS.pin_n)
                                         annotation (Line(points={{-90,10},{-92,10},{-90,
@@ -2195,7 +2197,6 @@ In this example the eddy current losses are implemented in two different ways. C
 
       model AIMC_Inverter
       "Test example: AsynchronousInductionMachineSquirrelCage with inverter"
-        import QuasiStationaryFundamentalWave;
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Integer m=3 "Number of phases";
@@ -2212,11 +2213,8 @@ In this example the eddy current losses are implemented in two different ways. C
           aimc(
           p=aimcData.p,
           fsNominal=aimcData.fsNominal,
-          Rs=aimcData.Rs,
           TsRef=aimcData.TsRef,
           alpha20s(displayUnit="1/K") = aimcData.alpha20s,
-          Lszero=aimcData.Lszero,
-          Lssigma=aimcData.Lssigma,
           Jr=aimcData.Jr,
           Js=aimcData.Js,
           frictionParameters=aimcData.frictionParameters,
@@ -2224,12 +2222,15 @@ In this example the eddy current losses are implemented in two different ways. C
           wMechanical(fixed=true),
           statorCoreParameters=aimcData.statorCoreParameters,
           strayLoadParameters=aimcData.strayLoadParameters,
-          Lm=aimcData.Lm,
-          Lrsigma=aimcData.Lrsigma,
-          Rr=aimcData.Rr,
           TrRef=aimcData.TrRef,
           m=m,
           TsOperational=293.15,
+          Rs=aimcData.Rs*m/3,
+          Lssigma=aimcData.Lssigma*m/3,
+          Lszero=aimcData.Lszero*m/3,
+          Lm=aimcData.Lm*m/3,
+          Lrsigma=aimcData.Lrsigma*m/3,
+          Rr=aimcData.Rr*m/3,
           alpha20r=aimcData.alpha20r,
           TrOperational=293.15)
           annotation (Placement(transformation(extent={{20,-90},{40,-70}},
@@ -2279,31 +2280,31 @@ In this example the eddy current losses are implemented in two different ways. C
         Modelica.Electrical.MultiPhase.Sensors.CurrentQuasiRMSSensor
                                                                    currentQuasiRMSSensor(final m=m)
           annotation (Placement(transformation(
-              origin={22,-50},
+              origin={20,-50},
               extent={{-10,10},{10,-10}},
               rotation=0)));
         QuasiStationaryFundamentalWave.BasicMachines.AsynchronousInductionMachines.AIM_SquirrelCage
           aimcQS(
           p=aimcData.p,
           fsNominal=aimcData.fsNominal,
-          Rs=aimcData.Rs,
           TsRef=aimcData.TsRef,
           alpha20s(displayUnit="1/K") = aimcData.alpha20s,
-          Lssigma=aimcData.Lssigma,
           Jr=aimcData.Jr,
           Js=aimcData.Js,
           frictionParameters=aimcData.frictionParameters,
           statorCoreParameters=aimcData.statorCoreParameters,
           strayLoadParameters=aimcData.strayLoadParameters,
-          Lm=aimcData.Lm,
-          Lrsigma=aimcData.Lrsigma,
-          Rr=aimcData.Rr,
           TrRef=aimcData.TrRef,
           m=m,
           gammar(fixed=true, start=+pi/2),
           gamma(fixed=true, start=-pi/2),
-          TsOperational=293.15,
           wMechanical(fixed=true, start=0),
+          TsOperational=293.15,
+          Rs=aimcData.Rs*m/3,
+          Lssigma=aimcData.Lssigma*m/3,
+          Lm=aimcData.Lm*m/3,
+          Lrsigma=aimcData.Lrsigma*m/3,
+          Rr=aimcData.Rr*m/3,
           alpha20r=aimcData.alpha20r,
           TrOperational=293.15)
           annotation (Placement(transformation(extent={{20,10},{40,30}},
@@ -2358,7 +2359,7 @@ In this example the eddy current losses are implemented in two different ways. C
           annotation (Placement(transformation(extent={{-40,80},{-20,100}},
                 rotation=0)));
       initial equation
-        aimc.is[1:m-1]=zeros(m-1);
+        aimc.is[1:2]=zeros(2);
         aimc.ir[1:m-1]=zeros(m-1);
 
       equation
@@ -2379,12 +2380,12 @@ In this example the eddy current losses are implemented in two different ways. C
             color={0,0,0},
             smooth=Smooth.None));
         connect(signalVoltage.plug_n, currentQuasiRMSSensor.plug_p) annotation (Line(
-            points={{0,-50},{12,-50}},
+            points={{0,-50},{10,-50}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(currentQuasiRMSSensor.plug_n, terminalBox.plugSupply) annotation (
             Line(
-            points={{32,-50},{32,-60},{30,-60},{30,-68}},
+            points={{30,-50},{30,-68}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(ground.p, star.pin_n) annotation (Line(
@@ -2474,7 +2475,8 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
       "Starting of asynchronous induction machine with slip rings"
         import Modelica.Constants.pi;
         extends Modelica.Icons.Example;
-        parameter Integer m=3 "Number of phases";
+        parameter Integer m=3 "Number of stator phases";
+        parameter Integer mr=3 "Number of rotor phases";
         parameter Modelica.SIunits.Voltage VsNominal=100
         "Nominal RMS voltage per phase";
         parameter Modelica.SIunits.Frequency fNominal=50 "Nominal frequency";
@@ -2547,15 +2549,15 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
           VrLockedRotor=aimsData.VrLockedRotor,
           rotorCoreParameters=aimsData.rotorCoreParameters,
           TurnsRatio=aimsData.turnsRatio,
-          mr=m,
-          m=m,
           Rs=aimsData.Rs*m/3,
           Lssigma=aimsData.Lssigma*m/3,
           Lszero=aimsData.Lszero*m/3,
           Lm=aimsData.Lm*m/3,
-          Lrsigma=aimsData.Lrsigma*m/3,
-          Lrzero=aimsData.Lrzero*m/3,
-          Rr=aimsData.Rr*m/3,
+          Lrsigma=aimsData.Lrsigma*mr/3,
+          Lrzero=aimsData.Lrzero*mr/3,
+          Rr=aimsData.Rr*mr/3,
+          mr=mr,
+          m=m,
           TsOperational=293.15,
           TrOperational=293.15) annotation (Placement(transformation(extent={{20,-80},
                   {40,-60}},      rotation=0)));
@@ -2576,31 +2578,30 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
           VsNominal=aimsData.VsNominal,
           VrLockedRotor=aimsData.VrLockedRotor,
           rotorCoreParameters=aimsData.rotorCoreParameters,
-          mr=m,
-          m=m,
           Rs=aimsData.Rs*m/3,
           Lssigma=aimsData.Lssigma*m/3,
           Lm=aimsData.Lm*m/3,
-          Lrsigma=aimsData.Lrsigma*m/3,
-          Rr=aimsData.Rr*m/3,
         gammar(fixed=true, start=pi/2),
         gamma(fixed=true, start=-pi/2),
         wMechanical(fixed=true),
-        TsOperational=566.3,
-        TrOperational=566.3,
-        TurnsRatio=aimsData.turnsRatio)
-                               annotation (Placement(transformation(extent={{20,20},{40,
+        TurnsRatio=aimsData.turnsRatio,
+          Lrsigma=aimsData.Lrsigma*mr/3,
+          Rr=aimsData.Rr*mr/3,
+          mr=mr,
+          m=m,
+          TsOperational=566.3,
+          TrOperational=566.3) annotation (Placement(transformation(extent={{20,20},{40,
                   40}},           rotation=0)));
         Modelica.Electrical.Machines.Utilities.SwitchedRheostat rheostatM(
           tStart=tRheostat,
-          m=m,
-          RStart=RStart*m/3)
+          m=mr,
+          RStart=RStart*mr/3)
                annotation (Placement(transformation(extent={{0,-80},{20,-60}},
                 rotation=0)));
         QuasiStationaryFundamentalWave.Utilities.SwitchedRheostat rheostatE(
           tStart=tRheostat,
-          m=m,
-          RStart=RStart*m/3)
+          RStart=RStart*mr/3,
+          m=mr)
                annotation (Placement(transformation(extent={{0,20},{20,40}},
                 rotation=0)));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
@@ -2679,8 +2680,9 @@ Default machine parameters of model <i>AIM_SquirrelCage</i> are used.
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},   rotation=0,
               origin={-10,0})));
       initial equation
-        aims.is[1:m-1]=zeros(m-1);
-        aims.ir[1:m]=zeros(m);
+        aims.is[1:2]=zeros(2);
+        aims.ir[1:mr]=zeros(mr);//???
+
       equation
         connect(star.pin_n, ground.p)
           annotation (Line(points={{-80,-80},{-80,-80}},
@@ -2826,7 +2828,6 @@ Simulate for 1.5 seconds and plot (versus time):
         extends Modelica.Icons.Example;
         parameter Integer m=3 "Number of phases";
         parameter Modelica.SIunits.Frequency f = 50 "Supply frequency";
-        // parameter Modelica.SIunits.Frequency fslip = 1e-3 "Supply frequency";
         parameter Modelica.SIunits.Voltage V = 112.3 "Suppy voltage";
         parameter Modelica.SIunits.Torque T_Load=181.4 "Nominal load torque";
         parameter Modelica.SIunits.Time tStep=0.5 "Time of load torque step";
@@ -2863,14 +2864,10 @@ Simulate for 1.5 seconds and plot (versus time):
           Jr=smpmData.Jr,
           p=smpmData.p,
           fsNominal=smpmData.fsNominal,
-          Rs=smpmData.Rs,
           TsRef=smpmData.TsRef,
-          Lssigma=smpmData.Lssigma,
           frictionParameters=smpmData.frictionParameters,
           statorCoreParameters=smpmData.statorCoreParameters,
           strayLoadParameters=smpmData.strayLoadParameters,
-          Lmd=smpmData.Lmd,
-          Lmq=smpmData.Lmq,
           useDamperCage=smpmData.useDamperCage,
           Lrsigmad=smpmData.Lrsigmad,
           Lrsigmaq=smpmData.Lrsigmaq,
@@ -2881,11 +2878,15 @@ Simulate for 1.5 seconds and plot (versus time):
           permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
         gammar(start=pi/2, fixed=true),
         gamma(start=-pi/2, fixed=true),
-        TsOperational=293.15,
-        alpha20s=smpmData.alpha20s,
         wMechanical(fixed=true, start=2*pi*smpmData.fsNominal/smpmData.p),
-        alpha20r=smpmData.alpha20r,
-        TrOperational=293.15)
+          TsOperational=293.15,
+          Rs=smpmData.Rs*m/3,
+          alpha20s=smpmData.alpha20s,
+          Lssigma=smpmData.Lssigma*m/3,
+          Lmd=smpmData.Lmd*m/3,
+          Lmq=smpmData.Lmq*m/3,
+          alpha20r=smpmData.alpha20r,
+          TrOperational=293.15)
                annotation (Placement(transformation(extent={{-10,-20},{10,0}})));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertiaM(J=J_Load)
           annotation (Placement(transformation(extent={{20,-20},{40,0}},
@@ -2968,17 +2969,13 @@ Simulate for 1.5 seconds and plot (versus time):
           smpmQS(
           p=smpmData.p,
           fsNominal=smpmData.fsNominal,
-          Rs=smpmData.Rs,
           TsRef=smpmData.TsRef,
-          Lssigma=smpmData.Lssigma,
           Jr=smpmData.Jr,
           Js=smpmData.Js,
           frictionParameters=smpmData.frictionParameters,
           statorCoreParameters=smpmData.statorCoreParameters,
           strayLoadParameters=smpmData.strayLoadParameters,
           VsOpenCircuit=smpmData.VsOpenCircuit,
-          Lmd=smpmData.Lmd,
-          Lmq=smpmData.Lmq,
           useDamperCage=smpmData.useDamperCage,
           Lrsigmad=smpmData.Lrsigmad,
           Lrsigmaq=smpmData.Lrsigmaq,
@@ -2989,7 +2986,11 @@ Simulate for 1.5 seconds and plot (versus time):
           phiMechanical(start=0),
           m=m,
           TsOperational=293.15,
+          Rs=smpmData.Rs*m/3,
           alpha20s=smpmData.alpha20s,
+          Lssigma=smpmData.Lssigma*m/3,
+          Lmd=smpmData.Lmd*m/3,
+          Lmq=smpmData.Lmq*m/3,
           alpha20r=smpmData.alpha20r,
           TrOperational=293.15)
           annotation (Placement(transformation(extent={{-10,20},{10,40}},
@@ -3022,17 +3023,13 @@ Simulate for 1.5 seconds and plot (versus time):
           smpm(
           p=smpmData.p,
           fsNominal=smpmData.fsNominal,
-          Rs=smpmData.Rs,
           TsRef=smpmData.TsRef,
-          Lssigma=smpmData.Lssigma,
           Jr=smpmData.Jr,
           Js=smpmData.Js,
           frictionParameters=smpmData.frictionParameters,
           statorCoreParameters=smpmData.statorCoreParameters,
           strayLoadParameters=smpmData.strayLoadParameters,
           VsOpenCircuit=smpmData.VsOpenCircuit,
-          Lmd=smpmData.Lmd,
-          Lmq=smpmData.Lmq,
           useDamperCage=smpmData.useDamperCage,
           Lrsigmad=smpmData.Lrsigmad,
           Lrsigmaq=smpmData.Lrsigmaq,
@@ -3042,7 +3039,12 @@ Simulate for 1.5 seconds and plot (versus time):
           permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
           m=m,
           TsOperational=293.15,
+          Rs=smpmData.Rs*m/3,
           alpha20s=smpmData.alpha20s,
+          Lssigma=smpmData.Lssigma*m/3,
+          Lszero=smpmData.Lszero*m/3,
+          Lmd=smpmData.Lmd*m/3,
+          Lmq=smpmData.Lmq*m/3,
           alpha20r=smpmData.alpha20r,
           TrOperational=293.15)
           annotation (Placement(transformation(extent={{-10,-50},{10,-30}},
@@ -3059,8 +3061,8 @@ Simulate for 1.5 seconds and plot (versus time):
               origin={-50,-20})));
         Modelica.Electrical.MultiPhase.Sensors.PotentialSensor potentialSensor(m=m)
           annotation (Placement(transformation(extent={{10,-30},{30,-10}})));
-        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistorQS(m=m,
-            R_ref=fill(1e6, m))
+        Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistorQS(m=m, R_ref=
+              fill(1e6*m/3, m))
           annotation (Placement(transformation(extent={{-10,50},{10,70}})));
       equation
         connect(starQS.plug_p, smpmQS.plug_sn)
@@ -3112,15 +3114,13 @@ Simulate for 1.5 seconds and plot (versus time):
         annotation (
           experiment(StopTime=0.1, Interval=0.001),
           Documentation(info="<html>
-</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                  100,100}}),
-                          graphics),
+</html>"),Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}), graphics),
           __Dymola_experimentSetupOutput);
       end SMPM_OpenCircuit;
 
       model SMPM_Inverter
       "Test example: PermanentMagnetSynchronousInductionMachine with inverter"
-        import QuasiStationaryFundamentalWave;
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Integer m=3 "Number of phases";
@@ -3137,10 +3137,7 @@ Simulate for 1.5 seconds and plot (versus time):
           smpm(
           p=smpmData.p,
           fsNominal=smpmData.fsNominal,
-          Rs=smpmData.Rs,
           TsRef=smpmData.TsRef,
-          Lszero=smpmData.Lszero,
-          Lssigma=smpmData.Lssigma,
           Jr=smpmData.Jr,
           Js=smpmData.Js,
           frictionParameters=smpmData.frictionParameters,
@@ -3149,8 +3146,6 @@ Simulate for 1.5 seconds and plot (versus time):
           statorCoreParameters=smpmData.statorCoreParameters,
           strayLoadParameters=smpmData.strayLoadParameters,
           VsOpenCircuit=smpmData.VsOpenCircuit,
-          Lmd=smpmData.Lmd,
-          Lmq=smpmData.Lmq,
           useDamperCage=smpmData.useDamperCage,
           Lrsigmad=smpmData.Lrsigmad,
           Lrsigmaq=smpmData.Lrsigmaq,
@@ -3160,6 +3155,11 @@ Simulate for 1.5 seconds and plot (versus time):
           permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
           ir(fixed=true),
           m=m,
+          Rs=smpmData.Rs*m/3,
+          Lssigma=smpmData.Lssigma*m/3,
+          Lszero=smpmData.Lszero*m/3,
+          Lmd=smpmData.Lmd*m/3,
+          Lmq=smpmData.Lmq*m/3,
           TsOperational=293.15,
           alpha20s=smpmData.alpha20s,
           alpha20r=smpmData.alpha20r,
@@ -3179,7 +3179,7 @@ Simulate for 1.5 seconds and plot (versus time):
           final m=m,
           VNominal=VNominal,
           fNominal=fNominal,
-          BasePhase=+Modelica.Constants.pi/2)
+          BasePhase=pi/2)
           annotation (Placement(transformation(extent={{-40,-20},{-20,0}},
                 rotation=0)));
         Modelica.Electrical.MultiPhase.Sources.SignalVoltage signalVoltage(final m=
@@ -3208,7 +3208,7 @@ Simulate for 1.5 seconds and plot (versus time):
                       annotation (Placement(transformation(extent={{100,-90},{80,-70}},
                          rotation=0)));
         Modelica.Electrical.Machines.Utilities.TerminalBox terminalBox(
-            terminalConnection="Y")        annotation (Placement(transformation(
+            terminalConnection="Y", m=m)   annotation (Placement(transformation(
                 extent={{20,-70},{40,-50}}, rotation=0)));
         parameter
         Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_PermanentMagnetData
@@ -3228,17 +3228,13 @@ Simulate for 1.5 seconds and plot (versus time):
           smpmQS(
           p=smpmData.p,
           fsNominal=smpmData.fsNominal,
-          Rs=smpmData.Rs,
           TsRef=smpmData.TsRef,
-          Lssigma=smpmData.Lssigma,
           Jr=smpmData.Jr,
           Js=smpmData.Js,
           frictionParameters=smpmData.frictionParameters,
           statorCoreParameters=smpmData.statorCoreParameters,
           strayLoadParameters=smpmData.strayLoadParameters,
           VsOpenCircuit=smpmData.VsOpenCircuit,
-          Lmd=smpmData.Lmd,
-          Lmq=smpmData.Lmq,
           useDamperCage=smpmData.useDamperCage,
           Lrsigmad=smpmData.Lrsigmad,
           Lrsigmaq=smpmData.Lrsigmaq,
@@ -3248,8 +3244,12 @@ Simulate for 1.5 seconds and plot (versus time):
           permanentMagnetLossParameters=smpmData.permanentMagnetLossParameters,
           m=m,
           wMechanical(fixed=true, start=0),
-          gammar(start=pi/2, fixed=true),
-          gamma(start=-pi/2, fixed=true),
+          Rs=smpmData.Rs*m/3,
+          Lssigma=smpmData.Lssigma*m/3,
+          Lmd=smpmData.Lmd*m/3,
+          Lmq=smpmData.Lmq*m/3,
+          gammas(fixed=true),
+          gamma(fixed=true),
           TsOperational=293.15,
           alpha20s=smpmData.alpha20s,
           alpha20r=smpmData.alpha20r,
@@ -3290,12 +3290,13 @@ Simulate for 1.5 seconds and plot (versus time):
           final m=m,
           VNominal=VNominal,
           fNominal=fNominal,
-          BasePhase=+Modelica.Constants.pi/2)
+          BasePhase=pi/2)
           annotation (Placement(transformation(extent={{-40,80},{-20,100}},
                 rotation=0)));
       initial equation
         smpm.is[1:2]=zeros(2);
       //conditional damper cage currents are defined as fixed start values
+
       equation
         connect(signalVoltage.plug_n, star.plug_p)
           annotation (Line(points={{-20,-50},{-20,-50},{-30,-50}},
@@ -3448,12 +3449,8 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
           Js=0.29,
           p=2,
           fsNominal=smeeData.fsNominal,
-          Rs=smeeData.Rs,
           TsRef=smeeData.TsRef,
           alpha20s(displayUnit="1/K") = smeeData.alpha20s,
-          Lssigma=smeeData.Lssigma,
-          Lmd=smeeData.Lmd,
-          Lmq=smeeData.Lmq,
           Lrsigmad=smeeData.Lrsigmad,
           Lrsigmaq=smeeData.Lrsigmaq,
           Rrd=smeeData.Rrd,
@@ -3472,8 +3469,12 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
           ir(fixed=true),
           useDamperCage=false,
           m=m,
-          TsOperational=293.15,
           frictionParameters(PRef=0),
+          Rs=smeeData.Rs*m/3,
+          Lssigma=smeeData.Lssigma*m/3,
+          Lmd=smeeData.Lmd*m/3,
+          Lmq=smeeData.Lmq*m/3,
+          TsOperational=293.15,
           TrOperational=293.15,
           TeOperational=293.15)               annotation (Placement(
               transformation(extent={{-10,-70},{10,-50}}, rotation=0)));
@@ -3481,17 +3482,13 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
           smeeQS(
           p=2,
           fsNominal=smeeData.fsNominal,
-          Rs=smeeData.Rs,
           TsRef=smeeData.TsRef,
           alpha20s(displayUnit="1/K") = smeeData.alpha20s,
-          Lssigma=smeeData.Lssigma,
           Jr=0.29,
           Js=0.29,
           frictionParameters(PRef=0),
           statorCoreParameters(PRef=0, VRef=100),
           strayLoadParameters(PRef=0, IRef=100),
-          Lmd=smeeData.Lmd,
-          Lmq=smeeData.Lmq,
           Lrsigmad=smeeData.Lrsigmad,
           Rrd=smeeData.Rrd,
           Rrq=smeeData.Rrq,
@@ -3506,11 +3503,15 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
           TrRef=smeeData.TrRef,
           useDamperCage=false,
           m=m,
-        TsOperational=293.15,
         gammar(fixed=true, start=pi/2),
         gamma(fixed=true, start=-pi/2),
-        TrOperational=293.15,
-        TeOperational=293.15)   annotation (Placement(transformation(extent={{-10,30},
+          TsOperational=293.15,
+          Rs=smeeData.Rs*m/3,
+          Lssigma=smeeData.Lssigma*m/3,
+          Lmd=smeeData.Lmd*m/3,
+          Lmq=smeeData.Lmq*m/3,
+          TrOperational=293.15,
+          TeOperational=293.15) annotation (Placement(transformation(extent={{-10,30},
                   {10,50}},       rotation=0)));
         Modelica.Electrical.Analog.Basic.Ground groundr annotation (Placement(
               transformation(
@@ -3610,6 +3611,7 @@ Default machine parameters of model <i>SM_PermanentMagnet</i> are used.
               origin={-50,60})));
       initial equation
         smee.is[1:2] = zeros(2);
+
       equation
         connect(star.pin_n, grounde.p)
           annotation (Line(points={{-70,-10},{-80,-10}},
@@ -3772,18 +3774,13 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
           Js=smrData.Js,
           p=smrData.p,
           fsNominal=smrData.fsNominal,
-          Rs=smrData.Rs,
           TsRef=smrData.TsRef,
           alpha20s(displayUnit="1/K") = smrData.alpha20s,
-          Lssigma=smrData.Lssigma,
-          Lszero=smrData.Lszero,
           frictionParameters=smrData.frictionParameters,
           statorCoreParameters=smrData.statorCoreParameters,
           strayLoadParameters=smrData.strayLoadParameters,
           phiMechanical(fixed=true),
           wMechanical(fixed=true),
-          Lmd=smrData.Lmd,
-          Lmq=smrData.Lmq,
           useDamperCage=smrData.useDamperCage,
           Lrsigmad=smrData.Lrsigmad,
           Lrsigmaq=smrData.Lrsigmaq,
@@ -3794,23 +3791,24 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
           ir(fixed=true),
           m=m,
           TsOperational=293.15,
-          TrOperational=293.15)                           annotation (Placement(
+          Rs=smrData.Rs*m/3,
+          Lssigma=smrData.Lssigma*m/3,
+          Lszero=smrData.Lszero*m/3,
+          TrOperational=293.15,
+          Lmd=smrData.Lmd*m/3,
+          Lmq=smrData.Lmq*m/3)                            annotation (Placement(
               transformation(extent={{20,-90},{40,-70}},  rotation=0)));
         QuasiStationaryFundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ReluctanceRotor
           smrQS(
           p=smrData.p,
           fsNominal=smrData.fsNominal,
-          Rs=smrData.Rs,
           TsRef=smrData.TsRef,
           alpha20s(displayUnit="1/K") = smrData.alpha20s,
-          Lssigma=smrData.Lssigma,
           Jr=smrData.Jr,
           Js=smrData.Js,
           frictionParameters=smrData.frictionParameters,
           statorCoreParameters=smrData.statorCoreParameters,
           strayLoadParameters=smrData.strayLoadParameters,
-          Lmd=smrData.Lmd,
-          Lmq=smrData.Lmq,
           useDamperCage=smrData.useDamperCage,
           Lrsigmad=smrData.Lrsigmad,
           Lrsigmaq=smrData.Lrsigmaq,
@@ -3818,11 +3816,16 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
           Rrq=smrData.Rrq,
           TrRef=smrData.TrRef,
           alpha20r(displayUnit="1/K") = smrData.alpha20r,
-        TsOperational=293.15,
         gammar(fixed=true, start=pi/2),
         gamma(fixed=true, start=-pi/2),
         wMechanical(fixed=true, start=0),
-        TrOperational=293.15)                             annotation (Placement(
+          Rs=smrData.Rs*m/3,
+          Lssigma=smrData.Lssigma*m/3,
+          Lmd=smrData.Lmd*m/3,
+          Lmq=smrData.Lmq*m/3,
+          m=m,
+          TsOperational=293.15,
+          TrOperational=293.15)                           annotation (Placement(
               transformation(extent={{20,10},{40,30}},    rotation=0)));
         Modelica.Mechanics.Rotational.Components.Inertia loadInertia(J=J_Load)
           annotation (Placement(transformation(extent={{50,-90},{70,-70}},
@@ -3885,6 +3888,7 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
                   {40,50}},            rotation=0)));
       initial equation
         smr.is[1:2] = zeros(2);
+
       equation
         connect(signalVoltage.plug_n, star.plug_p) annotation (Line(points={{-20,-50},
                 {-20,-50},{-30,-50}},                       color={0,0,255}));
@@ -6284,7 +6288,7 @@ The salient cage model is a two axis model with two phases. The electromagnetic 
     equation
     //amplitude = VNominal*min(abs(u)/fNominal, 1);
       amplitude = VNominal*(if abs(u)<fNominal then abs(u)/fNominal else 1);
-      y = Modelica.ComplexMath.fromPolar(fill(amplitude,m),orientation + fill(BasePhase,m));
+      y = Modelica.ComplexMath.fromPolar(fill(amplitude,m),orientation + fill(BasePhase - pi/2,m));
       annotation (
         Icon(coordinateSystem(preserveAspectRatio=false,extent={{-100,-100},{100,100}}),
                             graphics={
@@ -7771,6 +7775,7 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
 </html>"));
     end QuasiStationaryFundamentalWaveMachine;
   end Icons;
+
 
   annotation (uses(Modelica(version="3.2.1"),
                    Complex(version="3.2.1")),
