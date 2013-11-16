@@ -110,6 +110,11 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
     class ReleaseNotes "Release Notes"
       extends Modelica.Icons.ReleaseNotes;
       annotation (Documentation(info="<html>
+<h5>Version 0.4.1, 2013-11-16</h5>
+<ul>
+<li>Renamed base magnetic port to MagneticPort<li>
+</ul>
+
 <h5>Version 0.4.0, 2013-11-13</h5>
 <ul>
 <li>Renamed all machine class names according to #1348<li>
@@ -7212,16 +7217,16 @@ This package provides sensors for the magnetic potential difference and the magn
 
   package Interfaces "Interfaces"
     extends Modelica.Icons.InterfacesPackage;
-    connector Pin "Basic quasi static magnet connector"
+    connector MagneticPort "Basic quasi static magnet connector"
       Modelica.SIunits.ComplexMagneticPotential V_m
         "Complex magnetic potential at the node";
       flow Modelica.SIunits.ComplexMagneticFlux Phi
         "Complex magnetic flux flowing into the pin";
       annotation (Documentation(info="<html></html>"));
-    end Pin;
+    end MagneticPort;
 
     connector PositiveMagneticPort "Positive magnetic port"
-      extends QuasiStaticFundamentalWave.Interfaces.Pin;
+      extends QuasiStaticFundamentalWave.Interfaces.MagneticPort;
       Modelica.Electrical.QuasiStationary.Types.Reference reference "Reference";
       annotation (defaultComponentName="port_p",
         Diagram(graphics={Text(
@@ -7260,7 +7265,7 @@ Additionally the reference angle is specified in the connector. The time derivat
     end PositiveMagneticPort;
 
     connector NegativeMagneticPort "Negative magnetic port"
-      extends QuasiStaticFundamentalWave.Interfaces.Pin;
+      extends QuasiStaticFundamentalWave.Interfaces.MagneticPort;
       Modelica.Electrical.QuasiStationary.Types.Reference reference "Reference";
       annotation (defaultComponentName="port_n",
         Diagram(graphics={Text(
@@ -7861,7 +7866,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -7921,7 +7926,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString =                        "%name"),
+                textString=                         "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -7929,7 +7934,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
