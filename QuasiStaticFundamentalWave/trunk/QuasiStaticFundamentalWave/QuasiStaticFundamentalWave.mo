@@ -7756,7 +7756,7 @@ Modelica/QuasiStaticFundamentalWave/Resources/Images/Magnetic/FundamentalWave/4p
       if n==1 then
         ind[1] := 1;
       else
-        ind :=integer(linspace(0,n - 1,n))*integer(m/n) + ones(n);
+        ind := (0:n-1)*integer(m/n) + ones(n);
       end if;
       end indexPositiveSequence;
 
@@ -7780,8 +7780,7 @@ Modelica/QuasiStaticFundamentalWave/Resources/Images/Magnetic/FundamentalWave/4p
       else
         for k in 1:n loop
           ind[(mbas-1)*(k-1)+1:(mbas-1)*k] :=
-            integer(linspace(2,mbas,mbas - 1))
-          + mbas*(k - 1)*ones(mbas - 1);
+            (2:mbas) + mbas*(k - 1)*ones(mbas - 1);
         end for;
       end if;
       end indexNonPositiveSequence;
@@ -8293,6 +8292,6 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
 
   annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1")),
     version="0.4.0",
-    versionDate="2013-11-13 ",
-    versionBuild=0);
+    versionDate="2013-11-27 ",
+    versionBuild=1);
 end QuasiStaticFundamentalWave;
