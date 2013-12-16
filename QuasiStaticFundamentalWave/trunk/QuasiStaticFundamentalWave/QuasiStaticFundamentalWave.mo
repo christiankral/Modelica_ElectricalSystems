@@ -3225,7 +3225,6 @@ Simulate for 1.5 seconds and plot (versus time):
           "Test example: PermanentMagnetSynchronousMachine fed by current source"
           import QuasiStationaryFundamentalWave = QuasiStaticFundamentalWave;
           extends Modelica.Icons.Example;
-          extends Modelica.Icons.UnderConstruction;
           parameter Integer m=3 "Number of phases";
           parameter Modelica.SIunits.Voltage VNominal=100
             "Nominal RMS voltage per phase";
@@ -3401,6 +3400,11 @@ Simulate for 1.5 seconds and plot (versus time):
           Modelica.Electrical.QuasiStationary.SinglePhase.Basic.Ground groundeQS
             annotation (Placement(transformation(extent={{-10,-10},{10,10}},   rotation=0,
                 origin={40,-50})));
+          Modelica.Electrical.QuasiStationary.MultiPhase.Basic.Resistor resistor(m=m,
+              R_ref=fill(1e5, m)) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={20,-30})));
         equation
           connect(star.pin_n, ground.p)
             annotation (Line(points={{40,60},{40,60}},   color={0,0,255}));
@@ -3543,6 +3547,14 @@ Simulate for 1.5 seconds and plot (versus time):
             points={{0,-40},{0,-68}},
             color={85,170,255},
             smooth=Smooth.None));
+          connect(referenceCurrentSource.plug_p, resistor.plug_p) annotation (Line(
+              points={{0,-20},{20,-20}},
+              color={85,170,255},
+              smooth=Smooth.None));
+          connect(resistor.plug_n, referenceCurrentSource.plug_n) annotation (Line(
+              points={{20,-40},{0,-40}},
+              color={85,170,255},
+              smooth=Smooth.None));
           annotation (
             experiment(StopTime=2.0, Interval=0.001),
             Documentation(info="<html>
@@ -3553,9 +3565,8 @@ whereas the stator voltage is influenced by the d-current.</p>
 <p>
 Default machine parameters of model <a href=\"modelica://Modelica.Electrical.Machines.BasicMachines.SynchronousInductionMachines.SM_PermanentMagnet\">SM_PermanentMagnet</a> are used.
 </p>
-</html>"),  Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}),
-                            graphics));
+</html>"),  Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                    100}}), graphics));
         end SMPM_CurrentSource;
 
         model SMEE_Generator
@@ -6670,7 +6681,7 @@ Phase shifts between sine-waves may be chosen by the user; default values are <i
         annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
       MoveTo_Modelica.QuasiStationary_MultiPhase.SingleToMultiPhase
         singleToMultiPhase(final m=m)
-        annotation (Placement(transformation(extent={{0,30},{20,50}})));
+        annotation (Placement(transformation(extent={{20,30},{40,50}})));
       Modelica.ComplexBlocks.ComplexMath.RealToComplex realToComplex
         annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
       Modelica.Blocks.Math.Add add
@@ -6683,12 +6694,8 @@ Phase shifts between sine-waves may be chosen by the user; default values are <i
     equation
       connect(phi, toGamma.u) annotation (Line(points={{0,-120},{0,-82}},
                     color={0,0,127}));
-      connect(realToComplex.y, singleToMultiPhase.u) annotation (Line(
-          points={{-19,40},{-2,40}},
-          color={85,170,255},
-          smooth=Smooth.None));
       connect(singleToMultiPhase.y, I) annotation (Line(
-          points={{21,40},{110,40}},
+          points={{41,40},{110,40}},
           color={85,170,255},
           smooth=Smooth.None));
       connect(toGamma.y, add.u1) annotation (Line(
@@ -6710,6 +6717,10 @@ Phase shifts between sine-waves may be chosen by the user; default values are <i
       connect(iq_rms, realToComplex.im) annotation (Line(
           points={{-120,-60},{-60,-60},{-60,34},{-42,34}},
           color={0,0,127},
+          smooth=Smooth.None));
+      connect(realToComplex.y, singleToMultiPhase.u) annotation (Line(
+          points={{-19,40},{18,40}},
+          color={85,170,255},
           smooth=Smooth.None));
       annotation (         Icon(coordinateSystem(preserveAspectRatio=false,
               extent={{-100,-100},{100,100}}),
@@ -6740,7 +6751,7 @@ They can be used to feed a current source which in turn feeds an induction machi
 </p>
 </HTML>"),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-              {100,100}}),
+                {100,100}}),
                         graphics));
     end CurrentController;
   end Utilities;
@@ -7865,7 +7876,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -7925,7 +7936,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString=                         "%name"),
+                textString =                        "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -7933,7 +7944,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString=                            "m=%m"),
+                textString =                           "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -8245,11 +8256,85 @@ Additionally, the frequency of the current source is defined by a real signal in
         extends Modelica.ComplexBlocks.Interfaces.ComplexSIMO(final nout=m);
         parameter Integer m = 3 "Number of phases";
       equation
-        y = fill(u,m) - Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m);
+        y = u * Modelica.ComplexMath.fromPolar(fill(1,m),-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), Icon(graphics));
       end SingleToMultiPhase;
     end QuasiStationary_MultiPhase;
+
+    package ComplexBlocks
+      extends Modelica.Icons.Package;
+      block Rotator
+        extends Modelica.ComplexBlocks.Interfaces.ComplexSISO;
+        Modelica.Blocks.Interfaces.RealInput angle
+          "Angle of clockwise rotation"
+          annotation (Placement(transformation(
+              extent={{-20,-20},{20,20}},
+              rotation=90,
+              origin={0,-120})));
+        Modelica.ComplexBlocks.ComplexMath.ComplexToPolar complexToPolar
+          annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+        Modelica.ComplexBlocks.ComplexMath.PolarToComplex polarToComplex
+          annotation (Placement(transformation(extent={{40,-10},{60,10}})));
+        Modelica.Blocks.Math.Feedback feedback
+          annotation (Placement(transformation(extent={{-10,-16},{10,4}})));
+      equation
+
+        connect(feedback.u2, angle) annotation (Line(
+            points={{0,-14},{0,-120}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(complexToPolar.len, polarToComplex.len) annotation (Line(
+            points={{-38,6},{38,6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(complexToPolar.phi, feedback.u1) annotation (Line(
+            points={{-38,-6},{-8,-6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(feedback.y, polarToComplex.phi) annotation (Line(
+            points={{9,-6},{38,-6}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(polarToComplex.y, y) annotation (Line(
+            points={{61,0},{110,0}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(u, complexToPolar.u) annotation (Line(
+            points={{-120,1.11022e-15},{-91,1.11022e-15},{-91,0},{-62,0}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), Documentation(info="<html>
+<p>
+A quasi static phasor input phasor is rotated by <code>angle</code> clockwise (mathematical negative) direction.
+</p> 
+</html>"),
+          Icon(graphics={
+              Line(points={{0,0},{0,80},{-10,60},{10,60},{0,80}}, color={0,0,
+                    255}),
+              Line(points={{0,0},{80,0},{60,10},{60,-10},{80,0}}, color={0,0,
+                    255}),
+              Ellipse(extent={{-50,50},{50,-50}}, lineColor={0,0,255}),
+              Rectangle(
+                extent={{-51,51},{-1,-51}},
+                pattern=LinePattern.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                lineColor={0,0,255}),
+              Rectangle(
+                extent={{51,-1},{-1,-51}},
+                pattern=LinePattern.None,
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                lineColor={0,0,255}),
+              Polygon(
+                points={{50,0},{42,14},{54,16},{50,0}},
+                lineColor={0,0,255},
+                fillColor={0,0,255},
+                fillPattern=FillPattern.Solid)}));
+      end Rotator;
+    end ComplexBlocks;
   end MoveTo_Modelica;
 
   package Icons "Icons"
@@ -8291,7 +8376,7 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
   end Icons;
 
   annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1")),
-    version="0.4.0",
-    versionDate="2013-11-27 ",
-    versionBuild=1);
+    version="0.4.1",
+    versionDate="2013-12-16 ",
+    versionBuild=0);
 end QuasiStaticFundamentalWave;
