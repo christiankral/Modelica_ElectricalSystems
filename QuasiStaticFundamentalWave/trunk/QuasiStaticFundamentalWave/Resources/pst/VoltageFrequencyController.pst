@@ -1,0 +1,78 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Tue Dec 17 18:03:09 CET 2013
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="-2" x-max="32" y-min="-2" y-max="22" auto-bounding="true">
+%<multicurve right-arrow= "head"
+%	 points= "(0,-2);(0,-2);(0,22);(0,22)"
+%	 fill-style= "none"
+%	 />
+%<multicurve right-arrow= "head"
+%	 points= "(-1,0);(-1,0);(32,0);(32,0)"
+%	 fill-style= "none"
+%	 />
+%<multicurve stroke-width= "0.6"
+%	 points= "(0,0);(0,0);(16,16);(16,16);(16,16);(28,16);
+%	(28,16)"
+%	 fill-style= "none"
+%	 />
+%<text text-vert-align= "baseline"
+%	 anchor-point= "(32,2)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 fill-style= "none"
+%	 >
+%$f$
+%</text>
+%<text text-vert-align= "top"
+%	 anchor-point= "(2,22)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 fill-style= "none"
+%	 >
+%$V$
+%</text>
+%<multicurve points= "(16,0);(16,0);(16,-1);(16,-1)"
+%	 fill-style= "none"
+%	 />
+%<multicurve points= "(0,16);(0,16);(-1,16);(-1,16)"
+%	 fill-style= "none"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(-2,16)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "right"
+%	 fill-style= "none"
+%	 >
+%$V_\mathtt{Nominal}$
+%</text>
+%<text text-vert-align= "top"
+%	 anchor-point= "(16,-2)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 fill-style= "none"
+%	 >
+%$f_\mathtt{Nominal}$
+%</text>
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(32,22)
+\psline{->}(0,-2)(0,22)
+\psline{->}(-1,0)(32,0)
+\psline[linewidth=0.6](0,0)
+(16,16)(28,16)
+\rput[B](32,2){$f$}
+\rput[tl](2,22){$V$}
+\psline(16,0)(16,-1)
+\psline(0,16)(-1,16)
+\rput[r](-2,16){$V_\mathtt{Nominal}$}
+\rput[t](16,-2){$f_\mathtt{Nominal}$}
+\end{pspicture}
