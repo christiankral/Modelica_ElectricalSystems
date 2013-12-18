@@ -8816,6 +8816,6 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
 
   annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1")),
     version="0.4.1",
-    versionDate="2013-12-16 ",
+    versionDate="2013-12-17 ",
     versionBuild=1);
 end QuasiStaticFundamentalWave;
