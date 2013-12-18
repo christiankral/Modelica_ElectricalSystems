@@ -185,6 +185,16 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
       extends Modelica.Icons.References;
       annotation (Documentation(info="<html>
 
+<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
+    <tr>
+      <td valign=\"top\">[Lang1984]</td>
+      <td valign=\"top\">W. Lang,
+        &quot;&Uuml;ber die Bemessung verlustarmer Asynchronmotoren mit K&auml;figl&auml;ufer f&uuml;r 
+        Pulsumrichterspeisung,&quot;
+        Doctoral Thesis,
+        Technical University of Vienna, 1984.</td>
+    </tr>
+</table>
 </html>"));
     end References;
     annotation (Documentation(info="<html>
@@ -3933,7 +3943,7 @@ Simulate for 30 seconds and plot (versus <code>rotorAngleM.rotorDisplacementAngl
           "Starting of synchronous reluctance machine with inverter"
           import Modelica.Constants.pi;
           extends Modelica.Icons.Example;
-          extends Modelica.Icons.Obsolete;
+          extends Modelica.Icons.ObsoleteModel;
           parameter Integer m=3 "Number of stator phases";
           parameter Modelica.SIunits.Voltage VsNominal=100
             "Nominal RMS voltage per phase";
@@ -4352,7 +4362,7 @@ Simulate for 1.5 seconds and plot (versus time):
                 origin={20,84})));
           parameter
             Modelica.Electrical.Machines.Utilities.ParameterRecords.SM_ReluctanceRotorData
-            smrData
+            smrData(useDamperCage=false)
             annotation (Placement(transformation(extent={{70,70},{90,90}})));
           QuasiStaticFundamentalWave.BasicMachines.SynchronousMachines.SM_ReluctanceRotor
             smrQS(
@@ -4381,7 +4391,7 @@ Simulate for 1.5 seconds and plot (versus time):
             wMechanical(start=0),
             TsOperational=293.15,
             TrOperational=293.15,
-            useDamperCage=false)                            annotation (Placement(
+            useDamperCage=smrData.useDamperCage)            annotation (Placement(
                 transformation(extent={{-10,24},{10,44}},   rotation=0)));
           Modelica.Magnetic.FundamentalWave.BasicMachines.SynchronousInductionMachines.SM_ReluctanceRotor
             smr(
@@ -4411,7 +4421,7 @@ Simulate for 1.5 seconds and plot (versus time):
             Lmq=smrData.Lmq*m/3,
             TsOperational=293.15,
             TrOperational=293.15,
-            useDamperCage=false)                            annotation (Placement(
+            useDamperCage=smrData.useDamperCage)            annotation (Placement(
                 transformation(extent={{-10,-92},{10,-72}}, rotation=0)));
         equation
           connect(star.pin_n, ground.p)
@@ -7233,9 +7243,8 @@ Stray load losses are modeled similar to standards EN 60034-2 and IEEE 512, i.e.
 but without scaling them to zero at no-load current.
 </p>
 <p>
-For an estimation of dependency on varying angular velocity see:<br>
-W. Lang, &Uuml;ber die Bemessung verlustarmer Asynchronmotoren mit K&auml;figl&auml;ufer f&uuml;r Pulsumrichterspeisung,
-Doctoral Thesis, Technical University of Vienna, 1984.
+For an estimation of dependency on varying angular velocity see: 
+<a href=\"modelica://QuasiStaticFundamentalWave.UsersGuide.References\">[Lang1984]</a>
 </p>
 <p>
 The stray load losses are modeled such way that they do not cause a voltage drop in the electric circuit.
@@ -7672,7 +7681,18 @@ This package provides sensors for the magnetic potential difference and the magn
         "Complex magnetic potential at the node";
       flow Modelica.SIunits.ComplexMagneticFlux Phi
         "Complex magnetic flux flowing into the pin";
-      annotation (Documentation(info="<html></html>"));
+      annotation (Documentation(info="<html>
+<p>Base definition of complex quasi static magnetic port. The potential variable is the complex magnetic potential difference <code>V_m</code> and the flow variable is the complex magnetic flux <code>Phi</code>.</p> 
+</p>
+
+<h4>See also</h4>
+
+<p>
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.PositiveMagneticPort\">PositiveMagneticPort</a>,
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.NegativeMagneticPort\">NegativeMagneticPort</a>
+</p>
+
+</html>"));
     end MagneticPort;
 
     connector PositiveMagneticPort "Positive magnetic port"
@@ -7698,18 +7718,17 @@ This package provides sensors for the magnetic potential difference and the magn
       Documentation(info="<html>
 
 <p>
-The positive pin is based on <a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.Pin\">Pin</a>.
-Additionally the reference angle is specified in the connector. The time derivative of the reference angle is the actual angluar velocity of the quasi static voltage and current. The symbol is also designed such way to look different than the <a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.NegativePin\">negative pin</a>.
+The positive port is based on 
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.MagneticPort\">MagneticPort</a>.
+Additionally the reference angle is specified in the connector. The time derivative of the reference angle is the actual angluar velocity of the quasi static voltage and current. The symbol is also designed such way to look different than the 
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.NegativeMagneticPort\">NegativeMagneticPort</a>.
 </p>
 
 <h4>See also</h4>
 
 <p>
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.Pin\">Pin</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.NegativePin\">NegativePin</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.Plug\">Plug</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.PositivePlug\">PositivePlug</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.NegativePlug\">NegativePlug</a>
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.MagneticPort\">MagneticPort</a>,
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.NegativeMagneticPort\">NegativeMagneticPort</a>
 </p>
 </html>"));
     end PositiveMagneticPort;
@@ -7744,11 +7763,8 @@ Additionally the reference angle is specified in the connector. The time derivat
 <h4>See also</h4>
 
 <p>
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.Pin\">Pin</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.SinglePhase.Interfaces.PositivePin\">PositivePin</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.Plug\">Plug</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.PositivePlug\">PositivePlug</a>,
-<a href=\"modelica://Modelica.Electrical.QuasiStationary.MultiPhase.Interfaces.NegativePlug\">NegativePlug</a>
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.MagneticPort\">MagneticPort</a>,
+<a href=\"modelica://QuasiStaticFundamentalWave.Interfaces.PositiveMagneticPort\">PositiveMagneticPort</a>
 </p>
 </html>"));
     end NegativeMagneticPort;
@@ -7764,7 +7780,11 @@ Additionally the reference angle is specified in the connector. The time derivat
     equation
       Connections.branch(port_p.reference, port_n.reference);
       port_p.reference.gamma = port_n.reference.gamma;
-      annotation (Documentation(info="<html></html>"), Icon(graphics));
+      annotation (Documentation(info="<html>
+<p>
+The partial two port model consists of a positive and a negative magnetic port. The reference angles of the two ports are set equal and connected through <code>Connections.branch</code>.
+</p>
+</html>"),                                             Icon(graphics));
     end PartialTwoPort;
 
     partial model PartialTwoPortElementary
@@ -7777,7 +7797,11 @@ Additionally the reference angle is specified in the connector. The time derivat
       V_m = port_p.V_m - port_n.V_m;
       Phi = port_p.Phi;
       port_p.Phi + port_n.Phi = Complex(0,0);
-      annotation (Documentation(info="<html></html>"), Icon(graphics));
+      annotation (Documentation(info="<html>
+<p>
+The partial two port elementary model extends from the partial two port model and adds one equation considering the balance of flow variables, <code>port_p.Phi + port_n.Phi = Complex(0,0)</code>. Additionally, a variable for magnetic potential difference of the two magnetic ports, <code>V_m</code>, and the flux into the positive port, <code>Phi</code>, are defined. 
+</p>
+</html>"),                                             Icon(graphics));
     end PartialTwoPortElementary;
 
     partial model PartialBasicMachine
@@ -8315,7 +8339,7 @@ In quasistaionary operation, instantaneous power equals active power;
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-40,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -8375,7 +8399,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-150,60},{150,120}},
                 lineColor={0,0,255},
-                textString =                        "%name"),
+                textString=                         "%name"),
               Line(
                 points={{-44,62},{-44,-76},{75,-6},{-44,62},{-44,61}},
                 color={0,0,255},
@@ -8383,7 +8407,7 @@ Star (wye) connection of a multi phase circuit. The potentials at the star point
               Text(
                 extent={{-100,-110},{100,-70}},
                 lineColor={0,0,0},
-                textString =                           "m=%m"),
+                textString=                            "m=%m"),
               Line(points={{-90,0},{-44,0}}, color={0,0,255}),
               Line(points={{80,0},{90,0}}, color={0,0,255}),
               Line(
@@ -8748,8 +8772,7 @@ Additionally, the frequency of the current source is defined by a real signal in
 <p>
 A quasi static phasor input phasor is rotated by <code>angle</code> clockwise (mathematical negative) direction.
 </p> 
-</html>"),
-          Icon(graphics={
+</html>"),Icon(graphics={
               Line(points={{0,0},{0,80},{-10,60},{10,60},{0,80}}, color={0,0,
                     255}),
               Line(points={{0,0},{80,0},{60,10},{60,-10},{80,0}}, color={0,0,
@@ -8808,7 +8831,7 @@ A quasi static phasor input phasor is rotated by <code>angle</code> clockwise (m
               fillColor={0,0,0},
               fillPattern=FillPattern.Solid)}), Documentation(info="<html>
 <p>
-This icon is designed for a <b>FundamentalWave machine</b> model.
+This icon is designed for a <b>quasi static fundamental wave machine</b> model.
 </p>
 </html>"));
     end QuasiStaticFundamentalWaveMachine;
@@ -8816,6 +8839,6 @@ This icon is designed for a <b>FundamentalWave machine</b> model.
 
   annotation (uses(Modelica(version="3.2.1"), Complex(version="3.2.1")),
     version="0.4.1",
-    versionDate="2013-12-17 ",
-    versionBuild=1);
+    versionDate="2013-12-18 ",
+    versionBuild=2);
 end QuasiStaticFundamentalWave;
