@@ -38,7 +38,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge1Pulse_R
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.M1C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge1Pulse(
             twoPulse(
             useSignal=false,
             f=f,
@@ -72,7 +72,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge1Pulse_R_Characteristic
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.M1C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge1Pulse(
             twoPulse(useSignal=true, f=f), idealthyristor(Vknee=0));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
@@ -111,7 +111,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       extends Modelica.Icons.ExamplesPackage;
       model FullBridge2PulseCenterTap_R
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.M2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
+           b2C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -141,7 +142,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2PulseCenterTap_RL
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B6C(b6C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge6Pulse(
+                                                                            b6C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -178,7 +180,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2PulseCenterTap_RLV
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.M2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
+                                                                            b2C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -225,7 +228,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2PulseCenterTap_RLV_Characteristic
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.M2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
+                                                                            b2C(
               useSignal=true, f=f));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
@@ -281,7 +285,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       extends Modelica.Icons.ExamplesPackage;
       model FullBridge2Pulse_R
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
+                                                                            b2C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -311,7 +316,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2Pulse_RL
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
+                                                                            b2C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -348,7 +354,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2Pulse_RLV
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
+                                                                            b2C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -395,7 +402,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2Pulse_RLV_Characteristic
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2C(b2C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
+                                                                            b2C(
               useSignal=true, f=f));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
@@ -488,7 +496,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge6Pulse_R
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B6C(b6C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge6Pulse(
+                                                                            b6C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -516,7 +525,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge6Pulse_RL
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B6C(b6C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge6Pulse(
+                                                                            b6C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -550,7 +560,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge6Pulse_RLV
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B6C(b6C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge6Pulse(
+                                                                            b6C(
             useSignal=false,
             f=f,
             alpha=alpha));
@@ -594,7 +605,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge6Pulse_RLV_Characteristic
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B6C(b6C(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge6Pulse(
+                                                                            b6C(
               useSignal=true, f=f));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
@@ -714,7 +726,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2mPulse_R
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2mC(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
             b2mC(
             useSignal=false,
             f=f,
@@ -743,7 +755,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2mPulse_RL
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2mC(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
             b2mC(
             useSignal=false,
             f=f,
@@ -778,7 +790,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2mPulse_RLV
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2mC(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
             b2mC(
             useSignal=false,
             f=f,
@@ -823,7 +835,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       model FullBridge2mPulse_RLV_Characteristic
         extends
-          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.B2mC(
+          Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
             b2mC(useSignal=true, f=f));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
@@ -872,7 +884,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
     end FullBridge2mPulse;
 
     package ExampleTemplates
-      partial model M1C
+      partial model FullBridge1Pulse
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -977,9 +989,9 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
-      end M1C;
+      end FullBridge1Pulse;
       extends Modelica.Icons.Package;
-      model M2C
+      model FullBridge2PulseCenterTap
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -1001,7 +1013,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
         Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage1(V = sqrt(2) * Vrms, freqHz = f)
           annotation(Placement(visible = true, transformation(origin={-80,14},             extent={{-10,-10},
                   {10,10}},                                                                                                    rotation = -90)));
-        Modelica_Electrical_PowerConverters.ACDC.M2C b2C
+        Modelica_Electrical_PowerConverters.ACDC.FullBridge2PulseCenterTap b2C
           annotation (Placement(transformation(extent={{-50,-10},{-30,10}})));
         Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
           annotation(Placement(visible = true, transformation(origin={50,10},          extent={{10,-10},
@@ -1076,9 +1088,9 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             __Dymola_NumberOfIntervals=50000,
             Tolerance=1e-06),
           __Dymola_experimentSetupOutput);
-      end M2C;
+      end FullBridge2PulseCenterTap;
 
-      partial model B2C "Template of B2C without load"
+      partial model FullBridgeTwoPulse "Template of B2C without load"
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -1168,9 +1180,9 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             __Dymola_NumberOfIntervals=50000,
             Tolerance=1e-06),
           __Dymola_experimentSetupOutput);
-      end B2C;
+      end FullBridgeTwoPulse;
 
-      partial model B6C "Template of B6C without load"
+      partial model FullBridge6Pulse "Template of B6C without load"
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -1206,7 +1218,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
               extent={{-10,10},{10,-10}},
               rotation=270,
               origin={-70,30})));
-        Modelica_Electrical_PowerConverters.ACDC.B6C b6C
+        ACDC.FullBridge2mPulse                       b6C
           annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
         Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
           annotation(Placement(visible = true, transformation(origin={50,10},
@@ -1288,9 +1300,9 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           __Dymola_experimentSetupOutput,
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
-      end B6C;
+      end FullBridge6Pulse;
 
-      partial model B2mC "Template of B2*mC without load"
+      partial model FullBridge2mPulse "Template of B2*mC without load"
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
         import Modelica.Constants.pi;
         parameter Integer m(final min=3)=3 "Number of phases";
@@ -1416,7 +1428,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           __Dymola_experimentSetupOutput,
           Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics));
-      end B2mC;
+      end FullBridge2mPulse;
     end ExampleTemplates;
   end Examples;
 
@@ -2034,8 +2046,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             graphics),                                                                                                    experiment(StartTime = 0, StopTime = 0.1, Tolerance = 0.000001));
     end DiodeBridge2PulseCenterTap;
 
-    model FullBridge2PulseCenterTap
-      "Two pulse full bridge rectifier with center tap"
+    model FullBridge2PulseCenterTap "Two pulse full bridge SCR with center tap"
       import Modelica.Constants.pi;
       parameter Boolean useSignal = false
         "Enables signal input instead of parameter";
