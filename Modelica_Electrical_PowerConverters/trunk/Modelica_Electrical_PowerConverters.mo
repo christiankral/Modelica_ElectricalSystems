@@ -64,10 +64,10 @@ This is the library of power converters for single and multi phase electrical sy
         model Thyristor1Pulse_R
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(
-             twoPulse(
+             pulse2(
               useConstantFiringAngle=true,
               f=f,
-              constantFiringAngle=constantFiringAngle), idealthyristor(Vknee=0));
+              constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -99,7 +99,7 @@ This is the library of power converters for single and multi phase electrical sy
         model Thyristor1Pulse_R_Characteristic
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(
-             twoPulse(useConstantFiringAngle=false, f=f), idealthyristor(Vknee=0));
+             pulse2(useConstantFiringAngle=false, f=f));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -118,7 +118,7 @@ This is the library of power converters for single and multi phase electrical sy
               points={{30,40},{0,40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(ramp.y, twoPulse.firingAngle) annotation (Line(
+          connect(ramp.y, pulse2.firingAngle) annotation (Line(
               points={{-40,59},{-40,10}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -141,7 +141,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2PulseCenterTap_R
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -166,7 +166,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2PulseCenterTap_RL
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -198,7 +198,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2PulseCenterTap_RLV
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -240,7 +240,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2PulseCenterTap_RLV_Characteristic
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
-             pulse2m(useConstantFiringAngle=false));
+             pulse2(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -258,7 +258,7 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10)
             annotation (Placement(transformation(extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-30,68})));
+                origin={-30,70})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -272,8 +272,8 @@ This is the library of power converters for single and multi phase electrical sy
               points={{30,-40},{10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(ramp.y, pulse2m.firingAngle) annotation (Line(
-              points={{-30,57},{-30,40},{-30,40}},
+          connect(ramp.y, pulse2.firingAngle) annotation (Line(
+              points={{-30,59},{-30,40}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
@@ -292,7 +292,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2Pulse_R
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -317,7 +317,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2Pulse_RL
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -349,7 +349,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2Pulse_RLV
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -391,7 +391,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoBridge2Pulse_RLV_Characteristic
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
-             pulse2m(useConstantFiringAngle=false));
+             pulse2(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -423,7 +423,7 @@ This is the library of power converters for single and multi phase electrical sy
               points={{30,-40},{10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(ramp.y, pulse2m.firingAngle) annotation (Line(
+          connect(ramp.y, pulse2.firingAngle) annotation (Line(
               points={{-30,59},{-30,40}},
               color={0,0,127},
               smooth=Smooth.None));
@@ -567,7 +567,7 @@ This is the library of power converters for single and multi phase electrical sy
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2m.firingAngle) annotation (Line(
-              points={{-30,59},{-30,40},{-30,40}},
+              points={{-30,59},{-30,40}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -583,7 +583,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoCenterTapmPulse_R
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulsem(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -610,7 +610,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoCenterTapmPulse_RL
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulsem(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -643,7 +643,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoCenterTapmPulse_RLV
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-             pulse2m(constantFiringAngle=constantFiringAngle));
+             pulsem(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -686,7 +686,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristoCenterTapmPulse_RLV_Characteristic
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-             pulse2m(useConstantFiringAngle=false));
+             pulsem(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -718,13 +718,13 @@ This is the library of power converters for single and multi phase electrical sy
               points={{10,-50},{30,-50},{30,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(ramp.y, pulse2m.firingAngle) annotation (Line(
-              points={{-30,59},{-30,40},{-30,40}},
-              color={0,0,127},
-              smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
               points={{30,40},{-10,40},{-10,0},{-20,0}},
               color={0,0,255},
+              smooth=Smooth.None));
+          connect(ramp.y, pulsem.firingAngle) annotation (Line(
+              points={{-30,59},{-30,40}},
+              color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics),
@@ -930,8 +930,7 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={80,-60})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-                                                                         twoPulse(f=f)
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse pulse2(f=f)
            annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
@@ -967,7 +966,7 @@ This is the library of power converters for single and multi phase electrical sy
               points={{-80,-40},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(twoPulse.fire_p, idealthyristor.fire) annotation (Line(
+          connect(pulse2.fire_p, idealthyristor.fire)   annotation (Line(
               points={{-44,-11},{-44,-20},{-3,-20},{-3,29}},
               color={255,0,255},
               smooth=Smooth.None));
@@ -979,11 +978,11 @@ This is the library of power converters for single and multi phase electrical sy
               points={{0,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(sinevoltage.p, twoPulse.ac_p) annotation (Line(
+          connect(sinevoltage.p, pulse2.ac_p)   annotation (Line(
               points={{-80,10},{-60,10},{-60,6},{-50,6}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(sinevoltage.n, twoPulse.ac_n) annotation (Line(
+          connect(sinevoltage.n, pulse2.ac_n)   annotation (Line(
               points={{-80,-10},{-60,-10},{-60,-6},{-50,-6}},
               color={0,0,255},
               smooth=Smooth.None));
@@ -1047,8 +1046,7 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={80,-60})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-                                                                         pulse2m(f=f)
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse pulse2(f=f)
                                              annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -1094,19 +1092,19 @@ This is the library of power converters for single and multi phase electrical sy
               points={{50,0},{50,-40},{10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
+          connect(pulse2.fire_p, rectifier.fire_p)  annotation (Line(
               points={{-34,19},{-34,12}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
+          connect(pulse2.fire_n, rectifier.fire_n)  annotation (Line(
               points={{-26,19},{-26,12}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.ac_p, rectifier.ac_p) annotation (Line(
+          connect(pulse2.ac_p, rectifier.ac_p)  annotation (Line(
               points={{-40,36},{-60,36},{-60,6},{-40,6}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(rectifier.ac_n, pulse2m.ac_n) annotation (Line(
+          connect(rectifier.ac_n, pulse2.ac_n)  annotation (Line(
               points={{-40,-6},{-56,-6},{-56,24},{-40,24}},
               color={0,0,255},
               smooth=Smooth.None));
@@ -1169,8 +1167,7 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={80,-60})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-                                                                         pulse2m(f=f)
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse pulse2(f=f)
                                              annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -1219,19 +1216,19 @@ This is the library of power converters for single and multi phase electrical sy
               points={{50,20},{50,40},{-10,40},{-10,0},{-20,0}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
+          connect(pulse2.fire_p, rectifier.fire_p)  annotation (Line(
               points={{-34,19},{-34,12}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
+          connect(pulse2.fire_n, rectifier.fire_n)  annotation (Line(
               points={{-26,19},{-26,12}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(rectifier.ac_n, pulse2m.ac_n) annotation (Line(
+          connect(rectifier.ac_n, pulse2.ac_n)  annotation (Line(
               points={{-40,-6},{-46,-6},{-46,24},{-40,24}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.ac_p, rectifier.ac_p) annotation (Line(
+          connect(pulse2.ac_p, rectifier.ac_p)  annotation (Line(
               points={{-40,36},{-50,36},{-50,6},{-40,6}},
               color={0,0,255},
               smooth=Smooth.None));
@@ -1427,7 +1424,9 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-70})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
-                                                                     pulse2m(m=m, f=f,
+            pulsem(
+            m=m,
+            f=f,
             constantFiringAngle=1.5707963267949)                 annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
@@ -1459,11 +1458,11 @@ This is the library of power converters for single and multi phase electrical sy
               points={{10,-50},{50,-50},{50,0}},
               color={0,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
+          connect(pulsem.fire_p, rectifier.fire_p)  annotation (Line(
               points={{-34,19},{-34,12}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(pulse2m.ac, sineVoltage_p.plug_p)
+          connect(pulsem.ac, sineVoltage_p.plug_p)
                                                   annotation (Line(
               points={{-40,30},{-70,30},{-70,10}},
               color={0,0,255},
@@ -3968,6 +3967,458 @@ This is the library of power converters for single and multi phase electrical sy
 
   package DCAC "DC to AC converters"
     extends Modelica.Icons.Package;
+    model MultiPhase2Level "Multi phase DC to AC converter"
+      extends Modelica.Blocks.Icons.Block;
+      parameter Integer m(final min=1) = 3 "Number of phases";
+      parameter Modelica.SIunits.Resistance RonTransistor=1e-5
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor=1e-5
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor=0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode=1e-5
+        "Diode closed resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode=1e-5
+        "Diode opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
+         final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC input"
+        annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC input"
+        annotation (Placement(transformation(extent={{-110,-110},{-90,-90}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+        "AC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Firing signals of positive potential transistors"
+        annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={-40,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
+        "Firing signals of negative potential transistors"
+        annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={40,-120})));
+      Modelica.Electrical.MultiPhase.Ideal.IdealGTOThyristor transistor_p(
+        final m=m,
+        final Ron=fill(RonTransistor, m),
+        final Goff=fill(GoffTransistor, m),
+        final Vknee=fill(VkneeTransistor, m),
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={20,20})));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(
+        final m=m,
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={60,20})));
+      Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
+                                  annotation (Placement(
+            transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=90,
+            origin={40,50})));
+      Modelica.Electrical.MultiPhase.Ideal.IdealGTOThyristor transistor_n(
+        final m=m,
+        final Ron=fill(RonTransistor, m),
+        final Goff=fill(GoffTransistor, m),
+        final Vknee=fill(VkneeTransistor, m),
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={20,-20})));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
+        final m=m,
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={60,-20})));
+      Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
+                                  annotation (Placement(
+            transformation(
+            extent={{10,10},{-10,-10}},
+            rotation=90,
+            origin={40,-50})));
+      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
+
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
+                                                                                    useHeatPort
+        annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
+    equation
+      if not useHeatPort then
+        LossPower = sum(transistor_p.idealGTOThyristor.LossPower) + sum(diode_n.idealDiode.LossPower)
+                  + sum(transistor_n.idealGTOThyristor.LossPower) + sum(diode_n.idealDiode.LossPower);
+      end if;
+      connect(transistor_p.plug_p, star_p.plug_p)
+                                               annotation (Line(
+          points={{20,30},{40,30},{40,40}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star_p.plug_p, diode_p.plug_n)    annotation (Line(
+          points={{40,40},{40,30},{60,30}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.plug_n, star_n.plug_p)
+                                               annotation (Line(
+          points={{20,-30},{40,-30},{40,-40}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star_n.plug_p, diode_n.plug_p)    annotation (Line(
+          points={{40,-40},{40,-30},{60,-30}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_p.plug_n, diode_p.plug_p)   annotation (Line(
+          points={{20,10},{60,10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.plug_p, diode_n.plug_n)   annotation (Line(
+          points={{20,-10},{60,-10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star_n.pin_n, dc_n)
+                                 annotation (Line(
+          points={{40,-60},{40,-60},{40,-66},{40,-66},{40,-70},{-100,-70},{-100,-100}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_p, star_p.pin_n)
+                                 annotation (Line(
+          points={{-100,100},{-100,70},{40,70},{40,60},{40,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_p.plug_n, ac)
+                                     annotation (Line(
+          points={{20,10},{40,10},{40,0},{100,0}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.plug_p, ac)
+                                     annotation (Line(
+          points={{20,-10},{40,-10},{40,0},{100,0}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(fire_n, transistor_n.fire) annotation (Line(
+          points={{40,-120},{40,-80},{-20,-80},{-20,-27},{9,-27}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_p, transistor_p.fire) annotation (Line(
+          points={{-40,-120},{-40,13},{9,13}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(heatPort,thermalCollector. port_b) annotation (Line(
+          points={{4.44089e-16,-100},{0,-100},{0,-62},{0,-62},{0,-60},{4.44089e-16,-60}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(thermalCollector.port_a, transistor_n.heatPort) annotation (Line(
+          points={{0,-40},{0,-36},{30,-36},{30,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_n.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{70,-20},{70,-36},{0,-36},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(transistor_p.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{30,20},{30,4},{0,4},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{70,20},{70,4},{0,4},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
+            Line(
+              points={{-100,-100},{100,100}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Rectangle(
+              extent={{-40,40},{40,-40}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,20},{-20,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-28,20},{-28,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-40,0},{-28,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,4},{0,24},{0,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,-4},{0,-24},{0,-40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-24},{10,-24},{10,24},{0,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,8},{20,8}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{10,8},{0,-8},{20,-8},{10,8}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,70},{0,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC"),
+            Text(
+              extent={{0,-50},{100,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="AC")}),
+        Documentation(info="<html>
+</html>"));
+    end MultiPhase2Level;
+
+    model SinglePhase2Level "Single phase DC to AC converter"
+      extends Modelica.Blocks.Icons.Block;
+      parameter Integer m(final min=1) = 3 "Number of phases";
+      parameter Modelica.SIunits.Resistance RonTransistor=1e-5
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor=1e-5
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor=0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode=1e-5
+        "Diode closed resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode=1e-5
+        "Diode opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
+         final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC input"
+        annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC input"
+        annotation (Placement(transformation(extent={{-110,-110},{-90,-90}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin      ac "AC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+        "Firing signals of positive potential transistors"
+        annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={-40,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+        "Firing signals of negative potential transistors"
+        annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={40,-120})));
+      Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor_p(
+        final Ron=RonTransistor,
+        final Goff=GoffTransistor,
+        final Vknee=VkneeTransistor,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={20,20})));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={60,20})));
+      Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor_n(
+        final Ron=RonTransistor,
+        final Goff=GoffTransistor,
+        final Vknee=VkneeTransistor,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=270,
+            origin={20,-20})));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={60,-20})));
+      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac.i "AC currents";
+
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
+                                                                                    useHeatPort
+        annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
+    equation
+      if not useHeatPort then
+        LossPower = transistor_p.LossPower + diode_n.LossPower
+                  + transistor_n.LossPower + diode_n.LossPower;
+      end if;
+      connect(fire_n, transistor_n.fire) annotation (Line(
+          points={{40,-120},{40,-80},{-20,-80},{-20,-27},{9,-27}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_p, transistor_p.fire) annotation (Line(
+          points={{-40,-120},{-40,13},{9,13}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(heatPort,thermalCollector. port_b) annotation (Line(
+          points={{4.44089e-16,-100},{0,-100},{0,-62},{0,-62},{0,-60},{4.44089e-16,-60}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(thermalCollector.port_a, transistor_n.heatPort) annotation (Line(
+          points={{0,-40},{0,-36},{30,-36},{30,-20}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_n.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{70,-20},{70,-36},{0,-36},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(transistor_p.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{30,20},{30,4},{0,4},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{70,20},{70,4},{0,4},{0,-40}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(transistor_p.p, dc_p) annotation (Line(
+          points={{20,30},{40,30},{40,70},{-100,70},{-100,100}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.n, dc_n) annotation (Line(
+          points={{20,-30},{40,-30},{40,-70},{-100,-70},{-100,-100}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_p.p, diode_p.n) annotation (Line(
+          points={{20,30},{60,30}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_p.n, diode_p.p) annotation (Line(
+          points={{20,10},{60,10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.p, diode_n.n) annotation (Line(
+          points={{20,-10},{60,-10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_n.n, diode_n.p) annotation (Line(
+          points={{20,-30},{60,-30}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor_p.n, transistor_n.p) annotation (Line(
+          points={{20,10},{40,10},{40,-10},{20,-10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(ac, transistor_p.n) annotation (Line(
+          points={{100,0},{40,0},{40,10},{20,10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}), graphics={
+            Line(
+              points={{-100,-100},{100,100}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Rectangle(
+              extent={{-40,40},{40,-40}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,20},{-20,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-28,20},{-28,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-40,0},{-28,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,4},{0,24},{0,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,-4},{0,-24},{0,-40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-24},{10,-24},{10,24},{0,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,8},{20,8}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{10,8},{0,-8},{20,-8},{10,8}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,70},{0,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC"),
+            Text(
+              extent={{0,-50},{100,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="AC")}),
+        Documentation(info="<html>
+</html>"));
+    end SinglePhase2Level;
   end DCAC;
 
   package Icons
@@ -3994,6 +4445,7 @@ This is the library of power converters for single and multi phase electrical sy
     end ExampleTemplate;
   end Icons;
   annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}),
-        graphics),                                                                                                    Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})),
+        graphics), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})),
+    version = "1.0.0",
     uses(Modelica(version="3.2.2")));
 end Modelica_Electrical_PowerConverters;
