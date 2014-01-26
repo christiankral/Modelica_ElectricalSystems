@@ -1661,18 +1661,31 @@ This is the library of power converters for single and multi phase electrical sy
 
     model DiodeBridge2Pulse "Two pulse Graetz diode rectifier bridge "
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"
+        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"
+        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"
+        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
         useHeatPort=useHeatPort)
         "Diode connecting the positve AC input pin with postitive DC output"
                                  annotation (Placement(visible=true, transformation(
@@ -1680,9 +1693,9 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
         useHeatPort=useHeatPort)
         "Diode connecting the negative AC input pin with postitive DC output"
                                  annotation (Placement(visible=true, transformation(
@@ -1690,9 +1703,9 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
         useHeatPort=useHeatPort)
         "Diode connecting the positve AC input pin with negative DC output"
                                  annotation (Placement(visible=true, transformation(
@@ -1700,23 +1713,16 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
         useHeatPort=useHeatPort)
         "Diode connecting the negative AC input pin with negative DC output"
                                  annotation (Placement(visible=true, transformation(
             origin={40,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
-        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
-        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+
     equation
       if not useHeatPort then
         LossPower = diode_p1.LossPower + diode_p2.LossPower + diode_n1.LossPower + diode_n2.LossPower;
@@ -1807,61 +1813,26 @@ This is the library of power converters for single and multi phase electrical sy
 
     model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort)
-        "Thyristor connecting the positve AC input pin with postitive DC output"
-                                 annotation (Placement(visible=true, transformation(
-            origin={10,50},
-            extent={{-10,10},{10,-10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort)
-        "Thyristor connecting the negative AC input pin with postitive DC output"
-                                 annotation (Placement(visible=true, transformation(
-            origin={40,50},
-            extent={{-10,10},{10,-10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort)
-        "Thyristor connecting the positve AC input with negative DC output"
-                                 annotation (Placement(visible=true, transformation(
-            origin={10,-50},
-            extent={{-10,-10},{10,10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort)
-        "Thyristor connecting the negative AC input with negative DC output"
-                                 annotation (Placement(visible=true, transformation(
-            origin={40,-50},
-            extent={{-10,-10},{10,10}},
-            rotation=90)));
+
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
@@ -1875,6 +1846,48 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort)
+        "Thyristor connecting the positve AC input pin with postitive DC output"
+                                 annotation (Placement(visible=true, transformation(
+            origin={10,50},
+            extent={{-10,10},{10,-10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort)
+        "Thyristor connecting the negative AC input pin with postitive DC output"
+                                 annotation (Placement(visible=true, transformation(
+            origin={40,50},
+            extent={{-10,10},{10,-10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort)
+        "Thyristor connecting the positve AC input with negative DC output"
+        annotation (Placement(visible=true, transformation(
+            origin={10,-50},
+            extent={{-10,-10},{10,10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort)
+        "Thyristor connecting the negative AC input with negative DC output"
+        annotation (Placement(visible=true, transformation(
+            origin={40,-50},
+            extent={{-10,-10},{10,10}},
+            rotation=90)));
+
     equation
       if not useHeatPort then
         LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + thyristor_n1.LossPower + thyristor_n2.LossPower;
@@ -1981,55 +1994,32 @@ This is the library of power converters for single and multi phase electrical sy
 
     model HalfBridge2Pulse "Two pulse Graetz half rectifier bridge "
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
+                                                    extends
+        Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort) annotation (Placement(visible=true, transformation(
-            origin={10,50},
-            extent={{-10,10},{10,-10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort) annotation (Placement(visible=true, transformation(
-            origin={40,50},
-            extent={{-10,10},{10,-10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
-                                 annotation (Placement(visible=true, transformation(
-            origin={10,-50},
-            extent={{-10,-10},{10,10}},
-            rotation=90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
-        Ron=Ron,
-        Goff=Goff,
-        Vknee=Vknee,
-        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
-                                 annotation (Placement(visible=true, transformation(
-            origin={40,-50},
-            extent={{-10,-10},{10,10}},
-            rotation=90)));
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
@@ -2043,6 +2033,41 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort) annotation (Placement(visible=true, transformation(
+            origin={10,50},
+            extent={{-10,10},{10,-10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
+        Ron=RonThyristor,
+        Goff=GoffThyristor,
+        Vknee=VkneeThyristor,
+        useHeatPort=useHeatPort) annotation (Placement(visible=true, transformation(
+            origin={40,50},
+            extent={{-10,10},{10,-10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
+        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
+          annotation (Placement(visible=true, transformation(
+            origin={10,-50},
+            extent={{-10,-10},{10,10}},
+            rotation=90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
+        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
+          annotation (Placement(visible=true, transformation(
+            origin={40,-50},
+            extent={{-10,-10},{10,10}},
+            rotation=90)));
     equation
       if not useHeatPort then
         LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + diode_n1.LossPower + diode_n2.LossPower;
@@ -2141,18 +2166,28 @@ This is the library of power converters for single and multi phase electrical sy
 
     model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
         final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"
+        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"
+        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(
-        final Ron=Ron,
-        final Goff=Goff,
-        final Vknee=Vknee,
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
         final useHeatPort=useHeatPort)
         "Diodes conducting positive pin AC potentials"
                                        annotation (Placement(visible=true,
@@ -2161,9 +2196,9 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-10,10},{10,-10}},
             rotation=0)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(
-        final Ron=Ron,
-        final Goff=Goff,
-        final Vknee=Vknee,
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
         final useHeatPort=useHeatPort)
         "Diodes conducting negative pin AC potentials"
                                        annotation (Placement(visible=true,
@@ -2171,12 +2206,6 @@ This is the library of power converters for single and multi phase electrical sy
             origin={10,-60},
             extent={{-10,-10},{10,10}},
             rotation=0)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
-        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
-        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
     equation
       if not useHeatPort then
         LossPower = diode_p.LossPower + diode_n.LossPower;
@@ -2241,35 +2270,22 @@ This is the library of power converters for single and multi phase electrical sy
     model ThyristorCenterTap2Pulse
       "Two pulse thyristor rectifier with center tap"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
         final T=293.15);
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p(
-        final Ron=Ron,
-        final Goff=Goff,
-        final Vknee=Vknee,
-        final useHeatPort=useHeatPort)
-        "Thyristors conducting positive pin AC potentials"
-        annotation(Placement(visible = true, transformation(origin={10,60},
-          extent={{-10,10},{10,-10}},                                                                                                    rotation = 0)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n(
-        final Ron=Ron,
-        final Goff=Goff,
-        final Vknee=Vknee,
-        final useHeatPort=useHeatPort)
-        "Thyristors conducting negative pin AC potentials"
-        annotation(Placement(visible = true, transformation(origin={10,-60},
-          extent={{-10,-10},{10,10}},                                                                                                    rotation = 0)));
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
@@ -2283,6 +2299,23 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p(
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort)
+        "Thyristors conducting positive pin AC potentials"
+        annotation(Placement(visible = true, transformation(origin={10,60},
+          extent={{-10,10},{10,-10}},                                                                                                    rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n(
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort)
+        "Thyristors conducting negative pin AC potentials"
+        annotation(Placement(visible = true, transformation(origin={10,-60},
+          extent={{-10,-10},{10,10}},                                                                                                    rotation = 0)));
     equation
       if not useHeatPort then
         LossPower = thyristor_p.LossPower + thyristor_n.LossPower;
@@ -2356,50 +2389,53 @@ This is the library of power converters for single and multi phase electrical sy
     model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
       import Modelica.Constants.pi;
       parameter Integer m(final min=3)=3 "Number of phases";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"
+        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+        "AC input"
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
         each final useHeatPort=useHeatPort)
         "Diodes connected to positive DC potential"
-                                            annotation (Placement(visible=true,
+          annotation (Placement(visible=true,
             transformation(
             origin={10,40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
         each final useHeatPort=useHeatPort)
         "Diodes connected to negative DC potential"
-                                            annotation (Placement(visible=true,
+          annotation (Placement(visible=true,
             transformation(
             origin={10,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
       Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
         annotation (Placement(transformation(extent={{20,50},{40,70}})));
       Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
         annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
-                                                                                    useHeatPort
+        useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
     equation
       if not useHeatPort then
@@ -2474,25 +2510,25 @@ This is the library of power converters for single and multi phase electrical sy
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              textString="B2*%m%C")}));
+              textString="2*%m%")}));
     end DiodeBridge2mPulse;
 
     model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge "
       import Modelica.Constants.pi;
       parameter Integer m(final min=3)=3 "Number of phases";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort)
         "Thyristors connected to positive DC potential"
            annotation (Placement(visible=true, transformation(
@@ -2501,9 +2537,9 @@ This is the library of power converters for single and multi phase electrical sy
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort)
         "Thyristors connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
@@ -2616,25 +2652,51 @@ This is the library of power converters for single and multi phase electrical sy
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              textString="B2*%m%C")}));
+              textString="2*%m%")}));
     end ThyristorBridge2mPulse;
 
     model HalfBridge2mPulse "2*m pulse half rectifier bridge"
       import Modelica.Constants.pi;
       parameter Integer m(final min=3)=3 "Number of phases";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"
+        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+        "AC input"
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors" annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=270,
+            origin={-40,120})));
+
+      Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
+        annotation (Placement(transformation(extent={{20,50},{40,70}})));
+      Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
+        annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort)
         "Thyristors connected to positive DC potential"
            annotation (Placement(visible=true, transformation(
@@ -2643,34 +2705,20 @@ This is the library of power converters for single and multi phase electrical sy
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
         each final useHeatPort=useHeatPort)
         "Diodes connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
             origin={10,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
-        annotation (Placement(transformation(extent={{20,50},{40,70}})));
-      Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
-        annotation (Placement(transformation(extent={{20,-70},{40,-50}})));
+
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
         useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
-        "Fire signals for positive potential semiconductors" annotation (Placement(
-            transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+
     equation
       if not useHeatPort then
         LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(diode_n.idealDiode.LossPower);
@@ -2754,19 +2802,29 @@ This is the library of power converters for single and multi phase electrical sy
     model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min=3)=3 "Number of phases";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m=m)
+        "Positive potential AC input"
+        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m=m)
+        "Negative potential AC input"
+        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
         each final useHeatPort=useHeatPort)
         "Diodes connected to positive DC potential"
            annotation (Placement(visible=true, transformation(
@@ -2775,29 +2833,21 @@ This is the library of power converters for single and multi phase electrical sy
             rotation=180)));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
         final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
         each final useHeatPort=useHeatPort)
         "Diodes connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
             origin={-10,-60},
             extent={{10,10},{-10,-10}},
             rotation=180)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m=m)
-        "Positive potential AC input"
-        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m=m)
-        "Negative potential AC input"
-        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
       Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
         annotation (Placement(transformation(extent={{10,50},{30,70}})));
       Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
         annotation (Placement(transformation(extent={{12,-70},{32,-50}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
-                                                                                    useHeatPort
+        useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
 
     equation
@@ -2880,37 +2930,16 @@ This is the library of power converters for single and multi phase electrical sy
       "2*m pulse thyristor rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min=3)=3 "Number of phases";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1.E-5
         "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1.E-5
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1.E-5
         "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+        "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
-        final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
-        each final useHeatPort=useHeatPort)
-        "Thyristors conducting positive plug AC potentials"
-           annotation (Placement(visible=true, transformation(
-            origin={-10,60},
-            extent={{10,10},{-10,-10}},
-            rotation=180)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(
-        final m=m,
-        final Ron=fill(Ron, m),
-        final Goff=fill(Goff, m),
-        final Vknee=fill(Vknee, m),
-        each final useHeatPort=useHeatPort)
-        "Thyristors conducting negative plug AC potentials"
-        annotation (Placement(visible=true, transformation(
-            origin={-10,-60},
-            extent={{10,10},{-10,-10}},
-            rotation=180)));
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m=m)
         "Positive potential AC input"
@@ -2918,13 +2947,6 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m=m)
         "Negative potential AC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-      Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
-        annotation (Placement(transformation(extent={{10,50},{30,70}})));
-      Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
-        annotation (Placement(transformation(extent={{12,-70},{32,-50}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
-                                                                                    useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
         "Fire signals for positive potential semiconductors" annotation (Placement(
             transformation(
@@ -2937,6 +2959,36 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
+        final m=m,
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
+        each final useHeatPort=useHeatPort)
+        "Thyristors conducting positive plug AC potentials"
+           annotation (Placement(visible=true, transformation(
+            origin={-10,60},
+            extent={{10,10},{-10,-10}},
+            rotation=180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(
+        final m=m,
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
+        each final useHeatPort=useHeatPort)
+        "Thyristors conducting negative plug AC potentials"
+        annotation (Placement(visible=true, transformation(
+            origin={-10,-60},
+            extent={{10,10},{-10,-10}},
+            rotation=180)));
+      Modelica.Electrical.MultiPhase.Basic.Star starP(final m=m)
+        annotation (Placement(transformation(extent={{10,50},{30,70}})));
+      Modelica.Electrical.MultiPhase.Basic.Star starN(final m=m)
+        annotation (Placement(transformation(extent={{12,-70},{32,-50}})));
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
+                                                                                    useHeatPort
+        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
 
     equation
       if not useHeatPort then
