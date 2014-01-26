@@ -89,7 +89,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2PulseCenterTap_R
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -113,7 +113,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2PulseCenterTap_RL
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -144,7 +144,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2PulseCenterTap_RLV
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2PulseCenterTap(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -236,7 +236,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2Pulse_R
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -260,7 +260,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2Pulse_RL
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -291,7 +291,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2Pulse_RLV
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridgeTwoPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -377,7 +377,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       end FullBridge2Pulse_RLV_Characteristic;
     end FullBridge2Pulse;
 
-
     package FullBridge2mPulse
       extends Modelica.Icons.ExamplesPackage;
       model Impulses
@@ -452,7 +451,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2mPulse_R
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -474,7 +473,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2mPulse_RL
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -502,7 +501,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2mPulse_RLV
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
-            pulse2m(alpha=alpha));
+           pulse2m(alpha=alpha));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Angle alpha = 90 * pi / 180 "Firing angle";
@@ -540,7 +539,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       model FullBridge2mPulse_RLV_Characteristic
         extends
           Modelica_Electrical_PowerConverters.Examples.ExampleTemplates.FullBridge2mPulse(
-            pulse2m(useSignal=true));
+           pulse2m(useSignal=true));
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -659,7 +658,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             points={{-80,-40},{-10,-40}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(twoPulse.firePositive, idealthyristor.fire) annotation (Line(
+        connect(twoPulse.fire_p, idealthyristor.fire) annotation (Line(
             points={{-44,-11},{-44,-20},{-3,-20},{-3,29}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -788,11 +787,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             points={{50,20},{50,40},{-10,40},{-10,0},{-20,0}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.firePositive, rectifier.firePositive) annotation (Line(
+        connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
             points={{-34,19},{-34,12}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.fireNegative, rectifier.fireNegative) annotation (Line(
+        connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
             points={{-26,19},{-26,12}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -904,11 +903,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             points={{50,0},{50,-40},{10,-40}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.firePositive, rectifier.firePositive) annotation (Line(
+        connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
             points={{-34,19},{-34,12}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.fireNegative, rectifier.fireNegative) annotation (Line(
+        connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
             points={{-26,19},{-26,12}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -928,7 +927,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             Tolerance=1e-06),
           __Dymola_experimentSetupOutput);
       end FullBridgeTwoPulse;
-
 
       partial model FullBridge2mPulse "Template of B2*mC without load"
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
@@ -1031,11 +1029,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             points={{10,-40},{50,-40},{50,0}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.firePositive, rectifier.firePositive) annotation (Line(
+        connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
             points={{-34,19},{-34,12}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(pulse2m.fireNegative, rectifier.fireNegative) annotation (Line(
+        connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
             points={{-26,19},{-26,12}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -1104,12 +1102,12 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={40,-72})));
-      Modelica.Blocks.Interfaces.BooleanOutput firePositive[m] annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-110})));
-      Modelica.Blocks.Interfaces.BooleanOutput fireNegative[m] annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1156,14 +1154,13 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{40,-60},{40,-43}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(greaterPositive.y, firePositive) annotation (Line(
+      connect(greaterPositive.y, fire_p) annotation (Line(
           points={{-40,-83},{-40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(negativeEqual.y, fireNegative)
+      connect(negativeEqual.y, fire_n)
                                       annotation (Line(
-          points={{40,-83},{40,-88},{40,-88},{40,-96},{40,-96},{40,-110},{40,
-              -110}},
+          points={{40,-83},{40,-88},{40,-88},{40,-96},{40,-96},{40,-110},{40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(gain.y, replicator.u) annotation (Line(
@@ -1221,7 +1218,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
               textString="2*%m%")}));
     end Signal2mPulse;
 
-
     model Voltage2Pulse "Two pulse Graetz full bridge SCR"
       import Modelica.Constants.pi;
       parameter Boolean useSignal = false
@@ -1262,12 +1258,12 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             extent={{-10,10},{10,-10}},
             rotation=270,
             origin={-80,30})));
-      Modelica.Blocks.Interfaces.BooleanOutput firePositive    annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_p    annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-110})));
-      Modelica.Blocks.Interfaces.BooleanOutput fireNegative    annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_n    annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1290,11 +1286,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{-80,20},{-80,-60},{-100,-60}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(twoPulse.firePositive[1], firePositive) annotation (Line(
+      connect(twoPulse.fire_p[1], fire_p) annotation (Line(
           points={{-34,-11},{-34,-60},{-40,-60},{-40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(twoPulse.fireNegative[1], fireNegative) annotation (Line(
+      connect(twoPulse.fire_n[1], fire_n) annotation (Line(
           points={{-26,-11},{-26,-60},{40,-60},{40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -1312,8 +1308,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             textString="%name",
             lineColor={0,0,255}),
             Line(
-              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
-                  -60}},
+              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}},
               color={255,0,255},
               smooth=Smooth.None),
             Line(
@@ -1371,12 +1366,12 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             extent={{10,10},{-10,-10}},
             rotation=180,
             origin={-70,40})));
-      Modelica.Blocks.Interfaces.BooleanOutput firePositive[m] annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={-40,-110})));
-      Modelica.Blocks.Interfaces.BooleanOutput fireNegative[m] annotation (
+      Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
           Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
@@ -1385,8 +1380,8 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
 
       connect(twomPulse.u, u)
                              annotation (Line(
-          points={{-30,10},{-30,28},{-30,28},{-30,28},{-30,60},{0,60},{0,100},{
-              8.88178e-16,100}},
+          points={{-30,10},{-30,28},{-30,28},{-30,28},{-30,60},{0,60},{0,100},{8.88178e-16,
+              100}},
           color={0,0,127},
           smooth=Smooth.None));
       connect(ac, voltageSensorP.plug_p) annotation (Line(
@@ -1405,11 +1400,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{-70,29},{-70,0},{-44,0},{-44,0},{-40,0},{-40,0}},
           color={0,0,127},
           smooth=Smooth.None));
-      connect(twomPulse.fireNegative, fireNegative) annotation (Line(
+      connect(twomPulse.fire_n, fire_n) annotation (Line(
           points={{-26,-11},{-26,-60},{40,-60},{40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(twomPulse.firePositive, firePositive) annotation (Line(
+      connect(twomPulse.fire_p, fire_p) annotation (Line(
           points={{-34,-11},{-34,-60},{-40,-60},{-40,-110}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -1427,8 +1422,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
             textString="%name",
             lineColor={0,0,255}),
             Line(
-              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
-                  -60}},
+              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}},
               color={255,0,255},
               smooth=Smooth.None),
             Line(
@@ -1572,13 +1566,13 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput firePositive
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fireNegative
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
         "Fire signal for negative potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -1613,11 +1607,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           color={191,0,0},
           smooth=Smooth.None));
 
-      connect(firePositive, idealThyristorP.fire) annotation (Line(
+      connect(fire_p, idealThyristorP.fire) annotation (Line(
           points={{-40,120},{-40,40},{17,40},{17,49}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(fireNegative, idealThyristorN.fire) annotation (Line(
+      connect(fire_n, idealThyristorN.fire) annotation (Line(
           points={{40,120},{40,-40},{17,-40},{17,-49}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -1842,13 +1836,13 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.Blocks.Interfaces.BooleanInput firePositive
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fireNegative
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
         "Fire signal for negative potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -1906,11 +1900,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(firePositive, idealThyristorP1.fire) annotation (Line(
+      connect(fire_p, idealThyristorP1.fire) annotation (Line(
           points={{-40,120},{-40,80},{26,80},{26,57},{21,57}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(idealThyristorP2.fire, fireNegative) annotation (Line(
+      connect(idealThyristorP2.fire, fire_n) annotation (Line(
           points={{51,57},{56,57},{56,80},{40,80},{40,120}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -2000,13 +1994,13 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.Blocks.Interfaces.BooleanInput firePositive
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Fire signal for positive potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fireNegative
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
         "Fire signal for negative potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -2064,19 +2058,19 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(firePositive, idealThyristorP1.fire) annotation (Line(
+      connect(fire_p, idealThyristorP1.fire) annotation (Line(
           points={{-40,120},{-40,80},{26,80},{26,57},{21,57}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(fireNegative, idealThyristorP2.fire) annotation (Line(
+      connect(fire_n, idealThyristorP2.fire) annotation (Line(
           points={{40,120},{40,80},{60,80},{60,56},{56,56},{56,57},{51,57}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(firePositive, idealThyristorN2.fire) annotation (Line(
+      connect(fire_p, idealThyristorN2.fire) annotation (Line(
           points={{-40,120},{-40,80},{26,80},{26,-43},{29,-43}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(fireNegative, idealThyristorN1.fire) annotation (Line(
+      connect(fire_n, idealThyristorN1.fire) annotation (Line(
           points={{40,120},{40,80},{60,80},{60,-10},{-10,-10},{-10,-43},{-1,-43}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -2280,7 +2274,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
                                                                                     useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
-      Modelica.Blocks.Interfaces.BooleanInput firePositive[m]
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
         "Fire signals for positive potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -2326,7 +2320,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{20,40},{60,40},{60,-80}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(firePositive, idealThyristorP.fire) annotation (Line(
+      connect(fire_p, idealThyristorP.fire) annotation (Line(
           points={{-40,120},{-40,47},{-1,47}},
           color={255,0,255},
           smooth=Smooth.None));
@@ -2410,13 +2404,13 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
                                                                                     useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
-      Modelica.Blocks.Interfaces.BooleanInput firePositive[m]
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
         "Fire signals for positive potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fireNegative[m]
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
         "Fire signasl for negative potential semiconductors" annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
@@ -2462,11 +2456,11 @@ package Modelica_Electrical_PowerConverters "Rectifiers and DC/DC converters"
           points={{20,40},{60,40},{60,-80}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(firePositive, idealThyristorP.fire) annotation (Line(
+      connect(fire_p, idealThyristorP.fire) annotation (Line(
           points={{-40,120},{-40,47},{-1,47}},
           color={255,0,255},
           smooth=Smooth.None));
-      connect(fireNegative, idealThyristorN.fire) annotation (Line(
+      connect(fire_n, idealThyristorN.fire) annotation (Line(
           points={{40,120},{40,80},{-20,80},{-20,-33},{-1,-33}},
           color={255,0,255},
           smooth=Smooth.None));
