@@ -58,12 +58,12 @@ This is the library of power converters for single and multi phase electrical sy
     extends Modelica.Icons.ExamplesPackage;
     package ACDC "AC to DC converters"
       extends Modelica.Icons.ExamplesPackage;
-      package FullBridge1Pulse "Single pulse rectifier"
+      package Thyristor1Pulse "Single pulse rectifier"
         extends Modelica.Icons.ExamplesPackage;
 
-        model FullBridge1Pulse_R
+        model Thyristor1Pulse_R
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge1Pulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(
              twoPulse(
               useConstantFiringAngle=true,
               f=f,
@@ -94,11 +94,11 @@ This is the library of power converters for single and multi phase electrical sy
             Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
-        end FullBridge1Pulse_R;
+        end Thyristor1Pulse_R;
 
-        model FullBridge1Pulse_R_Characteristic
+        model Thyristor1Pulse_R_Characteristic
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge1Pulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(
              twoPulse(useConstantFiringAngle=false, f=f), idealthyristor(Vknee=0));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -132,15 +132,15 @@ This is the library of power converters for single and multi phase electrical sy
             Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
-        end FullBridge1Pulse_R_Characteristic;
-      end FullBridge1Pulse;
+        end Thyristor1Pulse_R_Characteristic;
+      end Thyristor1Pulse;
 
-      package FullBridge2PulseCenterTap
+      package ThyristoBridge2PulseCenterTap
         "Examples of Power Electronics with M2C"
         extends Modelica.Icons.ExamplesPackage;
-        model FullBridge2PulseCenterTap_R
+        model ThyristoBridge2PulseCenterTap_R
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -161,11 +161,11 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2PulseCenterTap_R;
+        end ThyristoBridge2PulseCenterTap_R;
 
-        model FullBridge2PulseCenterTap_RL
+        model ThyristoBridge2PulseCenterTap_RL
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -193,11 +193,11 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2PulseCenterTap_RL;
+        end ThyristoBridge2PulseCenterTap_RL;
 
-        model FullBridge2PulseCenterTap_RLV
+        model ThyristoBridge2PulseCenterTap_RLV
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -235,12 +235,12 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2PulseCenterTap_RLV;
+        end ThyristoBridge2PulseCenterTap_RLV;
 
-        model FullBridge2PulseCenterTap_RLV_Characteristic
+        model ThyristoBridge2PulseCenterTap_RLV_Characteristic
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2PulseCenterTap(
-              pulse2m(useConstantFiringAngle=false));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
+             pulse2m(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -283,15 +283,15 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2PulseCenterTap_RLV_Characteristic;
+        end ThyristoBridge2PulseCenterTap_RLV_Characteristic;
         annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})));
-      end FullBridge2PulseCenterTap;
+      end ThyristoBridge2PulseCenterTap;
 
-      package FullBridge2Pulse "Two pulse Graetz bridge"
+      package ThyristoBridge2Pulse "Two pulse Graetz bridge"
         extends Modelica.Icons.ExamplesPackage;
-        model FullBridge2Pulse_R
+        model ThyristoBridge2Pulse_R
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridgeTwoPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -312,11 +312,11 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2Pulse_R;
+        end ThyristoBridge2Pulse_R;
 
-        model FullBridge2Pulse_RL
+        model ThyristoBridge2Pulse_RL
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridgeTwoPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -344,11 +344,11 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2Pulse_RL;
+        end ThyristoBridge2Pulse_RL;
 
-        model FullBridge2Pulse_RLV
+        model ThyristoBridge2Pulse_RLV
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridgeTwoPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -386,12 +386,12 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2Pulse_RLV;
+        end ThyristoBridge2Pulse_RLV;
 
-        model FullBridge2Pulse_RLV_Characteristic
+        model ThyristoBridge2Pulse_RLV_Characteristic
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridgeTwoPulse(
-              pulse2m(useConstantFiringAngle=false));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
+             pulse2m(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -434,83 +434,15 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2Pulse_RLV_Characteristic;
-      end FullBridge2Pulse;
+        end ThyristoBridge2Pulse_RLV_Characteristic;
+      end ThyristoBridge2Pulse;
 
-      package FullBridge2mPulse
+      package ThyristoBridge2mPulse
         extends Modelica.Icons.ExamplesPackage;
-        model Impulses
-          import Modelica_Electrical_PowerConverters;
-          extends Modelica.Icons.Example;
-          parameter Integer m(final min=3)=3 "Number of phases";
-          Modelica.Electrical.Analog.Basic.Ground ground
-            annotation (Placement(transformation(extent={{-90,-60},{-70,-40}})));
-          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
-                                                         annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-80,-10})));
-          Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
-            final m=m,
-            V=fill(sqrt(2)*100, m),
-            freqHz=fill(1/360, m),
-            phase=-Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(
-                m))                annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-80,30})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.Signal2mPulse twomPulse(
-            f=1/360,
-            final m=m,
-            constantFiringAngle=0.017453292519943)
-            annotation (Placement(transformation(extent={{-20,40},{0,60}})));
-          Modelica.Electrical.MultiPhase.Basic.Delta deltaP(final m=m)
-                                                                 annotation (
-              Placement(transformation(
-                extent={{10,-10},{-10,10}},
-                rotation=90,
-                origin={-60,50})));
-          Modelica.Electrical.MultiPhase.Sensors.VoltageSensor voltageSensorP(final m=m)
-            annotation (Placement(transformation(
-                extent={{10,10},{-10,-10}},
-                rotation=270,
-                origin={-40,50})));
-        equation
-          connect(sineVoltage.plug_n, star.plug_p) annotation (Line(
-              points={{-80,20},{-80,0}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(star.pin_n, ground.p) annotation (Line(
-              points={{-80,-20},{-80,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(sineVoltage.plug_p, deltaP.plug_n) annotation (Line(
-              points={{-80,40},{-60,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(deltaP.plug_n, voltageSensorP.plug_p) annotation (Line(
-              points={{-60,40},{-40,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(deltaP.plug_p, voltageSensorP.plug_n) annotation (Line(
-              points={{-60,60},{-50,60},{-50,60},{-40,60}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(voltageSensorP.v, twomPulse.v) annotation (Line(
-              points={{-29,50},{-20,50}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          annotation (
-            Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                    -100},{100,100}}), graphics),
-            experiment(StopTime=360),
-            __Dymola_experimentSetupOutput);
-        end Impulses;
 
-        model FullBridge2mPulse_R
+        model ThyristoBridge2mPulse_R
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -529,11 +461,11 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end FullBridge2mPulse_R;
+        end ThyristoBridge2mPulse_R;
 
-        model FullBridge2mPulse_RL
+        model ThyristoBridge2mPulse_RL
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -558,11 +490,11 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end FullBridge2mPulse_RL;
+        end ThyristoBridge2mPulse_RL;
 
-        model FullBridge2mPulse_RLV
+        model ThyristoBridge2mPulse_RLV
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -597,11 +529,11 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end FullBridge2mPulse_RLV;
+        end ThyristoBridge2mPulse_RLV;
 
-        model FullBridge2mPulse_RLV_Characteristic
+        model ThyristoBridge2mPulse_RLV_Characteristic
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.FullBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
              pulse2m(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -642,11 +574,11 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=10, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end FullBridge2mPulse_RLV_Characteristic;
-      end FullBridge2mPulse;
+        end ThyristoBridge2mPulse_RLV_Characteristic;
+      end ThyristoBridge2mPulse;
 
       package ExampleTemplates
-        partial model FullBridge1Pulse
+        partial model Thyristor1Pulse
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -752,9 +684,128 @@ This is the library of power converters for single and multi phase electrical sy
             Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
-        end FullBridge1Pulse;
+        end Thyristor1Pulse;
         extends Modelica.Icons.Package;
-        model FullBridge2PulseCenterTap
+        partial model ThyristorBridge2Pulse "Template of B2C without load"
+          import Modelica_Electrical_PowerConverters;
+          extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
+          parameter Modelica.SIunits.Frequency f = 50 "Frequency";
+          // parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          // parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
+          // parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate=true);
+          // parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
+          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(visible=true,
+                transformation(
+                origin={-80,-50},
+                extent={{-10,-10},{10,10}},
+                rotation=0)));
+          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)*Vrms,
+              freqHz=f) annotation (Placement(visible=true, transformation(
+                origin={-80,0},
+                extent={{-10,-10},{10,10}},
+                rotation=-90)));
+          Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2Pulse
+                                                                    rectifier(
+              useHeatPort=false)
+            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+          Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor  annotation(Placement(visible = true, transformation(origin={50,10},          extent={{10,-10},
+                    {-10,10}},                                                                                                    rotation=90)));
+          Modelica.Blocks.Math.Mean meanVoltage(f=2*f)
+            annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,40})));
+          Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*f)
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,10})));
+          Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
+            annotation (Placement(transformation(
+                extent={{-10,10},{10,-10}},
+                rotation=180,
+                origin={0,-40})));
+          Modelica.Blocks.Math.Mean meanCurrent(f=2*f)
+            annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,-60})));
+          Modelica_Electrical_PowerConverters.ACDC.Control.Voltage2Pulse pulse2m(f=f)
+                                             annotation (Placement(transformation(
+                extent={{10,10},{-10,-10}},
+                rotation=180,
+                origin={-30,30})));
+        equation
+          connect(meanCurrent.u, currentSensor.i) annotation (Line(
+              points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(ground.p, sinevoltage.n) annotation (Line(
+              points={{-80,-40},{-80,-10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltagesensor.v, meanVoltage.u) annotation (Line(
+              points={{60,10},{64,10},{64,40},{68,40}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(voltagesensor.v, rootMeanSquareVoltage.u) annotation (Line(
+              points={{60,10},{68,10}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(sinevoltage.p, rectifier.ac_p)
+                                           annotation (Line(
+              points={{-80,10},{-62,10},{-62,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(sinevoltage.n, rectifier.ac_n)
+                                           annotation (Line(
+              points={{-80,-10},{-62,-10},{-62,-6},{-40,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.dc_n, currentSensor.n)
+                                             annotation (Line(
+              points={{-19.8,-6},{-10,-6},{-10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.dc_p, voltagesensor.p)
+                                             annotation (Line(
+              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltagesensor.n, currentSensor.p) annotation (Line(
+              points={{50,0},{50,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
+              points={{-34,19},{-34,12}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
+              points={{-26,19},{-26,12}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          connect(pulse2m.ac_p, rectifier.ac_p) annotation (Line(
+              points={{-40,36},{-60,36},{-60,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.ac_n, pulse2m.ac_n) annotation (Line(
+              points={{-40,-6},{-56,-6},{-56,24},{-40,24}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
+                    -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
+                graphics),                                                                                                    experiment(
+              StopTime=10,
+              __Dymola_NumberOfIntervals=50000,
+              Tolerance=1e-06),
+            __Dymola_experimentSetupOutput);
+        end ThyristorBridge2Pulse;
+
+        model ThyristoBridge2PulseCenterTap
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -876,127 +927,10 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end FullBridge2PulseCenterTap;
+        end ThyristoBridge2PulseCenterTap;
 
-        partial model FullBridgeTwoPulse "Template of B2C without load"
-          import Modelica_Electrical_PowerConverters;
-          extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
-          parameter Modelica.SIunits.Frequency f = 50 "Frequency";
-          // parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
-          // parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
-          // parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate=true);
-          // parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(visible=true,
-                transformation(
-                origin={-80,-50},
-                extent={{-10,-10},{10,10}},
-                rotation=0)));
-          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)*Vrms,
-              freqHz=f) annotation (Placement(visible=true, transformation(
-                origin={-80,0},
-                extent={{-10,-10},{10,10}},
-                rotation=-90)));
-          Modelica_Electrical_PowerConverters.ACDC.HalfBridge2Pulse rectifier(
-              useHeatPort=false)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-          Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor  annotation(Placement(visible = true, transformation(origin={50,10},          extent={{10,-10},
-                    {-10,10}},                                                                                                    rotation=90)));
-          Modelica.Blocks.Math.Mean meanVoltage(f=2*f)
-            annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={80,40})));
-          Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*f)
-            annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={80,10})));
-          Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
-            annotation (Placement(transformation(
-                extent={{-10,10},{10,-10}},
-                rotation=180,
-                origin={0,-40})));
-          Modelica.Blocks.Math.Mean meanCurrent(f=2*f)
-            annotation (Placement(
-                transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=0,
-                origin={80,-60})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.Voltage2Pulse pulse2m(f=f)
-                                             annotation (Placement(transformation(
-                extent={{10,10},{-10,-10}},
-                rotation=180,
-                origin={-30,30})));
-        equation
-          connect(meanCurrent.u, currentSensor.i) annotation (Line(
-              points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(ground.p, sinevoltage.n) annotation (Line(
-              points={{-80,-40},{-80,-10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(voltagesensor.v, meanVoltage.u) annotation (Line(
-              points={{60,10},{64,10},{64,40},{68,40}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(voltagesensor.v, rootMeanSquareVoltage.u) annotation (Line(
-              points={{60,10},{68,10}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(sinevoltage.p, rectifier.ac_p)
-                                           annotation (Line(
-              points={{-80,10},{-62,10},{-62,6},{-40,6}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(sinevoltage.n, rectifier.ac_n)
-                                           annotation (Line(
-              points={{-80,-10},{-62,-10},{-62,-6},{-40,-6}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(rectifier.dc_n, currentSensor.n)
-                                             annotation (Line(
-              points={{-19.8,-6},{-10,-6},{-10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(rectifier.dc_p, voltagesensor.p)
-                                             annotation (Line(
-              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(voltagesensor.n, currentSensor.p) annotation (Line(
-              points={{50,0},{50,-40},{10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
-              color={255,0,255},
-              smooth=Smooth.None));
-          connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
-              color={255,0,255},
-              smooth=Smooth.None));
-          connect(pulse2m.ac_p, rectifier.ac_p) annotation (Line(
-              points={{-40,36},{-60,36},{-60,6},{-40,6}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(rectifier.ac_n, pulse2m.ac_n) annotation (Line(
-              points={{-40,-6},{-56,-6},{-56,24},{-40,24}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
-                    -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
-                graphics),                                                                                                    experiment(
-              StopTime=10,
-              __Dymola_NumberOfIntervals=50000,
-              Tolerance=1e-06),
-            __Dymola_experimentSetupOutput);
-        end FullBridgeTwoPulse;
 
-        partial model FullBridge2mPulse "Template of B2*mC without load"
+        partial model ThyristoBridge2mPulse "Template of B2*mC without load"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1117,9 +1051,9 @@ This is the library of power converters for single and multi phase electrical sy
             __Dymola_experimentSetupOutput,
             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
-        end FullBridge2mPulse;
+        end ThyristoBridge2mPulse;
 
-        partial model FullBridge2mPulseCenterTap
+        partial model ThyristorCenterTap2mPulse
           "Template of 2*m pulse rectifier with center tap, without load"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
@@ -1259,7 +1193,7 @@ This is the library of power converters for single and multi phase electrical sy
             __Dymola_experimentSetupOutput,
             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
-        end FullBridge2mPulseCenterTap;
+        end ThyristorCenterTap2mPulse;
 
       end ExampleTemplates;
     end ACDC;
@@ -1803,12 +1737,23 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-40,10},{40,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="B2C")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end DiodeBridge2Pulse;
 
     model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
@@ -1984,12 +1929,27 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-40,10},{40,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="B2C")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{2,14},{2,30}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end ThyristorBridge2Pulse;
 
     model HalfBridge2Pulse "Two pulse Graetz half rectifier bridge "
@@ -2156,12 +2116,44 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-40,10},{40,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-44,48},{36,0}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="B2C")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-44,24},{36,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,48},{16,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,24},{-24,48},{-24,0},{16,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Rectangle(
+              extent={{-44,0},{36,-56}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-44,-32},{36,-32}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,-8},{16,-56}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,-32},{-24,-8},{-24,-56},{16,-32}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-4,-20},{-4,-4}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end HalfBridge2Pulse;
 
     model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
@@ -2257,12 +2249,23 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-40,10},{40,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="M2C")}),                                                                                                    Diagram(coordinateSystem(extent={{-100,
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None)}),                                                                                                  Diagram(coordinateSystem(extent={{-100,
                 -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
             graphics),                                                                                                    experiment(StartTime = 0, StopTime = 0.1, Tolerance = 0.000001));
     end DiodeCenterTap2Pulse;
@@ -2376,12 +2379,27 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-40,10},{40,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="M2C")}),                                                                                                    Diagram(coordinateSystem(extent={{-100,
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{2,14},{2,30}},
+              color={0,0,255},
+              smooth=Smooth.None)}),                                                                                                  Diagram(coordinateSystem(extent={{-100,
                 -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
             graphics),                                                                                                    experiment(StartTime = 0, StopTime = 0.1, Tolerance = 0.000001));
     end ThyristorCenterTap2Pulse;
@@ -2505,12 +2523,23 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-90,10},{90,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end DiodeBridge2mPulse;
 
     model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge "
@@ -2647,12 +2676,27 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-90,10},{90,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{2,14},{2,30}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end ThyristorBridge2mPulse;
 
     model HalfBridge2mPulse "2*m pulse half rectifier bridge"
@@ -2791,12 +2835,44 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-90,10},{90,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-44,48},{36,0}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="B2*%m%C")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-44,24},{36,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,48},{16,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,24},{-24,48},{-24,0},{16,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Rectangle(
+              extent={{-44,0},{36,-56}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-44,-32},{36,-32}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,-8},{16,-56}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{16,-32},{-24,-8},{-24,-56},{16,-32}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-4,-20},{-4,-4}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end HalfBridge2mPulse;
 
     model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
@@ -2918,12 +2994,23 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-90,10},{90,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end DiodeCenterTap2mPulse;
 
     model ThyristorCenterTap2mPulse
@@ -3066,14 +3153,33 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
-            Text(
-              extent={{-90,10},{90,-10}},
-              lineColor={0,0,127},
+            Rectangle(
+              extent={{-38,26},{42,-22}},
+              lineColor={255,255,255},
               fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}));
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-38,2},{42,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,26},{22,-22}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{2,14},{2,30}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
     end ThyristorCenterTap2mPulse;
   end ACDC;
+
+  package DCAC "DC to AC converters"
+    extends Modelica.Icons.Package;
+  end DCAC;
 
   package Icons
     extends Modelica.Icons.Package;
