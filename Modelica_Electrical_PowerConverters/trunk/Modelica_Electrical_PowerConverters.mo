@@ -4476,6 +4476,178 @@ This is the library of power converters for single and multi phase electrical sy
     end SinglePhase2Level;
   end DCAC;
 
+  package DCDC "DC to DC converters"
+    extends Modelica.Icons.Package;
+    model ChopperStepDown "Step down chopper"
+      import Modelica.Constants.pi;
+      parameter Modelica.SIunits.Resistance RonTransistor=1e-5
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor=1e-5
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor=0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1.E-5
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1.E-5
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+        "Diode forward threshold voltage";
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
+         final T=293.15);
+
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_pi
+        "Positive DC input"
+        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_ni
+        "Negative DC input"
+        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_po
+        "Postive DC output"
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_no
+        "Negative DC output"
+        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+      Modelica.SIunits.Voltage vDCi = dc_pi.v - dc_ni.v "DC voltage";
+      Modelica.SIunits.Current iDCi = dc_pi.i "DC current";
+      Modelica.SIunits.Voltage vDCo = dc_po.v - dc_no.v "AC voltages";
+      Modelica.SIunits.Current iDCo = dc_po.i "AC currents";
+
+      Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor(
+        useHeatPort=useHeatPort,
+        Ron=RonTransistor,
+        Goff=GoffTransistor,
+        Vknee=VkneeTransistor) "Switching transistor"
+                                 annotation (Placement(visible=true, transformation(
+            origin={0,60},
+            extent={{-10,-10},{10,10}},
+            rotation=0)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode(
+        Ron=RonDiode,
+        Goff=GoffDiode,
+        Vknee=VkneeDiode,
+        useHeatPort=useHeatPort) "Free wheeling diode"
+                                 annotation (Placement(visible=true, transformation(
+            origin={40,0},
+            extent={{-10,10},{10,-10}},
+            rotation=90)));
+
+      Modelica.Blocks.Interfaces.BooleanInput fire annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=270,
+            origin={0,120})));
+    equation
+      if not useHeatPort then
+        LossPower = diode.LossPower + transistor.LossPower;
+      end if;
+      connect(diode.n, transistor.n)          annotation (Line(
+          points={{40,10},{40,60},{10,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor.n, dc_po)  annotation (Line(
+          points={{10,60},{100,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor.heatPort, heatPort)   annotation (Line(
+          points={{6.66134e-16,50},{0,50},{0,-100},{4.44089e-16,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode.heatPort, heatPort)        annotation (Line(
+          points={{30,2.22045e-16},{30,0},{0,0},{0,-100},{4.44089e-16,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(dc_pi, transistor.p)  annotation (Line(
+          points={{-100,60},{-10,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_ni, diode.p)       annotation (Line(
+          points={{-100,-60},{40,-60},{40,-10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_ni, dc_no) annotation (Line(
+          points={{-100,-60},{102,-60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(transistor.fire, fire) annotation (Line(
+          points={{7,71},{7,85.5},{1.11022e-15,85.5},{1.11022e-15,120}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics={
+            Rectangle(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-100,-100},{100,100}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Text(
+              extent={{-100,70},{0,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC input"),
+            Text(
+              extent={{0,-50},{100,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC output"),      Text(
+            extent={{-150,150},{150,110}},
+            textString="%name",
+            lineColor={0,0,255}),
+            Rectangle(
+              extent={{-40,40},{40,-40}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-20,20},{-20,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-28,20},{-28,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-40,0},{-28,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,4},{0,24},{0,40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,-4},{0,-24},{0,-40}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,-24},{10,-24},{10,24},{0,24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,8},{20,8}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{10,8},{0,-8},{20,-8},{10,8}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
+    end ChopperStepDown;
+  end DCDC;
+
+  package Utilities "Utilities for operating power converters"
+    extends Modelica.Icons.Package;
+  end Utilities;
+
   package Icons
     extends Modelica.Icons.Package;
     model ExampleTemplate
