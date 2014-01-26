@@ -2165,6 +2165,10 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
         "Negative DC output"
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac_p.i "AC currents";
 
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p1(
         Ron=RonDiode,
@@ -2341,6 +2345,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac_p.i "AC currents";
 
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
         Ron=RonThyristor,
@@ -2543,6 +2551,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac_p.i "AC currents";
 
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
         Ron=RonThyristor,
@@ -2725,6 +2737,10 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac_p.i "AC currents";
 
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(
         final Ron=RonDiode,
@@ -2732,7 +2748,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Vknee=VkneeDiode,
         final useHeatPort=useHeatPort)
         "Diodes conducting positive pin AC potentials"
-                                       annotation (Placement(visible=true,
+          annotation (Placement(visible=true,
             transformation(
             origin={10,60},
             extent={{-10,10},{10,-10}},
@@ -2743,7 +2759,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Vknee=VkneeDiode,
         final useHeatPort=useHeatPort)
         "Diodes conducting negative pin AC potentials"
-                                       annotation (Placement(visible=true,
+          annotation (Placement(visible=true,
             transformation(
             origin={10,-60},
             extent={{-10,-10},{10,10}},
@@ -2852,6 +2868,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac_p.i "AC currents";
 
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p(
         final Ron=RonThyristor,
@@ -2974,6 +2994,11 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
         "AC input"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
+
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(
         final m=m,
         final Ron=fill(RonDiode, m),
@@ -3105,6 +3130,29 @@ This is the library of power converters for single and multi phase electrical sy
         "Thyristor forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors" annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=270,
+            origin={-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
+        "Fire signasl for negative potential semiconductors" annotation (Placement(
+            transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=270,
+            origin={40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
+
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
         final m=m,
         final Ron=fill(RonThyristor, m),
@@ -3127,12 +3175,7 @@ This is the library of power converters for single and multi phase electrical sy
             origin={10,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-        annotation (Placement(transformation(extent={{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
         annotation (Placement(transformation(extent={{20,70},{40,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
@@ -3140,18 +3183,7 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
                                                                                     useHeatPort
         annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
-        "Fire signals for positive potential semiconductors" annotation (Placement(
-            transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
-        "Fire signasl for negative potential semiconductors" annotation (Placement(
-            transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+
     equation
       if not useHeatPort then
         LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(thyristor_n.idealThyristor.LossPower);
@@ -3285,6 +3317,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
 
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
         annotation (Placement(transformation(extent={{20,70},{40,50}})));
@@ -3451,6 +3487,11 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m=m)
         "Negative potential AC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v
+        "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac_p.pin[:].i "AC currents";
 
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(
         final m=m,
@@ -3605,6 +3646,11 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v
+        "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac_p.pin[:].i "AC currents";
 
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
         final m=m,
@@ -3754,6 +3800,10 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
         "AC input"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
 
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode(
         final m=m,
@@ -3774,7 +3824,7 @@ This is the library of power converters for single and multi phase electrical sy
 
     equation
       if not useHeatPort then
-        LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
+        LossPower = sum(diode.idealDiode.LossPower);
       end if;
       connect(diode.plug_n, star.plug_p)            annotation (Line(
           points={{0,0},{10,0}},
@@ -3867,6 +3917,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=270,
             origin={-40,120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
 
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor(
         final m=m,
@@ -4006,6 +4060,10 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=90,
             origin={40,-120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
       Modelica.Electrical.MultiPhase.Ideal.IdealGTOThyristor transistor_p(
         final m=m,
         final Ron=fill(RonTransistor, m),
@@ -4058,10 +4116,6 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{10,10},{-10,-10}},
             rotation=90,
             origin={40,-50})));
-      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
-      Modelica.SIunits.Current iDC = dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
-      Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
 
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
                                                                                     useHeatPort
@@ -4231,7 +4285,7 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
         "Negative DC input"
         annotation (Placement(transformation(extent={{-110,-110},{-90,-90}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin      ac "AC output"
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac "AC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p
         "Firing signals of positive potential transistors"
@@ -4247,6 +4301,11 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-20,-20},{20,20}},
             rotation=90,
             origin={40,-120})));
+      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
+      Modelica.SIunits.Current iDC = dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC = ac.v "AC voltages";
+      Modelica.SIunits.Current iAC = ac.i "AC currents";
+
       Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor_p(
         final Ron=RonTransistor,
         final Goff=GoffTransistor,
@@ -4283,10 +4342,6 @@ This is the library of power converters for single and multi phase electrical sy
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={60,-20})));
-      Modelica.SIunits.Voltage vDC = dc_p.v-dc_n.v "DC voltage";
-      Modelica.SIunits.Current iDC = dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC = ac.v "AC voltages";
-      Modelica.SIunits.Current iAC = ac.i "AC currents";
 
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m) if
                                                                                     useHeatPort
