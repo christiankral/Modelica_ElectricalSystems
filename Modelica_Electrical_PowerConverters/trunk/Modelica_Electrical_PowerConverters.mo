@@ -1705,7 +1705,7 @@ This is the library of power converters for single and multi phase electrical sy
       extends Modelica.Icons.ExamplesPackage;
       package SinglePhaseTwoLevel "Single phase two level inverter examples"
         extends Modelica.Icons.ExamplesPackage;
-        model singlePhaseTwoLevel_R
+        model SinglePhaseTwoLevel_R
           "Single phase DC to AC converter with resistive load"
           extends
             Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(
@@ -1729,9 +1729,9 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics));
-        end singlePhaseTwoLevel_R;
+        end SinglePhaseTwoLevel_R;
 
-        model singlePhaseTwoLevel_RL
+        model SinglePhaseTwoLevel_RL
           "Single phase DC to AC converter with R-L load"
           extends
             Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(
@@ -1765,7 +1765,7 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics));
-        end singlePhaseTwoLevel_RL;
+        end SinglePhaseTwoLevel_RL;
       end SinglePhaseTwoLevel;
 
       package ExampleTemplates "Templates for examples"
