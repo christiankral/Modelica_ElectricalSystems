@@ -1241,7 +1241,6 @@ This is the library of power converters for single and multi phase electrical sy
             __Dymola_experimentSetupOutput);
         end ThyristoBridge2PulseCenterTap;
 
-
         partial model ThyristoBridge2mPulse "Template of B2*mC without load"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
@@ -1632,6 +1631,127 @@ This is the library of power converters for single and multi phase electrical sy
 
       end ExampleTemplates;
     end ACDC;
+
+    package DCDC "DC to DC converter examples"
+      extends Modelica.Icons.ExamplesPackage;
+      package ChopperStepDown "Step down chopper"
+        extends Modelica.Icons.ExamplesPackage;
+        model ChopperStepDown_R "Step down chopper with resistive load"
+          extends ExampleTemplates.ChopperStepDown;
+          parameter Modelica.SIunits.Resistance R = 100 "Resistance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R)
+                                                             annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,40})));
+        equation
+          connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
+              points={{-40,6},{-30,6},{-30,50},{30,50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.n, currentSensor.p) annotation (Line(
+              points={{30,30},{30,-6},{0,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics));
+        end ChopperStepDown_R;
+
+        model ChopperStepDown_RL "Step down chopper with R-L load"
+          extends ExampleTemplates.ChopperStepDown;
+          parameter Modelica.SIunits.Resistance R = 100 "Resistance";
+          parameter Modelica.SIunits.Inductance L = 1 "Inductance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R)
+                                                             annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,40})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,10})));
+        equation
+          connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
+              points={{-40,6},{-30,6},{-30,50},{30,50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,30},{30,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, currentSensor.p) annotation (Line(
+              points={{30,0},{30,-6},{0,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics));
+        end ChopperStepDown_RL;
+      end ChopperStepDown;
+
+      package ExampleTemplates "Templates for examples"
+        extends Modelica.Icons.Package;
+        partial model ChopperStepDown "Step down chopper including control"
+          import Modelica_Electrical_PowerConverters;
+          extends Icons.ExampleTemplate;
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=100)
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-80,0})));
+          Modelica_Electrical_PowerConverters.DCDC.ChopperStepDown chopperStepDown(
+              useHeatPort=false)
+            annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+          Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
+            annotation (Placement(transformation(extent={{0,-16},{-20,4}})));
+          Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor annotation (
+              Placement(transformation(
+                extent={{-10,10},{10,-10}},
+                rotation=270,
+                origin={60,10})));
+          Modelica.Electrical.Analog.Basic.Ground ground
+            annotation (Placement(transformation(extent={{-90,-40},{-70,-20}})));
+          Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM signalPWM(
+              constantDutyCycle=0.25, f=1000) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-50,30})));
+        equation
+          connect(constantVoltage.p, chopperStepDown.dc_p1) annotation (Line(
+              points={{-80,10},{-70,10},{-70,6},{-60,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(constantVoltage.n, chopperStepDown.dc_n1) annotation (Line(
+              points={{-80,-10},{-70,-10},{-70,-6},{-60,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(chopperStepDown.dc_p2, voltageSensor.p) annotation (Line(
+              points={{-40,6},{-30,6},{-30,50},{60,50},{60,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltageSensor.n, currentSensor.p) annotation (Line(
+              points={{60,0},{60,-6},{0,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(currentSensor.n, chopperStepDown.dc_n2) annotation (Line(
+              points={{-20,-6},{-39.8,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(constantVoltage.n, ground.p) annotation (Line(
+              points={{-80,-10},{-80,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(signalPWM.fire, chopperStepDown.fire) annotation (Line(
+              points={{-50,19},{-50,12}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics));
+        end ChopperStepDown;
+      end ExampleTemplates;
+    end DCDC;
   end Examples;
 
   package ACDC "AC to DC and DC to AC converter"
@@ -4478,6 +4598,144 @@ This is the library of power converters for single and multi phase electrical sy
 
   package DCDC "DC to DC converters"
     extends Modelica.Icons.Package;
+    package Control
+      extends Modelica.Icons.Package;
+      model SignalPWM "Generates a PWM boolean signal"
+        parameter Boolean useConstantDutyCycle = true
+          "Enables constant duty cycle";
+        parameter Real constantDutyCycle = 0 "Constant duty cycle"
+          annotation(Dialog(enable=useConstantDutyCycle));
+        parameter Modelica.SIunits.Frequency f = 50 "Switching frequency";
+        parameter Modelica.SIunits.Time startTime = 0 "Start time";
+        Modelica.Blocks.Interfaces.BooleanOutput fire "Firing PWM signal"
+          annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+        Modelica.Blocks.Interfaces.RealInput dutyCycle if not useConstantDutyCycle
+          "Duty cycle"
+          annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+        Modelica.Blocks.Sources.Constant const(final k=constantDutyCycle) if useConstantDutyCycle
+          annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
+        Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
+          annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+        Modelica.Blocks.Sources.SampleTrigger sampleTrigger(final period=1/f,
+            final startTime=startTime)
+          annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
+        Modelica.Blocks.Logical.Timer timer
+          annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
+        Modelica.Blocks.Logical.FallingEdge fallingEdge
+          annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
+        Modelica.Blocks.Logical.Not invert
+          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
+        Modelica.Blocks.Math.Gain gain(final k=f)
+          annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
+        Modelica.Blocks.Logical.GreaterEqual greaterEqual
+          annotation (Placement(transformation(extent={{50,-40},{70,-60}})));
+        Modelica.Blocks.Math.Feedback feedback annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,0})));
+        Modelica.Blocks.Sources.Constant one(final k=1) if                   useConstantDutyCycle
+          annotation (Placement(transformation(extent={{10,40},{30,60}})));
+        Modelica.Blocks.Logical.And andCondition
+          annotation (Placement(transformation(extent={{72,-10},{92,10}})));
+        Modelica.Blocks.Sources.BooleanStep enable(final startTime=startTime,
+            final startValue=false) "Enable signal of fire after start time"
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={60,50})));
+      equation
+        connect(const.y, limiter.u) annotation (Line(
+            points={{-79,50},{-70,50},{-70,8.88178e-16},{-14,8.88178e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(dutyCycle, limiter.u) annotation (Line(
+            points={{-120,8.88178e-16},{-14,8.88178e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+
+        connect(sampleTrigger.y, fallingEdge.u) annotation (Line(
+            points={{-79,-50},{-70,-50}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(fallingEdge.y, invert.u) annotation (Line(
+            points={{-47,-50},{-42,-50}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(invert.y, timer.u) annotation (Line(
+            points={{-19,-50},{-12,-50}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(timer.y, gain.u) annotation (Line(
+            points={{11,-50},{18,-50}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(gain.y, greaterEqual.u1) annotation (Line(
+            points={{41,-50},{48,-50}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(feedback.y, greaterEqual.u2) annotation (Line(
+            points={{40,-9},{40,-42},{48,-42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(feedback.u2, limiter.y) annotation (Line(
+            points={{32,0},{9,0}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(one.y, feedback.u1) annotation (Line(
+            points={{31,50},{40,50},{40,8}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(andCondition.y, fire) annotation (Line(
+            points={{93,0},{110,0}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(greaterEqual.y, andCondition.u2) annotation (Line(
+            points={{71,-50},{80,-50},{80,-20},{60,-20},{60,-8},{70,-8}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enable.y, andCondition.u1) annotation (Line(
+            points={{60,39},{60,0},{70,0}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}), graphics), Icon(coordinateSystem(
+                preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+              graphics={
+              Rectangle(
+                extent={{-100,100},{100,-100}},
+                lineColor={0,0,0},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),
+              Line(
+                points={{-100,0},{-98,0},{-62,0}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{-60,-4},{-60,-48},{40,-48},{40,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{-62,0},{-76,4},{-76,-4},{-62,0}},
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,-24}},
+
+                color={0,0,255},
+                smooth=Smooth.None),
+              Line(
+                points={{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},{80,
+                    -20},{80,-16}},
+                color={255,0,255},
+                smooth=Smooth.None)}));
+      end SignalPWM;
+    end Control;
+
     model ChopperStepDown "Step down chopper"
       import Modelica.Constants.pi;
       parameter Modelica.SIunits.Resistance RonTransistor=1e-5
@@ -4495,22 +4753,22 @@ This is the library of power converters for single and multi phase electrical sy
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(
          final T=293.15);
 
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_pi
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1
         "Positive DC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_ni
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n1
         "Negative DC input"
         annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_po
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p2
         "Postive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_no
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n2
         "Negative DC output"
         annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
-      Modelica.SIunits.Voltage vDCi = dc_pi.v - dc_ni.v "DC voltage";
-      Modelica.SIunits.Current iDCi = dc_pi.i "DC current";
-      Modelica.SIunits.Voltage vDCo = dc_po.v - dc_no.v "AC voltages";
-      Modelica.SIunits.Current iDCo = dc_po.i "AC currents";
+      Modelica.SIunits.Voltage vDCi = dc_p1.v - dc_n1.v "DC voltage side 1";
+      Modelica.SIunits.Current iDCi = dc_p1.i "DC current side 1";
+      Modelica.SIunits.Voltage vDCo = dc_p2.v - dc_n2.v "DC voltages side 2";
+      Modelica.SIunits.Current iDCo = dc_p2.i "DC current side 2";
 
       Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor(
         useHeatPort=useHeatPort,
@@ -4544,7 +4802,7 @@ This is the library of power converters for single and multi phase electrical sy
           points={{40,10},{40,60},{10,60}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(transistor.n, dc_po)  annotation (Line(
+      connect(transistor.n,dc_p2)   annotation (Line(
           points={{10,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
@@ -4556,15 +4814,15 @@ This is the library of power converters for single and multi phase electrical sy
           points={{30,2.22045e-16},{30,0},{0,0},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(dc_pi, transistor.p)  annotation (Line(
+      connect(dc_p1, transistor.p)  annotation (Line(
           points={{-100,60},{-10,60}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(dc_ni, diode.p)       annotation (Line(
+      connect(dc_n1, diode.p)       annotation (Line(
           points={{-100,-60},{40,-60},{40,-10}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(dc_ni, dc_no) annotation (Line(
+      connect(dc_n1,dc_n2)  annotation (Line(
           points={{-100,-60},{102,-60}},
           color={0,0,255},
           smooth=Smooth.None));
@@ -4590,13 +4848,13 @@ This is the library of power converters for single and multi phase electrical sy
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              textString="DC input"),
+              textString="DC in"),
             Text(
               extent={{0,-50},{100,-70}},
               lineColor={0,0,127},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
-              textString="DC output"),      Text(
+              textString="DC out"),         Text(
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255}),
