@@ -4615,7 +4615,7 @@ This is the library of power converters for single and multi phase electrical sy
         Modelica.Blocks.Sources.Constant const(final k=constantDutyCycle) if useConstantDutyCycle
           annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
         Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-          annotation (Placement(transformation(extent={{-12,-10},{8,10}})));
+          annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
         Modelica.Blocks.Sources.SampleTrigger sampleTrigger(final period=1/f,
             final startTime=startTime)
           annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
@@ -4644,13 +4644,16 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={60,50})));
+        Modelica.Blocks.Discrete.ZeroOrderHold zeroOrderHold(final startTime=
+              startTime, final samplePeriod=1/f)
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
       equation
         connect(const.y, limiter.u) annotation (Line(
-            points={{-79,50},{-70,50},{-70,8.88178e-16},{-14,8.88178e-16}},
+            points={{-79,50},{-70,50},{-70,8.88178e-16},{-42,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(dutyCycle, limiter.u) annotation (Line(
-            points={{-120,8.88178e-16},{-14,8.88178e-16}},
+            points={{-120,8.88178e-16},{-42,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
 
@@ -4678,10 +4681,6 @@ This is the library of power converters for single and multi phase electrical sy
             points={{40,-9},{40,-42},{48,-42}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(feedback.u2, limiter.y) annotation (Line(
-            points={{32,0},{9,0}},
-            color={0,0,127},
-            smooth=Smooth.None));
         connect(one.y, feedback.u1) annotation (Line(
             points={{31,50},{40,50},{40,8}},
             color={0,0,127},
@@ -4697,6 +4696,14 @@ This is the library of power converters for single and multi phase electrical sy
         connect(enable.y, andCondition.u1) annotation (Line(
             points={{60,39},{60,0},{70,0}},
             color={255,0,255},
+            smooth=Smooth.None));
+        connect(limiter.y, zeroOrderHold.u) annotation (Line(
+            points={{-19,0},{-12,0}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(zeroOrderHold.y, feedback.u2) annotation (Line(
+            points={{11,0},{32,0}},
+            color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}), graphics), Icon(coordinateSystem(
