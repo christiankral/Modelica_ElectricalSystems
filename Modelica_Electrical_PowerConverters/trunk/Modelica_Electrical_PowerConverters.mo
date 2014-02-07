@@ -136,13 +136,13 @@ This is the library of power converters for single and multi phase electrical sy
         end Thyristor1Pulse_R_Characteristic;
       end Thyristor1Pulse;
 
-      package ThyristoBridge2PulseCenterTap
+      package ThyristorBridge2PulseCenterTap
         "Examples of Power Electronics with M2C"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristoBridge2PulseCenterTap_R
+        model ThyristorBridge2PulseCenterTap_R
           "Two pulse thyristor rectifier with center tap and resistive load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2PulseCenterTap(
              pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -167,12 +167,12 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2PulseCenterTap_R;
+        end ThyristorBridge2PulseCenterTap_R;
 
-        model ThyristoBridge2PulseCenterTap_RL
+        model ThyristorBridge2PulseCenterTap_RL
           "Two pulse thyristor rectifier with center tap and R-L load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2PulseCenterTap(
              pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -204,12 +204,12 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2PulseCenterTap_RL;
+        end ThyristorBridge2PulseCenterTap_RL;
 
-        model ThyristoBridge2PulseCenterTap_RLV
+        model ThyristorBridge2PulseCenterTap_RLV
           "Two pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2PulseCenterTap(
              pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -251,12 +251,12 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2PulseCenterTap_RLV;
+        end ThyristorBridge2PulseCenterTap_RLV;
 
-        model ThyristoBridge2PulseCenterTap_RLV_Characteristic
+        model ThyristorBridge2PulseCenterTap_RLV_Characteristic
           "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2PulseCenterTap(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2PulseCenterTap(
              pulse2(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -304,13 +304,13 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2PulseCenterTap_RLV_Characteristic;
+        end ThyristorBridge2PulseCenterTap_RLV_Characteristic;
         annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})));
-      end ThyristoBridge2PulseCenterTap;
+      end ThyristorBridge2PulseCenterTap;
 
-      package ThyristoBridge2Pulse "Two pulse Graetz bridge"
+      package ThyristorBridge2Pulse "Two pulse Graetz bridge"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristoBridge2Pulse_R
+        model ThyristorBridge2Pulse_R
           "Graetz thyristor bridge rectifier with resistive load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
@@ -338,9 +338,9 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2Pulse_R;
+        end ThyristorBridge2Pulse_R;
 
-        model ThyristoBridge2Pulse_RL
+        model ThyristorBridge2Pulse_RL
           "Graetz thyristor bridge rectifier with R-L load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
@@ -375,9 +375,9 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2Pulse_RL;
+        end ThyristorBridge2Pulse_RL;
 
-        model ThyristoBridge2Pulse_RLV
+        model ThyristorBridge2Pulse_RLV
           "Graetz thyristor bridge rectifier with R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
@@ -422,9 +422,9 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2Pulse_RLV;
+        end ThyristorBridge2Pulse_RLV;
 
-        model ThyristoBridge2Pulse_RLV_Characteristic
+        model ThyristorBridge2Pulse_RLV_Characteristic
           "Characteristic of Graetz thyristor bridge rectifier with R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(
@@ -475,16 +475,16 @@ This is the library of power converters for single and multi phase electrical sy
               __Dymola_NumberOfIntervals=50000,
               Tolerance=1e-06),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2Pulse_RLV_Characteristic;
-      end ThyristoBridge2Pulse;
+        end ThyristorBridge2Pulse_RLV_Characteristic;
+      end ThyristorBridge2Pulse;
 
-      package ThyristoBridge2mPulse
+      package ThyristorBridge2mPulse "2*m pulse thyristor bridge"
         extends Modelica.Icons.ExamplesPackage;
 
-        model ThyristoBridge2mPulse_R
+        model ThyristorBridge2mPulse_R
           "2*m pulse thyristor rectifier bridge with resistive load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -507,12 +507,12 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2mPulse_R;
+        end ThyristorBridge2mPulse_R;
 
-        model ThyristoBridge2mPulse_RL
+        model ThyristorBridge2mPulse_RL
           "2*m pulse thyristor rectifier bridge with R-L load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -541,12 +541,12 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2mPulse_RL;
+        end ThyristorBridge2mPulse_RL;
 
-        model ThyristoBridge2mPulse_RLV
+        model ThyristorBridge2mPulse_RLV
           "2*m pulse thyristor rectifier bridge with R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(
              pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -585,12 +585,12 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2mPulse_RLV;
+        end ThyristorBridge2mPulse_RLV;
 
-        model ThyristoBridge2mPulse_RLV_Characteristic
+        model ThyristorBridge2mPulse_RLV_Characteristic
           "Characteristic of 2*m pulse thyristor rectifier bridge with R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristoBridge2mPulse(
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(
              pulse2m(useConstantFiringAngle=false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
@@ -635,13 +635,14 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=10, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoBridge2mPulse_RLV_Characteristic;
-      end ThyristoBridge2mPulse;
+        end ThyristorBridge2mPulse_RLV_Characteristic;
+      end ThyristorBridge2mPulse;
 
-      package ThyristoCenterTapmPulse
+      package ThyristorCenterTapmPulse
+        "m pulse thyristor rectifier with center tap"
         extends Modelica.Icons.ExamplesPackage;
 
-        model ThyristoCenterTapmPulse_R
+        model ThyristorCenterTapmPulse_R
           "2*m pulse thyristor rectifier with center tap and resistive load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
@@ -667,9 +668,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTapmPulse_R;
+        end ThyristorCenterTapmPulse_R;
 
-        model ThyristoCenterTapmPulse_RL
+        model ThyristorCenterTapmPulse_RL
           "2*m pulse thyristor rectifier with center tap and R-L load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
@@ -701,9 +702,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTapmPulse_RL;
+        end ThyristorCenterTapmPulse_RL;
 
-        model ThyristoCenterTapmPulse_RLV
+        model ThyristorCenterTapmPulse_RLV
           "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
@@ -745,9 +746,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTapmPulse_RLV;
+        end ThyristorCenterTapmPulse_RLV;
 
-        model ThyristoCenterTapmPulse_RLV_Characteristic
+        model ThyristorCenterTapmPulse_RLV_Characteristic
           "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
@@ -795,13 +796,14 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=10, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTapmPulse_RLV_Characteristic;
-      end ThyristoCenterTapmPulse;
+        end ThyristorCenterTapmPulse_RLV_Characteristic;
+      end ThyristorCenterTapmPulse;
 
-      package ThyristoCenterTap2mPulse
+      package ThyristorCenterTap2mPulse
+        "2*m pulse thyristor rectifier with center tap"
         extends Modelica.Icons.ExamplesPackage;
 
-        model ThyristoCenterTap2mPulse_R
+        model ThyristorCenterTap2mPulse_R
           "m pulse thyristor rectifier bridge with resistive load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(
@@ -827,9 +829,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTap2mPulse_R;
+        end ThyristorCenterTap2mPulse_R;
 
-        model ThyristoCenterTap2mPulse_RL
+        model ThyristorCenterTap2mPulse_RL
           "m pulse thyristor rectifier bridge with R-L load"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(
@@ -861,9 +863,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTap2mPulse_RL;
+        end ThyristorCenterTap2mPulse_RL;
 
-        model ThyristoCenterTap2mPulse_RLV
+        model ThyristorCenterTap2mPulse_RLV
           "m pulse thyristor rectifier bridge with R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(
@@ -905,9 +907,9 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=0.1, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTap2mPulse_RLV;
+        end ThyristorCenterTap2mPulse_RLV;
 
-        model ThyristoCenterTap2mPulse_RLV_Characteristic
+        model ThyristorCenterTap2mPulse_RLV_Characteristic
           "Characteristic of m pulse thyristor rectifier bridge with R-L load and voltage"
           extends
             Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(
@@ -955,11 +957,11 @@ This is the library of power converters for single and multi phase electrical sy
                     -100},{100,100}}), graphics),
             experiment(StopTime=10, __Dymola_NumberOfIntervals=5000),
             __Dymola_experimentSetupOutput);
-        end ThyristoCenterTap2mPulse_RLV_Characteristic;
-      end ThyristoCenterTap2mPulse;
+        end ThyristorCenterTap2mPulse_RLV_Characteristic;
+      end ThyristorCenterTap2mPulse;
 
-      package ExampleTemplates
-        partial model Thyristor1Pulse
+      package ExampleTemplates "Templates of examples"
+        partial model Thyristor1Pulse "Template of single pulse rectifier"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1057,17 +1059,14 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
                     -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
-                graphics),                                                                                                    experiment(
-              StopTime=0.1,
-              __Dymola_NumberOfIntervals=5000,
-              Tolerance=1e-06),
-            __Dymola_experimentSetupOutput,
+                graphics),
             Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
         end Thyristor1Pulse;
         extends Modelica.Icons.Package;
-        partial model ThyristorBridge2Pulse "Template of B2C without load"
+        partial model ThyristorBridge2Pulse
+          "Template of two pulse Graetz thyristor bridge"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1179,14 +1178,11 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
                     -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
-                graphics),                                                                                                    experiment(
-              StopTime=10,
-              __Dymola_NumberOfIntervals=50000,
-              Tolerance=1e-06),
-            __Dymola_experimentSetupOutput);
+                graphics));
         end ThyristorBridge2Pulse;
 
-        model ThyristoBridge2PulseCenterTap
+        model ThyristorBridge2PulseCenterTap
+          "Template of two pulse thyristor rectifier with center tap"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1303,14 +1299,11 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
                     -100},{100,100}},                                                                                                    preserveAspectRatio=false,  initialScale = 0.1, grid = {2,2}),
-                graphics),                                                                                                    experiment(
-              StopTime=10,
-              __Dymola_NumberOfIntervals=50000,
-              Tolerance=1e-06),
-            __Dymola_experimentSetupOutput);
-        end ThyristoBridge2PulseCenterTap;
+                graphics));
+        end ThyristorBridge2PulseCenterTap;
 
-        partial model ThyristoBridge2mPulse "Template of B2*mC without load"
+        partial model ThyristorBridge2mPulse
+          "Template of 2*m pulse thyristor rectifier"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1428,14 +1421,12 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics),
-            experiment(StopTime=0.04, __Dymola_NumberOfIntervals=5000),
-            __Dymola_experimentSetupOutput,
             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
-        end ThyristoBridge2mPulse;
+        end ThyristorBridge2mPulse;
 
         partial model ThyristorCenterTapmPulse
-          "Template of 2*m pulse rectifier with center tap, without load"
+          "Template of 2*m pulse rectifier with center tap"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1550,14 +1541,12 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics),
-            experiment(StopTime=0.04, __Dymola_NumberOfIntervals=5000),
-            __Dymola_experimentSetupOutput,
             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
         end ThyristorCenterTapmPulse;
 
         partial model ThyristorCenterTap2mPulse
-          "Template of 2*m pulse rectifier with center tap, without load"
+          "Template of 2*m pulse rectifier with center tap"
           import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
@@ -1692,8 +1681,6 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                     -100},{100,100}}), graphics),
-            experiment(StopTime=0.04, __Dymola_NumberOfIntervals=5000),
-            __Dymola_experimentSetupOutput,
             Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
                 graphics));
         end ThyristorCenterTap2mPulse;
