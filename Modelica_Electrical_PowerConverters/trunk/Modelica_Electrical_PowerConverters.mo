@@ -49,7 +49,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 
     class References "References"
       extends Modelica.Icons.References;
-      annotation(Documentation(info = "<html>
+      annotation(Documentation(info="<html>
 <h4>References</h4>
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
@@ -69,9 +69,9 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
     </tr>
 
     <tr>
-      <td valign=\"top\">[FreeScience]</td>
+      <td valign=\"top\">[Williams2006]</td>
       <td valign=\"top\"><a href=\"http://www.freescience.info/go.php?pagename=books&id=1732\">
-<i>Power Electronics: Devices, Drivers, Applications, and Passive Components</i></a>, available at FreeScience.</td>
+<i>Principles and Elements of Power Electronics: Devices, Drivers, Applications, and Passive Components</i></a>, available at <a href=\"http://www.freescience.info/go.php?pagename=books&id=1732\">FreeScience</a>, ISBN 978-0-9553384-0-3</td>
     </tr>
 
 </table>
@@ -132,7 +132,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristorCenterTap2Pulse_R
           "Two pulse thyristor rectifier with center tap and resistive load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(            pulse2(constantFiringAngle = constantFiringAngle));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(         pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -148,7 +148,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristorCenterTap2Pulse_RL
           "Two pulse thyristor rectifier with center tap and R-L load"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(            pulse2(constantFiringAngle = constantFiringAngle));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(         pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -167,7 +167,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristorCenterTap2Pulse_RLV
           "Two pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(            pulse2(constantFiringAngle = constantFiringAngle));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(         pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
@@ -190,7 +190,7 @@ This is the library of power converters for single and multi phase electrical sy
         model ThyristorCenterTap2Pulse_RLV_Characteristic
           "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
           extends
-            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(            pulse2(useConstantFiringAngle = false));
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(         pulse2(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -550,7 +550,6 @@ This is the library of power converters for single and multi phase electrical sy
 
       package ExampleTemplates "Templates of examples"
         partial model Thyristor1Pulse "Template of single pulse rectifier"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -585,7 +584,6 @@ This is the library of power converters for single and multi phase electrical sy
         extends Modelica.Icons.Package;
         partial model ThyristorBridge2Pulse
           "Template of two pulse Graetz thyristor bridge"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -622,7 +620,6 @@ This is the library of power converters for single and multi phase electrical sy
 
         model ThyristorCenterTap2Pulse
           "Template of two pulse thyristor rectifier with center tap"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -661,7 +658,6 @@ This is the library of power converters for single and multi phase electrical sy
 
         partial model ThyristorBridge2mPulse
           "Template of 2*m pulse thyristor rectifier"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -700,7 +696,6 @@ This is the library of power converters for single and multi phase electrical sy
 
         partial model ThyristorCenterTapmPulse
           "Template of 2*m pulse rectifier with center tap"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -738,7 +733,6 @@ This is the library of power converters for single and multi phase electrical sy
 
         partial model ThyristorCenterTap2mPulse
           "Template of 2*m pulse rectifier with center tap"
-          import Modelica_Electrical_PowerConverters;
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -816,8 +810,8 @@ This is the library of power converters for single and multi phase electrical sy
         extends Modelica.Icons.Package;
         partial model SinglePhaseTwoLevel
           "Single phas two level inverter including control"
-          import Modelica_Electrical_PowerConverters;
           extends Icons.ExampleTemplate;
+          extends Modelica.Icons.Example;
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V = 50) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-70,10})));
           Modelica_Electrical_PowerConverters.DCAC.SinglePhase2Level inverter(useHeatPort = false) annotation(Placement(transformation(extent = {{-50,20},{-30,40}})));
           Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{10,-80},{-10,-60}})));
@@ -850,16 +844,18 @@ This is the library of power converters for single and multi phase electrical sy
         extends Modelica.Icons.ExamplesPackage;
         model ChopperStepDown_R "Step down chopper with resistive load"
           extends ExampleTemplates.ChopperStepDown;
+          extends Modelica.Icons.Example;
           parameter Modelica.SIunits.Resistance R = 100 "Resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,40})));
         equation
           connect(chopperStepDown.dc_p2,resistor.p) annotation(Line(points = {{-40,6},{-30,6},{-30,50},{30,50}}, color = {0,0,255}, smooth = Smooth.None));
           connect(resistor.n,currentSensor.p) annotation(Line(points = {{30,30},{30,-6},{0,-6}}, color = {0,0,255}, smooth = Smooth.None));
-          annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics),experiment(stopTime=0.1,interval=0.0002,tolerance=1e-6));
         end ChopperStepDown_R;
 
         model ChopperStepDown_RL "Step down chopper with R-L load"
           extends ExampleTemplates.ChopperStepDown;
+          extends Modelica.Icons.Example;
           parameter Modelica.SIunits.Resistance R = 100 "Resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Inductance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,40})));
@@ -868,14 +864,13 @@ This is the library of power converters for single and multi phase electrical sy
           connect(chopperStepDown.dc_p2,resistor.p) annotation(Line(points = {{-40,6},{-30,6},{-30,50},{30,50}}, color = {0,0,255}, smooth = Smooth.None));
           connect(resistor.n,inductor.p) annotation(Line(points = {{30,30},{30,20}}, color = {0,0,255}, smooth = Smooth.None));
           connect(inductor.n,currentSensor.p) annotation(Line(points = {{30,0},{30,-6},{0,-6}}, color = {0,0,255}, smooth = Smooth.None));
-          annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
+          annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics),experiment(stopTime=0.1,interval=0.0002,tolerance=1e-6));
         end ChopperStepDown_RL;
       end ChopperStepDown;
 
       package ExampleTemplates "Templates for examples"
         extends Modelica.Icons.Package;
         partial model ChopperStepDown "Step down chopper including control"
-          import Modelica_Electrical_PowerConverters;
           extends Icons.ExampleTemplate;
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = 100) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-80,0})));
           Modelica_Electrical_PowerConverters.DCDC.ChopperStepDown chopperStepDown(useHeatPort = false) annotation(Placement(transformation(extent = {{-60,-10},{-40,10}})));
@@ -940,7 +935,8 @@ This is the library of power converters for single and multi phase electrical sy
         connect(constantconstantFiringAngle.y,limiter.u) annotation(Line(points = {{-30,79},{-30,70},{0,70},{0,62},{2.22045e-15,62}}, color = {0,0,127}, smooth = Smooth.None));
         connect(v,positiveThreshold.u) annotation(Line(points = {{-100,1.11022e-15},{-80,1.11022e-15},{-80,0},{-60,0},{-60,20},{-40,20},{-40,10}}, color = {0,0,127}, smooth = Smooth.None));
         connect(v,negativeThreshold.u) annotation(Line(points = {{-100,8.88178e-16},{-60,8.88178e-16},{-60,20},{40,20},{40,12}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255}, fillPattern=  FillPattern.Solid, textString=  "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "2*%m%")}));
       end Signal2mPulse;
 
       model VoltageBridge2Pulse "Control for 2 pulse bridge rectifier"
@@ -1012,7 +1008,9 @@ This is the library of power converters for single and multi phase electrical sy
         connect(twomPulse.fire_n,fire_n) annotation(Line(points = {{4,-1},{4,-60},{40,-60},{40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(twomPulse.fire_p,fire_p) annotation(Line(points = {{-4,-1},{-4,-60},{-40,-60},{-40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(firingAngle,twomPulse.firingAngle) annotation(Line(points = {{0,100},{0,40},{8.88178e-16,40},{8.88178e-16,20}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255}, fillPattern=  FillPattern.Solid, textString=  "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                  fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "2*%m%")}));
       end VoltageBridge2mPulse;
 
       model VoltageCenterTap2mPulse
@@ -1051,7 +1049,9 @@ This is the library of power converters for single and multi phase electrical sy
         connect(ac,delta.plug_n) annotation(Line(points = {{-100,4.44089e-16},{-90,4.44089e-16}}, color = {0,0,255}, smooth = Smooth.None));
         connect(gain.y,twomPulse.v) annotation(Line(points = {{-7,0},{-4.44089e-16,0}}, color = {0,0,127}, smooth = Smooth.None));
         connect(voltageSensor.phi,gain.u) annotation(Line(points = {{-39,0},{-30,0}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255}, fillPattern=  FillPattern.Solid, textString=  "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                  fillPattern=                                                                                                    FillPattern.Solid),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255},
+                  fillPattern=                                                                                                    FillPattern.Solid, textString=  "2*%m%")}));
       end VoltageCenterTap2mPulse;
     end Control;
     extends Modelica.Icons.Package;
@@ -1100,11 +1100,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_p2.heatPort,heatPort) annotation(Line(points = {{30,50},{30,30},{-50,30},{-50,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(ac_p,diode_p1.p) annotation(Line(points = {{-100,60},{-60,60},{-60,20},{10,20},{10,40}}, color = {0,0,255}, smooth = Smooth.None));
       connect(ac_n,diode_p2.p) annotation(Line(points = {{-100,-60},{-60,-60},{-60,-20},{40,-20},{40,40}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern =  FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern =  FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern =  FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern =  FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=   FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=   FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=   FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=   FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end DiodeBridge2Pulse;
 
     model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
@@ -1162,11 +1162,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(fire_n,thyristor_p2.fire) annotation(Line(points = {{40,120},{40,80},{60,80},{60,56},{56,56},{56,57},{51,57}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_p,thyristor_n2.fire) annotation(Line(points = {{-40,120},{-40,80},{26,80},{26,-43},{29,-43}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n1.fire) annotation(Line(points = {{40,120},{40,80},{60,80},{60,-10},{-10,-10},{-10,-43},{-1,-43}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{2,14},{2,30}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end ThyristorBridge2Pulse;
 
     model HalfBridge2Pulse "Two pulse Graetz half rectifier bridge "
@@ -1224,12 +1224,12 @@ This is the library of power converters for single and multi phase electrical sy
       connect(ac_n,diode_n2.n) annotation(Line(points = {{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}}, color = {0,0,255}, smooth = Smooth.None));
       connect(fire_p,thyristor_p1.fire) annotation(Line(points = {{-40,120},{-40,80},{26,80},{26,57},{21,57}}, color = {255,0,255}, smooth = Smooth.None));
       connect(thyristor_p2.fire,fire_n) annotation(Line(points = {{51,57},{56,57},{56,80},{40,80},{40,120}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-44,48},{36,0}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-44,24},{36,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,48},{16,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,24},{-24,48},{-24,0},{16,24}}, color=  {0,0,255}, smooth=  Smooth.None),Rectangle(extent=  {{-44,0},{36,-56}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-44,-32},{36,-32}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,-8},{16,-56}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-4,-4}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end HalfBridge2Pulse;
 
     model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
@@ -1265,11 +1265,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_n.n,dc_p) annotation(Line(points = {{20,-60},{100,-60},{100,4.44089e-16}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.heatPort,heatPort) annotation(Line(points = {{10,-70},{10,-100},{0,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,heatPort) annotation(Line(points = {{10,70},{30,70},{30,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
+      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
     end DiodeCenterTap2Pulse;
 
     model ThyristorCenterTap2Pulse
@@ -1312,11 +1312,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor_p.heatPort,heatPort) annotation(Line(points = {{10,70},{10,80},{30,80},{30,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,40},{17,40},{17,49}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n.fire) annotation(Line(points = {{40,120},{40,-40},{17,-40},{17,-49}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
+      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{2,14},{2,30}}, color=  {0,0,255}, smooth=  Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
     end ThyristorCenterTap2Pulse;
 
     model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
@@ -1359,11 +1359,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(heatPort,thermalCollector.port_b) annotation(Line(points = {{4.44089e-16,-100},{60,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(thermalCollector.port_a,diode_n.heatPort) annotation(Line(points = {{60,-80},{60,-40},{20,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end DiodeBridge2mPulse;
 
     model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge"
@@ -1409,11 +1409,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,47},{-1,47}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n.fire) annotation(Line(points = {{40,120},{40,80},{-20,80},{-20,-33},{-1,-33}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{2,14},{2,30}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end ThyristorBridge2mPulse;
 
     model HalfBridge2mPulse "2*m pulse half rectifier bridge"
@@ -1465,12 +1465,12 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thermalCollector.port_a,diode_n.heatPort) annotation(Line(points = {{60,-80},{60,-40},{20,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(thyristor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,47},{-1,47}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-44,48},{36,0}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-44,24},{36,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,48},{16,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,24},{-24,48},{-24,0},{16,24}}, color=  {0,0,255}, smooth=  Smooth.None),Rectangle(extent=  {{-44,0},{36,-56}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-44,-32},{36,-32}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,-8},{16,-56}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-4,-4}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end HalfBridge2mPulse;
 
     model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
@@ -1514,11 +1514,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(star_n.pin_n,dc_p) annotation(Line(points = {{32,-60},{100,-60},{100,0}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.plug_p,ac_n) annotation(Line(points = {{-20,-60},{-100,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.plug_n,star_n.plug_p) annotation(Line(points = {{4.44089e-16,-60},{12,-60}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end DiodeCenterTap2mPulse;
 
     model ThyristorCenterTap2mPulse
@@ -1569,11 +1569,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(star_n.pin_n,dc_p) annotation(Line(points = {{32,-60},{100,-60},{100,0}}, color = {0,0,255}, smooth = Smooth.None));
       connect(thyristor_n.plug_p,ac_n) annotation(Line(points = {{-20,-60},{-100,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(thyristor_n.plug_n,star_n.plug_p) annotation(Line(points = {{4.44089e-16,-60},{12,-60}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{2,14},{2,30}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end ThyristorCenterTap2mPulse;
 
     model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
@@ -1607,11 +1607,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(heatPort,thermalCollector.port_b) annotation(Line(points = {{4.44089e-16,-100},{60,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode.heatPort,thermalCollector.port_a) annotation(Line(points = {{-10,-10},{-10,-20},{60,-20},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(ac,diode.plug_p) annotation(Line(points = {{-100,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end DiodeCenterTapmPulse;
 
     model ThyristorCenterTapmPulse
@@ -1649,11 +1649,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor.heatPort,thermalCollector.port_a) annotation(Line(points = {{-10,-10},{-10,-20},{60,-20},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor.fire) annotation(Line(points = {{-40,120},{-40,80},{-2,80},{-2,11},{-3,11}}, color = {255,0,255}, smooth = Smooth.None));
       connect(ac,thyristor.plug_p) annotation(Line(points = {{-100,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
-                fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "AC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-38,26},{42,-22}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=  FillPattern.Solid),Line(points=  {{-38,2},{42,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,26},{22,-22}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{22,2},{-18,26},{-18,-22},{22,2}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{2,14},{2,30}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end ThyristorCenterTapmPulse;
   end ACDC;
 
@@ -1712,7 +1712,10 @@ This is the library of power converters for single and multi phase electrical sy
       connect(transistor_n.n,diode_n.p) annotation(Line(points = {{20,-30},{60,-30}}, color = {0,0,255}, smooth = Smooth.None));
       connect(transistor_p.n,transistor_n.p) annotation(Line(points = {{20,10},{40,10},{40,-10},{20,-10}}, color = {0,0,255}, smooth = Smooth.None));
       connect(ac,transistor_p.n) annotation(Line(points = {{100,0},{40,0},{40,10},{20,10}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "AC")}), Documentation(info = "<html>
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "DC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AC")}), Documentation(info = "<html>
 </html>"));
     end SinglePhase2Level;
 
@@ -1774,7 +1777,10 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_n.heatPort,thermalCollector.port_a) annotation(Line(points = {{70,-20},{70,-36},{0,-36},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(transistor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{30,20},{30,4},{0,4},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{70,20},{70,4},{0,4},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "DC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "AC")}), Documentation(info = "<html>
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "DC"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "AC")}), Documentation(info = "<html>
 </html>"));
     end MultiPhase2Level;
   end DCAC;
@@ -1800,9 +1806,7 @@ This is the library of power converters for single and multi phase electrical sy
         Modelica.Blocks.Logical.FallingEdge fallingEdge annotation(Placement(transformation(extent = {{-68,-60},{-48,-40}})));
         Modelica.Blocks.Logical.Not invert annotation(Placement(transformation(extent = {{-40,-60},{-20,-40}})));
         Modelica.Blocks.Math.Gain gain(final k = f) annotation(Placement(transformation(extent = {{20,-60},{40,-40}})));
-        Modelica.Blocks.Logical.GreaterEqual greaterEqual annotation(Placement(transformation(extent = {{50,-40},{70,-60}})));
-        Modelica.Blocks.Math.Feedback feedback annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,0})));
-        Modelica.Blocks.Sources.Constant one(final k = 1) annotation(Placement(transformation(extent = {{10,40},{30,60}})));
+        Modelica.Blocks.Logical.Less         greaterEqual annotation(Placement(transformation(extent = {{50,-40},{70,-60}})));
         Modelica.Blocks.Logical.And andCondition annotation(Placement(transformation(extent = {{72,-10},{92,10}})));
         Modelica.Blocks.Sources.BooleanStep enable(final startTime = startTime, final startValue = false)
           "Enable signal of fire after start time"                                                                                                 annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {60,50})));
@@ -1815,14 +1819,17 @@ This is the library of power converters for single and multi phase electrical sy
         connect(invert.y,timer.u) annotation(Line(points = {{-19,-50},{-12,-50}}, color = {255,0,255}, smooth = Smooth.None));
         connect(timer.y,gain.u) annotation(Line(points = {{11,-50},{18,-50}}, color = {0,0,127}, smooth = Smooth.None));
         connect(gain.y,greaterEqual.u1) annotation(Line(points = {{41,-50},{48,-50}}, color = {0,0,127}, smooth = Smooth.None));
-        connect(feedback.y,greaterEqual.u2) annotation(Line(points = {{40,-9},{40,-42},{48,-42}}, color = {0,0,127}, smooth = Smooth.None));
-        connect(one.y,feedback.u1) annotation(Line(points = {{31,50},{40,50},{40,8}}, color = {0,0,127}, smooth = Smooth.None));
         connect(andCondition.y,fire) annotation(Line(points = {{93,0},{110,0}}, color = {255,0,255}, smooth = Smooth.None));
         connect(greaterEqual.y,andCondition.u2) annotation(Line(points = {{71,-50},{80,-50},{80,-20},{60,-20},{60,-8},{70,-8}}, color = {255,0,255}, smooth = Smooth.None));
         connect(enable.y,andCondition.u1) annotation(Line(points = {{60,39},{60,0},{70,0}}, color = {255,0,255}, smooth = Smooth.None));
         connect(limiter.y,zeroOrderHold.u) annotation(Line(points = {{-19,0},{-12,0}}, color = {0,0,127}, smooth = Smooth.None));
-        connect(zeroOrderHold.y,feedback.u2) annotation(Line(points = {{11,4.44089e-16},{16,4.44089e-16},{16,0},{22,0},{22,1.77636e-15},{32,1.77636e-15}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,0}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Line(points=  {{-100,0},{-98,0},{-62,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-60,-4},{-60,-48},{40,-48},{40,-24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-62,0},{-76,4},{-76,-4},{-62,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,-24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},{80,-20},{80,-16}}, color=  {255,0,255}, smooth=  Smooth.None)}));
+        connect(zeroOrderHold.y, greaterEqual.u2) annotation (Line(
+            points={{11,0},{40,0},{40,-42},{48,-42}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                  -100},{100,100}}),                                                                        graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,0}, fillColor=  {255,255,255},
+                  fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-100,0},{-98,0},{-62,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-60,-4},{-60,-48},{40,-48},{40,-24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-62,0},{-76,4},{-76,-4},{-62,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,-24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},{80,-20},{80,-16}}, color=  {255,0,255}, smooth=  Smooth.None)}));
       end SignalPWM;
     end Control;
 
@@ -1870,7 +1877,11 @@ This is the library of power converters for single and multi phase electrical sy
       connect(dc_n1,diode.p) annotation(Line(points = {{-100,-60},{40,-60},{40,-10}}, color = {0,0,255}, smooth = Smooth.None));
       connect(dc_n1,dc_n2) annotation(Line(points = {{-100,-60},{102,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(transistor.fire,fire) annotation(Line(points = {{7,71},{7,85.5},{1.11022e-15,85.5},{1.11022e-15,120}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "DC in"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid, textString=  "DC out"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255}, fillPattern=  FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-100,-100},{100,100}}, color=  {0,0,127}, smooth=  Smooth.None),Text(extent=  {{-100,70},{0,50}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "DC in"),Text(extent=  {{0,-50},{100,-70}}, lineColor=  {0,0,127}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid, textString=  "DC out"),Text(extent=  {{-150,150},{150,110}}, textString=  "%name", lineColor=  {0,0,255}),Rectangle(extent=  {{-40,40},{40,-40}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
+                fillPattern=                                                                                                    FillPattern.Solid),Line(points=  {{-20,20},{-20,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-28,20},{-28,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-40,0},{-28,0}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,4},{0,24},{0,40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-20,-4},{0,-24},{0,-40}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,-24},{10,-24},{10,24},{0,24}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{0,8},{20,8}}, color=  {0,0,255}, smooth=  Smooth.None),Line(points=  {{10,8},{0,-8},{20,-8},{10,8}}, color=  {0,0,255}, smooth=  Smooth.None)}));
     end ChopperStepDown;
   end DCDC;
 
@@ -1881,10 +1892,11 @@ This is the library of power converters for single and multi phase electrical sy
   package Icons "Icons"
     extends Modelica.Icons.Package;
     model ExampleTemplate
-      annotation(Icon(graphics={  Ellipse(extent=  {{-100,100},{100,-100}}, lineColor=  {175,175,175}, fillColor=  {255,255,255},
-                fillPattern=                                                                                                    FillPattern.Solid),Polygon(points=  {{-36,-60},{-36,60},{64,0},{-36,-60}}, lineColor=  {175,175,175}, smooth=  Smooth.None, fillColor=  {175,175,175},
-                fillPattern=                                                                                                    FillPattern.Solid),Rectangle(extent=  {{-4,46},{14,-44}}, lineColor=  {255,255,255}, fillColor=  {255,255,255},
-                fillPattern=                                                                                                    FillPattern.Solid)}));
+
+      annotation(Icon(graphics={  Ellipse(extent = {{-100,100},{100,-100}}, lineColor = {175,175,175}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Polygon(points = {{-36,-60},{-36,60},{64,0},{-36,-60}}, lineColor = {175,175,175}, smooth = Smooth.None, fillColor = {175,175,175},
+                fillPattern =                                                                                                    FillPattern.Solid),Rectangle(extent = {{-4,46},{14,-44}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid)}));
     end ExampleTemplate;
   end Icons;
   annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), version = "1.0.0", uses(Modelica(version = "3.2.2")), Documentation(info = "<html>
