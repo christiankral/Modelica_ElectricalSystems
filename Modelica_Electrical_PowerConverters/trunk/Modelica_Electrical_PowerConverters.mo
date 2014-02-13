@@ -1,4 +1,6 @@
-package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC converters"
+within ;
+package Modelica_Electrical_PowerConverters
+  "Rectifiers, Inverters and DC/DC converters"
   extends Modelica.Icons.Package;
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
@@ -9,6 +11,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
 
 </html>"));
     end Concept;
+
     class Contact "Contact"
       extends Modelica.Icons.Contact;
       annotation(Documentation(info = "<html>
@@ -30,6 +33,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 
 </html>"));
     end Contact;
+
     class ReleaseNotes "Release Notes"
       extends Modelica.Icons.ReleaseNotes;
       annotation(Documentation(info = "<html>
@@ -42,6 +46,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 
 </html>"));
     end ReleaseNotes;
+
     class References "References"
       extends Modelica.Icons.References;
       annotation(Documentation(info = "<html>
@@ -79,6 +84,7 @@ This is the library of power converters for single and multi phase electrical sy
 
 </html>"));
   end UsersGuide;
+
   package Examples "Examples"
     extends Modelica.Icons.ExamplesPackage;
     package ACDC "AC to DC converter examples"
@@ -86,10 +92,12 @@ This is the library of power converters for single and multi phase electrical sy
       package Thyristor1Pulse "Single pulse rectifier"
         extends Modelica.Icons.ExamplesPackage;
         model Thyristor1Pulse_R "One pulse rectifier with resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(pulse2(useConstantFiringAngle = true, f = f, constantFiringAngle = constantFiringAngle));
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(      pulse2(useConstantFiringAngle = true, f = f, constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
@@ -99,8 +107,11 @@ This is the library of power converters for single and multi phase electrical sy
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
 </html>"));
         end Thyristor1Pulse_R;
-        model Thyristor1Pulse_R_Characteristic "Control characteristic of one pulse rectifier with resitive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(pulse2(useConstantFiringAngle = false, f = f));
+
+        model Thyristor1Pulse_R_Characteristic
+          "Control characteristic of one pulse rectifier with resitive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.Thyristor1Pulse(      pulse2(useConstantFiringAngle = false, f = f));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -115,25 +126,34 @@ This is the library of power converters for single and multi phase electrical sy
 </html>"));
         end Thyristor1Pulse_R_Characteristic;
       end Thyristor1Pulse;
+
       package ThyristorCenterTap2Pulse "Examples of Power Electronics with M2C"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristorCenterTap2Pulse_R "Two pulse thyristor rectifier with center tap and resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+        model ThyristorCenterTap2Pulse_R
+          "Two pulse thyristor rectifier with center tap and resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
           connect(resistor.n,currentSensor.p) annotation(Line(points = {{30,20},{30,-40},{10,-40}}, color = {0,0,255}, smooth = Smooth.None));
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
-          annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
+          annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent={{-100,
+                    -100},{100,100}},                                                                                                    preserveAspectRatio=false,   initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2Pulse_R;
-        model ThyristorCenterTap2Pulse_RL "Two pulse thyristor rectifier with center tap and R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTap2Pulse_RL
+          "Two pulse thyristor rectifier with center tap and R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
@@ -144,14 +164,19 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2Pulse_RL;
-        model ThyristorCenterTap2Pulse_RLV "Two pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTap2Pulse_RLV
+          "Two pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -120 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -120
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(start = 0, fixed = true)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -162,13 +187,17 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2Pulse_RLV;
-        model ThyristorCenterTap2Pulse_RLV_Characteristic "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(pulse2(useConstantFiringAngle = false));
+
+        model ThyristorCenterTap2Pulse_RLV_Characteristic
+          "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(      pulse2(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -120 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -120
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(fixed = true, start = 0)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -183,13 +212,17 @@ This is the library of power converters for single and multi phase electrical sy
         end ThyristorCenterTap2Pulse_RLV_Characteristic;
         annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})));
       end ThyristorCenterTap2Pulse;
+
       package ThyristorBridge2Pulse "Two pulse Graetz bridge"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristorBridge2Pulse_R "Graetz thyristor bridge rectifier with resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+        model ThyristorBridge2Pulse_R
+          "Graetz thyristor bridge rectifier with resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
@@ -197,11 +230,15 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2Pulse_R;
-        model ThyristorBridge2Pulse_RL "Graetz thyristor bridge rectifier with R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorBridge2Pulse_RL
+          "Graetz thyristor bridge rectifier with R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
@@ -212,14 +249,19 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2Pulse_RL;
-        model ThyristorBridge2Pulse_RLV "Graetz thyristor bridge rectifier with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(pulse2(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorBridge2Pulse_RLV
+          "Graetz thyristor bridge rectifier with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(      pulse2(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -120 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -120
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(fixed = true, start = 0)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -230,13 +272,17 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2Pulse_RLV;
-        model ThyristorBridge2Pulse_RLV_Characteristic "Characteristic of Graetz thyristor bridge rectifier with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(pulse2(useConstantFiringAngle = false));
+
+        model ThyristorBridge2Pulse_RLV_Characteristic
+          "Characteristic of Graetz thyristor bridge rectifier with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2Pulse(      pulse2(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -120 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -120
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(fixed = true, start = 0)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -250,13 +296,17 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics), experiment(StopTime = 10, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2Pulse_RLV_Characteristic;
       end ThyristorBridge2Pulse;
+
       package ThyristorBridge2mPulse "2*m pulse thyristor bridge"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristorBridge2mPulse_R "2*m pulse thyristor rectifier bridge with resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+        model ThyristorBridge2mPulse_R
+          "2*m pulse thyristor rectifier bridge with resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(      pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
@@ -264,11 +314,16 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2mPulse_R;
-        model ThyristorBridge2mPulse_RL "2*m pulse thyristor rectifier bridge with R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorBridge2mPulse_RL
+          "2*m pulse thyristor rectifier bridge with R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(
+             pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
@@ -279,14 +334,19 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2mPulse_RL;
-        model ThyristorBridge2mPulse_RLV "2*m pulse thyristor rectifier bridge with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorBridge2mPulse_RLV
+          "2*m pulse thyristor rectifier bridge with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(      pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -260 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -260
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(start = 0, fixed = true)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -297,13 +357,17 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,6},{-20,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2mPulse_RLV;
-        model ThyristorBridge2mPulse_RLV_Characteristic "Characteristic of 2*m pulse thyristor rectifier bridge with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(pulse2m(useConstantFiringAngle = false));
+
+        model ThyristorBridge2mPulse_RLV_Characteristic
+          "Characteristic of 2*m pulse thyristor rectifier bridge with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorBridge2mPulse(      pulse2m(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -260 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -260
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(fixed = true, start = 0)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -317,13 +381,18 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 10, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorBridge2mPulse_RLV_Characteristic;
       end ThyristorBridge2mPulse;
-      package ThyristorCenterTapmPulse "m pulse thyristor rectifier with center tap"
+
+      package ThyristorCenterTapmPulse
+        "m pulse thyristor rectifier with center tap"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristorCenterTapmPulse_R "2*m pulse thyristor rectifier with center tap and resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(pulsem(constantFiringAngle = constantFiringAngle));
+        model ThyristorCenterTapmPulse_R
+          "2*m pulse thyristor rectifier with center tap and resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(      pulsem(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
@@ -331,11 +400,15 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTapmPulse_R;
-        model ThyristorCenterTapmPulse_RL "2*m pulse thyristor rectifier with center tap and R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(pulsem(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTapmPulse_RL
+          "2*m pulse thyristor rectifier with center tap and R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(      pulsem(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
@@ -346,11 +419,15 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTapmPulse_RL;
-        model ThyristorCenterTapmPulse_RLV "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(pulsem(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTapmPulse_RLV
+          "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(      pulsem(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           parameter Modelica.SIunits.Voltage VDC = -50 "DC load offset voltage";
@@ -364,8 +441,11 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTapmPulse_RLV;
-        model ThyristorCenterTapmPulse_RLV_Characteristic "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(pulsem(useConstantFiringAngle = false));
+
+        model ThyristorCenterTapmPulse_RLV_Characteristic
+          "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(      pulsem(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
@@ -384,13 +464,18 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 10, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTapmPulse_RLV_Characteristic;
       end ThyristorCenterTapmPulse;
-      package ThyristorCenterTap2mPulse "2*m pulse thyristor rectifier with center tap"
+
+      package ThyristorCenterTap2mPulse
+        "2*m pulse thyristor rectifier with center tap"
         extends Modelica.Icons.ExamplesPackage;
-        model ThyristorCenterTap2mPulse_R "m pulse thyristor rectifier bridge with resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+        model ThyristorCenterTap2mPulse_R
+          "m pulse thyristor rectifier bridge with resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(      pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
         equation
@@ -398,11 +483,15 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2mPulse_R;
-        model ThyristorCenterTap2mPulse_RL "m pulse thyristor rectifier bridge with R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTap2mPulse_RL
+          "m pulse thyristor rectifier bridge with R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(      pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
@@ -413,14 +502,19 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2mPulse_RL;
-        model ThyristorCenterTap2mPulse_RLV "m pulse thyristor rectifier bridge with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(pulse2m(constantFiringAngle = constantFiringAngle));
+
+        model ThyristorCenterTap2mPulse_RLV
+          "m pulse thyristor rectifier bridge with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(      pulse2m(constantFiringAngle = constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180 "Firing angle";
+          parameter Modelica.SIunits.Angle constantFiringAngle = 90 * pi / 180
+            "Firing angle";
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -260 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -260
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(start = 0, fixed = true)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -431,13 +525,17 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.p,rectifier.dc_p) annotation(Line(points = {{30,40},{-10,40},{-10,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2mPulse_RLV;
-        model ThyristorCenterTap2mPulse_RLV_Characteristic "Characteristic of m pulse thyristor rectifier bridge with R-L load and voltage"
-          extends Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(pulse2m(useConstantFiringAngle = false));
+
+        model ThyristorCenterTap2mPulse_RLV_Characteristic
+          "Characteristic of m pulse thyristor rectifier bridge with R-L load and voltage"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2mPulse(      pulse2m(useConstantFiringAngle = false));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate = true);
-          parameter Modelica.SIunits.Voltage VDC = -260 "DC load offset voltage";
+          parameter Modelica.SIunits.Voltage VDC = -260
+            "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(visible = true, transformation(origin = {30,30}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L = L, i(start = 0, fixed = true)) annotation(Placement(visible = true, transformation(origin = {30,0}, extent = {{10,-10},{-10,10}}, rotation = 90)));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V = VDC) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {30,-30})));
@@ -451,6 +549,7 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StopTime = 10, Tolerance = 1e-06, Interval = 0.0002));
         end ThyristorCenterTap2mPulse_RLV_Characteristic;
       end ThyristorCenterTap2mPulse;
+
       package ExampleTemplates "Templates of examples"
         partial model Thyristor1Pulse "Template of single pulse rectifier"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
@@ -467,7 +566,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f = f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,10})));
           Modelica.Blocks.Math.Mean meanCurrent(f = f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse pulse2(f = f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {-40,0})));
-          Modelica.Electrical.Analog.Ideal.IdealThyristor idealthyristor annotation(Placement(visible = true, transformation(origin = {-10,40}, extent = {{-10,10},{10,-10}}, rotation = 0)));
+          Modelica.Electrical.Analog.Ideal.IdealThyristor idealthyristor(off(fixed=
+                 true))                                                  annotation(Placement(visible = true, transformation(origin = {-10,40}, extent = {{-10,10},{10,-10}}, rotation = 0)));
         equation
           connect(meanCurrent.u,currentSensor.i) annotation(Line(points = {{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}}, color = {0,0,127}, smooth = Smooth.None));
           connect(ground.p,sinevoltage.n) annotation(Line(points = {{-80,-40},{-80,-10}}, color = {0,0,255}, smooth = Smooth.None));
@@ -485,7 +585,8 @@ This is the library of power converters for single and multi phase electrical sy
 </html>"));
         end Thyristor1Pulse;
         extends Modelica.Icons.Package;
-        partial model ThyristorBridge2Pulse "Template of two pulse Graetz thyristor bridge"
+        partial model ThyristorBridge2Pulse
+          "Template of two pulse Graetz thyristor bridge"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -519,7 +620,9 @@ This is the library of power converters for single and multi phase electrical sy
           connect(rectifier.ac_n,pulse2.ac_n) annotation(Line(points = {{-40,-6},{-56,-6},{-56,24},{-40,24}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
         end ThyristorBridge2Pulse;
-        model ThyristorCenterTap2Pulse "Template of two pulse thyristor rectifier with center tap"
+
+        model ThyristorCenterTap2Pulse
+          "Template of two pulse thyristor rectifier with center tap"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Modelica.SIunits.Voltage Vrms = 110 "RMS supply voltage";
@@ -555,7 +658,9 @@ This is the library of power converters for single and multi phase electrical sy
           connect(pulse2.ac_p,rectifier.ac_p) annotation(Line(points = {{-40,36},{-50,36},{-50,6},{-40,6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
         end ThyristorCenterTap2Pulse;
-        partial model ThyristorBridge2mPulse "Template of 2*m pulse thyristor rectifier"
+
+        partial model ThyristorBridge2mPulse
+          "Template of 2*m pulse thyristor rectifier"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -574,7 +679,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f = 2 * m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,10})));
           Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10,10},{10,-10}}, rotation = 180, origin = {0,-40})));
           Modelica.Blocks.Math.Mean meanCurrent(f = 2 * m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,-60})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse pulse2m(m = m, f = f) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
+                                                                                pulse2m(m = m, f = f) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
         equation
           connect(sineVoltage.plug_n,star.plug_p) annotation(Line(points = {{-80,-20},{-80,-30}}, color = {0,0,255}, smooth = Smooth.None));
           connect(star.pin_n,ground.p) annotation(Line(points = {{-80,-50},{-80,-60}}, color = {0,0,255}, smooth = Smooth.None));
@@ -590,7 +696,9 @@ This is the library of power converters for single and multi phase electrical sy
           connect(pulse2m.ac,sineVoltage.plug_p) annotation(Line(points = {{-40,30},{-80,30},{-80,4.44089e-16}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
         end ThyristorBridge2mPulse;
-        partial model ThyristorCenterTapmPulse "Template of 2*m pulse rectifier with center tap"
+
+        partial model ThyristorCenterTapmPulse
+          "Template of 2*m pulse rectifier with center tap"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -609,7 +717,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f = m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,10})));
           Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10,10},{10,-10}}, rotation = 180, origin = {0,-50})));
           Modelica.Blocks.Math.Mean meanCurrent(f = m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,-70})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse pulsem(m = m, f = f, constantFiringAngle = 1.5707963267949) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
+                                                                                pulsem(m = m, f = f, constantFiringAngle = 1.5707963267949) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
         equation
           connect(star.pin_n,ground.p) annotation(Line(points = {{-70,-40},{-70,-80}}, color = {0,0,255}, smooth = Smooth.None));
           connect(meanCurrent.u,currentSensor.i) annotation(Line(points = {{68,-70},{0,-70},{0,-60},{-6.66134e-16,-60}}, color = {0,0,127}, smooth = Smooth.None));
@@ -624,7 +733,9 @@ This is the library of power converters for single and multi phase electrical sy
           connect(rectifier.ac,sineVoltage_p.plug_p) annotation(Line(points = {{-40,0},{-50,0},{-50,30},{-70,30},{-70,10}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics));
         end ThyristorCenterTapmPulse;
-        partial model ThyristorCenterTap2mPulse "Template of 2*m pulse rectifier with center tap"
+
+        partial model ThyristorCenterTap2mPulse
+          "Template of 2*m pulse rectifier with center tap"
           extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
           import Modelica.Constants.pi;
           parameter Integer m(final min = 3) = 3 "Number of phases";
@@ -643,7 +754,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f = 2 * m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,10})));
           Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor annotation(Placement(transformation(extent = {{-10,10},{10,-10}}, rotation = 180, origin = {0,-50})));
           Modelica.Blocks.Math.Mean meanCurrent(f = 2 * m * f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {80,-70})));
-          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageCenterTap2mPulse pulse2m(m = m, f = f, constantFiringAngle = 1.5707963267949) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageCenterTap2mPulse
+                                                                                   pulse2m(m = m, f = f, constantFiringAngle = 1.5707963267949) annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 180, origin = {-30,30})));
           Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage_n(final m = m, V = fill(sqrt(2) * Vrms, m), phase = -Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m), freqHz = fill(f, m)) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-70,-20})));
         equation
           connect(star.pin_n,ground.p) annotation(Line(points = {{-100,-20},{-100,-70},{-80,-70},{-80,-80}}, color = {0,0,255}, smooth = Smooth.None));
@@ -664,12 +776,15 @@ This is the library of power converters for single and multi phase electrical sy
         end ThyristorCenterTap2mPulse;
       end ExampleTemplates;
     end ACDC;
+
     package DCAC "DC to AC converters examples"
       extends Modelica.Icons.ExamplesPackage;
       package SinglePhaseTwoLevel "Single phase two level inverter examples"
         extends Modelica.Icons.ExamplesPackage;
-        model SinglePhaseTwoLevel_R "Single phase DC to AC converter with resistive load"
-          extends Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(sine(amplitude = 0.5, offset = 0.5));
+        model SinglePhaseTwoLevel_R
+          "Single phase DC to AC converter with resistive load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(      sine(amplitude = 0.5, offset = 0.5));
           parameter Modelica.SIunits.Resistance R = 100 "Resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,10})));
         equation
@@ -677,12 +792,16 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.n,currentSensor.p) annotation(Line(points = {{40,1.33227e-15},{40,-70},{10,-70}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StartTime = 0, StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end SinglePhaseTwoLevel_R;
-        model SinglePhaseTwoLevel_RL "Single phase DC to AC converter with R-L load"
-          extends Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(sine(amplitude = 0.5, offset = 0.5));
+
+        model SinglePhaseTwoLevel_RL
+          "Single phase DC to AC converter with R-L load"
+          extends
+            Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(      sine(amplitude = 0.5, offset = 0.5));
           parameter Modelica.SIunits.Resistance R = 100 "Resistance";
           parameter Modelica.SIunits.Inductance L = 1 "Inductance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R = R) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,10})));
-          Modelica.Electrical.Analog.Basic.Inductor inductor annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,-22})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L)
+                                                             annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,-22})));
         equation
           connect(resistor.p,inverter.ac) annotation(Line(points = {{40,20},{40,30},{-30,30}}, color = {0,0,255}, smooth = Smooth.None));
           connect(resistor.n,inductor.p) annotation(Line(points = {{40,0},{40,-12}}, color = {0,0,255}, smooth = Smooth.None));
@@ -690,9 +809,11 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StartTime = 0, StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end SinglePhaseTwoLevel_RL;
       end SinglePhaseTwoLevel;
+
       package ExampleTemplates "Templates for examples"
         extends Modelica.Icons.Package;
-        partial model SinglePhaseTwoLevel "Single phas two level inverter including control"
+        partial model SinglePhaseTwoLevel
+          "Single phas two level inverter including control"
           extends Icons.ExampleTemplate;
           extends Modelica.Icons.Example;
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V = 50) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-70,10})));
@@ -720,6 +841,7 @@ This is the library of power converters for single and multi phase electrical sy
         end SinglePhaseTwoLevel;
       end ExampleTemplates;
     end DCAC;
+
     package DCDC "DC to DC converter examples"
       extends Modelica.Icons.ExamplesPackage;
       package ChopperStepDown "Step down chopper"
@@ -734,6 +856,7 @@ This is the library of power converters for single and multi phase electrical sy
           connect(resistor.n,currentSensor.p) annotation(Line(points = {{30,30},{30,-6},{0,-6}}, color = {0,0,255}, smooth = Smooth.None));
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StartTime = 0, StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ChopperStepDown_R;
+
         model ChopperStepDown_RL "Step down chopper with R-L load"
           extends ExampleTemplates.ChopperStepDown;
           extends Modelica.Icons.Example;
@@ -748,6 +871,7 @@ This is the library of power converters for single and multi phase electrical sy
           annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), experiment(StartTime = 0, StopTime = 0.1, Tolerance = 1e-06, Interval = 0.0002));
         end ChopperStepDown_RL;
       end ChopperStepDown;
+
       package ExampleTemplates "Templates for examples"
         extends Modelica.Icons.Package;
         partial model ChopperStepDown "Step down chopper including control"
@@ -771,17 +895,22 @@ This is the library of power converters for single and multi phase electrical sy
       end ExampleTemplates;
     end DCDC;
   end Examples;
+
   package ACDC "AC to DC converter"
     package Control "Control components for rectifiers"
       extends Modelica.Icons.Package;
       block Signal2mPulse "Boolean impulses for 2*m pulse rectifiers"
         import Modelica.Constants.pi;
         parameter Integer m(final min = 1) = 3 "Number of phases";
-        parameter Boolean useConstantFiringAngle = true "Use constant firing angle instead of signal input";
+        parameter Boolean useConstantFiringAngle = true
+          "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Frequency f = 50 "Frequency";
-        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle" annotation(Dialog(enable = useConstantFiringAngle));
-        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle "Firing angle (rad)" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
-        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi "Maximum firing angle";
+        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle"
+                                                                                annotation(Dialog(enable = useConstantFiringAngle));
+        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle
+          "Firing angle (rad)"                                                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
+        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
+          "Maximum firing angle";
         Modelica.Blocks.Sources.Constant constantconstantFiringAngle(final k = constantFiringAngle) if useConstantFiringAngle annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-30,90})));
         Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold = zeros(m)) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-40,-2})));
         Modelica.Blocks.Logical.LessThreshold negativeThreshold[m](threshold = zeros(m)) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,0})));
@@ -810,18 +939,26 @@ This is the library of power converters for single and multi phase electrical sy
         connect(constantconstantFiringAngle.y,limiter.u) annotation(Line(points = {{-30,79},{-30,70},{0,70},{0,62},{2.22045e-15,62}}, color = {0,0,127}, smooth = Smooth.None));
         connect(v,positiveThreshold.u) annotation(Line(points = {{-100,1.11022e-15},{-80,1.11022e-15},{-80,0},{-60,0},{-60,20},{-40,20},{-40,10}}, color = {0,0,127}, smooth = Smooth.None));
         connect(v,negativeThreshold.u) annotation(Line(points = {{-100,8.88178e-16},{-60,8.88178e-16},{-60,20},{40,20},{40,12}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255}, fillPattern = FillPattern.Solid, textString = "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent=  {{-100,100},{100,-100}}, lineColor=  {0,0,255}),Line(points=  {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Line(points=  {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color=  {255,0,255}, smooth=  Smooth.None),Text(extent=  {{-40,60},{40,0}}, lineColor=  {255,0,255}, fillColor=  {0,0,255}, fillPattern=  FillPattern.Solid, textString=  "2*%m%")}));
       end Signal2mPulse;
+
       model VoltageBridge2Pulse "Control for 2 pulse bridge rectifier"
         import Modelica.Constants.pi;
-        parameter Boolean useConstantFiringAngle = true "Use constant firing angle instead of signal input";
+        parameter Boolean useConstantFiringAngle = true
+          "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Frequency f = 50 "Frequency";
-        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle" annotation(Dialog(enable = useConstantFiringAngle));
-        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05 "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05 "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0 "Forward threshold voltage";
-        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle "Firing angle (rad)" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
+        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle"
+                                                                                annotation(Dialog(enable = useConstantFiringAngle));
+        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
+          "Maximum firing angle";
+        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
+          "Closed thyristor resistance";
+        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
+          "Opened thyristor conductance";
+        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
+          "Forward threshold voltage";
+        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle
+          "Firing angle (rad)"                                                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
         Signal2mPulse twoPulse(final useConstantFiringAngle = useConstantFiringAngle, final f = f, final constantFiringAngle = constantFiringAngle, final firingAngleMax = firingAngleMax, final m = 1) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {0,0})));
         Modelica.Electrical.Analog.Interfaces.PositivePin ac_p annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
         Modelica.Electrical.Analog.Interfaces.NegativePin ac_n annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
@@ -835,23 +972,35 @@ This is the library of power converters for single and multi phase electrical sy
         connect(twoPulse.fire_p[1],fire_p) annotation(Line(points = {{-4,-11},{-4,-60},{-40,-60},{-40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(twoPulse.fire_n[1],fire_n) annotation(Line(points = {{4,-11},{4,-60},{40,-60},{40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(firingAngle,twoPulse.firingAngle) annotation(Line(points = {{8.88178e-16,100},{8.88178e-16,10}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255}, fillPattern = FillPattern.Solid, textString = "2")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                  fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, textString = "2")}));
       end VoltageBridge2Pulse;
+
       model VoltageBridge2mPulse "Control for 2*m pulse bridge rectifier"
         import Modelica.Constants.pi;
         parameter Integer m(final min = 3) = 3 "Number of phases";
-        parameter Boolean useConstantFiringAngle = true "Use constant firing angle instead of signal input";
+        parameter Boolean useConstantFiringAngle = true
+          "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Frequency f = 50 "Frequency";
-        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle" annotation(Dialog(enable = useConstantFiringAngle));
-        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05 "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05 "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0 "Forward threshold voltage";
-        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle "Firing angle (rad)" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
+        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle"
+                                                                                annotation(Dialog(enable = useConstantFiringAngle));
+        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
+          "Maximum firing angle";
+        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
+          "Closed thyristor resistance";
+        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
+          "Opened thyristor conductance";
+        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
+          "Forward threshold voltage";
+        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle
+          "Firing angle (rad)"                                                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
         Signal2mPulse twomPulse(final useConstantFiringAngle = useConstantFiringAngle, final f = f, final constantFiringAngle = constantFiringAngle, final firingAngleMax = firingAngleMax, final m = m) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {0,10})));
         Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
-        Modelica.Electrical.MultiPhase.Basic.Delta delta(final m = m) "Delta connection" annotation(Placement(transformation(extent = {{10,-10},{-10,10}}, rotation = 90, origin = {-80,10})));
-        Modelica.Electrical.MultiPhase.Sensors.VoltageSensor voltageSensor(final m = m) "Voltage sensor" annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 270, origin = {-44,10})));
+        Modelica.Electrical.MultiPhase.Basic.Delta delta(final m = m)
+          "Delta connection"                                                             annotation(Placement(transformation(extent = {{10,-10},{-10,10}}, rotation = 90, origin = {-80,10})));
+        Modelica.Electrical.MultiPhase.Sensors.VoltageSensor voltageSensor(final m = m)
+          "Voltage sensor"                                                                               annotation(Placement(transformation(extent = {{10,10},{-10,-10}}, rotation = 270, origin = {-44,10})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-40,-110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,-110})));
       equation
@@ -862,25 +1011,38 @@ This is the library of power converters for single and multi phase electrical sy
         connect(twomPulse.fire_n,fire_n) annotation(Line(points = {{4,-1},{4,-60},{40,-60},{40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(twomPulse.fire_p,fire_p) annotation(Line(points = {{-4,-1},{-4,-60},{-40,-60},{-40,-110}}, color = {255,0,255}, smooth = Smooth.None));
         connect(firingAngle,twomPulse.firingAngle) annotation(Line(points = {{0,100},{0,40},{8.88178e-16,40},{8.88178e-16,20}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255}, fillPattern = FillPattern.Solid, textString = "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                  fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, textString = "2*%m%")}));
       end VoltageBridge2mPulse;
-      model VoltageCenterTap2mPulse "Control for 2*m pulse cetner tap rectifier"
+
+      model VoltageCenterTap2mPulse
+        "Control for 2*m pulse cetner tap rectifier"
         import Modelica.Constants.pi;
         parameter Integer m(final min = 3) = 3 "Number of phases";
-        parameter Boolean useConstantFiringAngle = true "Use constant firing angle instead of signal input";
+        parameter Boolean useConstantFiringAngle = true
+          "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Frequency f = 50 "Frequency";
-        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle" annotation(Dialog(enable = useConstantFiringAngle));
-        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05 "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05 "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0 "Forward threshold voltage";
-        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle "Firing angle (rad)" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
+        parameter Modelica.SIunits.Angle constantFiringAngle = 0 "Firing angle"
+                                                                                annotation(Dialog(enable = useConstantFiringAngle));
+        parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
+          "Maximum firing angle";
+        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
+          "Closed thyristor resistance";
+        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
+          "Opened thyristor conductance";
+        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
+          "Forward threshold voltage";
+        Modelica.Blocks.Interfaces.RealInput firingAngle if not useConstantFiringAngle
+          "Firing angle (rad)"                                                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,100})));
         Signal2mPulse twomPulse(final useConstantFiringAngle = useConstantFiringAngle, final f = f, final constantFiringAngle = constantFiringAngle, final firingAngleMax = firingAngleMax, final m = m) annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 0, origin = {10,0})));
         Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {-40,-110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {40,-110})));
-        Modelica.Electrical.MultiPhase.Basic.Delta delta(final m = m) "Delta connection" annotation(Placement(transformation(extent = {{10,-10},{-10,10}}, rotation = 0, origin = {-80,0})));
-        Modelica.Electrical.MultiPhase.Sensors.PotentialSensor voltageSensor(final m = m) "Voltage sensor" annotation(Placement(transformation(extent = {{-60,-10},{-40,10}})));
+        Modelica.Electrical.MultiPhase.Basic.Delta delta(final m = m)
+          "Delta connection"                                                             annotation(Placement(transformation(extent = {{10,-10},{-10,10}}, rotation = 0, origin = {-80,0})));
+        Modelica.Electrical.MultiPhase.Sensors.PotentialSensor voltageSensor(final m = m)
+          "Voltage sensor"                                                                                 annotation(Placement(transformation(extent = {{-60,-10},{-40,10}})));
         Modelica.Blocks.Math.Gain gain[m](final k = fill(-1, m)) annotation(Placement(transformation(extent = {{-28,-10},{-8,10}})));
       equation
         connect(twomPulse.fire_n,fire_n) annotation(Line(points = {{14,-11},{14,-60},{40,-60},{40,-110}}, color = {255,0,255}, smooth = Smooth.None));
@@ -890,28 +1052,42 @@ This is the library of power converters for single and multi phase electrical sy
         connect(ac,delta.plug_n) annotation(Line(points = {{-100,4.44089e-16},{-90,4.44089e-16}}, color = {0,0,255}, smooth = Smooth.None));
         connect(gain.y,twomPulse.v) annotation(Line(points = {{-7,0},{-4.44089e-16,0}}, color = {0,0,127}, smooth = Smooth.None));
         connect(voltageSensor.phi,gain.u) annotation(Line(points = {{-39,0},{-30,0}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255}, fillPattern = FillPattern.Solid, textString = "2*%m%")}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                  fillPattern =                                                                                                    FillPattern.Solid),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Line(points = {{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}}, color = {255,0,255}, smooth = Smooth.None),Line(points = {{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}}, color = {255,0,255}, smooth = Smooth.None),Text(extent = {{-40,60},{40,0}}, lineColor = {255,0,255}, fillColor = {0,0,255},
+                  fillPattern =                                                                                                    FillPattern.Solid, textString = "2*%m%")}));
       end VoltageCenterTap2mPulse;
     end Control;
     extends Modelica.Icons.Package;
     model DiodeBridge2Pulse "Two pulse Graetz diode rectifier bridge "
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
+
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p "Positive AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n "Negative AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Postive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"                                                      annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"                                                      annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"                                                      annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"                                                      annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC = ac_p.i "AC currents";
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connecting the positve AC input pin with postitive DC output" annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connecting the negative AC input pin with postitive DC output" annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connecting the positve AC input pin with negative DC output" annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connecting the negative AC input pin with negative DC output" annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connecting the positve AC input pin with postitive DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connecting the negative AC input pin with postitive DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connecting the positve AC input pin with negative DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connecting the negative AC input pin with negative DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
     equation
       if not useHeatPort then
         LossPower = diode_p1.LossPower + diode_p2.LossPower + diode_n1.LossPower + diode_n2.LossPower;
@@ -928,28 +1104,56 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_p2.heatPort,heatPort) annotation(Line(points = {{30,50},{30,30},{-50,30},{-50,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(ac_p,diode_p1.p) annotation(Line(points = {{-100,60},{-60,60},{-60,20},{10,20},{10,40}}, color = {0,0,255}, smooth = Smooth.None));
       connect(ac_n,diode_p2.p) annotation(Line(points = {{-100,-60},{-60,-60},{-60,-20},{40,-20},{40,40}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
     end DiodeBridge2Pulse;
+
     model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p1 =  true
+        "Boolean off start value for thyristor_p1";
+      parameter Boolean offStart_p2 =  true
+        "Boolean off start value for thyristor_p2";
+      parameter Boolean offStart_n1 =  true
+        "Boolean off start value for thyristor_n1";
+      parameter Boolean offStart_n2 =  true
+        "Boolean off start value for thyristor_n2";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p "Positive AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n "Negative AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Postive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p "Fire signal for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n "Fire signal for negative potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"                                                      annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"                                                      annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"                                                      annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"                                                      annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+        "Fire signal for positive potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+        "Fire signal for negative potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC = ac_p.i "AC currents";
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) "Thyristor connecting the positve AC input pin with postitive DC output" annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) "Thyristor connecting the negative AC input pin with postitive DC output" annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) "Thyristor connecting the positve AC input with negative DC output" annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) "Thyristor connecting the negative AC input with negative DC output" annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_p1, fixed=true))
+        "Thyristor connecting the positve AC input pin with postitive DC output"
+                                                                                                            annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_p2, fixed=true))
+        "Thyristor connecting the negative AC input pin with postitive DC output"
+                                                                                                            annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_n1, fixed=true))
+        "Thyristor connecting the positve AC input with negative DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_n2, fixed=true))
+        "Thyristor connecting the negative AC input with negative DC output"                                                                                                     annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
     equation
       if not useHeatPort then
         LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + thyristor_n1.LossPower + thyristor_n2.LossPower;
@@ -970,31 +1174,54 @@ This is the library of power converters for single and multi phase electrical sy
       connect(fire_n,thyristor_p2.fire) annotation(Line(points = {{40,120},{40,80},{60,80},{60,56},{56,56},{56,57},{51,57}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_p,thyristor_n2.fire) annotation(Line(points = {{-40,120},{-40,80},{26,80},{26,-43},{29,-43}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n1.fire) annotation(Line(points = {{40,120},{40,80},{60,80},{60,-10},{-10,-10},{-10,-43},{-1,-43}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
     end ThyristorBridge2Pulse;
+
     model HalfBridge2Pulse "Two pulse Graetz half rectifier bridge "
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p1 =  true
+        "Boolean off start value for thyristor_p1";
+      parameter Boolean offStart_p2 =  true
+        "Boolean off start value for thyristor_p2";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p "Positive AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n "Negative AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Postive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p "Fire signal for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n "Fire signal for negative potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"                                                      annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"                                                      annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"                                                      annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"                                                      annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+        "Fire signal for positive potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+        "Fire signal for negative potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC = ac_p.i "AC currents";
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort) annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Diode connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_p1, fixed=true)) annotation(Placement(visible = true, transformation(origin = {10,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(Ron = RonThyristor, Goff = GoffThyristor, Vknee = VkneeThyristor, useHeatPort = useHeatPort, off(start=offStart_p2, fixed=true)) annotation(Placement(visible = true, transformation(origin = {40,50}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Diode connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {40,-50}, extent = {{-10,-10},{10,10}}, rotation = 90)));
     equation
       if not useHeatPort then
         LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + diode_n1.LossPower + diode_n2.LossPower;
@@ -1013,23 +1240,37 @@ This is the library of power converters for single and multi phase electrical sy
       connect(ac_n,diode_n2.n) annotation(Line(points = {{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}}, color = {0,0,255}, smooth = Smooth.None));
       connect(fire_p,thyristor_p1.fire) annotation(Line(points = {{-40,120},{-40,80},{26,80},{26,57},{21,57}}, color = {255,0,255}, smooth = Smooth.None));
       connect(thyristor_p2.fire,fire_n) annotation(Line(points = {{51,57},{56,57},{56,80},{40,80},{40,120}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
     end HalfBridge2Pulse;
+
     model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p "Positive AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n "Negative AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"                                                      annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"                                                      annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC = ac_p.i "AC currents";
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(final Ron = RonDiode, final Goff = GoffDiode, final Vknee = VkneeDiode, final useHeatPort = useHeatPort) "Diodes conducting positive pin AC potentials" annotation(Placement(visible = true, transformation(origin = {10,60}, extent = {{-10,10},{10,-10}}, rotation = 0)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(final Ron = RonDiode, final Goff = GoffDiode, final Vknee = VkneeDiode, final useHeatPort = useHeatPort) "Diodes conducting negative pin AC potentials" annotation(Placement(visible = true, transformation(origin = {10,-60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_p(final Ron = RonDiode, final Goff = GoffDiode, final Vknee = VkneeDiode, final useHeatPort = useHeatPort)
+        "Diodes conducting positive pin AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,60}, extent = {{-10,10},{10,-10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(final Ron = RonDiode, final Goff = GoffDiode, final Vknee = VkneeDiode, final useHeatPort = useHeatPort)
+        "Diodes conducting negative pin AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
     equation
       if not useHeatPort then
         LossPower = diode_p.LossPower + diode_n.LossPower;
@@ -1040,25 +1281,45 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_n.n,dc_p) annotation(Line(points = {{20,-60},{100,-60},{100,4.44089e-16}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.heatPort,heatPort) annotation(Line(points = {{10,-70},{10,-100},{0,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,heatPort) annotation(Line(points = {{10,70},{30,70},{30,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
+      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
     end DiodeCenterTap2Pulse;
-    model ThyristorCenterTap2Pulse "Two pulse thyristor rectifier with center tap"
+
+    model ThyristorCenterTap2Pulse
+      "Two pulse thyristor rectifier with center tap"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p =  true
+        "Boolean off start value for thyristor_p1";
+      parameter Boolean offStart_n =  true
+        "Boolean off start value for thyristor_p2";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p "Positive AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n "Negative AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Postive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p "Fire signal for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n "Fire signal for negative potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
+        "Positive AC input"                                                      annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin ac_n
+        "Negative AC input"                                                      annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+        "Fire signal for positive potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+        "Fire signal for negative potential semiconductors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC = ac_p.i "AC currents";
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p(final Ron = RonThyristor, final Goff = GoffThyristor, final Vknee = VkneeThyristor, final useHeatPort = useHeatPort) "Thyristors conducting positive pin AC potentials" annotation(Placement(visible = true, transformation(origin = {10,60}, extent = {{-10,10},{10,-10}}, rotation = 0)));
-      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n(final Ron = RonThyristor, final Goff = GoffThyristor, final Vknee = VkneeThyristor, final useHeatPort = useHeatPort) "Thyristors conducting negative pin AC potentials" annotation(Placement(visible = true, transformation(origin = {10,-60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p(final Ron = RonThyristor, final Goff = GoffThyristor, final Vknee = VkneeThyristor, final useHeatPort = useHeatPort, off(start=offStart_p, fixed=true))
+        "Thyristors conducting positive pin AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,60}, extent = {{-10,10},{10,-10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n(final Ron = RonThyristor, final Goff = GoffThyristor, final Vknee = VkneeThyristor, final useHeatPort = useHeatPort, off(start=offStart_n, fixed=true))
+        "Thyristors conducting negative pin AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
     equation
       if not useHeatPort then
         LossPower = thyristor_p.LossPower + thyristor_n.LossPower;
@@ -1071,24 +1332,37 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor_p.heatPort,heatPort) annotation(Line(points = {{10,70},{10,80},{30,80},{30,-100},{4.44089e-16,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,40},{17,40},{17,49}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n.fire) annotation(Line(points = {{40,120},{40,-40},{17,-40},{17,-49}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
+      annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = false, initialScale = 0.1, grid = {2,2}), graphics));
     end ThyristorCenterTap2Pulse;
+
     model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Postive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) "AC input" annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Postive DC output"                                                      annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"                                                      annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m)
+        "AC input"                                                                      annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
       Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to positive DC potential" annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to positive DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m = m) annotation(Placement(transformation(extent = {{20,70},{40,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m = m) annotation(Placement(transformation(extent = {{20,-50},{40,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
@@ -1105,26 +1379,44 @@ This is the library of power converters for single and multi phase electrical sy
       connect(heatPort,thermalCollector.port_b) annotation(Line(points = {{4.44089e-16,-100},{60,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(thermalCollector.port_a,diode_n.heatPort) annotation(Line(points = {{60,-80},{60,-40},{20,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
     end DiodeBridge2mPulse;
+
     model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p[m] =  fill(true,m)
+        "Boolean off start value for thyristor_p";
+      parameter Boolean offStart_n[m] =  fill(true,m)
+        "Boolean off start value for thyristor_n";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p annotation(Placement(transformation(extent = {{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m] "Fire signals for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n[m] "Fire signasl for negative potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
+        "Fire signasl for negative potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors connected to positive DC potential" annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort,
+        final offStart=offStart_p)
+        "Thyristors connected to positive DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort,
+        final offStart=offStart_n)
+        "Thyristors connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m = m) annotation(Placement(transformation(extent = {{20,70},{40,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m = m) annotation(Placement(transformation(extent = {{20,-50},{40,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
@@ -1143,30 +1435,49 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,47},{-1,47}}, color = {255,0,255}, smooth = Smooth.None));
       connect(fire_n,thyristor_n.fire) annotation(Line(points = {{40,120},{40,80},{-20,80},{-20,-33},{-1,-33}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
     end ThyristorBridge2mPulse;
+
     model HalfBridge2mPulse "2*m pulse half rectifier bridge"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p[m] = fill(true,m)
+        "Boolean off start value for thyristor_p";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) "AC input" annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m] "Fire signals for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC output"                                                      annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m)
+        "AC input"                                                                      annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m = m) annotation(Placement(transformation(extent = {{20,70},{40,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m = m) annotation(Placement(transformation(extent = {{20,-50},{40,-70}})));
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors connected to positive DC potential" annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort, final offStart=offStart_p)
+        "Thyristors connected to positive DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {10,-40}, extent = {{-10,-10},{10,10}}, rotation = 90)));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
     equation
       if not useHeatPort then
@@ -1182,24 +1493,39 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thermalCollector.port_a,diode_n.heatPort) annotation(Line(points = {{60,-80},{60,-40},{20,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(thyristor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{20,40},{60,40},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor_p.fire) annotation(Line(points = {{-40,120},{-40,47},{-1,47}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-44,48},{36,0}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-44,24},{36,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,48},{16,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,24},{-24,48},{-24,0},{16,24}}, color = {0,0,255}, smooth = Smooth.None),Rectangle(extent = {{-44,0},{36,-56}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-44,-32},{36,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-8},{16,-56}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{16,-32},{-24,-8},{-24,-56},{16,-32}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-4,-4}}, color = {0,0,255}, smooth = Smooth.None)}));
     end HalfBridge2mPulse;
+
     model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m = m) "Positive potential AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m = m) "Negative potential AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m = m)
+        "Positive potential AC input"                                                                        annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m = m)
+        "Negative potential AC input"                                                                        annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v "AC voltages";
+      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v
+        "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac_p.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to positive DC potential" annotation(Placement(visible = true, transformation(origin = {-10,60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to negative DC potential" annotation(Placement(visible = true, transformation(origin = {-10,-60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_p(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to positive DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to negative DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,-60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m = m) annotation(Placement(transformation(extent = {{10,70},{30,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m = m) annotation(Placement(transformation(extent = {{12,-50},{32,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
@@ -1216,26 +1542,47 @@ This is the library of power converters for single and multi phase electrical sy
       connect(star_n.pin_n,dc_p) annotation(Line(points = {{32,-60},{100,-60},{100,0}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.plug_p,ac_n) annotation(Line(points = {{-20,-60},{-100,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(diode_n.plug_n,star_n.plug_p) annotation(Line(points = {{4.44089e-16,-60},{12,-60}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
     end DiodeCenterTap2mPulse;
-    model ThyristorCenterTap2mPulse "2*m pulse thyristor rectifier with center tap"
+
+    model ThyristorCenterTap2mPulse
+      "2*m pulse thyristor rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart_p[m] =  fill(true,m)
+        "Boolean off start value for thyristor_p";
+      parameter Boolean offStart_n[m] =  fill(true,m)
+        "Boolean off start value for thyristor_n";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m = m) "Positive potential AC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m = m) "Negative potential AC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m] "Fire signals for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n[m] "Fire signasl for negative potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac_p(final m = m)
+        "Positive potential AC input"                                                                        annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.MultiPhase.Interfaces.NegativePlug ac_n(final m = m)
+        "Negative potential AC input"                                                                        annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
+        "Fire signasl for negative potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v "AC voltages";
+      Modelica.SIunits.Voltage vAC[m] = ac_p.pin[:].v - ac_n.pin[:].v
+        "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac_p.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors conducting positive plug AC potentials" annotation(Placement(visible = true, transformation(origin = {-10,60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors conducting negative plug AC potentials" annotation(Placement(visible = true, transformation(origin = {-10,-60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort, final offStart=offStart_p)
+        "Thyristors conducting positive plug AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort, final offStart=offStart_n)
+        "Thyristors conducting negative plug AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,-60}, extent = {{10,10},{-10,-10}}, rotation = 180)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m = m) annotation(Placement(transformation(extent = {{10,70},{30,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m = m) annotation(Placement(transformation(extent = {{12,-50},{32,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
@@ -1254,22 +1601,33 @@ This is the library of power converters for single and multi phase electrical sy
       connect(star_n.pin_n,dc_p) annotation(Line(points = {{32,-60},{100,-60},{100,0}}, color = {0,0,255}, smooth = Smooth.None));
       connect(thyristor_n.plug_p,ac_n) annotation(Line(points = {{-20,-60},{-100,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(thyristor_n.plug_n,star_n.plug_p) annotation(Line(points = {{4.44089e-16,-60},{12,-60}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
     end ThyristorCenterTap2mPulse;
+
     model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) "AC input" annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m)
+        "AC input"                                                                      annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort) "Diodes connected to positive DC potential" annotation(Placement(visible = true, transformation(origin = {-10,0}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode(final m = m, final Ron = fill(RonDiode, m), final Goff = fill(GoffDiode, m), final Vknee = fill(VkneeDiode, m), each final useHeatPort = useHeatPort)
+        "Diodes connected to positive DC potential"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,0}, extent = {{10,10},{-10,-10}}, rotation = 180)));
       Modelica.Electrical.MultiPhase.Basic.Star star(final m = m) annotation(Placement(transformation(extent = {{10,10},{30,-10}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
     equation
@@ -1281,23 +1639,37 @@ This is the library of power converters for single and multi phase electrical sy
       connect(heatPort,thermalCollector.port_b) annotation(Line(points = {{4.44089e-16,-100},{60,-100}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode.heatPort,thermalCollector.port_a) annotation(Line(points = {{-10,-10},{-10,-20},{60,-20},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(ac,diode.plug_p) annotation(Line(points = {{-100,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None)}));
     end DiodeCenterTapmPulse;
-    model ThyristorCenterTapmPulse "m pulse thyristor rectifier with center tap"
+
+    model ThyristorCenterTapmPulse
+      "m pulse thyristor rectifier with center tap"
       import Modelica.Constants.pi;
       parameter Integer m(final min = 3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05 "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05 "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0 "Thyristor forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min = 0) = 1e-05
+        "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min = 0) = 1e-05
+        "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min = 0) = 0
+        "Thyristor forward threshold voltage";
+      parameter Boolean offStart[m] =  fill(true,m) "Boolean off start value";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) "AC input" annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m] "Fire signals for positive potential semiconductors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC output"                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m)
+        "AC input"                                                                      annotation(Placement(transformation(extent = {{-110,-10},{-90,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Fire signals for positive potential semiconductors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {-40,120})));
       Modelica.SIunits.Voltage vDC = dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m] = ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort) "Thyristors conducting AC potentials" annotation(Placement(visible = true, transformation(origin = {-10,0}, extent = {{10,10},{-10,-10}}, rotation = 180)));
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor(final m = m, final Ron = fill(RonThyristor, m), final Goff = fill(GoffThyristor, m), final Vknee = fill(VkneeThyristor, m), each final useHeatPort = useHeatPort, final offStart=offStart)
+        "Thyristors conducting AC potentials"                                                                                                     annotation(Placement(visible = true, transformation(origin = {-10,0}, extent = {{10,10},{-10,-10}}, rotation = 180)));
       Modelica.Electrical.MultiPhase.Basic.Star star(final m = m) annotation(Placement(transformation(extent = {{10,10},{30,-10}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m = m) if useHeatPort annotation(Placement(transformation(extent = {{50,-100},{70,-80}})));
     equation
@@ -1310,26 +1682,42 @@ This is the library of power converters for single and multi phase electrical sy
       connect(thyristor.heatPort,thermalCollector.port_a) annotation(Line(points = {{-10,-10},{-10,-20},{60,-20},{60,-80}}, color = {191,0,0}, smooth = Smooth.None));
       connect(fire_p,thyristor.fire) annotation(Line(points = {{-40,120},{-40,80},{-2,80},{-2,11},{-3,11}}, color = {255,0,255}, smooth = Smooth.None));
       connect(ac,thyristor.plug_p) annotation(Line(points = {{-100,0},{-20,0}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-38,26},{42,-22}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-38,2},{42,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,26},{22,-22}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{22,2},{-18,26},{-18,-22},{22,2}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{2,14},{2,30}}, color = {0,0,255}, smooth = Smooth.None)}));
     end ThyristorCenterTapmPulse;
   end ACDC;
+
   package DCAC "DC to AC converters"
     extends Modelica.Icons.Package;
     model SinglePhase2Level "Single phase DC to AC converter"
       extends Modelica.Blocks.Icons.Block;
       parameter Integer m(final min = 1) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05 "Transistor closed resistance";
-      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05 "Transistor opened conductance";
-      parameter Modelica.SIunits.Voltage VkneeTransistor = 0 "Transistor threshold voltage";
-      parameter Modelica.SIunits.Resistance RonDiode = 1e-05 "Diode closed resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode = 1e-05 "Diode opened conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode = 0 "Diode threshold voltage";
+      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor = 0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode = 1e-05
+        "Diode closed resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode = 1e-05
+        "Diode opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode = 0
+        "Diode threshold voltage";
+      // parameter Boolean useEnable "Enables enable signal connector";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC input" annotation(Placement(transformation(extent = {{-110,110},{-90,90}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC input" annotation(Placement(transformation(extent = {{-110,-110},{-90,-90}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC input"                                                      annotation(Placement(transformation(extent = {{-110,110},{-90,90}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC input"                                                      annotation(Placement(transformation(extent = {{-110,-110},{-90,-90}})));
       Modelica.Electrical.Analog.Interfaces.PositivePin ac "AC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p "Firing signals of positive potential transistors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {-40,-120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n "Firing signals of negative potential transistors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {40,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+        "Firing signals of positive potential transistors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {-40,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+        "Firing signals of negative potential transistors"                                              annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {40,-120})));
       Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC = ac.v "AC voltages";
@@ -1358,24 +1746,41 @@ This is the library of power converters for single and multi phase electrical sy
       connect(transistor_n.n,diode_n.p) annotation(Line(points = {{20,-30},{60,-30}}, color = {0,0,255}, smooth = Smooth.None));
       connect(transistor_p.n,transistor_n.p) annotation(Line(points = {{20,10},{40,10},{40,-10},{20,-10}}, color = {0,0,255}, smooth = Smooth.None));
       connect(ac,transistor_p.n) annotation(Line(points = {{100,0},{40,0},{40,10},{20,10}}, color = {0,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC")}), Documentation(info = "<html>
+      annotation(Diagram(coordinateSystem(preserveAspectRatio=false,   extent={{-100,
+                -100},{100,100}}),                                                                        graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC")}), Documentation(info = "<html>
 </html>"));
     end SinglePhase2Level;
+
     model MultiPhase2Level "Multi phase DC to AC converter"
       extends Modelica.Blocks.Icons.Block;
       parameter Integer m(final min = 1) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05 "Transistor closed resistance";
-      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05 "Transistor opened conductance";
-      parameter Modelica.SIunits.Voltage VkneeTransistor = 0 "Transistor threshold voltage";
-      parameter Modelica.SIunits.Resistance RonDiode = 1e-05 "Diode closed resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode = 1e-05 "Diode opened conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode = 0 "Diode threshold voltage";
+      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor = 0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode = 1e-05
+        "Diode closed resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode = 1e-05
+        "Diode opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode = 0
+        "Diode threshold voltage";
+      // parameter Boolean useEnable "Enables enable signal connector";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p "Positive DC input" annotation(Placement(transformation(extent = {{-110,110},{-90,90}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n "Negative DC input" annotation(Placement(transformation(extent = {{-110,-110},{-90,-90}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m) "AC output" annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m] "Firing signals of positive potential transistors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {-40,-120})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_n[m] "Firing signals of negative potential transistors" annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {40,-120})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+        "Positive DC input"                                                      annotation(Placement(transformation(extent = {{-110,110},{-90,90}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
+        "Negative DC input"                                                      annotation(Placement(transformation(extent = {{-110,-110},{-90,-90}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m = m)
+        "AC output"                                                                      annotation(Placement(transformation(extent = {{90,-10},{110,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+        "Firing signals of positive potential transistors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {-40,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
+        "Firing signals of negative potential transistors"                                                 annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 90, origin = {40,-120})));
       Modelica.SIunits.Voltage vDC = dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC = dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m] = ac.pin[:].v "AC voltages";
@@ -1408,21 +1813,28 @@ This is the library of power converters for single and multi phase electrical sy
       connect(diode_n.heatPort,thermalCollector.port_a) annotation(Line(points = {{70,-20},{70,-36},{0,-36},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(transistor_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{30,20},{30,4},{0,4},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
       connect(diode_p.heatPort,thermalCollector.port_a) annotation(Line(points = {{70,20},{70,4},{0,4},{0,-40}}, color = {191,0,0}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "AC")}), Documentation(info = "<html>
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "AC")}), Documentation(info = "<html>
 </html>"));
     end MultiPhase2Level;
   end DCAC;
+
   package DCDC "DC to DC converters"
     extends Modelica.Icons.Package;
     package Control "Control components for DC to DC converters"
       extends Modelica.Icons.Package;
-      model SignalPWM "Generates a pulse width modulated (PWM) boolean fire signal"
-        parameter Boolean useConstantDutyCycle = true "Enables constant duty cycle";
+      model SignalPWM
+        "Generates a pulse width modulated (PWM) boolean fire signal"
+        parameter Boolean useConstantDutyCycle = true
+          "Enables constant duty cycle";
         parameter Real constantDutyCycle = 0 "Constant duty cycle" annotation(Dialog(enable = useConstantDutyCycle));
         parameter Modelica.SIunits.Frequency f = 50 "Switching frequency";
         parameter Modelica.SIunits.Time startTime = 0 "Start time";
         Modelica.Blocks.Interfaces.BooleanOutput fire "Firing PWM signal" annotation(Placement(transformation(extent = {{100,-10},{120,10}})));
-        Modelica.Blocks.Interfaces.RealInput dutyCycle if not useConstantDutyCycle "Duty cycle" annotation(Placement(transformation(extent = {{-140,-20},{-100,20}})));
+        Modelica.Blocks.Interfaces.RealInput dutyCycle if not useConstantDutyCycle
+          "Duty cycle"                                                                          annotation(Placement(transformation(extent = {{-140,-20},{-100,20}})));
         Modelica.Blocks.Sources.Constant const(final k = constantDutyCycle) if useConstantDutyCycle annotation(Placement(transformation(extent = {{-100,40},{-80,60}})));
         Modelica.Blocks.Nonlinear.Limiter limiter(uMax = 1, uMin = 0) annotation(Placement(transformation(extent = {{-40,-10},{-20,10}})));
         Modelica.Blocks.Sources.SampleTrigger sampleTrigger(final period = 1 / f, final startTime = startTime) annotation(Placement(transformation(extent = {{-100,-60},{-80,-40}})));
@@ -1432,7 +1844,8 @@ This is the library of power converters for single and multi phase electrical sy
         Modelica.Blocks.Math.Gain gain(final k = f) annotation(Placement(transformation(extent = {{20,-60},{40,-40}})));
         Modelica.Blocks.Logical.Less greaterEqual annotation(Placement(transformation(extent = {{50,-40},{70,-60}})));
         Modelica.Blocks.Logical.And andCondition annotation(Placement(transformation(extent = {{72,-10},{92,10}})));
-        Modelica.Blocks.Sources.BooleanStep enable(final startTime = startTime, final startValue = false) "Enable signal of fire after start time" annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {60,50})));
+        Modelica.Blocks.Sources.BooleanStep enable(final startTime = startTime, final startValue = false)
+          "Enable signal of fire after start time"                                                                                                 annotation(Placement(transformation(extent = {{-10,-10},{10,10}}, rotation = 270, origin = {60,50})));
         Modelica.Blocks.Discrete.ZeroOrderHold zeroOrderHold(final startTime = startTime, final samplePeriod = 1 / f) annotation(Placement(transformation(extent = {{-10,-10},{10,10}})));
       equation
         connect(const.y,limiter.u) annotation(Line(points = {{-79,50},{-70,50},{-70,8.88178e-16},{-42,8.88178e-16}}, color = {0,0,127}, smooth = Smooth.None));
@@ -1447,28 +1860,42 @@ This is the library of power converters for single and multi phase electrical sy
         connect(enable.y,andCondition.u1) annotation(Line(points = {{60,39},{60,0},{70,0}}, color = {255,0,255}, smooth = Smooth.None));
         connect(limiter.y,zeroOrderHold.u) annotation(Line(points = {{-19,0},{-12,0}}, color = {0,0,127}, smooth = Smooth.None));
         connect(zeroOrderHold.y,greaterEqual.u2) annotation(Line(points = {{11,0},{40,0},{40,-42},{48,-42}}, color = {0,0,127}, smooth = Smooth.None));
-        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,0}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,0},{-98,0},{-62,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-60,-4},{-60,-48},{40,-48},{40,-24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-62,0},{-76,4},{-76,-4},{-62,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,-24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},{80,-20},{80,-16}}, color = {255,0,255}, smooth = Smooth.None)}));
+        annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,0}, fillColor = {255,255,255},
+                  fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,0},{-98,0},{-62,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-60,-4},{-60,-48},{40,-48},{40,-24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-62,0},{-76,4},{-76,-4},{-62,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,-24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},{80,-20},{80,-16}}, color = {255,0,255}, smooth = Smooth.None)}));
       end SignalPWM;
     end Control;
+
     model ChopperStepDown "Step down chopper"
       import Modelica.Constants.pi;
-      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05 "Transistor closed resistance";
-      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05 "Transistor opened conductance";
-      parameter Modelica.SIunits.Voltage VkneeTransistor = 0 "Transistor threshold voltage";
-      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05 "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05 "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0 "Diode forward threshold voltage";
+      parameter Modelica.SIunits.Resistance RonTransistor = 1e-05
+        "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor = 1e-05
+        "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor = 0
+        "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode(final min = 0) = 1e-05
+        "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min = 0) = 1e-05
+        "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min = 0) = 0
+        "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T = 293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1 "Positive DC input" annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n1 "Negative DC input" annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p2 "Postive DC output" annotation(Placement(transformation(extent = {{90,50},{110,70}})));
-      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n2 "Negative DC output" annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1
+        "Positive DC input"                                                       annotation(Placement(transformation(extent = {{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n1
+        "Negative DC input"                                                       annotation(Placement(transformation(extent = {{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p2
+        "Postive DC output"                                                       annotation(Placement(transformation(extent = {{90,50},{110,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n2
+        "Negative DC output"                                                       annotation(Placement(transformation(extent = {{92,-70},{112,-50}})));
       Modelica.SIunits.Voltage vDCi = dc_p1.v - dc_n1.v "DC voltage side 1";
       Modelica.SIunits.Current iDCi = dc_p1.i "DC current side 1";
       Modelica.SIunits.Voltage vDCo = dc_p2.v - dc_n2.v "DC voltages side 2";
       Modelica.SIunits.Current iDCo = dc_p2.i "DC current side 2";
-      Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor(useHeatPort = useHeatPort, Ron = RonTransistor, Goff = GoffTransistor, Vknee = VkneeTransistor) "Switching transistor" annotation(Placement(visible = true, transformation(origin = {0,60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
-      Modelica.Electrical.Analog.Ideal.IdealDiode diode(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort) "Free wheeling diode" annotation(Placement(visible = true, transformation(origin = {40,0}, extent = {{-10,10},{10,-10}}, rotation = 90)));
+      Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor(useHeatPort = useHeatPort, Ron = RonTransistor, Goff = GoffTransistor, Vknee = VkneeTransistor)
+        "Switching transistor"                                                                                                     annotation(Placement(visible = true, transformation(origin = {0,60}, extent = {{-10,-10},{10,10}}, rotation = 0)));
+      Modelica.Electrical.Analog.Ideal.IdealDiode diode(Ron = RonDiode, Goff = GoffDiode, Vknee = VkneeDiode, useHeatPort = useHeatPort)
+        "Free wheeling diode"                                                                                                     annotation(Placement(visible = true, transformation(origin = {40,0}, extent = {{-10,10},{10,-10}}, rotation = 90)));
       Modelica.Blocks.Interfaces.BooleanInput fire annotation(Placement(transformation(extent = {{-20,-20},{20,20}}, rotation = 270, origin = {0,120})));
     equation
       if not useHeatPort then
@@ -1482,16 +1909,25 @@ This is the library of power converters for single and multi phase electrical sy
       connect(dc_n1,diode.p) annotation(Line(points = {{-100,-60},{40,-60},{40,-10}}, color = {0,0,255}, smooth = Smooth.None));
       connect(dc_n1,dc_n2) annotation(Line(points = {{-100,-60},{102,-60}}, color = {0,0,255}, smooth = Smooth.None));
       connect(transistor.fire,fire) annotation(Line(points = {{7,71},{7,85.5},{1.11022e-15,85.5},{1.11022e-15,120}}, color = {255,0,255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics = {Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC in"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid, textString = "DC out"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None)}));
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100,-100},{100,100}}), graphics={  Rectangle(extent = {{-100,100},{100,-100}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-100,-100},{100,100}}, color = {0,0,127}, smooth = Smooth.None),Text(extent = {{-100,70},{0,50}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC in"),Text(extent = {{0,-50},{100,-70}}, lineColor = {0,0,127}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid, textString = "DC out"),Text(extent = {{-150,150},{150,110}}, textString = "%name", lineColor = {0,0,255}),Rectangle(extent = {{-40,40},{40,-40}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Line(points = {{-20,20},{-20,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-28,20},{-28,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-40,0},{-28,0}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,4},{0,24},{0,40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-20,-4},{0,-24},{0,-40}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{-4,-20},{-10,-8},{-16,-14},{-4,-20}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,-24},{10,-24},{10,24},{0,24}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{0,8},{20,8}}, color = {0,0,255}, smooth = Smooth.None),Line(points = {{10,8},{0,-8},{20,-8},{10,8}}, color = {0,0,255}, smooth = Smooth.None)}));
     end ChopperStepDown;
   end DCDC;
+
   package Utilities "Utilities for operating power converters"
     extends Modelica.Icons.Package;
   end Utilities;
+
   package Icons "Icons"
     extends Modelica.Icons.Package;
     model ExampleTemplate
-      annotation(Icon(graphics = {Ellipse(extent = {{-100,100},{100,-100}}, lineColor = {175,175,175}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid),Polygon(points = {{-36,-60},{-36,60},{64,0},{-36,-60}}, lineColor = {175,175,175}, smooth = Smooth.None, fillColor = {175,175,175}, fillPattern = FillPattern.Solid),Rectangle(extent = {{-4,46},{14,-44}}, lineColor = {255,255,255}, fillColor = {255,255,255}, fillPattern = FillPattern.Solid)}));
+      annotation(Icon(graphics={  Ellipse(extent = {{-100,100},{100,-100}}, lineColor = {175,175,175}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid),Polygon(points = {{-36,-60},{-36,60},{64,0},{-36,-60}}, lineColor = {175,175,175}, smooth = Smooth.None, fillColor = {175,175,175},
+                fillPattern =                                                                                                    FillPattern.Solid),Rectangle(extent = {{-4,46},{14,-44}}, lineColor = {255,255,255}, fillColor = {255,255,255},
+                fillPattern =                                                                                                    FillPattern.Solid)}));
     end ExampleTemplate;
   end Icons;
   annotation(Icon(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2}), graphics), Diagram(coordinateSystem(extent = {{-100,-100},{100,100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2,2})), version = "1.0.0", uses(Modelica(version = "3.2.2")), Documentation(info = "<html>
