@@ -650,6 +650,228 @@ This is the library of power converters for single and multi phase electrical sy
               Tolerance=1e-06,
               Interval=0.0002));
         end ThyristorBridge2Pulse_RLV_Characteristic;
+
+        model ThyristorBridge2Pulse_ED_Drive
+          "Graetz thyristor bridge feeding a DC drive"
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Voltage Vrms=120 "RMS supply voltage";
+          parameter Modelica.SIunits.Frequency f=50 "Frequency";
+          parameter Modelica.SIunits.ApparentPower SMains=100E3
+            "Mains short circuit apparent power";
+          parameter Real lamdaMains=0.1 "Mains short circuit power factor";
+          final parameter Modelica.SIunits.Impedance ZMains=Vrms^2/SMains
+            "Mains short circuit impedance";
+          final parameter Modelica.SIunits.Resistance RMains=ZMains*lamdaMains
+            "Mains resistance" annotation (Evaluate=true);
+          final parameter Modelica.SIunits.Inductance LMains=ZMains*sqrt(1 -
+              lamdaMains^2)/(2*pi*f) "Mains inductance"
+            annotation (Evaluate=true);
+          parameter Modelica.SIunits.Inductance Ld=10*dcpmData.La
+            "Smoothing inductance" annotation (Evaluate=true);
+          final parameter Modelica.SIunits.Torque tauNominal=dcpmData.ViNominal
+              *dcpmData.IaNominal/dcpmData.wNominal "Nominal torque";
+          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
+                visible=true, transformation(
+                origin={-80,-50},
+                extent={{-10,-10},{10,10}},
+                rotation=0)));
+          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)*
+                Vrms, freqHz=f) annotation (Placement(visible=true,
+                transformation(
+                origin={-80,0},
+                extent={{-10,-10},{10,10}},
+                rotation=-90)));
+          Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2Pulse
+            rectifier(useHeatPort=false)
+            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+          Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
+            annotation (Placement(visible=true, transformation(
+                origin={50,10},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Blocks.Math.Mean meanVoltage(f=2*f) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,40})));
+          Modelica.Blocks.Math.RootMeanSquare rootMeanSquareVoltage(f=2*f)
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,10})));
+          Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
+            annotation (Placement(transformation(
+                extent={{-10,10},{10,-10}},
+                rotation=180,
+                origin={0,-40})));
+          Modelica.Blocks.Math.Mean meanCurrent(f=2*f) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={80,-60})));
+          Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
+            pulse2(f=f, useConstantFiringAngle=false) annotation (Placement(
+                transformation(
+                extent={{10,10},{-10,-10}},
+                rotation=180,
+                origin={-30,30})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=Ld) annotation (
+              Placement(visible=true, transformation(
+                origin={30,-10},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet
+            dcpm(
+            VaNominal=dcpmData.VaNominal,
+            IaNominal=dcpmData.IaNominal,
+            wNominal=dcpmData.wNominal,
+            TaNominal=dcpmData.TaNominal,
+            Ra=dcpmData.Ra,
+            TaRef=dcpmData.TaRef,
+            La=dcpmData.La,
+            Jr=dcpmData.Jr,
+            useSupport=false,
+            Js=dcpmData.Js,
+            frictionParameters=dcpmData.frictionParameters,
+            coreParameters=dcpmData.coreParameters,
+            strayLoadParameters=dcpmData.strayLoadParameters,
+            brushParameters=dcpmData.brushParameters,
+            phiMechanical(fixed=true),
+            wMechanical(fixed=true, start=dcpmData.wNominal),
+            TaOperational=293.15,
+            alpha20a=dcpmData.alpha20a,
+            ia(start=0, fixed=true)) annotation (Placement(transformation(
+                  extent={{10,-90},{30,-70}}, rotation=0)));
+          parameter
+            Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData
+            dcpmData
+            annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
+          Modelica.Mechanics.Rotational.Sources.Torque torque
+            annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
+          Modelica.Blocks.Sources.Ramp ramp(
+            duration=10,
+            startTime=5,
+            height=tauNominal,
+            offset=-tauNominal)
+            annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
+          Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-30,70})));
+          Modelica.Electrical.Analog.Basic.Resistor rMains(R=RMains)
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=90,
+                origin={-80,30})));
+          Modelica.Electrical.Analog.Basic.Inductor lMains(L=LMains, i(start=0,
+                fixed=true)) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=90,
+                origin={-80,60})));
+        equation
+          connect(meanCurrent.u, currentSensor.i) annotation (Line(
+              points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(ground.p, sinevoltage.n) annotation (Line(
+              points={{-80,-40},{-80,-10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltagesensor.v, meanVoltage.u) annotation (Line(
+              points={{60,10},{64,10},{64,40},{68,40}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(voltagesensor.v, rootMeanSquareVoltage.u) annotation (Line(
+              points={{60,10},{68,10}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(sinevoltage.n, rectifier.ac_n) annotation (Line(
+              points={{-80,-10},{-60,-10},{-60,-6},{-40,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.dc_n, currentSensor.n) annotation (Line(
+              points={{-19.8,-6},{-10,-6},{-10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
+              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltagesensor.n, currentSensor.p) annotation (Line(
+              points={{50,0},{50,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
+              points={{-34,19},{-34,12}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
+              points={{-26,19},{-26,12}},
+              color={255,0,255},
+              smooth=Smooth.None));
+          connect(pulse2.ac_p, rectifier.ac_p) annotation (Line(
+              points={{-40,36},{-60,36},{-60,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.ac_n, pulse2.ac_n) annotation (Line(
+              points={{-40,-6},{-50,-6},{-50,24},{-40,24}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, dcpm.pin_ap) annotation (Line(
+              points={{30,-20},{30,-70},{26,-70}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(torque.flange, dcpm.flange) annotation (Line(
+              points={{40,-80},{30,-80}},
+              color={0,0,0},
+              smooth=Smooth.None));
+          connect(ramp.y, torque.tau) annotation (Line(
+              points={{69,-80},{62,-80}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(rectifier.dc_p, inductor.p) annotation (Line(
+              points={{-20,6},{-10,6},{-10,40},{30,40},{30,0}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(currentSensor.p, dcpm.pin_an) annotation (Line(
+              points={{10,-40},{10,-70},{14,-70}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(const.y, pulse2.firingAngle) annotation (Line(
+              points={{-30,59},{-30,40}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(rMains.n, lMains.p) annotation (Line(
+              points={{-80,40},{-80,50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rMains.p, sinevoltage.p) annotation (Line(
+              points={{-80,20},{-80,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.ac_p, lMains.n) annotation (Line(
+              points={{-40,6},{-60,6},{-60,70},{-80,70}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (
+            Icon(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=true,
+                initialScale=0.1,
+                grid={2,2})),
+            Diagram(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=false,
+                initialScale=0.1,
+                grid={2,2}), graphics),
+            experiment(
+              StopTime=15,
+              Interval=0.0002,
+              Tolerance=1e-006),
+            __Dymola_experimentSetupOutput);
+        end ThyristorBridge2Pulse_ED_Drive;
       end ThyristorBridge2Pulse;
 
       package ThyristorBridge2mPulse "2*m pulse thyristor bridge"
@@ -2634,32 +2856,27 @@ This is the library of power converters for single and multi phase electrical sy
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-              graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255}),
-              Line(
-                points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
-                    -60}},
-                color={255,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
-                color={255,0,255},
-                smooth=Smooth.None),
-              Text(
-                extent={{-40,60},{40,0}},
-                lineColor={255,0,255},
-                fillColor={0,0,255},
-                fillPattern=FillPattern.Solid,
-                textString="2*%m%")}));
+              graphics={Rectangle(
+                      extent={{-100,100},{100,-100}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{-150,150},{150,110}},
+                      textString="%name",
+                      lineColor={0,0,255}),Line(
+                      points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},
+                  {-40,-60}},
+                      color={255,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,
+                  -60}},
+                      color={255,0,255},
+                      smooth=Smooth.None),Text(
+                      extent={{-40,60},{40,0}},
+                      lineColor={255,0,255},
+                      fillColor={0,0,255},
+                      fillPattern=FillPattern.Solid,
+                      textString="2*%m%")}));
       end VoltageBridge2mPulse;
 
       model VoltageCenterTap2mPulse
@@ -2751,32 +2968,27 @@ This is the library of power converters for single and multi phase electrical sy
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
                   {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-              graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255}),
-              Line(
-                points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
-                    -60}},
-                color={255,0,255},
-                smooth=Smooth.None),
-              Line(
-                points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
-                color={255,0,255},
-                smooth=Smooth.None),
-              Text(
-                extent={{-40,60},{40,0}},
-                lineColor={255,0,255},
-                fillColor={0,0,255},
-                fillPattern=FillPattern.Solid,
-                textString="2*%m%")}));
+              graphics={Rectangle(
+                      extent={{-100,100},{100,-100}},
+                      lineColor={0,0,127},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Solid),Text(
+                      extent={{-150,150},{150,110}},
+                      textString="%name",
+                      lineColor={0,0,255}),Line(
+                      points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},
+                  {-40,-60}},
+                      color={255,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,
+                  -60}},
+                      color={255,0,255},
+                      smooth=Smooth.None),Text(
+                      extent={{-40,60},{40,0}},
+                      lineColor={255,0,255},
+                      fillColor={0,0,255},
+                      fillPattern=FillPattern.Solid,
+                      textString="2*%m%")}));
       end VoltageCenterTap2mPulse;
 
       block Filter "PT1 + allpass filter"
@@ -2824,39 +3036,33 @@ This is the library of power converters for single and multi phase electrical sy
 <p>PT1-filter with cut-off frequency fCut. </p>
 <p>The phase shift is compensated by a series of two 1st order allpass filters for frequency f.</p>
 </html>"),
-          Icon(graphics={
-              Polygon(
-                visible=true,
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid,
-                points={{-80,90},{-88,68},{-72,68},{-80,90}}),
-              Line(
-                visible=true,
-                points={{-80,78},{-80,-90}},
-                color={192,192,192}),
-              Polygon(
-                visible=true,
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid,
-                points={{90,-80},{68,-72},{68,-88},{90,-80}}),
-              Line(
-                visible=true,
-                points={{-90,-80},{82,-80}},
-                color={192,192,192}),
-              Rectangle(
-                visible=true,
-                lineColor={160,160,164},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Backward,
-                extent={{-80,-80},{22,8}}),
-              Line(
-                visible=true,
-                origin={3.333,-8.667},
-                points={{-83.333,34.667},{24.667,34.667},{42.667,-71.333}},
-                color={0,0,127},
-                smooth=Smooth.Bezier)}));
+          Icon(graphics={Polygon(
+                      visible=true,
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid,
+                      points={{-80,90},{-88,68},{-72,68},{-80,90}}),Line(
+                      visible=true,
+                      points={{-80,78},{-80,-90}},
+                      color={192,192,192}),Polygon(
+                      visible=true,
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid,
+                      points={{90,-80},{68,-72},{68,-88},{90,-80}}),Line(
+                      visible=true,
+                      points={{-90,-80},{82,-80}},
+                      color={192,192,192}),Rectangle(
+                      visible=true,
+                      lineColor={160,160,164},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Backward,
+                      extent={{-80,-80},{22,8}}),Line(
+                      visible=true,
+                      origin={3.333,-8.667},
+                      points={{-83.333,34.667},{24.667,34.667},{42.667,-71.333}},
+                      color={0,0,127},
+                      smooth=Smooth.Bezier)}));
       end Filter;
     end Control;
     extends Modelica.Icons.Package;
@@ -5467,20 +5673,23 @@ This is the library of power converters for single and multi phase electrical sy
   package Icons "Icons"
     extends Modelica.Icons.Package;
     model ExampleTemplate
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={175,175,175},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Polygon(
-                  points={{-36,-60},{-36,60},{64,0},{-36,-60}},
-                  lineColor={175,175,175},
-                  smooth=Smooth.None,
-                  fillColor={175,175,175},
-                  fillPattern=FillPattern.Solid),Rectangle(
-                  extent={{-4,46},{14,-44}},
-                  lineColor={255,255,255},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+      annotation (Icon(graphics={
+            Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={175,175,175},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-36,-60},{-36,60},{64,0},{-36,-60}},
+              lineColor={175,175,175},
+              smooth=Smooth.None,
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-4,46},{14,-44}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
     end ExampleTemplate;
   end Icons;
   annotation (
