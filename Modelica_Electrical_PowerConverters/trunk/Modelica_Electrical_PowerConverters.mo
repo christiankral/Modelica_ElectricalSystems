@@ -1043,6 +1043,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
+          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
+                transformation(extent={{-90,-80},{-70,-60}})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -1062,6 +1064,10 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
               points={{30,40},{-10,40},{-10,6},{-20,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(earthing.pin, ground.p) annotation (Line(
+              points={{-80,-50},{-80,-60}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1097,11 +1103,6 @@ This is the library of power converters for single and multi phase electrical sy
               *dcpmData.IaNominal/dcpmData.wNominal "Nominal torque";
           output Modelica.SIunits.AngularVelocity w(displayUnit="rpm") = dcpm.wMechanical;
           output Modelica.SIunits.Torque tau=dcpm.tauShaft;
-          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
-                visible=true, transformation(
-                origin={-80,-60},
-                extent={{-10,-10},{10,10}},
-                rotation=0)));
           Modelica.Electrical.MultiPhase.Sources.SineVoltage sinevoltage(
             m=m,
             each final V=fill(sqrt(2)*Vrms, m),
@@ -1200,11 +1201,10 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=90,
                 origin={-80,60})));
-          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation
-            (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-80,-30})));
+          Modelica_Electrical_PowerConverters.Utilities.Earthing earthing(m=m)
+            annotation (Placement(transformation(extent={{-90,-40},{-70,-20}})));
+          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
+                transformation(extent={{-30,-60},{-10,-40}})));
         initial equation
           lMains.i[1:m - 1] = zeros(m - 1);
 
@@ -1222,7 +1222,7 @@ This is the library of power converters for single and multi phase electrical sy
               color={0,0,127},
               smooth=Smooth.None));
           connect(rectifier.dc_n, currentSensor.n) annotation (Line(
-              points={{-19.8,-6},{-10,-6},{-10,-40}},
+              points={{-20,-6},{-10,-6},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
@@ -1265,14 +1265,6 @@ This is the library of power converters for single and multi phase electrical sy
               points={{-30,59},{-30,40}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(ground.p, star.pin_n) annotation (Line(
-              points={{-80,-50},{-80,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(sinevoltage.plug_n, star.plug_p) annotation (Line(
-              points={{-80,-10},{-80,-20}},
-              color={0,0,255},
-              smooth=Smooth.None));
           connect(rMains.plug_p, sinevoltage.plug_p) annotation (Line(
               points={{-80,20},{-80,10}},
               color={0,0,255},
@@ -1287,6 +1279,14 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           connect(rectifier.ac, pulse2.ac) annotation (Line(
               points={{-40,0},{-60,0},{-60,30},{-40,30}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(sinevoltage.plug_n, earthing.plug) annotation (Line(
+              points={{-80,-10},{-80,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(rectifier.dc_n, ground.p) annotation (Line(
+              points={{-20,-6},{-20,-23},{-20,-23},{-20,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -2056,13 +2056,6 @@ This is the library of power converters for single and multi phase electrical sy
           // parameter Modelica.SIunits.Resistance R = 20 "Load resistance";
           // parameter Modelica.SIunits.Inductance L = 1 "Load resistance" annotation(Evaluate=true);
           // parameter Modelica.SIunits.Voltage VDC=-260 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
-                transformation(extent={{-90,-80},{-70,-60}})));
-          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation
-            (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-80,-40})));
           Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage(
             final m=m,
             V=fill(sqrt(2)*Vrms, m),
@@ -2107,15 +2100,9 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{10,10},{-10,-10}},
                 rotation=180,
                 origin={-30,30})));
+          Utilities.Earthing earthing(m=m) annotation (Placement(transformation(
+                  extent={{-90,-50},{-70,-30}})));
         equation
-          connect(sineVoltage.plug_n, star.plug_p) annotation (Line(
-              points={{-80,-20},{-80,-30}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(star.pin_n, ground.p) annotation (Line(
-              points={{-80,-50},{-80,-60}},
-              color={0,0,255},
-              smooth=Smooth.None));
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{0,-60},{0,-50}},
               color={0,0,127},
@@ -2133,7 +2120,7 @@ This is the library of power converters for single and multi phase electrical sy
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, currentSensor.n) annotation (Line(
-              points={{-19.8,-6},{-10,-6},{-10,-40}},
+              points={{-20,-6},{-10,-6},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
@@ -2154,6 +2141,10 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           connect(pulse2m.ac, sineVoltage.plug_p) annotation (Line(
               points={{-40,30},{-80,30},{-80,4.44089e-16}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(sineVoltage.plug_n, earthing.plug) annotation (Line(
+              points={{-80,-20},{-80,-30}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -3293,39 +3284,33 @@ This is the library of power converters for single and multi phase electrical sy
 <p>PT1-filter with cut-off frequency fCut. </p>
 <p>The phase shift is compensated by a series of two 1st order allpass filters for frequency f.</p>
 </html>"),
-          Icon(graphics={
-              Polygon(
-                visible=true,
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid,
-                points={{-80,90},{-88,68},{-72,68},{-80,90}}),
-              Line(
-                visible=true,
-                points={{-80,78},{-80,-90}},
-                color={192,192,192}),
-              Polygon(
-                visible=true,
-                lineColor={192,192,192},
-                fillColor={192,192,192},
-                fillPattern=FillPattern.Solid,
-                points={{90,-80},{68,-72},{68,-88},{90,-80}}),
-              Line(
-                visible=true,
-                points={{-90,-80},{82,-80}},
-                color={192,192,192}),
-              Rectangle(
-                visible=true,
-                lineColor={160,160,164},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Backward,
-                extent={{-80,-80},{22,8}}),
-              Line(
-                visible=true,
-                origin={3.333,-8.667},
-                points={{-83.333,34.667},{24.667,34.667},{42.667,-71.333}},
-                color={0,0,127},
-                smooth=Smooth.Bezier)}));
+          Icon(graphics={Polygon(
+                      visible=true,
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid,
+                      points={{-80,90},{-88,68},{-72,68},{-80,90}}),Line(
+                      visible=true,
+                      points={{-80,78},{-80,-90}},
+                      color={192,192,192}),Polygon(
+                      visible=true,
+                      lineColor={192,192,192},
+                      fillColor={192,192,192},
+                      fillPattern=FillPattern.Solid,
+                      points={{90,-80},{68,-72},{68,-88},{90,-80}}),Line(
+                      visible=true,
+                      points={{-90,-80},{82,-80}},
+                      color={192,192,192}),Rectangle(
+                      visible=true,
+                      lineColor={160,160,164},
+                      fillColor={255,255,255},
+                      fillPattern=FillPattern.Backward,
+                      extent={{-80,-80},{22,8}}),Line(
+                      visible=true,
+                      origin={3.333,-8.667},
+                      points={{-83.333,34.667},{24.667,34.667},{42.667,-71.333}},
+                      color={0,0,127},
+                      smooth=Smooth.Bezier)}));
       end Filter;
     end Control;
     extends Modelica.Icons.Package;
@@ -4356,7 +4341,7 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+        annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
@@ -4431,7 +4416,7 @@ This is the library of power converters for single and multi phase electrical sy
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_n) annotation (Line(
-          points={{40,-60},{102,-60}},
+          points={{40,-60},{100,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
@@ -5931,25 +5916,86 @@ This is the library of power converters for single and multi phase electrical sy
 
   package Utilities "Utilities for operating power converters"
     extends Modelica.Icons.Package;
+    model Earthing
+      parameter Integer m(final min=3) = 3 "Number of phases";
+      final parameter Integer mBasic=
+          Modelica.Electrical.MultiPhase.Functions.numberOfSymmetricBaseSystems(
+          m) "Number of symmetric base systems";
+      parameter Modelica.SIunits.Resistance R=1e6
+        "Insulation resistance between base systems";
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug plug(m=m)
+        annotation (Placement(transformation(extent={{-10,90},{10,110}})));
+
+      Modelica.Electrical.MultiPhase.Basic.MultiStar multiStar(m=m) annotation
+        (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,50})));
+      Modelica.Electrical.MultiPhase.Basic.Resistor resistor(m=mBasic, R=fill(R,
+            mBasic)) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,0})));
+      Modelica.Electrical.MultiPhase.Basic.Star star(m=mBasic) annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={0,-50})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin pin
+        annotation (Placement(transformation(extent={{-10,-110},{10,-90}})));
+    equation
+      connect(plug, multiStar.plug_p) annotation (Line(
+          points={{0,100},{0,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(multiStar.starpoints, resistor.plug_p) annotation (Line(
+          points={{0,40},{0,10}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(resistor.plug_n, star.plug_p) annotation (Line(
+          points={{0,-10},{0,-40}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star.pin_n, pin) annotation (Line(
+          points={{0,-60},{0,-100}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics={
+            Line(
+              points={{-40,100},{0,60},{40,100},{0,60},{0,20}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Rectangle(extent={{-10,20},{10,-20}}, lineColor={0,0,255}),
+            Line(
+              points={{-40,-10},{0,-50},{40,-10},{0,-50},{0,-90}},
+              color={0,0,255},
+              smooth=Smooth.None)}));
+    end Earthing;
   end Utilities;
 
   package Icons "Icons"
     extends Modelica.Icons.Package;
     model ExampleTemplate
-      annotation (Icon(graphics={Ellipse(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={175,175,175},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Polygon(
-                  points={{-36,-60},{-36,60},{64,0},{-36,-60}},
-                  lineColor={175,175,175},
-                  smooth=Smooth.None,
-                  fillColor={175,175,175},
-                  fillPattern=FillPattern.Solid),Rectangle(
-                  extent={{-4,46},{14,-44}},
-                  lineColor={255,255,255},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid)}));
+      annotation (Icon(graphics={
+            Ellipse(
+              extent={{-100,100},{100,-100}},
+              lineColor={175,175,175},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Polygon(
+              points={{-36,-60},{-36,60},{64,0},{-36,-60}},
+              lineColor={175,175,175},
+              smooth=Smooth.None,
+              fillColor={175,175,175},
+              fillPattern=FillPattern.Solid),
+            Rectangle(
+              extent={{-4,46},{14,-44}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid)}));
     end ExampleTemplate;
   end Icons;
   annotation (
