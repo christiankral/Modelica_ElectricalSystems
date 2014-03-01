@@ -2512,11 +2512,6 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-60,-30})));
-          Modelica.Blocks.Logical.Not inverse annotation (Placement(
-                transformation(
-                extent={{-10,10},{10,-10}},
-                rotation=90,
-                origin={-30,-10})));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage1(V=
                50) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2530,15 +2525,7 @@ This is the library of power converters for single and multi phase electrical sy
               color={0,0,255},
               smooth=Smooth.None));
           connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-              points={{-49,-30},{-44,-30},{-44,18}},
-              color={255,0,255},
-              smooth=Smooth.None));
-          connect(inverse.u, signalPWM.fire) annotation (Line(
-              points={{-30,-22},{-30,-30},{-49,-30}},
-              color={255,0,255},
-              smooth=Smooth.None));
-          connect(inverse.y, inverter.fire_n) annotation (Line(
-              points={{-30,1},{-30,10},{-36,10},{-36,18}},
+              points={{-49,-26},{-44,-26},{-44,18}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(constantVoltage1.n, constantVoltage2.p) annotation (Line(
@@ -2568,6 +2555,10 @@ This is the library of power converters for single and multi phase electrical sy
           connect(sine.y, signalPWM.dutyCycle) annotation (Line(
               points={{-71,-54},{-80,-54},{-80,-30},{-72,-30}},
               color={0,0,127},
+              smooth=Smooth.None));
+          connect(inverter.fire_n, signalPWM.notFire) annotation (Line(
+              points={{-36,18},{-36,-34},{-49,-34}},
+              color={255,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics));
@@ -5646,12 +5637,22 @@ This is the library of power converters for single and multi phase electrical sy
         "Generates a pulse width modulated (PWM) boolean fire signal"
         parameter Boolean useConstantDutyCycle=true
           "Enables constant duty cycle";
+        parameter Boolean useEnable=false
+          "Enables boolean input to enable fire and fireNot";
         parameter Real constantDutyCycle=0 "Constant duty cycle"
           annotation (Dialog(enable=useConstantDutyCycle));
-        parameter Modelica.SIunits.Frequency f=50 "Switching frequency";
+        parameter Modelica.SIunits.Frequency f=1000 "Switching frequency";
         parameter Modelica.SIunits.Time startTime=0 "Start time";
+        Modelica.Blocks.Interfaces.BooleanInput enable if useEnable
+          "Enables fire and notFire"
+          annotation (Placement(transformation(
+              extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={0,100})));
         Modelica.Blocks.Interfaces.BooleanOutput fire "Firing PWM signal"
-          annotation (Placement(transformation(extent={{100,-10},{120,10}})));
+          annotation (Placement(transformation(extent={{100,30},{120,50}})));
+        Modelica.Blocks.Interfaces.BooleanOutput notFire "Firing PWM signal"
+          annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
         Modelica.Blocks.Interfaces.RealInput dutyCycle if not
           useConstantDutyCycle "Duty cycle"
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
@@ -5659,92 +5660,113 @@ This is the library of power converters for single and multi phase electrical sy
           useConstantDutyCycle
           annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
         Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-          annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
-        Modelica.Blocks.Sources.SampleTrigger sampleTrigger(final period=1/f,
-            final startTime=startTime)
-          annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
-        Modelica.Blocks.Logical.Timer timer
-          annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
-        Modelica.Blocks.Logical.FallingEdge fallingEdge
-          annotation (Placement(transformation(extent={{-68,-60},{-48,-40}})));
-        Modelica.Blocks.Logical.Not invert
-          annotation (Placement(transformation(extent={{-40,-60},{-20,-40}})));
-        Modelica.Blocks.Math.Gain gain(final k=f)
-          annotation (Placement(transformation(extent={{20,-60},{40,-40}})));
+          annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
         Modelica.Blocks.Logical.Less greaterEqual
-          annotation (Placement(transformation(extent={{50,-40},{70,-60}})));
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+              rotation=270,
+              origin={-22,-60})));
         Modelica.Blocks.Logical.And andCondition
-          annotation (Placement(transformation(extent={{72,-10},{92,10}})));
-        Modelica.Blocks.Sources.BooleanStep enable(final startTime=startTime,
-            final startValue=false) "Enable signal of fire after start time"
-          annotation (Placement(transformation(
+          annotation (Placement(transformation(extent={{60,-10},{80,10}})));
+        Modelica.Blocks.Sources.BooleanConstant enableConstant(final k=true) if
+                                       not useEnable
+          "Constant enable signal of fire and notFire" annotation (Placement(
+              transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={60,50})));
+              origin={50,50})));
         Modelica.Blocks.Discrete.ZeroOrderHold zeroOrderHold(final startTime=
               startTime, final samplePeriod=1/f)
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+          annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+        Modelica.Blocks.Sources.SawTooth sawtooth(
+          final period=1/f,
+          final amplitude=1,
+          final nperiod=-1,
+          final offset=0,
+          final startTime=startTime)
+                             annotation (Placement(visible=true, transformation(
+              origin={-50,-40},
+              extent={{-10,-10},{10,10}},
+              rotation=0)));
+
+        Modelica.Blocks.Logical.Not inverse annotation (Placement(
+              transformation(
+              extent={{-10,10},{10,-10}},
+              rotation=0,
+              origin={30,-48})));
+        Modelica.Blocks.Logical.And andConditionNot
+          annotation (Placement(transformation(extent={{60,-50},{80,-30}})));
+
       equation
         connect(const.y, limiter.u) annotation (Line(
-            points={{-79,50},{-70,50},{-70,8.88178e-16},{-42,8.88178e-16}},
+            points={{-79,50},{-70,50},{-70,8.88178e-16},{-62,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(dutyCycle, limiter.u) annotation (Line(
-            points={{-120,8.88178e-16},{-42,8.88178e-16}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(sampleTrigger.y, fallingEdge.u) annotation (Line(
-            points={{-79,-50},{-70,-50}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(fallingEdge.y, invert.u) annotation (Line(
-            points={{-47,-50},{-42,-50}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(invert.y, timer.u) annotation (Line(
-            points={{-19,-50},{-12,-50}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(timer.y, gain.u) annotation (Line(
-            points={{11,-50},{18,-50}},
-            color={0,0,127},
-            smooth=Smooth.None));
-        connect(gain.y, greaterEqual.u1) annotation (Line(
-            points={{41,-50},{48,-50}},
+            points={{-120,8.88178e-16},{-62,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(andCondition.y, fire) annotation (Line(
-            points={{93,0},{110,0}},
+            points={{81,6.66134e-16},{100,6.66134e-16},{100,40},{110,40}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(greaterEqual.y, andCondition.u2) annotation (Line(
-            points={{71,-50},{80,-50},{80,-20},{60,-20},{60,-8},{70,-8}},
+            points={{-22,-71},{-22,-80},{10,-80},{10,-8},{58,-8}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(enable.y, andCondition.u1) annotation (Line(
-            points={{60,39},{60,0},{70,0}},
+        connect(enableConstant.y, andCondition.u1) annotation (Line(
+            points={{50,39},{50,6.66134e-16},{58,6.66134e-16}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(limiter.y, zeroOrderHold.u) annotation (Line(
-            points={{-19,0},{-12,0}},
+            points={{-39,0},{-32,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(zeroOrderHold.y, greaterEqual.u2) annotation (Line(
-            points={{11,0},{40,0},{40,-42},{48,-42}},
+            points={{-9,6.66134e-16},{-4,6.66134e-16},{-4,0},{0,0},{0,-40},{-14,-40},{
+                -14,-48},{-14,-48}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+        connect(sawtooth.y, greaterEqual.u1) annotation (Line(
+            points={{-39,-40},{-22,-40},{-22,-48},{-22,-48}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(greaterEqual.y, inverse.u) annotation (Line(
+            points={{-22,-71},{-22,-80},{10,-80},{10,-48},{18,-48}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enableConstant.y, andConditionNot.u1) annotation (Line(
+            points={{50,39},{50,-40},{58,-40}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(inverse.y, andConditionNot.u2) annotation (Line(
+            points={{41,-48},{58,-48}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andConditionNot.y, notFire) annotation (Line(
+            points={{81,-40},{110,-40}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enable, andCondition.u1) annotation (Line(
+            points={{0,100},{0,20},{42,20},{42,20},{50,20},{50,0},{58,0}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enable, andConditionNot.u1) annotation (Line(
+            points={{8.88178e-16,100},{8.88178e-16,20},{50,20},{50,2},{50,2},{50,-40},
+                {58,-40}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={Rectangle(
                       extent={{-100,100},{100,-100}},
                       lineColor={0,0,0},
                       fillColor={255,255,255},
                       fillPattern=FillPattern.Solid),Line(
-                      points={{-100,0},{-98,0},{-62,0}},
+                      points={{-100,0},{-98,0},{12,0}},
                       color={0,0,255},
                       smooth=Smooth.None),Line(
-                      points={{-60,-4},{-60,-48},{40,-48},{40,-24}},
+                      points={{-60,-22},{-60,-64},{44,-64},{44,-36}},
                       color={0,0,255},
                       smooth=Smooth.None),Line(
                       points={{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}},
@@ -5753,12 +5775,18 @@ This is the library of power converters for single and multi phase electrical sy
                       points={{-62,0},{-76,4},{-76,-4},{-62,0}},
                       color={0,0,255},
                       smooth=Smooth.None),Line(
-                      points={{40,-24},{40,-24},{36,-38},{40,-38},{44,-38},{40,
-                  -24}},
+                      points={{44,-36},{44,-36},{40,-50},{44,-50},{48,-50},{44,-36}},
                       color={0,0,255},
                       smooth=Smooth.None),Line(
-                      points={{36,-20},{38,-20},{40,-20},{40,20},{60,20},{60,-20},
-                  {80,-20},{80,-16}},
+                      points={{20,-20},{22,-20},{24,-20},{24,20},{44,20},{44,-20},{64,
+                    -20},{64,-16}},
+                      color={255,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{-40,-16},{-40,-20},{0,20},{0,-20},{4,-16}},
+                      color={0,0,255},
+                      smooth=Smooth.None),Line(
+                      points={{60,-20},{62,-20},{64,-20},{64,20},{84,20},{84,-20},{84,
+                    -20},{88,-20}},
                       color={255,0,255},
                       smooth=Smooth.None)}));
       end SignalPWM;
