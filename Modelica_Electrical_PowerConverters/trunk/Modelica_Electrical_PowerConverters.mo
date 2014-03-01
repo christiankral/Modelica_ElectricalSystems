@@ -150,8 +150,8 @@ This is the library of power converters for single and multi phase electrical sy
                 origin={30,30},
                 extent={{10,-10},{-10,10}},
                 rotation=90)));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-40,70})));
@@ -372,8 +372,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
@@ -610,8 +610,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
@@ -777,7 +777,6 @@ This is the library of power converters for single and multi phase electrical sy
                 origin={-80,60})));
         initial equation
           lMains.i = 0;
-
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
@@ -1038,13 +1037,11 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
-          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
-                transformation(extent={{-90,-80},{-70,-60}})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -1064,10 +1061,6 @@ This is the library of power converters for single and multi phase electrical sy
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
               points={{30,40},{-10,40},{-10,6},{-20,6}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(earthing.pin, ground.p) annotation (Line(
-              points={{-80,-50},{-80,-60}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1207,7 +1200,6 @@ This is the library of power converters for single and multi phase electrical sy
                 transformation(extent={{-30,-60},{-10,-40}})));
         initial equation
           lMains.i[1:m - 1] = zeros(m - 1);
-
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
@@ -1286,7 +1278,7 @@ This is the library of power converters for single and multi phase electrical sy
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, ground.p) annotation (Line(
-              points={{-20,-6},{-20,-23},{-20,-23},{-20,-40}},
+              points={{-20,-6},{-20,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -1462,8 +1454,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
@@ -1650,8 +1642,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation
-            (Placement(transformation(
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-30,70})));
@@ -1821,7 +1813,11 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,-10},{10,10}},
                 rotation=-90)));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2Pulse
-            rectifier(useHeatPort=false)
+            rectifier(useHeatPort=false,
+            final offStart_p1=true,
+            final offStart_p2=true,
+            final offStart_n1=true,
+            final offStart_n2=true)
             annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
@@ -2061,12 +2057,10 @@ This is the library of power converters for single and multi phase electrical sy
             V=fill(sqrt(2)*Vrms, m),
             phase=-
                 Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
-
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-80,-10})));
-
           Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2mPulse
             rectifier(final m=m)
             annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -2102,6 +2096,8 @@ This is the library of power converters for single and multi phase electrical sy
                 origin={-30,30})));
           Utilities.Earthing earthing(m=m) annotation (Placement(transformation(
                   extent={{-90,-50},{-70,-30}})));
+          Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
+                transformation(extent={{-90,-80},{-70,-60}})));
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{0,-60},{0,-50}},
@@ -2147,6 +2143,10 @@ This is the library of power converters for single and multi phase electrical sy
               points={{-80,-20},{-80,-30}},
               color={0,0,255},
               smooth=Smooth.None));
+          connect(earthing.pin, ground.p) annotation (Line(
+              points={{-80,-50},{-80,-60}},
+              color={0,0,255},
+              smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
@@ -2166,8 +2166,8 @@ This is the library of power converters for single and multi phase electrical sy
           // parameter Modelica.SIunits.Voltage VDC=-260 "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
                 transformation(extent={{-80,-100},{-60,-80}})));
-          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation
-            (Placement(transformation(
+          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,-30})));
@@ -2176,12 +2176,10 @@ This is the library of power converters for single and multi phase electrical sy
             V=fill(sqrt(2)*Vrms, m),
             phase=-
                 Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
-
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,0})));
-
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTapmPulse
             rectifier(final m=m)
             annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -2284,8 +2282,8 @@ This is the library of power converters for single and multi phase electrical sy
           // parameter Modelica.SIunits.Voltage VDC=-260 "DC load offset voltage";
           Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
                 transformation(extent={{-90,-100},{-70,-80}})));
-          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation
-            (Placement(transformation(
+          Modelica.Electrical.MultiPhase.Basic.Star star(final m=m) annotation (
+             Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-100,-10})));
@@ -2294,12 +2292,10 @@ This is the library of power converters for single and multi phase electrical sy
             V=fill(sqrt(2)*Vrms, m),
             phase=-
                 Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
-
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,10})));
-
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTap2mPulse
             rectifier(final m=m)
             annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
@@ -2342,12 +2338,10 @@ This is the library of power converters for single and multi phase electrical sy
             V=fill(sqrt(2)*Vrms, m),
             phase=-
                 Modelica.Electrical.MultiPhase.Functions.symmetricOrientation(m),
-
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,-20})));
-
         equation
           connect(star.pin_n, ground.p) annotation (Line(
               points={{-100,-20},{-100,-70},{-80,-70},{-80,-80}},
@@ -2492,8 +2486,8 @@ This is the library of power converters for single and multi phase electrical sy
           "Single phas two level inverter including control"
           extends Icons.ExampleTemplate;
           extends Modelica.Icons.Example;
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V
-              =50) annotation (Placement(transformation(
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V=
+               50) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,10})));
@@ -2523,8 +2517,8 @@ This is the library of power converters for single and multi phase electrical sy
                 extent={{-10,10},{10,-10}},
                 rotation=90,
                 origin={-30,-10})));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage1(V
-              =50) annotation (Placement(transformation(
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage1(V=
+               50) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,50})));
@@ -2738,8 +2732,8 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-30,90})));
-        Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold
-            =zeros(m)) annotation (Placement(transformation(
+        Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold=
+             zeros(m)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-40,-2})));
@@ -2783,8 +2777,8 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,0})));
-        Modelica.Blocks.Routing.Replicator replicator(final nout=m) annotation
-          (Placement(transformation(
+        Modelica.Blocks.Routing.Replicator replicator(final nout=m) annotation (
+           Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={0,-30})));
@@ -2806,21 +2800,17 @@ This is the library of power converters for single and multi phase electrical sy
               origin={-60,20})));
       equation
         connect(positiveThreshold.y, timerPositive.u) annotation (Line(
-            points={{-40,-13},{-40,-14},{-40,-14},{-40,-16},{-40,-16},{-40,-20}},
-
+            points={{-40,-13},{-40,-20}},
             color={255,0,255},
             smooth=Smooth.None));
-
         connect(negativeThreshold.y, timerNegative.u) annotation (Line(
             points={{40,-11},{40,-20}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(timerPositive.y, greaterPositive.u1) annotation (Line(
             points={{-40,-43},{-40,-48},{-42,-48},{-42,-52},{-40,-52},{-40,-60}},
-
             color={0,0,127},
             smooth=Smooth.None));
-
         connect(negativeEqual.u1, timerNegative.y) annotation (Line(
             points={{40,-60},{40,-43}},
             color={0,0,127},
@@ -2830,8 +2820,7 @@ This is the library of power converters for single and multi phase electrical sy
             color={255,0,255},
             smooth=Smooth.None));
         connect(negativeEqual.y, fire_n) annotation (Line(
-            points={{40,-83},{40,-88},{40,-88},{40,-96},{40,-96},{40,-110},{40,
-                -110}},
+            points={{40,-83},{40,-110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(gain.y, replicator.u) annotation (Line(
@@ -2840,10 +2829,8 @@ This is the library of power converters for single and multi phase electrical sy
             smooth=Smooth.None));
         connect(replicator.y, greaterPositive.u2) annotation (Line(
             points={{-1.33227e-15,-41},{-1.33227e-15,-50},{-48,-50},{-48,-60}},
-
             color={0,0,127},
             smooth=Smooth.None));
-
         connect(replicator.y, negativeEqual.u2) annotation (Line(
             points={{-1.33227e-15,-41},{-1.33227e-15,-50},{32,-50},{32,-60}},
             color={0,0,127},
@@ -2885,7 +2872,6 @@ This is the library of power converters for single and multi phase electrical sy
                 smooth=Smooth.None),
               Line(
                 points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
                 color={255,0,255},
                 smooth=Smooth.None),
               Text(
@@ -2993,7 +2979,6 @@ This is the library of power converters for single and multi phase electrical sy
                 smooth=Smooth.None),
               Line(
                 points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
                 color={255,0,255},
                 smooth=Smooth.None),
               Text(
@@ -3062,10 +3047,8 @@ This is the library of power converters for single and multi phase electrical sy
       equation
         connect(ac, voltageSensor.plug_p) annotation (Line(
             points={{-100,4.44089e-16},{-100,-4.44089e-16},{-44,-4.44089e-16}},
-
             color={0,0,255},
             smooth=Smooth.None));
-
         connect(voltageSensor.plug_p, delta.plug_n) annotation (Line(
             points={{-44,-4.44089e-16},{-54,-4.44089e-16},{-54,0},{-62,0},{-62,
                 -4.44089e-16},{-80,-4.44089e-16}},
@@ -3111,7 +3094,6 @@ This is the library of power converters for single and multi phase electrical sy
                 smooth=Smooth.None),
               Line(
                 points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
                 color={255,0,255},
                 smooth=Smooth.None),
               Text(
@@ -3228,7 +3210,6 @@ This is the library of power converters for single and multi phase electrical sy
                 smooth=Smooth.None),
               Line(
                 points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-
                 color={255,0,255},
                 smooth=Smooth.None),
               Text(
@@ -3283,8 +3264,7 @@ This is the library of power converters for single and multi phase electrical sy
           Documentation(info="<html>
 <p>PT1-filter with cut-off frequency fCut. </p>
 <p>The phase shift is compensated by a series of two 1st order allpass filters for frequency f.</p>
-</html>"),
-          Icon(graphics={Polygon(
+</html>"),Icon(graphics={Polygon(
                       visible=true,
                       lineColor={192,192,192},
                       fillColor={192,192,192},
@@ -3322,9 +3302,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
         "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -3342,40 +3321,40 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC=ac_p.i "AC currents";
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p1(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort)
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort,
+        final Ron=RonDiode)
         "Diode connecting the positve AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
             origin={10,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_p2(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort)
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
         "Diode connecting the negative AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
             origin={40,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort)
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
         "Diode connecting the positve AC input pin with negative DC output"
         annotation (Placement(visible=true, transformation(
             origin={10,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort)
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
         "Diode connecting the negative AC input pin with negative DC output"
         annotation (Placement(visible=true, transformation(
             origin={40,-50},
@@ -3491,15 +3470,20 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p1=true
-        "Boolean off start value for thyristor_p1";
+        "Boolean start value of variable thyristor_p1.off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_p2=true
-        "Boolean off start value for thyristor_p2";
+        "Boolean start value of variable thyristor_p2.off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_n1=true
-        "Boolean off start value for thyristor_n1";
+        "Boolean start value of variable thyristor_n1.off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_n2=true
-        "Boolean off start value for thyristor_n2";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_n2.off"
+        annotation(choices(checkBox=true));
+
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
         "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -3529,50 +3513,51 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC=ac_p.i "AC currents";
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_p1, fixed=true))
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_p1, fixed=true))
         "Thyristor connecting the positve AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
             origin={10,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_p2, fixed=true))
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_p2, fixed=true))
         "Thyristor connecting the negative AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
             origin={40,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_n1, fixed=true))
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_n1, fixed=true))
         "Thyristor connecting the positve AC input with negative DC output"
         annotation (Placement(visible=true, transformation(
             origin={10,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_n2, fixed=true))
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_n2, fixed=true))
         "Thyristor connecting the negative AC input with negative DC output"
         annotation (Placement(visible=true, transformation(
             origin={40,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
     equation
+
       if not useHeatPort then
         LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower +
           thyristor_n1.LossPower + thyristor_n2.LossPower;
@@ -3639,10 +3624,8 @@ This is the library of power converters for single and multi phase electrical sy
           smooth=Smooth.None));
       connect(fire_n, thyristor_n1.fire) annotation (Line(
           points={{40,120},{40,80},{60,80},{60,-10},{-10,-10},{-10,-43},{-1,-43}},
-
           color={255,0,255},
           smooth=Smooth.None));
-
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
@@ -3710,11 +3693,13 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p1=true
-        "Boolean off start value for thyristor_p1";
+        "Boolean start value of variable thyristor_p1.off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_p2=true
-        "Boolean off start value for thyristor_p2";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_p2.off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
         "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -3744,39 +3729,41 @@ This is the library of power converters for single and multi phase electrical sy
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
       Modelica.SIunits.Current iAC=ac_p.i "AC currents";
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p1(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_p1, fixed=true)) annotation (Placement(visible=true,
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_p1, fixed=true)) annotation (Placement(visible=true,
             transformation(
             origin={10,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
-        Ron=RonThyristor,
-        Goff=GoffThyristor,
-        Vknee=VkneeThyristor,
-        useHeatPort=useHeatPort,
-        off(start=offStart_p2, fixed=true)) annotation (Placement(visible=true,
+        final Ron=RonThyristor,
+        final Goff=GoffThyristor,
+        final Vknee=VkneeThyristor,
+        final useHeatPort=useHeatPort,
+        final off(start=offStart_p2, fixed=true)) annotation (Placement(visible=true,
             transformation(
             origin={40,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        "Diode connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
             origin={10,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
-        Ron=RonDiode,
-        Goff=GoffDiode,
-        Vknee=VkneeDiode,
-        useHeatPort=useHeatPort) "Diode connected to negative DC potential"
+        final Ron=RonDiode,
+        final Goff=GoffDiode,
+        final Vknee=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        "Diode connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
             origin={40,-50},
             extent={{-10,-10},{10,10}},
@@ -3919,8 +3906,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
         "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -4041,11 +4028,13 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p=true
-        "Boolean off start value for thyristor_p1";
+        "Boolean start value of variable thyristor_p.off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_n=true
-        "Boolean off start value for thyristor_p2";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_n.off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
         "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -4076,7 +4065,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=GoffThyristor,
         final Vknee=VkneeThyristor,
         final useHeatPort=useHeatPort,
-        off(start=offStart_p, fixed=true))
+        final off(start=offStart_p, fixed=true))
         "Thyristors conducting positive pin AC potentials" annotation (
           Placement(visible=true, transformation(
             origin={10,60},
@@ -4087,7 +4076,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=GoffThyristor,
         final Vknee=VkneeThyristor,
         final useHeatPort=useHeatPort,
-        off(start=offStart_n, fixed=true))
+        final off(start=offStart_n, fixed=true))
         "Thyristors conducting negative pin AC potentials" annotation (
           Placement(visible=true, transformation(
             origin={10,-60},
@@ -4191,8 +4180,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Postive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
@@ -4333,11 +4322,13 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p[m]=fill(true, m)
-        "Boolean off start value for thyristor_p";
+        "Boolean start value of variable thyristor_p[:].off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_n[m]=fill(true, m)
-        "Boolean off start value for thyristor_n";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_n[:].off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
@@ -4366,8 +4357,9 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart_p)
-        "Thyristors connected to positive DC potential" annotation (Placement(
+        final off(start=offStart_p,fixed=true))
+        "Thyristors connected to positive DC potential"
+          annotation (Placement(
             visible=true, transformation(
             origin={10,40},
             extent={{-10,-10},{10,10}},
@@ -4378,7 +4370,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart_n)
+        final off(start=offStart_n,fixed=true))
         "Thyristors connected to negative DC potential" annotation (Placement(
             visible=true, transformation(
             origin={10,-40},
@@ -4507,9 +4499,10 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p[m]=fill(true, m)
-        "Boolean off start value for thyristor_p";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_p[:].off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
@@ -4539,8 +4532,9 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart_p)
-        "Thyristors connected to positive DC potential" annotation (Placement(
+        final off(start=offStart_p,fixed=true))
+        "Thyristors connected to positive DC potential"
+          annotation (Placement(
             visible=true, transformation(
             origin={10,40},
             extent={{-10,-10},{10,10}},
@@ -4681,8 +4675,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -4825,11 +4819,13 @@ This is the library of power converters for single and multi phase electrical sy
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
       parameter Boolean offStart_p[m]=fill(true, m)
-        "Boolean off start value for thyristor_p";
+        "Boolean start value of variable thyristor_p[:].off"
+        annotation(choices(checkBox=true));
       parameter Boolean offStart_n[m]=fill(true, m)
-        "Boolean off start value for thyristor_n";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+        "Boolean start value of variable thyristor_n[:].off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -4862,7 +4858,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart_p)
+        final off(start=offStart_p,fixed=true))
         "Thyristors conducting positive plug AC potentials" annotation (
           Placement(visible=true, transformation(
             origin={-10,60},
@@ -4874,7 +4870,7 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart_n)
+        final off(start=offStart_n,fixed=true))
         "Thyristors conducting negative plug AC potentials" annotation (
           Placement(visible=true, transformation(
             origin={-10,-60},
@@ -4996,8 +4992,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -5106,9 +5102,11 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened thyristor conductance";
       parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
         "Thyristor forward threshold voltage";
-      parameter Boolean offStart[m]=fill(true, m) "Boolean off start value";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      parameter Boolean offStart[m]=fill(true, m)
+        "Boolean start value of variable thyristor_p[:].off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC output"
         annotation (Placement(transformation(extent={{90,-10},{110,10}})));
@@ -5131,7 +5129,8 @@ This is the library of power converters for single and multi phase electrical sy
         final Goff=fill(GoffThyristor, m),
         final Vknee=fill(VkneeThyristor, m),
         each final useHeatPort=useHeatPort,
-        final offStart=offStart) "Thyristors conducting AC potentials"
+        final off(start=offStart,fixed=true))
+        "Thyristors conducting AC potentials"
         annotation (Placement(visible=true, transformation(
             origin={-10,0},
             extent={{10,10},{-10,-10}},
@@ -5239,8 +5238,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Diode opened conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
       // parameter Boolean useEnable "Enables enable signal connector";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC input"
         annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
@@ -5434,8 +5433,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Diode opened conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
       // parameter Boolean useEnable "Enables enable signal connector";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
         "Positive DC input"
         annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
@@ -5779,8 +5778,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Opened diode conductance";
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
         "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T
-          =293.15);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1
         "Positive DC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -5925,9 +5924,8 @@ This is the library of power converters for single and multi phase electrical sy
         "Insulation resistance between base systems";
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug plug(m=m)
         annotation (Placement(transformation(extent={{-10,90},{10,110}})));
-
-      Modelica.Electrical.MultiPhase.Basic.MultiStar multiStar(m=m) annotation
-        (Placement(transformation(
+      Modelica.Electrical.MultiPhase.Basic.MultiStar multiStar(m=m) annotation (
+         Placement(transformation(
             extent={{-10,-10},{10,10}},
             rotation=270,
             origin={0,50})));
@@ -6021,4 +6019,3 @@ Copyright &copy; 2013-2014, <a href=\"modelica://Modelica_Electrical_PowerConver
 </p>
 </html>"));
 end Modelica_Electrical_PowerConverters;
-
