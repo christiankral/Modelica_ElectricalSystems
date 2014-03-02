@@ -2211,8 +2211,7 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
             pulsem(
             m=m,
-            f=f,
-            constantFiringAngle=1.5707963267949) annotation (Placement(
+            f=f)                                 annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -2327,8 +2326,7 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageCenterTap2mPulse
             pulse2m(
             m=m,
-            f=f,
-            constantFiringAngle=1.5707963267949) annotation (Placement(
+            f=f)                                 annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
