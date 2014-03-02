@@ -3139,7 +3139,8 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,-110})));
-        Modelica.Electrical.MultiPhase.Basic.Delta delta(final m=m)
+        Modelica.Electrical.MultiPhase.Basic.MultiDelta
+                                                   delta(final m=m)
           "Delta connection" annotation (Placement(transformation(
               extent={{10,-10},{-10,10}},
               rotation=0,
