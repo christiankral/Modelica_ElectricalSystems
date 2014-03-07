@@ -2702,9 +2702,17 @@ This is the library of power converters for single and multi phase electrical sy
         parameter Integer m(final min=1) = 3 "Number of phases";
         parameter Boolean useConstantFiringAngle=true
           "Use constant firing angle instead of signal input";
-        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
+        parameter Boolean useFilter "Enable use of filter";
+        parameter Modelica.SIunits.Frequency f=50 "Frequency"
+          annotation (Dialog(enable=useFilter));
+        parameter Modelica.SIunits.Frequency fCut=2*f
+          "Cut off frequency of filter"
+          annotation (Dialog(enable=useFilter));
+        parameter Modelica.SIunits.Voltage vStart[m] = zeros(m)
+          "Start voltage of filter output"
+          annotation (Dialog(enable=useFilter));
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
@@ -2782,11 +2790,15 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-20,-20},{20,20}},
               rotation=0,
               origin={-100,0})));
-        Filter filter[m](each final f=f, each final fCut=2*f) annotation (
+        Filter filter[m](each final f=f, each final fCut=2*f,
+          yStart=vStart) if useFilter                                     annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={-60,20})));
+        Modelica.Blocks.Routing.RealPassThrough realPassThrough[m] if
+          not useFilter "Pass through in case filter is off"
+          annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
       equation
         connect(positiveThreshold.y, timerPositive.u) annotation (Line(
             points={{-40,-13},{-40,-20}},
@@ -2849,8 +2861,20 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-49,20},{40,20},{40,12}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+        connect(realPassThrough.u, v) annotation (Line(
+            points={{-72,50},{-80,50},{-80,0},{-88,0},{-88,0},{-100,0},{-100,8.88178e-16}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(realPassThrough.y, positiveThreshold.u) annotation (Line(
+            points={{-49,50},{-40,50},{-40,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(realPassThrough.y, negativeThreshold.u) annotation (Line(
+            points={{-49,50},{-40,50},{-40,20},{40,20},{40,12}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
               Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,255}),
@@ -2882,6 +2906,11 @@ This is the library of power converters for single and multi phase electrical sy
           min=0,
           max=Modelica.Constants.pi) = Modelica.Constants.pi
           "Maximum firing angle";
+        parameter Boolean useConstantEnable = true
+          "Enables boolean input for enabling firing signals";
+        parameter Boolean constantEnable = true
+          "Constant enabling of firing signals"
+          annotation (Dialog(enable=useConstantEnable));
         parameter Modelica.SIunits.Resistance Ron(final min=0) = 1e-05
           "Closed thyristor resistance";
         parameter Modelica.SIunits.Conductance Goff(final min=0) = 1e-05
@@ -2922,10 +2951,36 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,-110})));
+        Modelica.Blocks.Logical.And andCondition_p
+          "And condition for positive firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-40,-50})));
+        Modelica.Blocks.Sources.BooleanConstant enableConstantSource(
+          final k=constantEnable) if useConstantEnable
+          "Constant enable signal of fire and notFire"
+          annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={70,50})));
+        Modelica.Blocks.Logical.And andCondition_n
+          "And condition for negative firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-50})));
+        Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
+          "Enables fire and notFire"
+          annotation (Placement(transformation(
+              extent={{-20,-20},{20,20}},
+              rotation=270,
+              origin={40,100})));
       equation
         connect(voltageSensor.v, twoPulse.v[1]) annotation (Line(
             points={{-70,-2.22045e-15},{-60,-2.22045e-15},{-60,0},{-10,0},{-10,
-                6.66134e-16}},
+                8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSensor.p, ac_p) annotation (Line(
@@ -2936,20 +2991,47 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-80,-10},{-80,-60},{-100,-60}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(twoPulse.fire_p[1], fire_p) annotation (Line(
-            points={{-4,-11},{-4,-60},{-40,-60},{-40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(twoPulse.fire_n[1], fire_n) annotation (Line(
-            points={{4,-11},{4,-60},{40,-60},{40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
         connect(firingAngle, twoPulse.firingAngle) annotation (Line(
             points={{8.88178e-16,100},{8.88178e-16,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+        connect(enableConstantSource.y, andCondition_p.u1) annotation (Line(
+            points={{70,39},{70,-30},{-34,-30},{-34,-30},{-40,-30},{-40,-30},{
+                -40,-30},{-40,-38},{-40,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enableConstantSource.y, andCondition_n.u1) annotation (Line(
+            points={{70,39},{70,-30},{40,-30},{40,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enable, andCondition_p.u1) annotation (Line(
+            points={{40,100},{40,30},{70,30},{70,-30},{-40,-30},{-40,-30},{-40,
+                -30},{-40,-38},{-40,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(enable, andCondition_n.u1) annotation (Line(
+            points={{40,100},{40,30},{70,30},{70,-30},{40,-30},{40,-32},{40,-32},
+                {40,-38},{40,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(twoPulse.fire_n[1], andCondition_n.u2) annotation (Line(
+            points={{4,-11},{4,-20},{32,-20},{32,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(twoPulse.fire_p[1], andCondition_p.u2) annotation (Line(
+            points={{-4,-11},{-4,-20},{-48,-20},{-48,-38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_p.y, fire_p) annotation (Line(
+            points={{-40,-61},{-40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_n.y, fire_n) annotation (Line(
+            points={{40,-61},{40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
               Rectangle(
@@ -3219,7 +3301,8 @@ This is the library of power converters for single and multi phase electrical sy
           "Count of 1st order allpass";
         final parameter Modelica.SIunits.Frequency fa=f/tan(pi/na - atan(f/fCut)
             /(2*na));
-        parameter Real yStart=0 "Start value of output";
+        parameter Real yStart=0 "Start value of output"
+          annotation (Dialog(enable=useFilter));
         Modelica.Blocks.Continuous.FirstOrder firstOrder(
           final k=1,
           final T=1/(2*pi*fCut),
@@ -3249,8 +3332,8 @@ This is the library of power converters for single and multi phase electrical sy
             color={0,0,127},
             smooth=Smooth.None));
         annotation (
-          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                  {100,100}}),graphics),
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}),     graphics),
           Documentation(info="<html>
 <p>PT1-filter with cut-off frequency fCut. </p>
 <p>The phase shift is compensated by a series of two 1st order allpass filters for frequency f.</p>
@@ -5634,15 +5717,21 @@ This is the library of power converters for single and multi phase electrical sy
       extends Modelica.Icons.Package;
       model SignalPWM
         "Generates a pulse width modulated (PWM) boolean fire signal"
-        parameter Boolean useConstantDutyCycle=true
+        parameter Boolean useConstantDutyCycle = true
           "Enables constant duty cycle";
-        parameter Boolean useEnable=false
-          "Enables boolean input to enable fire and fireNot";
         parameter Real constantDutyCycle=0 "Constant duty cycle"
           annotation (Dialog(enable=useConstantDutyCycle));
+        parameter Boolean useConstantEnable = true
+          "Enables boolean input for enabling firing signals";
+        parameter Boolean constantEnable = true
+          "Constant enabling of firing signals"
+          annotation (Dialog(enable=useConstantEnable));
         parameter Modelica.SIunits.Frequency f=1000 "Switching frequency";
         parameter Modelica.SIunits.Time startTime=0 "Start time";
-        Modelica.Blocks.Interfaces.BooleanInput enable if useEnable
+        Modelica.Blocks.Interfaces.RealInput dutyCycle if not
+          useConstantDutyCycle "Duty cycle"
+          annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
+        Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
           "Enables fire and notFire"
           annotation (Placement(transformation(
               extent={{-20,-20},{20,20}},
@@ -5652,9 +5741,6 @@ This is the library of power converters for single and multi phase electrical sy
           annotation (Placement(transformation(extent={{100,30},{120,50}})));
         Modelica.Blocks.Interfaces.BooleanOutput notFire "Firing PWM signal"
           annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
-        Modelica.Blocks.Interfaces.RealInput dutyCycle if not
-          useConstantDutyCycle "Duty cycle"
-          annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Sources.Constant const(final k=constantDutyCycle) if
           useConstantDutyCycle
           annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
@@ -5666,9 +5752,10 @@ This is the library of power converters for single and multi phase electrical sy
               origin={-22,-60})));
         Modelica.Blocks.Logical.And andCondition
           annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-        Modelica.Blocks.Sources.BooleanConstant enableConstant(final k=true) if
-                                       not useEnable
-          "Constant enable signal of fire and notFire" annotation (Placement(
+        Modelica.Blocks.Sources.BooleanConstant enableConstantSource(
+          final k=constantEnable) if useConstantEnable
+          "Constant enable signal of fire and notFire"
+          annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
@@ -5712,7 +5799,7 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-22,-71},{-22,-80},{10,-80},{10,-8},{58,-8}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(enableConstant.y, andCondition.u1) annotation (Line(
+        connect(enableConstantSource.y, andCondition.u1) annotation (Line(
             points={{50,39},{50,6.66134e-16},{58,6.66134e-16}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -5733,7 +5820,7 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-22,-71},{-22,-80},{10,-80},{10,-48},{18,-48}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(enableConstant.y, andConditionNot.u1) annotation (Line(
+        connect(enableConstantSource.y, andConditionNot.u1) annotation (Line(
             points={{50,39},{50,-40},{58,-40}},
             color={255,0,255},
             smooth=Smooth.None));
@@ -5746,12 +5833,11 @@ This is the library of power converters for single and multi phase electrical sy
             color={255,0,255},
             smooth=Smooth.None));
         connect(enable, andCondition.u1) annotation (Line(
-            points={{0,100},{0,20},{42,20},{42,20},{50,20},{50,0},{58,0}},
+            points={{0,100},{0,20},{50,20},{50,0},{58,0}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(enable, andConditionNot.u1) annotation (Line(
-            points={{8.88178e-16,100},{8.88178e-16,20},{50,20},{50,2},{50,2},{50,-40},
-                {58,-40}},
+            points={{8.88178e-16,100},{8.88178e-16,20},{50,20},{50,-40},{58,-40}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
