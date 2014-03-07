@@ -2704,7 +2704,7 @@ This is the library of power converters for single and multi phase electrical sy
           "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
-        parameter Boolean useFilter "Enable use of filter";
+        parameter Boolean useFilter = true "Enable use of filter";
         parameter Modelica.SIunits.Frequency f=50 "Frequency"
           annotation (Dialog(enable=useFilter));
         parameter Modelica.SIunits.Frequency fCut=2*f
@@ -2899,7 +2899,15 @@ This is the library of power converters for single and multi phase electrical sy
         import Modelica.Constants.pi;
         parameter Boolean useConstantFiringAngle=true
           "Use constant firing angle instead of signal input";
-        parameter Modelica.SIunits.Frequency f=50 "Frequency";
+        parameter Boolean useFilter = true "Enable use of filter";
+        parameter Modelica.SIunits.Frequency f=50 "Frequency"
+          annotation (Dialog(enable=useFilter));
+        parameter Modelica.SIunits.Frequency fCut=2*f
+          "Cut off frequency of filter"
+          annotation (Dialog(enable=useFilter));
+        parameter Modelica.SIunits.Voltage vStart = 0
+          "Start voltage of filter output"
+          annotation (Dialog(enable=useFilter));
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(
@@ -2928,7 +2936,11 @@ This is the library of power converters for single and multi phase electrical sy
           final f=f,
           final constantFiringAngle=constantFiringAngle,
           final firingAngleMax=firingAngleMax,
-          final m=1) annotation (Placement(transformation(
+          final m=1,
+          final useFilter=useFilter,
+          final fCut=fCut,
+          final vStart=fill(vStart, 1))
+                     annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={0,0})));
