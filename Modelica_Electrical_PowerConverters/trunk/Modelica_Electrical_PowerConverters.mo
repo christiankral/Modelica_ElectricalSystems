@@ -716,7 +716,8 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-            pulse2(f=f, useConstantFiringAngle=false) annotation (Placement(
+            pulse2(     useConstantFiringAngle=false, useFilter=true)
+                                                      annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -1134,8 +1135,8 @@ This is the library of power converters for single and multi phase electrical sy
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
             pulse2(
-            f=f,
             useConstantFiringAngle=false,
+            useFilter=true,
             m=m) annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -1721,7 +1722,8 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-            pulse2(f=f) annotation (Placement(transformation(
+            pulse2(f=f, useFilter=false)
+                        annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-40,0})));
@@ -1845,7 +1847,8 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-            pulse2(f=f) annotation (Placement(transformation(
+            pulse2(f=f, useFilter=false)
+                        annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
                 origin={-30,30})));
@@ -1969,7 +1972,8 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2Pulse
-            pulse2(f=f) annotation (Placement(transformation(
+            pulse2(f=f, useFilter=false)
+                        annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
                 origin={-30,30})));
@@ -2090,7 +2094,8 @@ This is the library of power converters for single and multi phase electrical sy
                 rotation=0,
                 origin={80,-60})));
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
-            pulse2m(m=m, f=f) annotation (Placement(transformation(
+            pulse2m(m=m, f=f,
+            useFilter=false)  annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
                 origin={-30,30})));
@@ -2211,7 +2216,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageBridge2mPulse
             pulsem(
             m=m,
-            f=f)                                 annotation (Placement(
+            f=f,
+            useFilter=false)                     annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -2326,7 +2332,8 @@ This is the library of power converters for single and multi phase electrical sy
           Modelica_Electrical_PowerConverters.ACDC.Control.VoltageCenterTap2mPulse
             pulse2m(
             m=m,
-            f=f)                                 annotation (Placement(
+            f=f,
+            useFilter=false)                     annotation (Placement(
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
@@ -2704,15 +2711,16 @@ This is the library of power converters for single and multi phase electrical sy
           "Use constant firing angle instead of signal input";
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
-        parameter Boolean useFilter = true "Enable use of filter";
+        parameter Boolean useFilter = true "Enable use of filter"
+          annotation (Dialog(tab="Filter"));
         parameter Modelica.SIunits.Frequency f=50 "Frequency"
-          annotation (Dialog(enable=useFilter));
+          annotation (Dialog(tab="Filter",enable=useFilter));
         parameter Modelica.SIunits.Frequency fCut=2*f
           "Cut off frequency of filter"
-          annotation (Dialog(enable=useFilter));
+          annotation (Dialog(tab="Filter",enable=useFilter));
         parameter Modelica.SIunits.Voltage vStart[m] = zeros(m)
           "Start voltage of filter output"
-          annotation (Dialog(enable=useFilter));
+          annotation (Dialog(tab="Filter",enable=useFilter));
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
@@ -2897,34 +2905,33 @@ This is the library of power converters for single and multi phase electrical sy
 
       model VoltageBridge2Pulse "Control for 2 pulse bridge rectifier"
         import Modelica.Constants.pi;
+        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Boolean useConstantFiringAngle=true
           "Use constant firing angle instead of signal input";
-        parameter Boolean useFilter = true "Enable use of filter";
-        parameter Modelica.SIunits.Frequency f=50 "Frequency"
-          annotation (Dialog(enable=useFilter));
-        parameter Modelica.SIunits.Frequency fCut=2*f
-          "Cut off frequency of filter"
-          annotation (Dialog(enable=useFilter));
-        parameter Modelica.SIunits.Voltage vStart = 0
-          "Start voltage of filter output"
-          annotation (Dialog(enable=useFilter));
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(
           min=0,
           max=Modelica.Constants.pi) = Modelica.Constants.pi
           "Maximum firing angle";
-        parameter Boolean useConstantEnable = true
-          "Enables boolean input for enabling firing signals";
-        parameter Boolean constantEnable = true
-          "Constant enabling of firing signals"
-          annotation (Dialog(enable=useConstantEnable));
         parameter Modelica.SIunits.Resistance Ron(final min=0) = 1e-05
           "Closed thyristor resistance";
         parameter Modelica.SIunits.Conductance Goff(final min=0) = 1e-05
           "Opened thyristor conductance";
         parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
           "Forward threshold voltage";
+
+        parameter Boolean useFilter = true "Enable use of filter"
+          annotation (Dialog(tab="Filter"));
+        parameter Modelica.SIunits.Frequency fCut=2*f
+          "Cut off frequency of filter"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+        parameter Modelica.SIunits.Voltage vStart = 0
+          "Start voltage of filter output"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+
+        extends Modelica_Electrical_PowerConverters.Interfaces.Enable;
+
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
@@ -2968,27 +2975,13 @@ This is the library of power converters for single and multi phase electrical sy
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={-40,-50})));
-        Modelica.Blocks.Sources.BooleanConstant enableConstantSource(
-          final k=constantEnable) if useConstantEnable
-          "Constant enable signal of fire and notFire"
-          annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={70,50})));
+              origin={-40,-80})));
         Modelica.Blocks.Logical.And andCondition_n
           "And condition for negative firing signal" annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={40,-50})));
-        Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
-          "Enables fire and notFire"
-          annotation (Placement(transformation(
-              extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={40,100})));
+              origin={40,-80})));
       equation
         connect(voltageSensor.v, twoPulse.v[1]) annotation (Line(
             points={{-70,-2.22045e-15},{-60,-2.22045e-15},{-60,0},{-10,0},{-10,
@@ -3007,39 +3000,28 @@ This is the library of power converters for single and multi phase electrical sy
             points={{8.88178e-16,100},{8.88178e-16,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(enableConstantSource.y, andCondition_p.u1) annotation (Line(
-            points={{70,39},{70,-30},{-34,-30},{-34,-30},{-40,-30},{-40,-30},{
-                -40,-30},{-40,-38},{-40,-38}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(enableConstantSource.y, andCondition_n.u1) annotation (Line(
-            points={{70,39},{70,-30},{40,-30},{40,-38}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(enable, andCondition_p.u1) annotation (Line(
-            points={{40,100},{40,30},{70,30},{70,-30},{-40,-30},{-40,-30},{-40,
-                -30},{-40,-38},{-40,-38}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(enable, andCondition_n.u1) annotation (Line(
-            points={{40,100},{40,30},{70,30},{70,-30},{40,-30},{40,-32},{40,-32},
-                {40,-38},{40,-38}},
-            color={255,0,255},
-            smooth=Smooth.None));
         connect(twoPulse.fire_n[1], andCondition_n.u2) annotation (Line(
-            points={{4,-11},{4,-20},{32,-20},{32,-38}},
+            points={{4,-11},{4,-50},{32,-50},{32,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(twoPulse.fire_p[1], andCondition_p.u2) annotation (Line(
-            points={{-4,-11},{-4,-20},{-48,-20},{-48,-38}},
+            points={{-4,-11},{-4,-50},{-48,-50},{-48,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_p.y, fire_p) annotation (Line(
-            points={{-40,-61},{-40,-110}},
+            points={{-40,-91},{-40,-110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_n.y, fire_n) annotation (Line(
-            points={{40,-61},{40,-110}},
+            points={{40,-91},{40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(internalEnable, andCondition_n.u1) annotation (Line(
+            points={{60,70},{60,-60},{40,-60},{40,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(internalEnable, andCondition_p.u1) annotation (Line(
+            points={{60,70},{60,-60},{-40,-60},{-40,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -3074,10 +3056,11 @@ This is the library of power converters for single and multi phase electrical sy
 
       model VoltageBridge2mPulse "Control for 2*m pulse bridge rectifier"
         import Modelica.Constants.pi;
+
         parameter Integer m(final min=3) = 3 "Number of phases";
+        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Boolean useConstantFiringAngle=true
           "Use constant firing angle instead of signal input";
-        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(
@@ -3090,6 +3073,18 @@ This is the library of power converters for single and multi phase electrical sy
           "Opened thyristor conductance";
         parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
           "Forward threshold voltage";
+
+        parameter Boolean useFilter = true "Enable use of filter"
+          annotation (Dialog(tab="Filter"));
+        parameter Modelica.SIunits.Frequency fCut=2*f
+          "Cut off frequency of filter"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+        parameter Modelica.SIunits.Voltage vStart[m] = zeros(m)
+          "Start voltage of filter output"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+
+        extends Modelica_Electrical_PowerConverters.Interfaces.Enable;
+
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
@@ -3101,7 +3096,11 @@ This is the library of power converters for single and multi phase electrical sy
           final f=f,
           final constantFiringAngle=constantFiringAngle,
           final firingAngleMax=firingAngleMax,
-          final m=m) annotation (Placement(transformation(
+          final m=m,
+          useFilter=useFilter,
+          final fCut=fCut,
+          final vStart=vStart)
+                     annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={0,10})));
@@ -3127,6 +3126,23 @@ This is the library of power converters for single and multi phase electrical sy
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,-110})));
+        Modelica.Blocks.Logical.And andCondition_p[m]
+          "And condition for positive firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-40,-80})));
+        Modelica.Blocks.Logical.And andCondition_n[m]
+          "And condition for negative firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-80})));
+        Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(final nout=m)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={60,40})));
       equation
         connect(ac, voltageSensor.plug_p) annotation (Line(
             points={{-100,4.44089e-16},{-100,-4.44089e-16},{-44,-4.44089e-16}},
@@ -3145,20 +3161,40 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-33,10},{-10,10}},
             color={0,0,127},
             smooth=Smooth.None));
-        connect(twomPulse.fire_n, fire_n) annotation (Line(
-            points={{4,-1},{4,-60},{40,-60},{40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(twomPulse.fire_p, fire_p) annotation (Line(
-            points={{-4,-1},{-4,-60},{-40,-60},{-40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
         connect(firingAngle, twomPulse.firingAngle) annotation (Line(
             points={{0,100},{0,40},{8.88178e-16,40},{8.88178e-16,20}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+        connect(twomPulse.fire_p, andCondition_p.u2) annotation (Line(
+            points={{-4,-1},{-4,-50},{-48,-50},{-48,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(twomPulse.fire_n, andCondition_n.u2) annotation (Line(
+            points={{4,-1},{4,-50},{32,-50},{32,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(internalEnable, booleanReplicator.u) annotation (Line(
+            points={{60,70},{60,52}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(booleanReplicator.y, andCondition_p.u1) annotation (Line(
+            points={{60,29},{60,-60},{-40,-60},{-40,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(booleanReplicator.y, andCondition_n.u1) annotation (Line(
+            points={{60,29},{60,-60},{40,-60},{40,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_p.y, fire_p) annotation (Line(
+            points={{-40,-91},{-40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_n.y, fire_n) annotation (Line(
+            points={{40,-91},{40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
               Rectangle(
@@ -3191,9 +3227,9 @@ This is the library of power converters for single and multi phase electrical sy
         "Control for 2*m pulse cetner tap rectifier"
         import Modelica.Constants.pi;
         parameter Integer m(final min=3) = 3 "Number of phases";
+        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Boolean useConstantFiringAngle=true
           "Use constant firing angle instead of signal input";
-        parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Modelica.SIunits.Angle constantFiringAngle=0 "Firing angle"
           annotation (Dialog(enable=useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(
@@ -3206,6 +3242,18 @@ This is the library of power converters for single and multi phase electrical sy
           "Opened thyristor conductance";
         parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
           "Forward threshold voltage";
+
+        parameter Boolean useFilter = true "Enable use of filter"
+          annotation (Dialog(tab="Filter"));
+        parameter Modelica.SIunits.Frequency fCut=2*f
+          "Cut off frequency of filter"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+        parameter Modelica.SIunits.Voltage vStart[m] = zeros(m)
+          "Start voltage of filter output"
+          annotation (Dialog(tab="Filter",enable=useFilter));
+
+        extends Modelica_Electrical_PowerConverters.Interfaces.Enable;
+
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
@@ -3217,7 +3265,11 @@ This is the library of power converters for single and multi phase electrical sy
           final f=f,
           final constantFiringAngle=constantFiringAngle,
           final firingAngleMax=firingAngleMax,
-          final m=m) annotation (Placement(transformation(
+          final m=m,
+          final useFilter=useFilter,
+          final fCut=2*f,
+          final vStart=vStart)
+                     annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={10,0})));
@@ -3244,15 +3296,24 @@ This is the library of power converters for single and multi phase electrical sy
           annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
         Modelica.Blocks.Math.Gain gain[m](final k=fill(-1, m))
           annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
+        Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(final nout=m)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={60,40})));
+        Modelica.Blocks.Logical.And andCondition_p[m]
+          "And condition for positive firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-40,-80})));
+        Modelica.Blocks.Logical.And andCondition_n[m]
+          "And condition for negative firing signal" annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-80})));
       equation
-        connect(twomPulse.fire_n, fire_n) annotation (Line(
-            points={{14,-11},{14,-60},{40,-60},{40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(twomPulse.fire_p, fire_p) annotation (Line(
-            points={{6,-11},{6,-60},{-40,-60},{-40,-110}},
-            color={255,0,255},
-            smooth=Smooth.None));
         connect(firingAngle, twomPulse.firingAngle) annotation (Line(
             points={{0,100},{0,40},{10,40},{10,10}},
             color={0,0,127},
@@ -3274,8 +3335,36 @@ This is the library of power converters for single and multi phase electrical sy
             points={{-39,0},{-30,0}},
             color={0,0,127},
             smooth=Smooth.None));
-        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent=
-                  {{-100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+        connect(booleanReplicator.y, andCondition_n.u1) annotation (Line(
+            points={{60,29},{60,-60},{40,-60},{40,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(booleanReplicator.y, andCondition_p.u1) annotation (Line(
+            points={{60,29},{60,-60},{-40,-60},{-40,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(twomPulse.fire_p, andCondition_p.u2) annotation (Line(
+            points={{6,-11},{6,-50},{-48,-50},{-48,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(twomPulse.fire_n, andCondition_n.u2) annotation (Line(
+            points={{14,-11},{14,-50},{32,-50},{32,-68}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_p.y, fire_p) annotation (Line(
+            points={{-40,-91},{-40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(andCondition_n.y, fire_n) annotation (Line(
+            points={{40,-91},{40,-110}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(internalEnable, booleanReplicator.u) annotation (Line(
+            points={{60,70},{60,52}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
               Rectangle(
@@ -3379,7 +3468,8 @@ This is the library of power converters for single and multi phase electrical sy
       end Filter;
     end Control;
     extends Modelica.Icons.Package;
-    model DiodeBridge2Pulse "Two pulse Graetz diode rectifier bridge "
+    model DiodeBridge2Pulse "Two pulse Graetz diode rectifier bridge"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
         "Closed diode resistance";
@@ -3502,15 +3592,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -3523,30 +3604,27 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end DiodeBridge2Pulse;
 
     model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
         "Closed thyristor resistance";
@@ -3715,15 +3793,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -3736,35 +3805,32 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{2,14},{2,30}},
+              points={{0,12},{0,28}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end ThyristorBridge2Pulse;
 
     model HalfBridge2Pulse "Two pulse Graetz half rectifier bridge "
       import Modelica.Constants.pi;
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
         "Closed diode resistance";
       parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1e-05
@@ -3918,15 +3984,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -3939,51 +3996,48 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-44,48},{36,0}},
+              extent={{-44,50},{36,2}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-44,24},{36,24}},
+              points={{-44,26},{36,26}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,48},{16,0}},
+              points={{16,50},{16,2}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,24},{-24,48},{-24,0},{16,24}},
+              points={{16,26},{-24,50},{-24,2},{16,26}},
               color={0,0,255},
               smooth=Smooth.None),
             Rectangle(
-              extent={{-44,0},{36,-56}},
+              extent={{-44,2},{36,-54}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-44,-32},{36,-32}},
+              points={{-44,-30},{36,-30}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,-8},{16,-56}},
+              points={{16,-6},{16,-54}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,-32},{-24,-8},{-24,-56},{16,-32}},
+              points={{16,-30},{-24,-6},{-24,-54},{16,-30}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{-4,-20},{-4,-4}},
+              points={{-4,-18},{-4,-2}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end HalfBridge2Pulse;
 
     model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
         "Closed diode resistance";
@@ -4059,15 +4113,6 @@ This is the library of power converters for single and multi phase electrical sy
             preserveAspectRatio=true,
             initialScale=0.1,
             grid={2,2}), graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4081,20 +4126,20 @@ This is the library of power converters for single and multi phase electrical sy
               fillPattern=FillPattern.Solid,
               textString="DC"),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None)}), Diagram(coordinateSystem(
             extent={{-100,-100},{100,100}},
@@ -4105,6 +4150,7 @@ This is the library of power converters for single and multi phase electrical sy
 
     model ThyristorCenterTap2Pulse
       "Two pulse thyristor rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
         "Closed thyristor resistance";
@@ -4208,15 +4254,6 @@ This is the library of power converters for single and multi phase electrical sy
             preserveAspectRatio=true,
             initialScale=0.1,
             grid={2,2}), graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4230,24 +4267,24 @@ This is the library of power converters for single and multi phase electrical sy
               fillPattern=FillPattern.Solid,
               textString="DC"),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{2,14},{2,30}},
+              points={{0,12},{0,28}},
               color={0,0,255},
               smooth=Smooth.None)}), Diagram(coordinateSystem(
             extent={{-100,-100},{100,100}},
@@ -4257,6 +4294,7 @@ This is the library of power converters for single and multi phase electrical sy
     end ThyristorCenterTap2Pulse;
 
     model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
@@ -4353,15 +4391,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4374,30 +4403,27 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end DiodeBridge2mPulse;
 
     model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
@@ -4520,15 +4546,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4541,34 +4558,31 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{2,14},{2,30}},
+              points={{0,12},{0,28}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end ThyristorBridge2mPulse;
 
     model HalfBridge2mPulse "2*m pulse half rectifier bridge"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
@@ -4686,15 +4700,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4707,51 +4712,48 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-44,48},{36,0}},
+              extent={{-46,52},{34,4}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-44,24},{36,24}},
+              points={{-46,28},{34,28}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,48},{16,0}},
+              points={{14,52},{14,4}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,24},{-24,48},{-24,0},{16,24}},
+              points={{14,28},{-26,52},{-26,4},{14,28}},
               color={0,0,255},
               smooth=Smooth.None),
             Rectangle(
-              extent={{-44,0},{36,-56}},
+              extent={{-46,4},{34,-52}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-44,-32},{36,-32}},
+              points={{-46,-28},{34,-28}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,-8},{16,-56}},
+              points={{14,-4},{14,-52}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{16,-32},{-24,-8},{-24,-56},{16,-32}},
+              points={{14,-28},{-26,-4},{-26,-52},{14,-28}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{-4,-20},{-4,-4}},
+              points={{-6,-16},{-6,0}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end HalfBridge2mPulse;
 
     model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
@@ -4849,15 +4851,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -4870,31 +4863,28 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end DiodeCenterTap2mPulse;
 
     model ThyristorCenterTap2mPulse
       "2*m pulse thyristor rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
@@ -5020,15 +5010,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -5041,35 +5022,32 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{2,14},{2,30}},
+              points={{0,12},{0,28}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end ThyristorCenterTap2mPulse;
 
     model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
       import Modelica.Constants.pi;
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
         "Closed diode resistance";
@@ -5133,15 +5111,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -5154,31 +5123,28 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end DiodeCenterTapmPulse;
 
     model ThyristorCenterTapmPulse
       "m pulse thyristor rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
       parameter Integer m(final min=3) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
@@ -5257,15 +5223,6 @@ This is the library of power converters for single and multi phase electrical sy
                 -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
-            Rectangle(
-              extent={{-100,100},{100,-100}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-100,-100},{100,100}},
-              color={0,0,127},
-              smooth=Smooth.None),
             Text(
               extent={{-100,70},{0,50}},
               lineColor={0,0,127},
@@ -5278,29 +5235,25 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid,
               textString="DC"),
-            Text(
-              extent={{-150,150},{150,110}},
-              textString="%name",
-              lineColor={0,0,255}),
             Rectangle(
-              extent={{-38,26},{42,-22}},
+              extent={{-40,24},{40,-24}},
               lineColor={255,255,255},
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid),
             Line(
-              points={{-38,2},{42,2}},
+              points={{-40,0},{40,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,26},{22,-22}},
+              points={{20,24},{20,-24}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{22,2},{-18,26},{-18,-22},{22,2}},
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
               color={0,0,255},
               smooth=Smooth.None),
             Line(
-              points={{2,14},{2,30}},
+              points={{0,12},{0,28}},
               color={0,0,255},
               smooth=Smooth.None)}));
     end ThyristorCenterTapmPulse;
@@ -5740,41 +5693,36 @@ This is the library of power converters for single and multi phase electrical sy
           annotation (Dialog(enable=useConstantEnable));
         parameter Modelica.SIunits.Frequency f=1000 "Switching frequency";
         parameter Modelica.SIunits.Time startTime=0 "Start time";
+
+        extends Modelica_Electrical_PowerConverters.Interfaces.Enable;
+
         Modelica.Blocks.Interfaces.RealInput dutyCycle if not
           useConstantDutyCycle "Duty cycle"
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
-        Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
-          "Enables fire and notFire"
-          annotation (Placement(transformation(
-              extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={0,100})));
         Modelica.Blocks.Interfaces.BooleanOutput fire "Firing PWM signal"
-          annotation (Placement(transformation(extent={{100,30},{120,50}})));
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-40,-110})));
         Modelica.Blocks.Interfaces.BooleanOutput notFire "Firing PWM signal"
-          annotation (Placement(transformation(extent={{100,-50},{120,-30}})));
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-110})));
         Modelica.Blocks.Sources.Constant const(final k=constantDutyCycle) if
           useConstantDutyCycle
-          annotation (Placement(transformation(extent={{-100,40},{-80,60}})));
+          annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
         Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-          annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
+          annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
         Modelica.Blocks.Logical.Less greaterEqual
-          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={-22,-60})));
+              origin={18,0})));
         Modelica.Blocks.Logical.And andCondition
-          annotation (Placement(transformation(extent={{60,-10},{80,10}})));
-        Modelica.Blocks.Sources.BooleanConstant enableConstantSource(
-          final k=constantEnable) if useConstantEnable
-          "Constant enable signal of fire and notFire"
-          annotation (Placement(
-              transformation(
-              extent={{-10,-10},{10,10}},
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
               rotation=270,
-              origin={50,50})));
+              origin={-40,-80})));
         Modelica.Blocks.Discrete.ZeroOrderHold zeroOrderHold(final startTime=
               startTime, final samplePeriod=1/f)
-          annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
+          annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
         Modelica.Blocks.Sources.SawTooth sawtooth(
           final period=1/f,
           final amplitude=1,
@@ -5782,74 +5730,68 @@ This is the library of power converters for single and multi phase electrical sy
           final offset=0,
           final startTime=startTime)
                              annotation (Placement(visible=true, transformation(
-              origin={-50,-40},
+              origin={-50,60},
               extent={{-10,-10},{10,10}},
               rotation=0)));
 
         Modelica.Blocks.Logical.Not inverse annotation (Placement(
               transformation(
               extent={{-10,10},{10,-10}},
-              rotation=0,
-              origin={30,-48})));
+              rotation=270,
+              origin={80,-42})));
         Modelica.Blocks.Logical.And andConditionNot
-          annotation (Placement(transformation(extent={{60,-50},{80,-30}})));
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={40,-80})));
 
       equation
         connect(const.y, limiter.u) annotation (Line(
-            points={{-79,50},{-70,50},{-70,8.88178e-16},{-62,8.88178e-16}},
+            points={{-79,60},{-70,60},{-70,20},{-62,20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(dutyCycle, limiter.u) annotation (Line(
-            points={{-120,8.88178e-16},{-62,8.88178e-16}},
+            points={{-120,1.11022e-15},{-96,1.11022e-15},{-96,0},{-70,0},{-70,20},{-62,
+                20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(andCondition.y, fire) annotation (Line(
-            points={{81,6.66134e-16},{100,6.66134e-16},{100,40},{110,40}},
+            points={{-40,-91},{-40,-91},{-40,-106},{-40,-106},{-40,-110},{-40,-110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(greaterEqual.y, andCondition.u2) annotation (Line(
-            points={{-22,-71},{-22,-80},{10,-80},{10,-8},{58,-8}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(enableConstantSource.y, andCondition.u1) annotation (Line(
-            points={{50,39},{50,6.66134e-16},{58,6.66134e-16}},
+            points={{18,-11},{18,-20},{-48,-20},{-48,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(limiter.y, zeroOrderHold.u) annotation (Line(
-            points={{-39,0},{-32,0}},
+            points={{-39,20},{-32,20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(zeroOrderHold.y, greaterEqual.u2) annotation (Line(
-            points={{-9,6.66134e-16},{-4,6.66134e-16},{-4,0},{0,0},{0,-40},{-14,-40},{
-                -14,-48},{-14,-48}},
+            points={{-9,20},{10,20},{10,12}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(sawtooth.y, greaterEqual.u1) annotation (Line(
-            points={{-39,-40},{-22,-40},{-22,-48},{-22,-48}},
+            points={{-39,60},{18,60},{18,12}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(greaterEqual.y, inverse.u) annotation (Line(
-            points={{-22,-71},{-22,-80},{10,-80},{10,-48},{18,-48}},
-            color={255,0,255},
-            smooth=Smooth.None));
-        connect(enableConstantSource.y, andConditionNot.u1) annotation (Line(
-            points={{50,39},{50,-40},{58,-40}},
+            points={{18,-11},{18,-11},{18,-20},{80,-20},{80,-30}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(inverse.y, andConditionNot.u2) annotation (Line(
-            points={{41,-48},{58,-48}},
+            points={{80,-53},{80,-60},{32,-60},{32,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andConditionNot.y, notFire) annotation (Line(
-            points={{81,-40},{110,-40}},
+            points={{40,-91},{40,-110}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(enable, andCondition.u1) annotation (Line(
-            points={{0,100},{0,20},{50,20},{50,0},{58,0}},
+        connect(internalEnable, andCondition.u1) annotation (Line(
+            points={{60,70},{60,-50},{-40,-50},{-40,-68}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(enable, andConditionNot.u1) annotation (Line(
-            points={{8.88178e-16,100},{8.88178e-16,20},{50,20},{50,-40},{58,-40}},
+        connect(internalEnable, andConditionNot.u1) annotation (Line(
+            points={{60,70},{60,-50},{40,-50},{40,-68}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -6038,6 +5980,56 @@ This is the library of power converters for single and multi phase electrical sy
     end ChopperStepDown;
   end DCDC;
 
+  package Interfaces "Interfaces and partial models"
+    extends Modelica.Icons.InterfacesPackage;
+    model Enable
+      "Partial model providing enable parameter and optional enable input"
+      parameter Boolean useConstantEnable = true
+        "Enables boolean input for enabling firing signals"
+        annotation (Dialog(tab="Enable"));
+      parameter Boolean constantEnable = true
+        "Constant enabling of firing signals"
+        annotation (Dialog(tab="Enable",enable=useConstantEnable));
+
+      Modelica.Blocks.Sources.BooleanConstant enableConstantSource(
+        final k=constantEnable) if useConstantEnable
+        "Constant enable signal of fire and notFire"
+        annotation (Placement(
+            transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={80,90})));
+      Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
+        "Enables fire and notFire"
+        annotation (Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=270,
+            origin={40,120})));
+    protected
+      Modelica.Blocks.Interfaces.BooleanInput internalEnable
+        "Internal enable signal" annotation (Placement(transformation(
+            extent={{-6,-6},{6,6}},
+            rotation=270,
+            origin={60,70})));
+    equation
+      connect(enable, internalEnable) annotation (Line(
+          points={{40,120},{40,70},{60,70}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(enableConstantSource.y, internalEnable) annotation (Line(
+          points={{80,79},{80,70},{60,70}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), Documentation(info="<html>
+This model provides an internal enable signal derived either from a parameter or an optional signal input. 
+For <code>useConstantEnable = true</code> the internal signal is equal to the parameter <code>constantEnable</code>. 
+For <code>useConstantEnable = false</code> the internal signal 
+is equal to the optional signal input <code>enable</code>.
+</html>"));
+    end Enable;
+  end Interfaces;
+
   package Utilities "Utilities for operating power converters"
     extends Modelica.Icons.Package;
     model Earthing
@@ -6120,6 +6112,23 @@ This is the library of power converters for single and multi phase electrical sy
               fillColor={255,255,255},
               fillPattern=FillPattern.Solid)}));
     end ExampleTemplate;
+
+    model Converter "Converter icon"
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-100,-100},{100,100}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Text(
+              extent={{-150,-112},{150,-152}},
+              textString="%name",
+              lineColor={0,0,255})}));
+    end Converter;
   end Icons;
   annotation (
     Icon(coordinateSystem(
