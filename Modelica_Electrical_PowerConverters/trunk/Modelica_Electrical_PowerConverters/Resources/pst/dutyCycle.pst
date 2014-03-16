@@ -1,0 +1,124 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Sun Mar 16 16:05:58 CET 2014
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="6" x-max="36" y-min="-2" y-max="37" auto-bounding="true">
+%<multicurve right-arrow= "head"
+%	 points= "(7,0);(7,0);(36,0);(36,0)"
+%	 fill-style= "none"
+%	 />
+%<multicurve right-arrow= "head"
+%	 points= "(8,-1);(8,-1);(8,16);(8,16)"
+%	 fill-style= "none"
+%	 />
+%<multicurve right-arrow= "head"
+%	 points= "(7,21);(7,21);(36,21);(36,21)"
+%	 fill-style= "none"
+%	 />
+%<multicurve right-arrow= "head"
+%	 points= "(8,20);(8,20);(8,37);(8,37)"
+%	 fill-style= "none"
+%	 />
+%<multicurve stroke-width= "0.6"
+%	 points= "(6,0);(6,0);(8,0);(8,0);(8,0);(8,8);
+%	(8,8);(8,8);(13,8);(13,8);(13,8);(13,0);
+%	(13,0);(13,0);(24,0);(24,0);(24,0);(24,8);
+%	(24,8);(24,8);(29,8);(29,8);(29,8);(29,0);
+%	(29,0);(29,0);(32,0);(32,0)"
+%	 fill-style= "none"
+%	 />
+%<multicurve stroke-width= "0.6"
+%	 points= "(6,28);(6,28);(8,28);(8,28);(8,28);(8,21);
+%	(8,21);(8,21);(13,21);(13,21);(13,21);(13,28);
+%	(13,28);(13,28);(24,28);(24,28);(24,28);(24,21);
+%	(24,21);(24,21);(29,21);(29,21);(29,21);(29,28);
+%	(29,28);(29,28);(32,28);(32,28)"
+%	 fill-style= "none"
+%	 />
+%<text text-vert-align= "top"
+%	 anchor-point= "(10,16)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%\textt{fire}
+%</text>
+%<text text-vert-align= "top"
+%	 anchor-point= "(10,37)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%\textt{notFire}
+%</text>
+%<multicurve points= "(13,-1);(13,-1);(13,0);(13,0)"
+%	 fill-style= "none"
+%	 />
+%<multicurve points= "(24,-1);(24,-1);(24,0);(24,0)"
+%	 fill-style= "none"
+%	 />
+%<text text-vert-align= "top"
+%	 anchor-point= "(8,-2)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$0$
+%</text>
+%<text text-vert-align= "top"
+%	 anchor-point= "(13,-2)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$d\dot T$
+%</text>
+%<text text-vert-align= "top"
+%	 anchor-point= "(24,-2)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$T$
+%</text>
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(36,37)
+\psline{->}(7,0)(36,0)
+\psline{->}(8,-1)(8,16)
+\psline{->}(7,21)(36,21)
+\psline{->}(8,20)(8,37)
+\psline[linewidth=0.6](6,0)
+(8,0)
+(8,8)
+(13,8)
+(13,0)
+(24,0)
+(24,8)
+(29,8)
+(29,0)(32,0)
+\psline[linewidth=0.6](6,28)
+(8,28)
+(8,21)
+(13,21)
+(13,28)
+(24,28)
+(24,21)
+(29,21)
+(29,28)(32,28)
+\rput[tl](10,16){\textt{fire}}
+\rput[tl](10,37){\textt{notFire}}
+\psline(13,-1)(13,0)
+\psline(24,-1)(24,0)
+\rput[t](8,-2){$0$}
+\rput[t](13,-2){$d\dot T$}
+\rput[t](24,-2){$T$}
+\end{pspicture}
