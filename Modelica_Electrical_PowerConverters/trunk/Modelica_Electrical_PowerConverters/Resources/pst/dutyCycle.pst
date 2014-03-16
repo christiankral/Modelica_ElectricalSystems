@@ -1,22 +1,22 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Sun Mar 16 16:05:58 CET 2014
+%%Sun Mar 16 21:49:48 CET 2014
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
 %<jpic x-min="6" x-max="36" y-min="-2" y-max="37" auto-bounding="true">
-%<multicurve right-arrow= "head"
-%	 points= "(7,0);(7,0);(36,0);(36,0)"
+%<multicurve points= "(7,0);(7,0);(36,0);(36,0)"
+%	 right-arrow= "head"
 %	 fill-style= "none"
 %	 />
-%<multicurve right-arrow= "head"
-%	 points= "(8,-1);(8,-1);(8,16);(8,16)"
+%<multicurve points= "(8,-1);(8,-1);(8,16);(8,16)"
+%	 right-arrow= "head"
 %	 fill-style= "none"
 %	 />
-%<multicurve right-arrow= "head"
-%	 points= "(7,21);(7,21);(36,21);(36,21)"
+%<multicurve points= "(7,21);(7,21);(36,21);(36,21)"
+%	 right-arrow= "head"
 %	 fill-style= "none"
 %	 />
-%<multicurve right-arrow= "head"
-%	 points= "(8,20);(8,20);(8,37);(8,37)"
+%<multicurve points= "(8,20);(8,20);(8,37);(8,37)"
+%	 right-arrow= "head"
 %	 fill-style= "none"
 %	 />
 %<multicurve stroke-width= "0.6"
@@ -37,19 +37,19 @@
 %	 />
 %<text text-vert-align= "top"
 %	 anchor-point= "(10,16)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
+%	 fill-style= "none"
 %	 >
-%\textt{fire}
+%\texttt{fire}
 %</text>
 %<text text-vert-align= "top"
 %	 anchor-point= "(10,37)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
+%	 fill-style= "none"
 %	 >
-%\textt{notFire}
+%\texttt{notFire}
 %</text>
 %<multicurve points= "(13,-1);(13,-1);(13,0);(13,0)"
 %	 fill-style= "none"
@@ -59,28 +59,34 @@
 %	 />
 %<text text-vert-align= "top"
 %	 anchor-point= "(8,-2)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
+%	 fill-style= "none"
 %	 >
 %$0$
 %</text>
 %<text text-vert-align= "top"
 %	 anchor-point= "(13,-2)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
+%	 fill-style= "none"
 %	 >
-%$d\dot T$
+%$d/f$
 %</text>
 %<text text-vert-align= "top"
 %	 anchor-point= "(24,-2)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
+%	 fill-style= "none"
 %	 >
-%$T$
+%$1/f$
 %</text>
+%<multicurve points= "(13,21);(13,21);(13,20);(13,20)"
+%	 fill-style= "none"
+%	 />
+%<multicurve points= "(24,21);(24,21);(24,20);(24,20)"
+%	 fill-style= "none"
+%	 />
 %</jpic>
 %%End JPIC-XML
 %PSTricks content-type (pstricks.sty package needed)
@@ -114,11 +120,13 @@
 (24,21)
 (29,21)
 (29,28)(32,28)
-\rput[tl](10,16){\textt{fire}}
-\rput[tl](10,37){\textt{notFire}}
+\rput[tl](10,16){\texttt{fire}}
+\rput[tl](10,37){\texttt{notFire}}
 \psline(13,-1)(13,0)
 \psline(24,-1)(24,0)
 \rput[t](8,-2){$0$}
-\rput[t](13,-2){$d\dot T$}
-\rput[t](24,-2){$T$}
+\rput[t](13,-2){$d/f$}
+\rput[t](24,-2){$1/f$}
+\psline(13,21)(13,20)
+\psline(24,21)(24,20)
 \end{pspicture}

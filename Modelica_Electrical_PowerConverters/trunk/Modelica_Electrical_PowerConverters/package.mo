@@ -40,9 +40,7 @@ The firing angle of thyristor rectifiers can either be set by a parameter or a s
 These examples include different kinds of DC loads. Even the control characeteristics 
 of the rectifiers can be obtained experimentally; the names of these models 
 contain <code>_Characteristic</code>.
-
-<p></p>
-
+</p>
 </html>"));
     end ACDCConcept;
 
@@ -66,6 +64,28 @@ is provided.
 </p>
 </html>"));
     end DCDCConcept;
+
+    class DCACConcept "DC/AC converter concept"
+      extends Modelica.Icons.Information;
+      annotation (DocumentationClass=true, Documentation(info="<html>
+
+<p>There are a single and multi phase DC/AC converter model provided by the PowerConverters libraray.</p>
+
+<h4>Control</h4>
+
+<p>There are currently no space phasor pulse width modulation (PWM) models provided. However, for operating the single 
+and multi phase inverter the PWM 
+<a href=\"modelica://Modelica_Electrical_PowerConverters.DCDC.Control\">controller</a> 
+can be used. 
+</p>
+
+<h4>Examples</h4>
+
+<p>Some examples are provided at
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCAC\">Examples.DCAC</a>.
+</p>
+</html>"));
+    end DCACConcept;
 
     class Contact "Contact"
       extends Modelica.Icons.Contact;
@@ -95,7 +115,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 
 <h5>Version 1.0.0, 2014-XX-XX</h5>
 <ul>
-<li>Initial version</li>
+<li>Initial version before inclusion into MSL</li>
 </ul>
 
 
@@ -107,6 +127,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
       annotation (Documentation(info="<html>
 <h4>References</h4>
 
+<p>
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
     <tr>
       <td valign=\"top\">[Skvarenina01]</td>
@@ -128,8 +149,8 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
       <td valign=\"top\"><a href=\"http://www.freescience.info/go.php?pagename=books&id=1732\">
 <i>Principles and Elements of Power Electronics: Devices, Drivers, Applications, and Passive Components</i></a>, available at <a href=\"http://www.freescience.info/go.php?pagename=books&id=1732\">FreeScience</a>, ISBN 978-0-9553384-0-3</td>
     </tr>
-
 </table>
+</p>
 </html>"));
     end References;
     annotation (DocumentationClass=true, Documentation(info="<html>
@@ -2527,6 +2548,7 @@ A freely available book is available in
           extends
           Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(
               sine(amplitude=0.5, offset=0.5));
+          extends Modelica.Icons.Example;
           parameter Modelica.SIunits.Resistance R=100 "Resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
               Placement(transformation(
@@ -2555,6 +2577,7 @@ A freely available book is available in
           extends
           Modelica_Electrical_PowerConverters.Examples.DCAC.ExampleTemplates.SinglePhaseTwoLevel(
               sine(amplitude=0.5, offset=0.5));
+          extends Modelica.Icons.Example;
           parameter Modelica.SIunits.Resistance R=100 "Resistance";
           parameter Modelica.SIunits.Inductance L=1 "Inductance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
@@ -2594,7 +2617,6 @@ A freely available book is available in
         partial model SinglePhaseTwoLevel
         "Single phas two level inverter including control"
           extends Icons.ExampleTemplate;
-          extends Modelica.Icons.Example;
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V=
                50) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2634,7 +2656,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-              points={{-64,-41},{-44,-41},{-44,18}},
+              points={{-66,-19},{-46,-19},{-46,18}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(constantVoltage1.n, constantVoltage2.p) annotation (Line(
@@ -2666,13 +2688,15 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(inverter.fire_n, signalPWM.notFire) annotation (Line(
-              points={{-36,18},{-36,-41},{-56,-41}},
+              points={{-34,18},{-34,-19},{-54,-19}},
               color={255,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics));
         end SinglePhaseTwoLevel;
       end ExampleTemplates;
+    annotation (Documentation(info="<html>
+</html>"));
     end DCAC;
 
     package DCDC "DC to DC converter examples"
@@ -2795,7 +2819,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(signalPWM.fire, chopperStepDown.fire) annotation (Line(
-              points={{-54,29},{-54,20},{-50,20},{-50,12}},
+              points={{-56,51},{-56,20},{-56,20},{-56,-12}},
               color={255,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -5797,6 +5821,14 @@ General information about AC/DC converters can be found at the
                   fillPattern=FillPattern.Solid,
                   textString="AC")}),
         Documentation(info="<html>
+<p>
+This is a single phase two level inverter. The boolean signals <code>fire_p</code> and <code>fire_n</code> shall not be <code>true</code> at the same time to avoid DC bus short circuits. The inverter consists of two transistors and two anti parallel free wheeling diodes.
+</p>
+
+<p>
+An example of a single phase inverter with PWM voltage control is included in
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCAC.SinglePhaseTwoLevel\">Examples.DCAC.SinglePhaseTwoLevel</a>.
+</p>
 </html>"));
     end SinglePhase2Level;
 
@@ -6016,9 +6048,17 @@ General information about AC/DC converters can be found at the
                   fillPattern=FillPattern.Solid,
                   textString="AC")}),
         Documentation(info="<html>
+<p>
+This is a multi phase two level inverter. The boolean signals <code>fire_p[k]</code> and <code>fire_n[k]</code> for any phase <code>k</code> shall not be <code>true</code> at the same time to avoid DC bus short circuits. The inverter consists of <code>2*m</code> transistors and two anti parallel free wheeling diodes, respectively, where <code>m</code> is the number of phases.
+</p>
 </html>"));
     end MultiPhase2Level;
-    annotation (Documentation(info="v"));
+    annotation (Documentation(info="<html>
+<p>
+General information about DC/AC converters can be found at the
+<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCACConcept\">DC/AC converter concept</a> 
+</p>
+</html>"));
   end DCAC;
 
 
@@ -6032,11 +6072,6 @@ General information about AC/DC converters can be found at the
         "Enables constant duty cycle";
         parameter Real constantDutyCycle=0 "Constant duty cycle"
           annotation (Dialog(enable=useConstantDutyCycle));
-        parameter Boolean useConstantEnable = true
-        "Enables boolean input for enabling firing signals";
-        parameter Boolean constantEnable = true
-        "Constant enabling of firing signals"
-          annotation (Dialog(enable=useConstantEnable));
         parameter Modelica.SIunits.Frequency f=1000 "Switching frequency";
         parameter Modelica.SIunits.Time startTime=0 "Start time";
 
@@ -6188,7 +6223,7 @@ to the switching period. The output firing signal is strictly determined by the 
 </p>
 
 <table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
-  <caption align=\"bottom\"><b>Fig. 1:</b> Firing (<code>fire</code>) and inverse firing (<code>notFire</code>) signal of PWM control; <code>d</code> = duty cycle</caption>
+  <caption align=\"bottom\"><b>Fig. 1:</b> Firing (<code>fire</code>) and inverse firing (<code>notFire</code>) signal of PWM control; <code>d</code> = duty cycle; <code>f</code> = switching period </caption>
   <tr>
     <td>
       <img src=\"modelica://Modelica_Electrical_PowerConverters/Resources/Images/dutyCycle.png\">
@@ -6196,8 +6231,16 @@ to the switching period. The output firing signal is strictly determined by the 
   </tr>
 </table>
 
+<p>
+The firing signal is generated by comparing the sampled duty cycle input with a periodic saw tooth signal [Williams2006]. 
+</p>
 </html>"));
       end SignalPWM;
+    annotation (Documentation(info="<html>
+<p>
+Currently there is only one PWM method provided in this library.
+</p>
+</html>"));
     end Control;
 
     model ChopperStepDown "Step down chopper"
@@ -6345,7 +6388,12 @@ to the switching period. The output firing signal is strictly determined by the 
                   smooth=Smooth.None),Line(
                   points={{10,8},{0,-8},{20,-8},{10,8}},
                   color={0,0,255},
-                  smooth=Smooth.None)}));
+                  smooth=Smooth.None)}),
+      Documentation(info="<html>
+<p>
+This is a conventional step down chopper model. It consists of a transistor and free wheeling diode. 
+</p>
+</html>"));
     end ChopperStepDown;
     annotation (Documentation(info="<html>
 <p>
@@ -6361,7 +6409,7 @@ General information about DC/DC converters can be found at the
     model Enable
     "Partial model providing enable parameter and optional enable input"
       parameter Boolean useConstantEnable = true
-      "Enables boolean input for enabling firing signals"
+      "true = disabled boolean input, use constantEnable"
         annotation (Dialog(tab="Enable"));
       parameter Boolean constantEnable = true
       "Constant enabling of firing signals"
@@ -6409,7 +6457,8 @@ is equal to the optional signal input <code>enable</code>.
 
   package Icons "Icons"
     extends Modelica.Icons.Package;
-    model ExampleTemplate
+    model ExampleTemplate "Example template"
+
       annotation (Icon(graphics={
             Ellipse(
               extent={{-100,100},{100,-100}},
