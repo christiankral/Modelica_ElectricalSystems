@@ -2,6 +2,7 @@ within ;
 package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC converters"
   extends Modelica.Icons.Package;
 
+
   package UsersGuide "User's Guide"
     extends Modelica.Icons.Information;
     class ACDCConcept "AC/DC converter concept"
@@ -311,7 +312,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -363,7 +364,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -473,9 +474,9 @@ A freely available book is available in
                 origin={30,-30})));
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
              Placement(transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-30,-60})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -490,11 +491,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,59},{-30,40}},
+              points={{-30,-49},{-30,-12}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -1004,7 +1005,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1047,7 +1048,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1099,7 +1100,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1140,9 +1141,9 @@ A freely available book is available in
                 origin={30,-30})));
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
              Placement(transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-30,-50})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -1157,11 +1158,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2m.firingAngle) annotation (Line(
-              points={{-30,59},{-30,42}},
+              points={{-30,-39},{-30,-12}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1207,7 +1208,7 @@ A freely available book is available in
                 rotation=-90)));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2mPulse
             rectifier(useHeatPort=false, m=m)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-48,-10},{-28,10}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -1240,7 +1241,7 @@ A freely available book is available in
             m=m) annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-38,-40})));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L=Ld) annotation (
               Placement(visible=true, transformation(
                 origin={30,-10},
@@ -1282,9 +1283,9 @@ A freely available book is available in
             annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
           Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(
                 transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-38,-70})));
           Modelica.Electrical.MultiPhase.Basic.Resistor rMains(m=m, R=fill(
                 RMains, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -1318,11 +1319,11 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(rectifier.dc_n, currentSensor.n) annotation (Line(
-              points={{-20,-6},{-10,-6},{-10,-40}},
+              points={{-28,-6},{-10,-6},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
-              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
+              points={{-28,6},{-10,6},{-10,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(voltagesensor.n, currentSensor.p) annotation (Line(
@@ -1330,11 +1331,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-44,-29},{-44,-11.8}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-32,-29},{-32,-12}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(inductor.n, dcpm.pin_ap) annotation (Line(
@@ -1350,7 +1351,7 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(rectifier.dc_p, inductor.p) annotation (Line(
-              points={{-20,6},{-10,6},{-10,40},{30,40},{30,0}},
+              points={{-28,6},{-10,6},{-10,40},{30,40},{30,0}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(currentSensor.p, dcpm.pin_an) annotation (Line(
@@ -1358,7 +1359,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(const.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,59},{-30,42}},
+              points={{-38,-59},{-38,-52}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(rMains.plug_p, sinevoltage.plug_p) annotation (Line(
@@ -1370,11 +1371,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(lMains.plug_n, rectifier.ac) annotation (Line(
-              points={{-80,70},{-60,70},{-60,0},{-40,0}},
+              points={{-80,70},{-60,70},{-60,6.66134e-16},{-48,6.66134e-16}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.ac, pulse2.ac) annotation (Line(
-              points={{-40,0},{-60,0},{-60,30},{-40,30}},
+              points={{-48,6.66134e-16},{-60,6.66134e-16},{-60,-40},{-48,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage.plug_n, earthing.plug) annotation (Line(
@@ -1382,7 +1383,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, ground.p) annotation (Line(
-              points={{-20,-6},{-20,-40}},
+              points={{-28,-6},{-20,-6},{-20,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -1428,7 +1429,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1470,7 +1471,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1522,7 +1523,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1560,9 +1561,9 @@ A freely available book is available in
                 origin={30,-30})));
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
              Placement(transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-30,-70})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -1577,11 +1578,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulsem.firingAngle) annotation (Line(
-              points={{-30,59},{-30,42}},
+              points={{-30,-59},{-30,-12}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1616,7 +1617,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1658,7 +1659,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1710,7 +1711,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1748,9 +1749,9 @@ A freely available book is available in
                 origin={30,-30})));
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
              Placement(transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-30,-70})));
         equation
           connect(resistor.n, inductor.p) annotation (Line(
               points={{30,20},{30,10}},
@@ -1765,11 +1766,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2m.firingAngle) annotation (Line(
-              points={{-30,59},{-30,42},{-30,42}},
+              points={{-30,-59},{-30,-12}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -1861,7 +1862,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, idealthyristor.fire) annotation (Line(
-              points={{-44,-11},{-44,-20},{-3,-20},{-3,29}},
+              points={{-46,11},{-46,20},{-3,20},{-3,29}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(voltagesensor.n, currentSensor.p) annotation (Line(
@@ -1873,11 +1874,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage.p, pulse2.ac_p) annotation (Line(
-              points={{-80,10},{-60,10},{-60,6},{-50,6}},
+              points={{-80,10},{-80,10},{-80,20},{-60,20},{-60,6},{-50,6}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage.n, pulse2.ac_n) annotation (Line(
-              points={{-80,-10},{-60,-10},{-60,-6},{-50,-6}},
+              points={{-80,-10},{-80,-10},{-80,-20},{-60,-20},{-60,-6},{-50,-6}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -1914,12 +1915,12 @@ A freely available book is available in
           Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage(V=sqrt(2)*
                 Vrms, freqHz=f) annotation (Placement(visible=true,
                 transformation(
-                origin={-80,0},
+                origin={-80,20},
                 extent={{-10,-10},{10,10}},
                 rotation=-90)));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2Pulse
             rectifier(useHeatPort=false, offStart_p1=true)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-40,24},{-20,44}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -1950,14 +1951,14 @@ A freely available book is available in
                         annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,-2})));
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(ground.p, sinevoltage.n) annotation (Line(
-              points={{-80,-40},{-80,-10}},
+              points={{-80,-40},{-80,10}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(voltagesensor.v, meanVoltage.u) annotation (Line(
@@ -1969,19 +1970,19 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(sinevoltage.p, rectifier.ac_p) annotation (Line(
-              points={{-80,10},{-62,10},{-62,6},{-40,6}},
+              points={{-80,30},{-80,40},{-40,40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage.n, rectifier.ac_n) annotation (Line(
-              points={{-80,-10},{-62,-10},{-62,-6},{-40,-6}},
+              points={{-80,10},{-80,10},{-80,-8},{-50,-8},{-50,28},{-40,28}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, currentSensor.n) annotation (Line(
-              points={{-19.8,-6},{-10,-6},{-10,-40}},
+              points={{-19.8,28},{-10,28},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
-              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
+              points={{-20,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(voltagesensor.n, currentSensor.p) annotation (Line(
@@ -1989,19 +1990,19 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,9},{-36,22}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-24,9},{-24,22}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.ac_p, rectifier.ac_p) annotation (Line(
-              points={{-40,36},{-60,36},{-60,6},{-40,6}},
+              points={{-40,4},{-60,4},{-60,40},{-40,40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.ac_n, pulse2.ac_n) annotation (Line(
-              points={{-40,-6},{-56,-6},{-56,24},{-40,24}},
+              points={{-40,28},{-50,28},{-50,-8},{-40,-8}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Icon(coordinateSystem(
@@ -2044,7 +2045,7 @@ A freely available book is available in
                 rotation=-90)));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTap2Pulse
             rectifier
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -2075,7 +2076,7 @@ A freely available book is available in
                         annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,0})));
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
@@ -2098,11 +2099,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage1.p, rectifier.ac_p) annotation (Line(
-              points={{-80,24},{-80,32},{-60,32},{-60,6},{-40,6}},
+              points={{-80,24},{-80,46},{-40,46}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage2.n, rectifier.ac_n) annotation (Line(
-              points={{-80,-23.9999},{-80,-30},{-60,-30},{-60,-6},{-40,-6}},
+              points={{-80,-23.9999},{-80,-32},{-50,-32},{-50,34},{-40,34}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(ground.p, currentSensor.n) annotation (Line(
@@ -2114,23 +2115,23 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(voltagesensor.p, rectifier.dc_p) annotation (Line(
-              points={{50,20},{50,40},{-10,40},{-10,0},{-20,0}},
+              points={{50,20},{50,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,11},{-36,28}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-24,11},{-24,28}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(rectifier.ac_n, pulse2.ac_n) annotation (Line(
-              points={{-40,-6},{-46,-6},{-46,24},{-40,24}},
+              points={{-40,34},{-50,34},{-50,-6},{-40,-6}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.ac_p, rectifier.ac_p) annotation (Line(
-              points={{-40,36},{-50,36},{-50,6},{-40,6}},
+              points={{-40,6},{-60,6},{-60,46},{-40,46}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Icon(coordinateSystem(
@@ -2163,10 +2164,10 @@ A freely available book is available in
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,-10})));
+                origin={-80,-30})));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorBridge2mPulse
             rectifier(final m=m)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-40,24},{-20,44}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -2197,14 +2198,14 @@ A freely available book is available in
             useFilter=false)  annotation (Placement(transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,0})));
           Modelica.Electrical.MultiPhase.Basic.MultiStarResistance multiStarResistance(final m=m)
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,-40})));
+                origin={-80,-60})));
           Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
-                transformation(extent={{-90,-80},{-70,-60}})));
+                transformation(extent={{-90,-100},{-70,-80}})));
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{0,-60},{0,-50}},
@@ -2219,15 +2220,15 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(sineVoltage.plug_p, rectifier.ac) annotation (Line(
-              points={{-80,0},{-40,0}},
+              points={{-80,-20},{-80,34},{-40,34}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, currentSensor.n) annotation (Line(
-              points={{-20,-6},{-10,-6},{-10,-40}},
+              points={{-20,28},{-10,28},{-10,-40}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
-              points={{-20,6},{-10,6},{-10,40},{50,40},{50,20}},
+              points={{-20,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(currentSensor.p, voltagesensor.n) annotation (Line(
@@ -2235,24 +2236,24 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,11},{-36,22.2}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-24,11},{-24,22}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2m.ac, sineVoltage.plug_p) annotation (Line(
-              points={{-40,30},{-80,30},{-80,4.44089e-16}},
+              points={{-40,6.66134e-16},{-80,6.66134e-16},{-80,-20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sineVoltage.plug_n, multiStarResistance.plug) annotation (
               Line(
-              points={{-80,-20},{-80,-30}},
+              points={{-80,-40},{-80,-50}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(multiStarResistance.pin, ground.p) annotation (Line(
-              points={{-80,-50},{-80,-60}},
+              points={{-80,-70},{-80,-80}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -2287,10 +2288,10 @@ A freely available book is available in
             freqHz=fill(f, m)) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-70,0})));
+                origin={-70,10})));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTapmPulse
             rectifier(final m=m)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -2324,7 +2325,7 @@ A freely available book is available in
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,0})));
         equation
           connect(star.pin_n, ground.p) annotation (Line(
               points={{-70,-40},{-70,-80}},
@@ -2343,8 +2344,7 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
-              points={{-20,8.88178e-16},{-10,8.88178e-16},{-10,40},{50,40},{50,
-                  20}},
+              points={{-20,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(currentSensor.p, voltagesensor.n) annotation (Line(
@@ -2352,15 +2352,16 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulsem.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,11},{-36,28}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulsem.ac, sineVoltage_p.plug_p) annotation (Line(
-              points={{-40,30},{-70,30},{-70,10}},
+              points={{-40,6.66134e-16},{-46,6.66134e-16},{-46,0},{-50,0},{-50,
+                40},{-70,40},{-70,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(star.plug_p, sineVoltage_p.plug_n) annotation (Line(
-              points={{-70,-20},{-70,-10}},
+              points={{-70,-20},{-70,1.33227e-15}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(star.pin_n, currentSensor.n) annotation (Line(
@@ -2368,7 +2369,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.ac, sineVoltage_p.plug_p) annotation (Line(
-              points={{-40,0},{-50,0},{-50,30},{-70,30},{-70,10}},
+              points={{-40,40},{-70,40},{-70,20}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -2406,7 +2407,7 @@ A freely available book is available in
                 origin={-70,10})));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTap2mPulse
             rectifier(final m=m)
-            annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+            annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
           Modelica.Electrical.Analog.Sensors.VoltageSensor voltagesensor
             annotation (Placement(visible=true, transformation(
                 origin={50,10},
@@ -2440,7 +2441,7 @@ A freely available book is available in
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,0})));
           Modelica.Electrical.MultiPhase.Sources.SineVoltage sineVoltage_n(
             final m=m,
             V=fill(sqrt(2)*Vrms, m),
@@ -2452,7 +2453,7 @@ A freely available book is available in
                 origin={-70,-20})));
         equation
           connect(star.pin_n, ground.p) annotation (Line(
-              points={{-100,-20},{-100,-70},{-80,-70},{-80,-80}},
+              points={{-100,-20},{-100,-50},{-80,-50},{-80,-80}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
@@ -2468,8 +2469,7 @@ A freely available book is available in
               color={0,0,127},
               smooth=Smooth.None));
           connect(rectifier.dc_p, voltagesensor.p) annotation (Line(
-              points={{-20,8.88178e-16},{-10,8.88178e-16},{-10,40},{50,40},{50,
-                  20}},
+              points={{-20,40},{50,40},{50,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(currentSensor.p, voltagesensor.n) annotation (Line(
@@ -2477,11 +2477,12 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2m.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,11},{-36,28}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2m.ac, sineVoltage_p.plug_p) annotation (Line(
-              points={{-40,30},{-70,30},{-70,20}},
+              points={{-40,6.66134e-16},{-46,6.66134e-16},{-46,46},{-70,46},{
+                -70,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sineVoltage_p.plug_n, sineVoltage_n.plug_p) annotation (Line(
@@ -2490,11 +2491,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(sineVoltage_n.plug_n, rectifier.ac_n) annotation (Line(
-              points={{-70,-30},{-70,-40},{-50,-40},{-50,-6},{-40,-6}},
+              points={{-70,-30},{-70,-40},{-50,-40},{-50,34},{-40,34}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(sineVoltage_p.plug_p, rectifier.ac_p) annotation (Line(
-              points={{-70,20},{-70,30},{-50,30},{-50,6},{-40,6}},
+              points={{-70,20},{-70,46},{-40,46}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(star.plug_p, sineVoltage_p.plug_n) annotation (Line(
@@ -2506,7 +2507,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2m.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-24,11},{-24,28}},
               color={255,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -2828,9 +2829,9 @@ A freely available book is available in
         Modelica.Blocks.Interfaces.RealInput firingAngle if not
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
-              extent={{-20,-20},{20,20}},
+              extent={{20,-20},{-20,20}},
               rotation=270,
-              origin={0,120})));
+              origin={0,-120})));
         parameter Modelica.SIunits.Angle firingAngleMax(
           min=0,
           max=Modelica.Constants.pi) = Modelica.Constants.pi
@@ -2838,65 +2839,65 @@ A freely available book is available in
         Modelica.Blocks.Sources.Constant constantconstantFiringAngle(final k=
               constantFiringAngle) if useConstantFiringAngle annotation (
             Placement(transformation(
-              extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-30,90})));
+              extent={{10,-10},{-10,10}},
+              rotation=180,
+              origin={-30,-80})));
         Modelica.Blocks.Logical.GreaterThreshold positiveThreshold[m](threshold=
              zeros(m)) annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={-40,-2})));
+              origin={-60,10})));
         Modelica.Blocks.Logical.LessThreshold negativeThreshold[m](threshold=
               zeros(m)) annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,0})));
+              origin={60,10})));
         Modelica.Blocks.Logical.Timer timerPositive[m] annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={-40,-32})));
+              origin={-60,40})));
         Modelica.Blocks.Logical.Timer timerNegative[m] annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,-32})));
+              origin={60,40})));
         Modelica.Blocks.Logical.Greater greaterPositive[m] annotation (
             Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,10},{-10,-10}},
               rotation=270,
-              origin={-40,-72})));
+              origin={-60,80})));
         Modelica.Blocks.Logical.Greater negativeEqual[m] annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,-72})));
+              origin={60,80})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-110})));
+              rotation=90,
+              origin={-60,110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-110})));
+              rotation=90,
+              origin={60,110})));
         Modelica.Blocks.Math.Gain gain(final k=1/2/pi/f) annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={0,0})));
+              origin={0,10})));
         Modelica.Blocks.Routing.Replicator replicator(final nout=m) annotation (
            Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={0,-30})));
+              origin={0,40})));
         Modelica.Blocks.Nonlinear.Limiter limiter(final uMax=max(Modelica.Constants.pi,
               firingAngleMax), final uMin=0) annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={0,50})));
+              origin={0,-20})));
         Modelica.Blocks.Interfaces.RealInput v[m] "Voltages" annotation (
             Placement(transformation(
               extent={{-20,-20},{20,20}},
@@ -2907,82 +2908,83 @@ A freely available book is available in
             Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-60,20})));
+              origin={-80,-80})));
         Modelica.Blocks.Routing.RealPassThrough realPassThrough[m] if
           not useFilter "Pass through in case filter is off"
-          annotation (Placement(transformation(extent={{-70,40},{-50,60}})));
+          annotation (Placement(transformation(extent={{-90,-60},{-70,-40}})));
       equation
         connect(positiveThreshold.y, timerPositive.u) annotation (Line(
-            points={{-40,-13},{-40,-20}},
+            points={{-60,21},{-60,28}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(negativeThreshold.y, timerNegative.u) annotation (Line(
-            points={{40,-11},{40,-20}},
+            points={{60,21},{60,28}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(timerPositive.y, greaterPositive.u1) annotation (Line(
-            points={{-40,-43},{-40,-48},{-42,-48},{-42,-52},{-40,-52},{-40,-60}},
+            points={{-60,51},{-60,68}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(negativeEqual.u1, timerNegative.y) annotation (Line(
-            points={{40,-60},{40,-43}},
+            points={{60,68},{60,51}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(greaterPositive.y, fire_p) annotation (Line(
-            points={{-40,-83},{-40,-110}},
+            points={{-60,91},{-60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(negativeEqual.y, fire_n) annotation (Line(
-            points={{40,-83},{40,-110}},
+            points={{60,91},{60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(gain.y, replicator.u) annotation (Line(
-            points={{-2.22045e-15,-11},{-2.22045e-15,-18},{2.22045e-15,-18}},
+            points={{1.33227e-15,21},{1.33227e-15,28},{-2.66454e-15,28}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(replicator.y, greaterPositive.u2) annotation (Line(
-            points={{-1.33227e-15,-41},{-1.33227e-15,-50},{-48,-50},{-48,-60}},
+            points={{1.55431e-15,51},{1.55431e-15,60},{-52,60},{-52,68}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(replicator.y, negativeEqual.u2) annotation (Line(
-            points={{-1.33227e-15,-41},{-1.33227e-15,-50},{32,-50},{32,-60}},
+            points={{1.55431e-15,51},{1.55431e-15,52},{0,52},{0,60},{52,60},{52,
+              68}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(limiter.y, gain.u) annotation (Line(
-            points={{-1.9984e-15,39},{-1.9984e-15,12},{2.22045e-15,12}},
+            points={{1.55431e-15,-9},{1.55431e-15,-2},{-2.66454e-15,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(firingAngle, limiter.u) annotation (Line(
-            points={{8.88178e-16,120},{0,100},{0,70},{2.22045e-15,70},{
-                2.22045e-15,62}},
+            points={{-8.88178e-16,-120},{0,-120},{0,-32},{-2.66454e-15,-32}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(constantconstantFiringAngle.y, limiter.u) annotation (Line(
-            points={{-30,79},{-30,70},{0,70},{0,62},{2.22045e-15,62}},
+            points={{-19,-80},{0,-80},{0,-32},{-2.66454e-15,-32}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(v, filter.u) annotation (Line(
-            points={{-120,0},{-80,0},{-80,20},{-72,20}},
+            points={{-120,0},{-100,0},{-100,-80},{-92,-80}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(filter.y, positiveThreshold.u) annotation (Line(
-            points={{-49,20},{-40,20},{-40,10}},
+            points={{-69,-80},{-60,-80},{-60,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(filter.y, negativeThreshold.u) annotation (Line(
-            points={{-49,20},{40,20},{40,12}},
+            points={{-69,-80},{-60,-80},{-60,-50},{-52,-50},{-52,-50},{60,-50},
+              {60,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(realPassThrough.u, v) annotation (Line(
-            points={{-72,50},{-80,50},{-80,0},{-120,0},{-120,8.88178e-16}},
+            points={{-92,-50},{-100,-50},{-100,0},{-120,0},{-120,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(realPassThrough.y, positiveThreshold.u) annotation (Line(
-            points={{-49,50},{-40,50},{-40,10}},
+            points={{-69,-50},{-60,-50},{-60,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(realPassThrough.y, negativeThreshold.u) annotation (Line(
-            points={{-49,50},{-40,50},{-40,20},{40,20},{40,12}},
+            points={{-69,-50},{-56,-50},{-56,-50},{60,-50},{60,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -3048,8 +3050,8 @@ General information about controllers is summarized in
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
               extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={0,120})));
+              rotation=90,
+              origin={0,-120})));
         Signal2mPulse twoPulse(
           final useConstantFiringAngle=useConstantFiringAngle,
           final f=f,
@@ -3075,25 +3077,25 @@ General information about controllers is summarized in
         Modelica.Blocks.Interfaces.BooleanOutput fire_p annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-110})));
+              rotation=90,
+              origin={-60,110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n annotation (Placement(
               transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-110})));
+              rotation=90,
+              origin={60,110})));
         Modelica.Blocks.Logical.And andCondition_p
         "And condition for positive firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,10},{-10,-10}},
               rotation=270,
-              origin={-40,-80})));
+              origin={-60,70})));
         Modelica.Blocks.Logical.And andCondition_n
         "And condition for negative firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,-80})));
+              origin={60,70})));
       equation
         connect(voltageSensor.v, twoPulse.v[1]) annotation (Line(
             points={{-70,-2.22045e-15},{-60,-2.22045e-15},{-60,0},{-12,0},{-12,
@@ -3109,31 +3111,31 @@ General information about controllers is summarized in
             color={0,0,255},
             smooth=Smooth.None));
         connect(firingAngle, twoPulse.firingAngle) annotation (Line(
-            points={{8.88178e-16,120},{8.88178e-16,12}},
+            points={{8.88178e-16,-120},{8.88178e-16,-12}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(twoPulse.fire_n[1], andCondition_n.u2) annotation (Line(
-            points={{4,-11},{4,-50},{32,-50},{32,-68}},
+            points={{6,11},{6,40},{52,40},{52,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(twoPulse.fire_p[1], andCondition_p.u2) annotation (Line(
-            points={{-4,-11},{-4,-50},{-48,-50},{-48,-68}},
+            points={{-6,11},{-6,40},{-52,40},{-52,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_p.y, fire_p) annotation (Line(
-            points={{-40,-91},{-40,-110}},
+            points={{-60,81},{-60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_n.y, fire_n) annotation (Line(
-            points={{40,-91},{40,-110}},
+            points={{60,81},{60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, andCondition_n.u1) annotation (Line(
-            points={{60,70},{60,-60},{40,-60},{40,-68}},
+            points={{80,-60},{80,-40},{60,-40},{60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, andCondition_p.u1) annotation (Line(
-            points={{60,70},{60,-60},{-40,-60},{-40,-68}},
+            points={{80,-60},{80,-60},{80,-40},{-60,-40},{-60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -3216,8 +3218,8 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
               extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={0,120})));
+              rotation=90,
+              origin={0,-120})));
         Signal2mPulse twomPulse(
           final useConstantFiringAngle=useConstantFiringAngle,
           final f=f,
@@ -3246,30 +3248,30 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
         Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-110})));
+              rotation=90,
+              origin={-60,110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-110})));
+              rotation=90,
+              origin={60,110})));
         Modelica.Blocks.Logical.And andCondition_p[m]
         "And condition for positive firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={-40,-80})));
+              origin={-60,70})));
         Modelica.Blocks.Logical.And andCondition_n[m]
         "And condition for negative firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,-80})));
+              origin={60,70})));
         Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(final nout=m)
           annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={60,40})));
+              origin={80,0})));
       equation
         connect(ac, voltageSensor.plug_p) annotation (Line(
             points={{-100,4.44089e-16},{-100,-4.44089e-16},{-44,-4.44089e-16}},
@@ -3289,35 +3291,36 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
             color={0,0,127},
             smooth=Smooth.None));
         connect(firingAngle, twomPulse.firingAngle) annotation (Line(
-            points={{0,120},{0,40},{8.88178e-16,40},{8.88178e-16,22}},
+            points={{1.11022e-15,-120},{1.11022e-15,-26},{0,-26},{0,-14},{
+              4.44089e-16,-14},{4.44089e-16,-2}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(twomPulse.fire_p, andCondition_p.u2) annotation (Line(
-            points={{-4,-1},{-4,-50},{-48,-50},{-48,-68}},
+            points={{-6,21},{-6,32},{-68,32},{-68,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(twomPulse.fire_n, andCondition_n.u2) annotation (Line(
-            points={{4,-1},{4,-50},{32,-50},{32,-68}},
+            points={{6,21},{6,30},{52,30},{52,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, booleanReplicator.u) annotation (Line(
-            points={{60,70},{60,52}},
+            points={{80,-60},{80,-12}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(booleanReplicator.y, andCondition_p.u1) annotation (Line(
-            points={{60,29},{60,-60},{-40,-60},{-40,-68}},
+            points={{80,11},{80,40},{-60,40},{-60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(booleanReplicator.y, andCondition_n.u1) annotation (Line(
-            points={{60,29},{60,-60},{40,-60},{40,-68}},
+            points={{80,11},{80,40},{60,40},{60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_p.y, fire_p) annotation (Line(
-            points={{-40,-91},{-40,-110}},
+            points={{-60,81},{-60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_n.y, fire_n) annotation (Line(
-            points={{40,-91},{40,-110}},
+            points={{60,81},{60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -3396,8 +3399,8 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
           useConstantFiringAngle "Firing angle (rad)" annotation (Placement(
               transformation(
               extent={{-20,-20},{20,20}},
-              rotation=270,
-              origin={0,120})));
+              rotation=90,
+              origin={0,-120})));
         Signal2mPulse twomPulse(
           final useConstantFiringAngle=useConstantFiringAngle,
           final f=f,
@@ -3416,13 +3419,13 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
         Modelica.Blocks.Interfaces.BooleanOutput fire_p[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-110})));
+              rotation=90,
+              origin={-60,110})));
         Modelica.Blocks.Interfaces.BooleanOutput fire_n[m] annotation (
             Placement(transformation(
               extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-110})));
+              rotation=90,
+              origin={60,110})));
         Modelica.Electrical.MultiPhase.Basic.MultiDelta
                                                    delta(final m=m)
         "Delta connection"   annotation (Placement(transformation(
@@ -3436,24 +3439,24 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
           annotation (Placement(transformation(extent={{-28,-10},{-8,10}})));
         Modelica.Blocks.Routing.BooleanReplicator booleanReplicator(final nout=m)
           annotation (Placement(transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={60,40})));
+              origin={80,0})));
         Modelica.Blocks.Logical.And andCondition_p[m]
         "And condition for positive firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={-40,-80})));
+              origin={-60,70})));
         Modelica.Blocks.Logical.And andCondition_n[m]
         "And condition for negative firing signal"   annotation (Placement(
               transformation(
-              extent={{-10,-10},{10,10}},
+              extent={{10,-10},{-10,10}},
               rotation=270,
-              origin={40,-80})));
+              origin={60,70})));
       equation
         connect(firingAngle, twomPulse.firingAngle) annotation (Line(
-            points={{0,120},{0,40},{10,40},{10,12}},
+            points={{8.88178e-16,-120},{8.88178e-16,-80},{10,-80},{10,-12}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSensor.plug_p, delta.plug_p) annotation (Line(
@@ -3474,31 +3477,31 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
             color={0,0,127},
             smooth=Smooth.None));
         connect(booleanReplicator.y, andCondition_n.u1) annotation (Line(
-            points={{60,29},{60,-60},{40,-60},{40,-68}},
+            points={{80,11},{80,40},{60,40},{60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(booleanReplicator.y, andCondition_p.u1) annotation (Line(
-            points={{60,29},{60,-60},{-40,-60},{-40,-68}},
+            points={{80,11},{80,40},{-60,40},{-60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(twomPulse.fire_p, andCondition_p.u2) annotation (Line(
-            points={{6,-11},{6,-50},{-48,-50},{-48,-68}},
+            points={{4,11},{4,30},{-68,30},{-68,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(twomPulse.fire_n, andCondition_n.u2) annotation (Line(
-            points={{14,-11},{14,-50},{32,-50},{32,-68}},
+            points={{16,11},{16,30},{52,30},{52,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_p.y, fire_p) annotation (Line(
-            points={{-40,-91},{-40,-110}},
+            points={{-60,81},{-60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andCondition_n.y, fire_n) annotation (Line(
-            points={{40,-91},{40,-110}},
+            points={{60,81},{60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, booleanReplicator.u) annotation (Line(
-            points={{60,70},{60,52}},
+            points={{80,-60},{80,-12}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -3850,14 +3853,14 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
       "Fire signal for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n
       "Fire signal for negative potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
@@ -3870,8 +3873,8 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
         final off(start=offStart_p1, fixed=true))
       "Thyristor connecting the positve AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
-            origin={10,50},
-            extent={{-10,10},{10,-10}},
+            origin={-20,50},
+            extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
         final Ron=RonThyristor,
@@ -3881,7 +3884,7 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
         final off(start=offStart_p2, fixed=true))
       "Thyristor connecting the negative AC input pin with postitive DC output"
         annotation (Placement(visible=true, transformation(
-            origin={40,50},
+            origin={20,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n1(
@@ -3892,7 +3895,7 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
         final off(start=offStart_n1, fixed=true))
       "Thyristor connecting the positve AC input with negative DC output"
         annotation (Placement(visible=true, transformation(
-            origin={10,-50},
+            origin={-20,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n2(
@@ -3903,8 +3906,8 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
         final off(start=offStart_n2, fixed=true))
       "Thyristor connecting the negative AC input with negative DC output"
         annotation (Placement(visible=true, transformation(
-            origin={40,-50},
-            extent={{-10,-10},{10,10}},
+            origin={20,-50},
+            extent={{-10,10},{10,-10}},
             rotation=90)));
     equation
 
@@ -3913,71 +3916,71 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
           thyristor_n1.LossPower + thyristor_n2.LossPower;
       end if;
       connect(thyristor_p2.n, thyristor_p1.n) annotation (Line(
-          points={{40,60},{10,60}},
+          points={{20,60},{-20,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n1.p, thyristor_n2.p) annotation (Line(
-          points={{10,-60},{40,-60}},
+          points={{-20,-60},{20,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n2.n, thyristor_p2.p) annotation (Line(
-          points={{40,-40},{40,40}},
+          points={{20,-40},{20,40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p1.p, thyristor_n1.n) annotation (Line(
-          points={{10,40},{10,-40}},
+          points={{-20,40},{-20,-40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p1.n, dc_p) annotation (Line(
-          points={{10,60},{100,60}},
+          points={{-20,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n1.p, dc_n) annotation (Line(
-          points={{10,-60},{102,-60}},
+          points={{-20,-60},{102,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n1.heatPort, heatPort) annotation (Line(
-          points={{20,-50},{20,-100},{4.44089e-16,-100}},
+          points={{-10,-50},{0,-50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_n2.heatPort, heatPort) annotation (Line(
-          points={{50,-50},{50,-100},{4.44089e-16,-100}},
+          points={{10,-50},{0,-50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p1.heatPort, heatPort) annotation (Line(
-          points={{0,50},{-50,50},{-50,-100},{4.44089e-16,-100}},
+          points={{-10,50},{0,50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p2.heatPort, heatPort) annotation (Line(
-          points={{30,50},{30,30},{-50,30},{-50,-100},{4.44089e-16,-100}},
+          points={{10,50},{0,50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(ac_p, thyristor_p1.p) annotation (Line(
-          points={{-100,60},{-80,60},{-80,20},{10,20},{10,40}},
+          points={{-100,60},{-100,20},{-20,20},{-20,40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(ac_n, thyristor_n2.n) annotation (Line(
-          points={{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}},
+          points={{-100,-60},{-100,-20},{20,-20},{20,-40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p1.fire) annotation (Line(
-          points={{-40,120},{-40,80},{26,80},{26,57},{21,57}},
+          points={{-60,-120},{-60,30},{-60,30},{-60,30},{-60,57},{-31,57}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_n, thyristor_p2.fire) annotation (Line(
-          points={{40,120},{40,80},{60,80},{60,56},{56,56},{56,57},{51,57}},
+          points={{60,-120},{60,57},{31,57}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_p, thyristor_n2.fire) annotation (Line(
-          points={{-40,120},{-40,80},{26,80},{26,-43},{29,-43}},
+          points={{-60,-120},{-60,-30},{40,-30},{40,-43},{31,-43}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_n, thyristor_n1.fire) annotation (Line(
-          points={{40,120},{40,80},{60,80},{60,-10},{-10,-10},{-10,-43},{-1,-43}},
+          points={{60,-120},{60,-70},{-40,-70},{-40,-43},{-31,-43}},
           color={255,0,255},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),        graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
             Text(
@@ -4070,14 +4073,14 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
       "Fire signal for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n
       "Fire signal for negative potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
@@ -4089,8 +4092,8 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
         final useHeatPort=useHeatPort,
         final off(start=offStart_p1, fixed=true)) annotation (Placement(visible=true,
             transformation(
-            origin={10,50},
-            extent={{-10,10},{10,-10}},
+            origin={-20,50},
+            extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_p2(
         final Ron=RonThyristor,
@@ -4099,7 +4102,7 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
         final useHeatPort=useHeatPort,
         final off(start=offStart_p2, fixed=true)) annotation (Placement(visible=true,
             transformation(
-            origin={40,50},
+            origin={20,50},
             extent={{-10,10},{10,-10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n1(
@@ -4109,7 +4112,7 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
         final useHeatPort=useHeatPort)
       "Diode connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
-            origin={10,-50},
+            origin={-20,-50},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n2(
@@ -4119,8 +4122,8 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
         final useHeatPort=useHeatPort)
       "Diode connected to negative DC potential"
         annotation (Placement(visible=true, transformation(
-            origin={40,-50},
-            extent={{-10,-10},{10,10}},
+            origin={20,-50},
+            extent={{-10,10},{10,-10}},
             rotation=90)));
     equation
       if not useHeatPort then
@@ -4128,63 +4131,63 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
            + diode_n2.LossPower;
       end if;
       connect(thyristor_p2.n, thyristor_p1.n) annotation (Line(
-          points={{40,60},{10,60}},
+          points={{20,60},{-20,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n1.p, diode_n2.p) annotation (Line(
-          points={{10,-60},{40,-60}},
+          points={{-20,-60},{20,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n2.n, thyristor_p2.p) annotation (Line(
-          points={{40,-40},{40,40}},
+          points={{20,-40},{20,40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p1.p, diode_n1.n) annotation (Line(
-          points={{10,40},{10,-40}},
+          points={{-20,40},{-20,-40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p1.n, dc_p) annotation (Line(
-          points={{10,60},{100,60}},
+          points={{-20,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n1.p, dc_n) annotation (Line(
-          points={{10,-60},{102,-60}},
+          points={{-20,-60},{102,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n1.heatPort, heatPort) annotation (Line(
-          points={{20,-50},{20,-100},{4.44089e-16,-100}},
+          points={{-10,-50},{0,-50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(diode_n2.heatPort, heatPort) annotation (Line(
-          points={{50,-50},{50,-100},{4.44089e-16,-100}},
+          points={{10,-50},{0,-50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p1.heatPort, heatPort) annotation (Line(
-          points={{0,50},{-50,50},{-50,-100},{4.44089e-16,-100}},
+          points={{-10,50},{0,50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p2.heatPort, heatPort) annotation (Line(
-          points={{30,50},{30,30},{-50,30},{-50,-100},{4.44089e-16,-100}},
+          points={{10,50},{0,50},{0,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(ac_p, thyristor_p1.p) annotation (Line(
-          points={{-100,60},{-80,60},{-80,20},{10,20},{10,40}},
+          points={{-100,60},{-100,20},{-20,20},{-20,40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(ac_n, diode_n2.n) annotation (Line(
-          points={{-100,-60},{-80,-60},{-80,-20},{40,-20},{40,-40}},
+          points={{-100,-60},{-100,-20},{20,-20},{20,-40}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p1.fire) annotation (Line(
-          points={{-40,120},{-40,80},{26,80},{26,57},{21,57}},
+          points={{-60,-120},{-60,57},{-31,57}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(thyristor_p2.fire, fire_n) annotation (Line(
-          points={{51,57},{56,57},{56,80},{40,80},{40,120}},
+          points={{31,57},{60,57},{60,-120}},
           color={255,0,255},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),        graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
             Text(
@@ -4286,8 +4289,8 @@ The circuit topology is the same as in
         final useHeatPort=useHeatPort)
       "Diodes conducting positive pin AC potentials"   annotation (Placement(
             visible=true, transformation(
-            origin={10,60},
-            extent={{-10,10},{10,-10}},
+            origin={0,60},
+            extent={{-10,-10},{10,10}},
             rotation=0)));
       Modelica.Electrical.Analog.Ideal.IdealDiode diode_n(
         final Ron=RonDiode,
@@ -4296,7 +4299,7 @@ The circuit topology is the same as in
         final useHeatPort=useHeatPort)
       "Diodes conducting negative pin AC potentials"   annotation (Placement(
             visible=true, transformation(
-            origin={10,-60},
+            origin={0,-60},
             extent={{-10,-10},{10,10}},
             rotation=0)));
     equation
@@ -4304,27 +4307,28 @@ The circuit topology is the same as in
         LossPower = diode_p.LossPower + diode_n.LossPower;
       end if;
       connect(ac_p, diode_p.p) annotation (Line(
-          points={{-100,60},{0,60}},
+          points={{-100,60},{-10,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(ac_n, diode_n.p) annotation (Line(
-          points={{-100,-60},{0,-60}},
+          points={{-100,-60},{-10,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_p.n, dc_p) annotation (Line(
-          points={{20,60},{100,60},{100,0}},
+          points={{10,60},{100,60},{100,0}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.n, dc_p) annotation (Line(
-          points={{20,-60},{100,-60},{100,4.44089e-16}},
+          points={{10,-60},{100,-60},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.heatPort, heatPort) annotation (Line(
-          points={{10,-70},{10,-100},{0,-100}},
+          points={{6.66134e-16,-70},{6.66134e-16,-100},{0,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(diode_p.heatPort, heatPort) annotation (Line(
-          points={{10,70},{30,70},{30,-100},{4.44089e-16,-100}},
+          points={{6.66134e-16,50},{6.66134e-16,40},{20,40},{20,-100},{
+            4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(
@@ -4409,14 +4413,14 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
       "Fire signal for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n
       "Fire signal for negative potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC=ac_p.v - ac_n.v "AC voltages";
@@ -4429,8 +4433,8 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
         final off(start=offStart_p, fixed=true))
       "Thyristors conducting positive pin AC potentials"   annotation (
           Placement(visible=true, transformation(
-            origin={10,60},
-            extent={{-10,10},{10,-10}},
+            origin={0,60},
+            extent={{-10,-10},{10,10}},
             rotation=0)));
       Modelica.Electrical.Analog.Ideal.IdealThyristor thyristor_n(
         final Ron=RonThyristor,
@@ -4440,7 +4444,7 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
         final off(start=offStart_n, fixed=true))
       "Thyristors conducting negative pin AC potentials"   annotation (
           Placement(visible=true, transformation(
-            origin={10,-60},
+            origin={0,-60},
             extent={{-10,-10},{10,10}},
             rotation=0)));
     equation
@@ -4448,35 +4452,36 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
         LossPower = thyristor_p.LossPower + thyristor_n.LossPower;
       end if;
       connect(ac_p, thyristor_p.p) annotation (Line(
-          points={{-100,60},{-4.44089e-16,60}},
+          points={{-100,60},{-10,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(ac_n, thyristor_n.p) annotation (Line(
-          points={{-100,-60},{-4.44089e-16,-60}},
+          points={{-100,-60},{-10,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p.n, dc_p) annotation (Line(
-          points={{20,60},{100,60},{100,0}},
+          points={{10,60},{100,60},{100,0}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n.n, dc_p) annotation (Line(
-          points={{20,-60},{100,-60},{100,4.44089e-16}},
+          points={{10,-60},{100,-60},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n.heatPort, heatPort) annotation (Line(
-          points={{10,-70},{10,-100},{0,-100}},
+          points={{6.66134e-16,-70},{6.66134e-16,-100},{4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p.heatPort, heatPort) annotation (Line(
-          points={{10,70},{10,80},{30,80},{30,-100},{4.44089e-16,-100}},
+          points={{6.66134e-16,50},{6.66134e-16,40},{20,40},{20,-100},{
+            4.44089e-16,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p.fire) annotation (Line(
-          points={{-40,120},{-40,40},{17,40},{17,49}},
+          points={{-60,-120},{-60,80},{7,80},{7,71}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_n, thyristor_n.fire) annotation (Line(
-          points={{40,120},{40,-40},{17,-40},{17,-49}},
+          points={{60,-120},{60,-40},{7,-40},{7,-49}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (Icon(coordinateSystem(
@@ -4566,7 +4571,7 @@ General information about AC/DC converters can be found at the
         each final useHeatPort=useHeatPort)
       "Diodes connected to positive DC potential"   annotation (Placement(
             visible=true, transformation(
-            origin={10,40},
+            origin={0,40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
@@ -4577,54 +4582,54 @@ General information about AC/DC converters can be found at the
         each final useHeatPort=useHeatPort)
       "Diodes connected to negative DC potential"   annotation (Placement(
             visible=true, transformation(
-            origin={10,-40},
+            origin={0,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
-        annotation (Placement(transformation(extent={{20,70},{40,50}})));
+        annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
-        annotation (Placement(transformation(extent={{20,-50},{40,-70}})));
+        annotation (Placement(transformation(extent={{70,-50},{90,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
       end if;
       connect(ac, diode_p.plug_p) annotation (Line(
-          points={{-100,4.44089e-16},{-100,0},{10,0},{10,30}},
+          points={{-100,4.44089e-16},{-100,0},{0,0},{0,30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_p.plug_p, diode_n.plug_n) annotation (Line(
-          points={{10,30},{10,-30}},
+          points={{0,30},{0,-30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_p.plug_n, star_p.plug_p) annotation (Line(
-          points={{10,50},{10,60},{20,60}},
+          points={{0,50},{0,60},{70,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_p.pin_n, dc_p) annotation (Line(
-          points={{40,60},{100,60}},
+          points={{90,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.plug_p, star_n.plug_p) annotation (Line(
-          points={{10,-50},{10,-60},{20,-60}},
+          points={{0,-50},{0,-60},{70,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_n) annotation (Line(
-          points={{40,-60},{102,-60}},
+          points={{90,-60},{102,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{20,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, diode_n.heatPort) annotation (Line(
-          points={{60,-80},{60,-40},{20,-40}},
+          points={{20,-80},{20,-40},{10,-40}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{20,40},{60,40},{60,-80}},
+          points={{10,40},{20,40},{20,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
@@ -4702,14 +4707,14 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
       "Fire signals for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-118})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
       "Fire signasl for negative potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
@@ -4724,7 +4729,7 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
       "Thyristors connected to positive DC potential"
           annotation (Placement(
             visible=true, transformation(
-            origin={10,40},
+            origin={0,40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_n(
@@ -4736,62 +4741,64 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
         final off(start=offStart_n,fixed=true))
       "Thyristors connected to negative DC potential"   annotation (Placement(
             visible=true, transformation(
-            origin={10,-40},
+            origin={0,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
-        annotation (Placement(transformation(extent={{20,70},{40,50}})));
+        annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
-        annotation (Placement(transformation(extent={{20,-50},{40,-70}})));
+        annotation (Placement(transformation(extent={{70,-50},{90,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(thyristor_n.idealThyristor.LossPower);
       end if;
       connect(ac, thyristor_p.plug_p) annotation (Line(
-          points={{-100,0},{10,0},{10,30}},
+          points={{-100,0},{-2.22045e-16,0},{-2.22045e-16,30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p.plug_p, thyristor_n.plug_n) annotation (Line(
-          points={{10,30},{10,-30}},
+          points={{-2.22045e-16,30},{-2.22045e-16,16},{8.88178e-16,16},{
+            8.88178e-16,-30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p.plug_n, star_p.plug_p) annotation (Line(
-          points={{10,50},{10,60},{20,60}},
+          points={{1.33227e-15,50},{1.33227e-15,60},{70,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_p.pin_n, dc_p) annotation (Line(
-          points={{40,60},{100,60}},
+          points={{90,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n.plug_p, star_n.plug_p) annotation (Line(
-          points={{10,-50},{10,-60},{20,-60}},
+          points={{-2.22045e-16,-50},{-2.22045e-16,-60},{70,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_n) annotation (Line(
-          points={{40,-60},{100,-60}},
+          points={{90,-60},{100,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{20,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, thyristor_n.heatPort) annotation (Line(
-          points={{60,-80},{60,-40},{20,-40}},
+          points={{20,-80},{20,-40},{10,-40}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{20,40},{60,40},{60,-80}},
+          points={{10,40},{20,40},{20,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p.fire) annotation (Line(
-          points={{-40,120},{-40,47},{-1,47}},
+          points={{-60,-118},{-60,47},{-11,47}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_n, thyristor_n.fire) annotation (Line(
-          points={{40,120},{40,80},{-20,80},{-20,-33},{-1,-33}},
+          points={{60,-120},{60,-20},{-20,-20},{-20,-28},{-20,-28},{-20,-33},{
+            -11,-33}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -4881,16 +4888,16 @@ See example
       "Fire signals for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
       Modelica.SIunits.Current iAC[m]=ac.pin[:].i "AC currents";
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
-        annotation (Placement(transformation(extent={{20,70},{40,50}})));
+        annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
-        annotation (Placement(transformation(extent={{20,-50},{40,-70}})));
+        annotation (Placement(transformation(extent={{70,-50},{90,-70}})));
       Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor_p(
         final m=m,
         final Ron=fill(RonThyristor, m),
@@ -4901,7 +4908,7 @@ See example
       "Thyristors connected to positive DC potential"
           annotation (Placement(
             visible=true, transformation(
-            origin={10,40},
+            origin={0,40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode_n(
@@ -4912,54 +4919,55 @@ See example
         each final useHeatPort=useHeatPort)
       "Diodes connected to negative DC potential"   annotation (Placement(
             visible=true, transformation(
-            origin={10,-40},
+            origin={0,-40},
             extent={{-10,-10},{10,10}},
             rotation=90)));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(diode_n.idealDiode.LossPower);
       end if;
       connect(ac, thyristor_p.plug_p) annotation (Line(
-          points={{-100,4.44089e-16},{10,4.44089e-16},{10,30}},
+          points={{-100,4.44089e-16},{0,4.44089e-16},{0,30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p.plug_p, diode_n.plug_n) annotation (Line(
-          points={{10,30},{10,-30}},
+          points={{0,30},{0,-30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_p.plug_n, star_p.plug_p) annotation (Line(
-          points={{10,50},{10,60},{20,60}},
+          points={{0,50},{0,60},{70,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_p.pin_n, dc_p) annotation (Line(
-          points={{40,60},{100,60}},
+          points={{90,60},{100,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.plug_p, star_n.plug_p) annotation (Line(
-          points={{10,-50},{10,-60},{20,-60}},
+          points={{0,-50},{0,-50},{0,-50},{0,-60},{70,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_n) annotation (Line(
-          points={{40,-60},{102,-60}},
+          points={{90,-60},{102,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{20,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, diode_n.heatPort) annotation (Line(
-          points={{60,-80},{60,-40},{20,-40}},
+          points={{20,-80},{20,-40},{10,-40}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{20,40},{60,40},{60,-80}},
+          points={{10,40},{20,40},{20,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p.fire) annotation (Line(
-          points={{-40,120},{-40,47},{-1,47}},
+          points={{-60,-120},{-60,46},{-60,46},{-60,46},{-60,47},{-36,47},{-11,
+            47}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -5080,34 +5088,34 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
             extent={{10,10},{-10,-10}},
             rotation=180)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
-        annotation (Placement(transformation(extent={{10,70},{30,50}})));
+        annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
-        annotation (Placement(transformation(extent={{12,-50},{32,-70}})));
+        annotation (Placement(transformation(extent={{72,-50},{92,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
       end if;
       connect(diode_p.plug_n, star_p.plug_p) annotation (Line(
-          points={{0,60},{10,60}},
+          points={{0,60},{70,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_p.pin_n, dc_p) annotation (Line(
-          points={{30,60},{100,60},{100,4.44089e-16}},
+          points={{90,60},{100,60},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{30,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, diode_n.heatPort) annotation (Line(
-          points={{60,-80},{-10,-80},{-10,-70}},
+          points={{30,-80},{-10,-80},{-10,-70}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,50},{-10,40},{60,40},{60,-80}},
+          points={{-10,50},{-10,40},{30,40},{30,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(ac_p, diode_p.plug_p) annotation (Line(
@@ -5115,7 +5123,7 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_p) annotation (Line(
-          points={{32,-60},{100,-60},{100,0}},
+          points={{92,-60},{100,-60},{100,0}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.plug_p, ac_n) annotation (Line(
@@ -5123,7 +5131,7 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_n.plug_n, star_n.plug_p) annotation (Line(
-          points={{4.44089e-16,-60},{12,-60}},
+          points={{4.44089e-16,-60},{72,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
@@ -5204,14 +5212,14 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
       "Fire signals for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
       "Fire signasl for negative potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m]=ac_p.pin[:].v - ac_n.pin[:].v
@@ -5242,42 +5250,42 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
             extent={{10,10},{-10,-10}},
             rotation=180)));
       Modelica.Electrical.MultiPhase.Basic.Star star_p(final m=m)
-        annotation (Placement(transformation(extent={{10,70},{30,50}})));
+        annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
-        annotation (Placement(transformation(extent={{12,-50},{32,-70}})));
+        annotation (Placement(transformation(extent={{72,-50},{92,-70}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(thyristor_n.idealThyristor.LossPower);
       end if;
       connect(thyristor_p.plug_n, star_p.plug_p) annotation (Line(
-          points={{0,60},{10,60}},
+          points={{0,60},{70,60}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_p.pin_n, dc_p) annotation (Line(
-          points={{30,60},{100,60},{100,4.44089e-16}},
+          points={{90,60},{100,60},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{30,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, thyristor_n.heatPort) annotation (Line(
-          points={{60,-80},{-10,-80},{-10,-70}},
+          points={{30,-80},{-10,-80},{-10,-70}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,50},{-10,40},{60,40},{60,-80}},
+          points={{-10,50},{-10,40},{30,40},{30,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p.fire) annotation (Line(
-          points={{-40,120},{-40,80},{-2,80},{-2,71},{-3,71}},
+          points={{-60,-120},{-60,80},{-2,80},{-2,71},{-3,71}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_n, thyristor_n.fire) annotation (Line(
-          points={{40,120},{40,-40},{-2,-40},{-2,-49},{-3,-49}},
+          points={{60,-120},{60,-40},{-2,-40},{-2,-49},{-3,-49}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(ac_p, thyristor_p.plug_p) annotation (Line(
@@ -5285,7 +5293,7 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_p) annotation (Line(
-          points={{32,-60},{100,-60},{100,0}},
+          points={{92,-60},{100,-60},{100,0}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n.plug_p, ac_n) annotation (Line(
@@ -5293,7 +5301,7 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
           color={0,0,255},
           smooth=Smooth.None));
       connect(thyristor_n.plug_n, star_n.plug_p) annotation (Line(
-          points={{4.44089e-16,-60},{12,-60}},
+          points={{4.44089e-16,-60},{72,-60}},
           color={0,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -5380,29 +5388,29 @@ This is a 2*m pulse thyristor rectifier with center tap. In order to operate thi
             extent={{10,10},{-10,-10}},
             rotation=180)));
       Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
-        annotation (Placement(transformation(extent={{10,10},{30,-10}})));
+        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
     equation
       assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
       if not useHeatPort then
         LossPower = sum(diode.idealDiode.LossPower);
       end if;
       connect(diode.plug_n, star.plug_p) annotation (Line(
-          points={{0,0},{10,0}},
+          points={{0,0},{22,0},{22,-6.66134e-16},{70,-6.66134e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star.pin_n, dc_p) annotation (Line(
-          points={{30,0},{100,0},{100,4.44089e-16}},
+          points={{90,-6.66134e-16},{100,-6.66134e-16},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{30,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(diode.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,-10},{-10,-20},{60,-20},{60,-80}},
+          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(ac, diode.plug_p) annotation (Line(
@@ -5483,8 +5491,8 @@ The circuit topology is the same as in
       "Fire signals for positive potential semiconductors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={-40,120})));
+            rotation=90,
+            origin={-60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
@@ -5502,33 +5510,33 @@ The circuit topology is the same as in
             extent={{10,10},{-10,-10}},
             rotation=180)));
       Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
-        annotation (Placement(transformation(extent={{10,10},{30,-10}})));
+        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
       Modelica.Thermal.HeatTransfer.Components.ThermalCollector
         thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{50,-100},{70,-80}})));
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
     equation
       assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
       if not useHeatPort then
         LossPower = sum(thyristor.idealThyristor.LossPower);
       end if;
       connect(thyristor.plug_n, star.plug_p) annotation (Line(
-          points={{0,0},{10,0}},
+          points={{0,0},{70,0}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(star.pin_n, dc_p) annotation (Line(
-          points={{30,4.44089e-16},{100,4.44089e-16}},
+          points={{90,4.44089e-16},{100,4.44089e-16}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{60,-100}},
+          points={{4.44089e-16,-100},{30,-100}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thyristor.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,-10},{-10,-20},{60,-20},{60,-80}},
+          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor.fire) annotation (Line(
-          points={{-40,120},{-40,80},{-2,80},{-2,11},{-3,11}},
+          points={{-60,-120},{-60,20},{-2,20},{-2,11},{-3,11}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(ac, thyristor.plug_p) annotation (Line(
@@ -5627,13 +5635,13 @@ General information about AC/DC converters can be found at the
           Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={-40,-120})));
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n
       "Firing signals of negative potential transistors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={40,-120})));
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC=ac.v "AC voltages";
@@ -5679,11 +5687,11 @@ General information about AC/DC converters can be found at the
            + diode_n.LossPower;
       end if;
       connect(fire_n, transistor_n.fire) annotation (Line(
-          points={{40,-120},{40,-80},{-20,-80},{-20,-27},{9,-27}},
+          points={{60,-120},{60,-80},{-20,-80},{-20,-27},{9,-27}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_p, transistor_p.fire) annotation (Line(
-          points={{-40,-120},{-40,13},{9,13}},
+          points={{-60,-120},{-60,13},{9,13}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
@@ -5823,13 +5831,13 @@ General information about AC/DC converters can be found at the
           Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={-40,-120})));
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n[m]
       "Firing signals of negative potential transistors"   annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={40,-120})));
+            origin={60,-120})));
       Modelica.SIunits.Voltage vDC=dc_p.v - dc_n.v "DC voltage";
       Modelica.SIunits.Current iDC=dc_p.i "DC current";
       Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
@@ -5930,11 +5938,11 @@ General information about AC/DC converters can be found at the
           color={0,0,255},
           smooth=Smooth.None));
       connect(fire_n, transistor_n.fire) annotation (Line(
-          points={{40,-120},{40,-80},{-20,-80},{-20,-27},{9,-27}},
+          points={{60,-120},{60,-80},{-20,-80},{-20,-27},{9,-27}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(fire_p, transistor_p.fire) annotation (Line(
-          points={{-40,-120},{-40,13},{9,13}},
+          points={{-60,-120},{-60,13},{9,13}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
@@ -6039,28 +6047,28 @@ General information about AC/DC converters can be found at the
           annotation (Placement(transformation(extent={{-140,-20},{-100,20}})));
         Modelica.Blocks.Interfaces.BooleanOutput fire "Firing PWM signal"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-110})));
+              rotation=90,
+              origin={-60,110})));
         Modelica.Blocks.Interfaces.BooleanOutput notFire "Firing PWM signal"
           annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-110})));
+              rotation=90,
+              origin={60,110})));
         Modelica.Blocks.Sources.Constant const(final k=constantDutyCycle) if
           useConstantDutyCycle
-          annotation (Placement(transformation(extent={{-100,50},{-80,70}})));
+          annotation (Placement(transformation(extent={{-100,-60},{-80,-40}})));
         Modelica.Blocks.Nonlinear.Limiter limiter(uMax=1, uMin=0)
-          annotation (Placement(transformation(extent={{-60,10},{-40,30}})));
+          annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
         Modelica.Blocks.Logical.Less greaterEqual
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={18,0})));
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+              rotation=0,
+              origin={22,-8})));
         Modelica.Blocks.Logical.And andCondition
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={-40,-80})));
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+              rotation=90,
+              origin={-60,70})));
         Modelica.Blocks.Discrete.ZeroOrderHold zeroOrderHold(final startTime=
               startTime, final samplePeriod=1/f)
-          annotation (Placement(transformation(extent={{-30,10},{-10,30}})));
+          annotation (Placement(transformation(extent={{-30,-10},{-10,10}})));
         Modelica.Blocks.Sources.SawTooth sawtooth(
           final period=1/f,
           final amplitude=1,
@@ -6068,68 +6076,70 @@ General information about AC/DC converters can be found at the
           final offset=0,
           final startTime=startTime)
                              annotation (Placement(visible=true, transformation(
-              origin={-50,60},
+              origin={-50,-50},
               extent={{-10,-10},{10,10}},
               rotation=0)));
 
         Modelica.Blocks.Logical.Not inverse annotation (Placement(
               transformation(
               extent={{-10,10},{10,-10}},
-              rotation=270,
-              origin={80,-42})));
+              rotation=90,
+              origin={52,20})));
         Modelica.Blocks.Logical.And andConditionNot
-          annotation (Placement(transformation(extent={{-10,-10},{10,10}},
-              rotation=270,
-              origin={40,-80})));
+          annotation (Placement(transformation(extent={{-10,10},{10,-10}},
+              rotation=90,
+              origin={60,70})));
 
       equation
         connect(const.y, limiter.u) annotation (Line(
-            points={{-79,60},{-70,60},{-70,20},{-62,20}},
+            points={{-79,-50},{-70,-50},{-70,0},{-62,0}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(dutyCycle, limiter.u) annotation (Line(
-            points={{-120,1.11022e-15},{-96,1.11022e-15},{-96,0},{-70,0},{-70,20},{-62,
-                20}},
+            points={{-120,1.11022e-15},{-96,1.11022e-15},{-96,0},{-70,0},{-70,
+              6.66134e-16},{-62,6.66134e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(andCondition.y, fire) annotation (Line(
-            points={{-40,-91},{-40,-91},{-40,-106},{-40,-106},{-40,-110},{-40,-110}},
+            points={{-60,81},{-60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(greaterEqual.y, andCondition.u2) annotation (Line(
-            points={{18,-11},{18,-20},{-48,-20},{-48,-68}},
+            points={{33,-8},{40,-8},{40,32},{-68,32},{-68,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(limiter.y, zeroOrderHold.u) annotation (Line(
-            points={{-39,20},{-32,20}},
+            points={{-39,6.66134e-16},{-38,6.66134e-16},{-38,4.44089e-16},{-36,
+              4.44089e-16},{-36,8.88178e-16},{-32,8.88178e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(zeroOrderHold.y, greaterEqual.u2) annotation (Line(
-            points={{-9,20},{10,20},{10,12}},
+            points={{-9,6.66134e-16},{-4,6.66134e-16},{-4,-4.44089e-16},{0,
+              -4.44089e-16},{0,4.44089e-16},{10,4.44089e-16}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(sawtooth.y, greaterEqual.u1) annotation (Line(
-            points={{-39,60},{18,60},{18,12}},
+            points={{-39,-50},{0,-50},{0,-8},{10,-8}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(greaterEqual.y, inverse.u) annotation (Line(
-            points={{18,-11},{18,-11},{18,-20},{80,-20},{80,-30}},
+            points={{33,-8},{52,-8},{52,8}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(inverse.y, andConditionNot.u2) annotation (Line(
-            points={{80,-53},{80,-60},{32,-60},{32,-68}},
+            points={{52,31},{52,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(andConditionNot.y, notFire) annotation (Line(
-            points={{40,-91},{40,-110}},
+            points={{60,81},{60,110}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, andCondition.u1) annotation (Line(
-            points={{60,70},{60,-50},{-40,-50},{-40,-68}},
+            points={{80,-60},{80,40},{-60,40},{-60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(internalEnable, andConditionNot.u1) annotation (Line(
-            points={{60,70},{60,-50},{40,-50},{40,-68}},
+            points={{80,-60},{80,40},{60,40},{60,58}},
             color={255,0,255},
             smooth=Smooth.None));
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -6165,7 +6175,11 @@ General information about AC/DC converters can be found at the
                       points={{60,-20},{62,-20},{64,-20},{64,20},{84,20},{84,-20},{84,
                     -20},{88,-20}},
                       color={255,0,255},
-                      smooth=Smooth.None)}),
+                      smooth=Smooth.None),
+              Text(
+                extent={{-150,150},{150,110}},
+                textString="%name",
+                lineColor={0,0,255})}),
           Documentation(info="<html>
 <p>
 This controller can be used both for DC/DC and AC/DC converters. 
@@ -6239,8 +6253,8 @@ to the switching period. The output firing signal is strictly determined by the 
       Modelica.Blocks.Interfaces.BooleanInput fire annotation (Placement(
             transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={0,120})));
+            rotation=90,
+            origin={-60,-120})));
     equation
       if not useHeatPort then
         LossPower = diode.LossPower + transistor.LossPower;
@@ -6274,7 +6288,7 @@ to the switching period. The output firing signal is strictly determined by the 
           color={0,0,255},
           smooth=Smooth.None));
       connect(transistor.fire, fire) annotation (Line(
-          points={{7,71},{7,85.5},{1.11022e-15,85.5},{1.11022e-15,120}},
+          points={{7,71},{7,80},{6,80},{6,80},{-60,80},{-60,-120}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
@@ -6359,27 +6373,27 @@ General information about DC/DC converters can be found at the
         annotation (Placement(
             transformation(
             extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={80,90})));
+            rotation=90,
+            origin={80,-80})));
       Modelica.Blocks.Interfaces.BooleanInput enable if not useConstantEnable
       "Enables fire and notFire"
         annotation (Placement(transformation(
             extent={{-20,-20},{20,20}},
-            rotation=270,
-            origin={40,120})));
+            rotation=90,
+            origin={60,-120})));
   protected
       Modelica.Blocks.Interfaces.BooleanInput internalEnable
       "Internal enable signal"   annotation (Placement(transformation(
             extent={{-6,-6},{6,6}},
-            rotation=270,
-            origin={60,70})));
+            rotation=90,
+            origin={80,-60})));
     equation
       connect(enable, internalEnable) annotation (Line(
-          points={{40,120},{40,70},{60,70}},
+          points={{60,-120},{60,-64},{80,-64},{80,-60},{80,-60}},
           color={255,0,255},
           smooth=Smooth.None));
       connect(enableConstantSource.y, internalEnable) annotation (Line(
-          points={{80,79},{80,70},{60,70}},
+          points={{80,-69},{80,-60}},
           color={255,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
@@ -6427,11 +6441,12 @@ is equal to the optional signal input <code>enable</code>.
               color={0,0,127},
               smooth=Smooth.None),
             Text(
-              extent={{-150,-112},{150,-152}},
+              extent={{-150,150},{150,110}},
               textString="%name",
               lineColor={0,0,255})}));
     end Converter;
   end Icons;
+
 
   annotation (
     Icon(coordinateSystem(
