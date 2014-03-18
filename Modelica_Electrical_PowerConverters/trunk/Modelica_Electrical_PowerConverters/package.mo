@@ -2826,6 +2826,68 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics));
         end ChopperStepDown;
       end ExampleTemplates;
+
+      package HBridge
+      extends Modelica.Icons.ExamplesPackage;
+        model HBridge "H bridge DC/DC converter"
+        import Modelica_Electrical_PowerConverters;
+          extends Modelica.Icons.Example;
+          parameter Modelica.SIunits.Resistance R=100 "Resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Inductance";
+          Modelica_Electrical_PowerConverters.DCDC.HBridge hbridge
+          annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=100)
+            annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-80,50})));
+          Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM signalPWM(
+            constantDutyCycle=0.6)
+            annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R)
+            annotation (Placement(transformation(extent={{-20,50},{0,70}})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L)
+            annotation (Placement(transformation(extent={{20,50},{40,70}})));
+        Modelica.Electrical.Analog.Basic.Ground ground
+          annotation (Placement(transformation(extent={{-90,-20},{-70,0}})));
+        equation
+
+        connect(hbridge.fire_p, signalPWM.fire) annotation (Line(
+            points={{-56.2,38},{-56.2,20},{-56,20},{-56,21}},
+            color={255,0,255},
+            smooth=Smooth.None));
+        connect(signalPWM.notFire, hbridge.fire_n) annotation (Line(
+            points={{-44,21},{-44,38},{-44.2,38}},
+            color={255,0,255},
+            smooth=Smooth.None));
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{0,60},{20,60}},
+              color={0,0,255},
+              smooth=Smooth.None));
+        connect(ground.p, constantVoltage.n) annotation (Line(
+            points={{-80,0},{-80,40}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.p, hbridge.dc_p1) annotation (Line(
+            points={{-80,60},{-68,60},{-68,56},{-60,56}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage.n, hbridge.dc_n1) annotation (Line(
+            points={{-80,40},{-68,40},{-68,44},{-60,44}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(hbridge.dc_p2, resistor.p) annotation (Line(
+            points={{-40,56},{-30,56},{-30,60},{-20,60}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(hbridge.dc_n2, inductor.n) annotation (Line(
+            points={{-40,44},{-30,44},{-30,40},{60,40},{60,60},{40,60}},
+            color={0,0,255},
+            smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                  -100},{100,100}}),   graphics));
+        end HBridge;
+      end HBridge;
     end DCDC;
   end Examples;
 
@@ -3681,7 +3743,7 @@ enabling signal is taken from the optional signal input <code>enable</code>.
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
       "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
+        293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin ac_p
       "Positive AC input"
         annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
@@ -4898,7 +4960,7 @@ See example
       "Boolean start value of variable thyristor_p[:].off"
         annotation(choices(checkBox=true));
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
+           293.15,useHeatPort=true);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
       "Positive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
@@ -5631,7 +5693,6 @@ General information about AC/DC converters can be found at the
     extends Modelica.Icons.Package;
     model SinglePhase2Level "Single phase DC to AC converter"
       extends Modelica.Blocks.Icons.Block;
-      parameter Integer m(final min=1) = 3 "Number of phases";
       parameter Modelica.SIunits.Resistance RonTransistor=1e-05
       "Transistor closed resistance";
       parameter Modelica.SIunits.Conductance GoffTransistor=1e-05
@@ -5702,9 +5763,6 @@ General information about AC/DC converters can be found at the
             extent={{-10,-10},{10,10}},
             rotation=90,
             origin={60,-20})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-        thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
     equation
       if not useHeatPort then
         LossPower = transistor_p.LossPower + diode_n.LossPower + transistor_n.LossPower
@@ -5717,27 +5775,6 @@ General information about AC/DC converters can be found at the
       connect(fire_p, transistor_p.fire) annotation (Line(
           points={{-60,-120},{-60,13},{9,13}},
           color={255,0,255},
-          smooth=Smooth.None));
-      connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{0,-100},{0,-62},{0,-62},{0,-60},{
-              4.44089e-16,-60}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(thermalCollector.port_a, transistor_n.heatPort) annotation (Line(
-          points={{0,-40},{0,-36},{30,-36},{30,-20}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(diode_n.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{70,-20},{70,-36},{0,-36},{0,-40}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(transistor_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{30,20},{30,4},{0,4},{0,-40}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{70,20},{70,4},{0,4},{0,-40}},
-          color={191,0,0},
           smooth=Smooth.None));
       connect(transistor_p.p, dc_p) annotation (Line(
           points={{20,30},{40,30},{40,70},{-100,70},{-100,100}},
@@ -5771,9 +5808,25 @@ General information about AC/DC converters can be found at the
           points={{100,0},{40,0},{40,10},{20,10}},
           color={0,0,255},
           smooth=Smooth.None));
+      connect(transistor_p.heatPort, heatPort) annotation (Line(
+          points={{30,20},{30,0},{0,0},{0,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(transistor_n.heatPort, heatPort) annotation (Line(
+          points={{30,-20},{30,-40},{4.44089e-16,-40},{4.44089e-16,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_p.heatPort, heatPort) annotation (Line(
+          points={{70,20},{70,-40},{0,-40},{0,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode_n.heatPort, heatPort) annotation (Line(
+          points={{70,-20},{70,-40},{0,-40},{0,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
       annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                100}}),      graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
                 100,100}}), graphics={Line(
                   points={{-100,-100},{100,100}},
@@ -5848,7 +5901,7 @@ An example of a single phase inverter with PWM voltage control is included in
       parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
       // parameter Boolean useEnable "Enables enable signal connector";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
+           293.15,useHeatPort=true);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
       "Positive DC input"
         annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
@@ -5978,8 +6031,7 @@ An example of a single phase inverter with PWM voltage control is included in
           color={255,0,255},
           smooth=Smooth.None));
       connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{0,-100},{0,-62},{0,-62},{0,-60},{
-              4.44089e-16,-60}},
+          points={{4.44089e-16,-100},{0,-100},{0,-60},{4.44089e-16,-60}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(thermalCollector.port_a, transistor_n.heatPort) annotation (Line(
@@ -6245,6 +6297,7 @@ Currently there is only one PWM method provided in this library.
 
     model ChopperStepDown "Step down chopper"
       import Modelica.Constants.pi;
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
       parameter Modelica.SIunits.Resistance RonTransistor=1e-05
       "Transistor closed resistance";
       parameter Modelica.SIunits.Conductance GoffTransistor=1e-05
@@ -6334,17 +6387,10 @@ Currently there is only one PWM method provided in this library.
           points={{7,71},{7,80},{6,80},{6,80},{-60,80},{-60,-120}},
           color={255,0,255},
           smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),      graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics={Rectangle(
-                  extent={{-100,100},{100,-100}},
-                  lineColor={0,0,127},
-                  fillColor={255,255,255},
-                  fillPattern=FillPattern.Solid),Line(
-                  points={{-100,-100},{100,100}},
-                  color={0,0,127},
-                  smooth=Smooth.None),Text(
+            graphics={                Text(
                   extent={{-100,70},{0,50}},
                   lineColor={0,0,127},
                   fillColor={255,255,255},
@@ -6401,6 +6447,147 @@ General information about DC/DC converters can be found at the
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCDCConcept\">DC/DC converter concept</a>
 </p>
 </html>"));
+    model HBridge "H bridge (four quadrant converter)"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=293.15,useHeatPort=true);
+      parameter Modelica.SIunits.Resistance RonTransistor=1e-05
+      "Transistor closed resistance";
+      parameter Modelica.SIunits.Conductance GoffTransistor=1e-05
+      "Transistor opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeTransistor=0
+      "Transistor threshold voltage";
+      parameter Modelica.SIunits.Resistance RonDiode=1e-05
+      "Diode closed resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode=1e-05
+      "Diode opened conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
+      // parameter Boolean useEnable "Enables enable signal connector";
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1
+      "Positive DC input"
+        annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n1
+      "Negative DC input"
+        annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+      Modelica.Electrical.Analog.Interfaces.NegativePin dc_n2
+      "Negative DC output"
+        annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p2
+      "Postive DC output"
+        annotation (Placement(transformation(extent={{90,50},{110,70}})));
+      DCAC.SinglePhase2Level inverter_p(
+        final RonTransistor=RonTransistor,
+        final GoffTransistor=GoffTransistor,
+        final VkneeTransistor=VkneeTransistor,
+        final RonDiode=RonDiode,
+        final GoffDiode=GoffDiode,
+        final VkneeDiode=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(extent={{-20,40},{0,60}})));
+      DCAC.SinglePhase2Level inverter_n(
+        final RonTransistor=RonTransistor,
+        final GoffTransistor=GoffTransistor,
+        final VkneeTransistor=VkneeTransistor,
+        final RonDiode=RonDiode,
+        final GoffDiode=GoffDiode,
+        final VkneeDiode=VkneeDiode,
+        final useHeatPort=useHeatPort)
+        annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p
+      "Firing signals of positive potential transistors"   annotation (
+          Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={-62,-120})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_n
+      "Firing signals of negative potential transistors"   annotation (
+          Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={58,-120})));
+    equation
+      if not useHeatPort then
+        LossPower = inverter_p.LossPower + inverter_n.LossPower;
+      end if;
+      connect(inverter_n.heatPort, heatPort) annotation (Line(
+          points={{-50,-60},{-50,-100},{4.44089e-16,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(inverter_p.heatPort, heatPort) annotation (Line(
+          points={{-10,40},{-10,-100},{0,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(fire_p, inverter_n.fire_p) annotation (Line(
+          points={{-62,-120},{-62,-80},{-56,-80},{-56,-62}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_p, inverter_p.fire_n) annotation (Line(
+          points={{-62,-120},{-62,-80},{-4,-80},{-4,38}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_n, inverter_n.fire_n) annotation (Line(
+          points={{58,-120},{58,-70},{-44,-70},{-44,-62}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_n, inverter_p.fire_p) annotation (Line(
+          points={{58,-120},{58,-70},{-16,-70},{-16,38}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(dc_p1, inverter_p.dc_p) annotation (Line(
+          points={{-100,60},{-20,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_p1, inverter_n.dc_p) annotation (Line(
+          points={{-100,60},{-70,60},{-70,-40},{-60,-40}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_n1, inverter_n.dc_n) annotation (Line(
+          points={{-100,-60},{-60,-60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(dc_n1, inverter_p.dc_n) annotation (Line(
+          points={{-100,-60},{-80,-60},{-80,40},{-20,40}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(inverter_p.ac, dc_p2) annotation (Line(
+          points={{4.44089e-16,50},{100,50},{100,60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(inverter_n.ac, dc_n2) annotation (Line(
+          points={{-40,-50},{100,-50},{100,-60}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics), Icon(graphics={
+                                       Rectangle(
+                  extent={{-40,40},{40,-40}},
+                  lineColor={255,255,255},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid),
+                                      Text(
+                  extent={{0,-50},{100,-70}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  textString="DC out"),
+                                      Text(
+                  extent={{-100,70},{0,50}},
+                  lineColor={0,0,127},
+                  fillColor={255,255,255},
+                  fillPattern=FillPattern.Solid,
+                  textString="DC in"),
+            Line(
+              points={{-20,30},{-20,-30}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Line(
+              points={{20,30},{20,-30}},
+              color={0,0,127},
+              smooth=Smooth.None),
+            Line(
+              points={{-20,0},{20,0}},
+              color={0,0,127},
+              smooth=Smooth.None)}));
+    end HBridge;
   end DCDC;
 
 
