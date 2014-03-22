@@ -221,7 +221,7 @@ A freely available book is available in
               constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
@@ -254,7 +254,7 @@ A freely available book is available in
               Tolerance=1e-06,
               Interval=0.0002),
             Documentation(info="<html>
-<p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
         end Thyristor1Pulse_R;
 
@@ -273,9 +273,9 @@ A freely available book is available in
                 rotation=90)));
           Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
              Placement(transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-40,70})));
+                origin={-40,-70})));
         equation
           connect(resistor.n, currentSensor.p) annotation (Line(
               points={{30,20},{30,-40},{10,-40}},
@@ -286,7 +286,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2.firingAngle) annotation (Line(
-              points={{-40,59},{-40,10}},
+              points={{-40,-59},{-40,-12}},
               color={0,0,127},
               smooth=Smooth.None));
           annotation (
@@ -305,246 +305,10 @@ A freely available book is available in
               Tolerance=1e-06,
               Interval=0.0002),
             Documentation(info="<html>
-<p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with resistive load.</p>
 </html>"));
         end Thyristor1Pulse_R_Characteristic;
       end Thyristor1Pulse;
-
-      package ThyristorCenterTap2Pulse "Examples of Power Electronics with M2C"
-        extends Modelica.Icons.ExamplesPackage;
-        model ThyristorCenterTap2Pulse_R
-        "Two pulse thyristor rectifier with center tap and resistive load"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
-              pulse2(constantFiringAngle=constantFiringAngle));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-        equation
-          connect(resistor.n, currentSensor.p) annotation (Line(
-              points={{30,20},{30,-40},{10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (
-            Icon(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=true,
-                initialScale=0.1,
-                grid={2,2})),
-            Diagram(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=false,
-                initialScale=0.1,
-                grid={2,2}), graphics),
-            experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTap2Pulse_R;
-
-        model ThyristorCenterTap2Pulse_RL
-        "Two pulse thyristor rectifier with center tap and R-L load"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
-              pulse2(constantFiringAngle=constantFiringAngle));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-                start=0)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, currentSensor.p) annotation (Line(
-              points={{30,-10},{30,-40},{10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (
-            Icon(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=true,
-                initialScale=0.1,
-                grid={2,2})),
-            Diagram(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=false,
-                initialScale=0.1,
-                grid={2,2}), graphics),
-            experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTap2Pulse_RL;
-
-        model ThyristorCenterTap2Pulse_RLV
-        "Two pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
-              pulse2(constantFiringAngle=constantFiringAngle));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0,
-                fixed=true)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
-                VDC) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={30,-30})));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, constantVoltage.p) annotation (Line(
-              points={{30,-10},{30,-20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(constantVoltage.n, currentSensor.p) annotation (Line(
-              points={{30,-40},{10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,0},{-20,0}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (
-            Icon(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=true,
-                initialScale=0.1,
-                grid={2,2})),
-            Diagram(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=false,
-                initialScale=0.1,
-                grid={2,2}), graphics),
-            experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTap2Pulse_RLV;
-
-        model ThyristorCenterTap2Pulse_RLV_Characteristic
-        "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
-              pulse2(useConstantFiringAngle=false));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-                start=0)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
-                VDC) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
-             Placement(transformation(
-                extent={{10,-10},{-10,10}},
-                rotation=270,
-                origin={-30,-60})));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, constantVoltage.p) annotation (Line(
-              points={{30,-10},{30,-20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(constantVoltage.n, currentSensor.p) annotation (Line(
-              points={{30,-40},{10,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(ramp.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,-49},{-30,-12}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (
-            Icon(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=true,
-                initialScale=0.1,
-                grid={2,2})),
-            Diagram(coordinateSystem(
-                extent={{-100,-100},{100,100}},
-                preserveAspectRatio=false,
-                initialScale=0.1,
-                grid={2,2}), graphics),
-            experiment(
-              StopTime=10,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTap2Pulse_RLV_Characteristic;
-        annotation (Icon(coordinateSystem(
-              extent={{-100,-100},{100,100}},
-              preserveAspectRatio=true,
-              initialScale=0.1,
-              grid={2,2})), Diagram(coordinateSystem(
-              extent={{-100,-100},{100,100}},
-              preserveAspectRatio=true,
-              initialScale=0.1,
-              grid={2,2})));
-      end ThyristorCenterTap2Pulse;
 
       package ThyristorBridge2Pulse "Two pulse Graetz bridge"
         extends Modelica.Icons.ExamplesPackage;
@@ -555,7 +319,7 @@ A freely available book is available in
               pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
@@ -569,7 +333,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -586,7 +350,10 @@ A freely available book is available in
             experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2Pulse_R;
 
         model ThyristorBridge2Pulse_RL
@@ -596,7 +363,7 @@ A freely available book is available in
               pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -621,7 +388,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -638,7 +405,10 @@ A freely available book is available in
             experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2Pulse_RL;
 
         model ThyristorBridge2Pulse_RLV
@@ -648,7 +418,7 @@ A freely available book is available in
               pulse2(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -683,7 +453,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -700,7 +470,10 @@ A freely available book is available in
             experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2Pulse_RLV;
 
         model ThyristorBridge2Pulse_RLV_Characteristic
@@ -750,11 +523,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(ramp.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,59},{-30,40}},
+              points={{-30,59},{-30,-14}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,6},{-20,6}},
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (
@@ -771,7 +544,10 @@ A freely available book is available in
             experiment(
               StopTime=10,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
+</html>"));
         end ThyristorBridge2Pulse_RLV_Characteristic;
 
         model ThyristorBridge2Pulse_DC_Drive
@@ -899,6 +675,7 @@ A freely available book is available in
                 origin={-80,60})));
         initial equation
           lMains.i = 0;
+
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
@@ -933,11 +710,11 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-34,19},{-34,12}},
+              points={{-36,41},{-36,22},{-38,22},{-38,2},{-34,2},{-34,12}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-26,19},{-26,12}},
+              points={{-24,41},{-24,22},{-22,22},{-22,2},{-26,2},{-26,12}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.ac_p, rectifier.ac_p) annotation (Line(
@@ -969,7 +746,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(const.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,59},{-30,40}},
+              points={{-30,59},{-30,18}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(rMains.n, lMains.p) annotation (Line(
@@ -1003,6 +780,454 @@ A freely available book is available in
         end ThyristorBridge2Pulse_DC_Drive;
       end ThyristorBridge2Pulse;
 
+      package ThyristorCenterTap2Pulse "Examples of Power Electronics with M2C"
+        extends Modelica.Icons.ExamplesPackage;
+        model ThyristorCenterTap2Pulse_R
+        "Two pulse thyristor rectifier with center tap and resistive load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
+              pulse2(constantFiringAngle=constantFiringAngle));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+        equation
+          connect(resistor.n, currentSensor.p) annotation (Line(
+              points={{30,20},{30,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (
+            Icon(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=true,
+                initialScale=0.1,
+                grid={2,2})),
+            Diagram(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=false,
+                initialScale=0.1,
+                grid={2,2}), graphics),
+            experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTap2Pulse_R;
+
+        model ThyristorCenterTap2Pulse_RL
+        "Two pulse thyristor rectifier with center tap and R-L load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
+              pulse2(constantFiringAngle=constantFiringAngle));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+                start=0)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, currentSensor.p) annotation (Line(
+              points={{30,-10},{30,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (
+            Icon(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=true,
+                initialScale=0.1,
+                grid={2,2})),
+            Diagram(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=false,
+                initialScale=0.1,
+                grid={2,2}), graphics),
+            experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTap2Pulse_RL;
+
+        model ThyristorCenterTap2Pulse_RLV
+        "Two pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
+              pulse2(constantFiringAngle=constantFiringAngle));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(start=0,
+                fixed=true)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+                VDC) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,-30})));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, constantVoltage.p) annotation (Line(
+              points={{30,-10},{30,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(constantVoltage.n, currentSensor.p) annotation (Line(
+              points={{30,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (
+            Icon(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=true,
+                initialScale=0.1,
+                grid={2,2})),
+            Diagram(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=false,
+                initialScale=0.1,
+                grid={2,2}), graphics),
+            experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTap2Pulse_RLV;
+
+        model ThyristorCenterTap2Pulse_RLV_Characteristic
+        "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTap2Pulse(
+              pulse2(useConstantFiringAngle=false));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          parameter Modelica.SIunits.Voltage VDC=-120 "DC load offset voltage";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+                start=0)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+                VDC) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,-30})));
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
+                extent={{10,-10},{-10,10}},
+                rotation=270,
+                origin={-30,-60})));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, constantVoltage.p) annotation (Line(
+              points={{30,-10},{30,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(constantVoltage.n, currentSensor.p) annotation (Line(
+              points={{30,-40},{10,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(ramp.y, pulse2.firingAngle) annotation (Line(
+              points={{-30,-49},{-30,-12}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (
+            Icon(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=true,
+                initialScale=0.1,
+                grid={2,2})),
+            Diagram(coordinateSystem(
+                extent={{-100,-100},{100,100}},
+                preserveAspectRatio=false,
+                initialScale=0.1,
+                grid={2,2}), graphics),
+            experiment(
+              StopTime=10,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
+</html>"));
+        end ThyristorCenterTap2Pulse_RLV_Characteristic;
+        annotation (Icon(coordinateSystem(
+              extent={{-100,-100},{100,100}},
+              preserveAspectRatio=true,
+              initialScale=0.1,
+              grid={2,2})), Diagram(coordinateSystem(
+              extent={{-100,-100},{100,100}},
+              preserveAspectRatio=true,
+              initialScale=0.1,
+              grid={2,2})));
+      end ThyristorCenterTap2Pulse;
+
+      package ThyristorCenterTapmPulse
+      "m pulse thyristor rectifier with center tap"
+        extends Modelica.Icons.ExamplesPackage;
+        model ThyristorCenterTapmPulse_R
+        "2*m pulse thyristor rectifier with center tap and resistive load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
+              pulsem(constantFiringAngle=constantFiringAngle),m=6);
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+        equation
+          connect(resistor.n, currentSensor.p) annotation (Line(
+              points={{30,20},{30,-50},{10,-50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                  extent={{-100,-100},{100,100}}), graphics), experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTapmPulse_R;
+
+        model ThyristorCenterTapmPulse_RL
+        "2*m pulse thyristor rectifier with center tap and R-L load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
+              pulsem(constantFiringAngle=constantFiringAngle));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+                start=0)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, currentSensor.p) annotation (Line(
+              points={{30,-10},{30,-50},{10,-50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                  extent={{-100,-100},{100,100}}), graphics), experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTapmPulse_RL;
+
+        model ThyristorCenterTapmPulse_RLV
+        "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
+              pulsem(constantFiringAngle=constantFiringAngle));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
+          "Firing angle";
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          parameter Modelica.SIunits.Voltage VDC=-50 "DC load offset voltage";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+                start=0)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+                VDC) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,-30})));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, constantVoltage.p) annotation (Line(
+              points={{30,-10},{30,-10},{30,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(constantVoltage.n, currentSensor.p) annotation (Line(
+              points={{30,-40},{30,-40},{30,-48},{30,-48},{30,-50},{10,-50}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                  extent={{-100,-100},{100,100}}), graphics), experiment(
+              StopTime=0.1,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end ThyristorCenterTapmPulse_RLV;
+
+        model ThyristorCenterTapmPulse_RLV_Characteristic
+        "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
+              pulsem(useConstantFiringAngle=false));
+          extends Modelica.Icons.Example;
+          import Modelica.Constants.pi;
+          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
+            annotation (Evaluate=true);
+          parameter Modelica.SIunits.Voltage VDC=-50 "DC load offset voltage";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
+              Placement(visible=true, transformation(
+                origin={30,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
+                start=0)) annotation (Placement(visible=true, transformation(
+                origin={30,0},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
+                VDC) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={30,-30})));
+          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
+             Placement(transformation(
+                extent={{10,-10},{-10,10}},
+                rotation=270,
+                origin={-30,-70})));
+        equation
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{30,20},{30,10}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, constantVoltage.p) annotation (Line(
+              points={{30,-10},{30,-20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(currentSensor.p, constantVoltage.n) annotation (Line(
+              points={{10,-50},{30,-50},{30,-40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, rectifier.dc_p) annotation (Line(
+              points={{30,40},{-10,40},{-10,40},{-20,40}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(ramp.y, pulsem.firingAngle) annotation (Line(
+              points={{-30,-59},{-30,-12}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
+                  extent={{-100,-100},{100,100}}), graphics), experiment(
+              StopTime=10,
+              Tolerance=1e-06,
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulsem.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
+</html>"));
+        end ThyristorCenterTapmPulse_RLV_Characteristic;
+      end ThyristorCenterTapmPulse;
+
       package ThyristorBridge2mPulse "2*m pulse thyristor bridge"
         extends Modelica.Icons.ExamplesPackage;
         model ThyristorBridge2mPulse_R
@@ -1012,7 +1237,7 @@ A freely available book is available in
               pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
@@ -1033,7 +1258,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2mPulse_R;
 
         model ThyristorBridge2mPulse_RL
@@ -1044,7 +1272,7 @@ A freely available book is available in
                 offStart_p=fill(true, m), offStart_n=fill(true, m)));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -1076,7 +1304,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2mPulse_RL;
 
         model ThyristorBridge2mPulse_RLV
@@ -1086,7 +1317,7 @@ A freely available book is available in
               pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -1128,7 +1359,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorBridge2mPulse_RLV;
 
         model ThyristorBridge2mPulse_RLV_Characteristic
@@ -1190,7 +1424,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=10,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2m.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
+</html>"));
         end ThyristorBridge2mPulse_RLV_Characteristic;
 
         model ThyristorBridge2mPulse_DC_Drive
@@ -1326,6 +1563,7 @@ A freely available book is available in
                 transformation(extent={{-30,-60},{-10,-40}})));
         initial equation
           lMains.i[1:m - 1] = zeros(m - 1);
+
         equation
           connect(meanCurrent.u, currentSensor.i) annotation (Line(
               points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
@@ -1400,7 +1638,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(sinevoltage.plug_n, earthing.plug) annotation (Line(
-              points={{-80,-10},{-80,-20},{-80,-20},{-80,-20}},
+              points={{-80,-10},{-80,-20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.dc_n, ground.p) annotation (Line(
@@ -1426,194 +1664,6 @@ A freely available book is available in
         end ThyristorBridge2mPulse_DC_Drive;
       end ThyristorBridge2mPulse;
 
-      package ThyristorCenterTapmPulse
-      "m pulse thyristor rectifier with center tap"
-        extends Modelica.Icons.ExamplesPackage;
-        model ThyristorCenterTapmPulse_R
-        "2*m pulse thyristor rectifier with center tap and resistive load"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-              pulsem(constantFiringAngle=constantFiringAngle),m=6);
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-        equation
-          connect(resistor.n, currentSensor.p) annotation (Line(
-              points={{30,20},{30,-50},{10,-50}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTapmPulse_R;
-
-        model ThyristorCenterTapmPulse_RL
-        "2*m pulse thyristor rectifier with center tap and R-L load"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-              pulsem(constantFiringAngle=constantFiringAngle));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-                start=0)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, currentSensor.p) annotation (Line(
-              points={{30,-10},{30,-50},{10,-50}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTapmPulse_RL;
-
-        model ThyristorCenterTapmPulse_RLV
-        "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-              pulsem(constantFiringAngle=constantFiringAngle));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
-          "Firing angle";
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          parameter Modelica.SIunits.Voltage VDC=-50 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-                start=0)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
-                VDC) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={30,-30})));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, constantVoltage.p) annotation (Line(
-              points={{30,-10},{30,-10},{30,-20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(constantVoltage.n, currentSensor.p) annotation (Line(
-              points={{30,-40},{30,-40},{30,-48},{30,-48},{30,-50},{10,-50}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), experiment(
-              StopTime=0.1,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTapmPulse_RLV;
-
-        model ThyristorCenterTapmPulse_RLV_Characteristic
-        "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
-          extends
-          Modelica_Electrical_PowerConverters.Examples.ACDC.ExampleTemplates.ThyristorCenterTapmPulse(
-              pulsem(useConstantFiringAngle=false));
-          extends Modelica.Icons.Example;
-          import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Resistance R=20 "Load resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Load resistance"
-            annotation (Evaluate=true);
-          parameter Modelica.SIunits.Voltage VDC=-50 "DC load offset voltage";
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
-              Placement(visible=true, transformation(
-                origin={30,30},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-                start=0)) annotation (Placement(visible=true, transformation(
-                origin={30,0},
-                extent={{10,-10},{-10,10}},
-                rotation=90)));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
-                VDC) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={30,-30})));
-          Modelica.Blocks.Sources.Ramp ramp(height=pi, duration=10) annotation (
-             Placement(transformation(
-                extent={{10,-10},{-10,10}},
-                rotation=270,
-                origin={-30,-70})));
-        equation
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,20},{30,10}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(inductor.n, constantVoltage.p) annotation (Line(
-              points={{30,-10},{30,-20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(currentSensor.p, constantVoltage.n) annotation (Line(
-              points={{10,-50},{30,-50},{30,-40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(resistor.p, rectifier.dc_p) annotation (Line(
-              points={{30,40},{-10,40},{-10,40},{-20,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(ramp.y, pulsem.firingAngle) annotation (Line(
-              points={{-30,-59},{-30,-12}},
-              color={0,0,127},
-              smooth=Smooth.None));
-          annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics), experiment(
-              StopTime=10,
-              Tolerance=1e-06,
-              Interval=0.0002));
-        end ThyristorCenterTapmPulse_RLV_Characteristic;
-      end ThyristorCenterTapmPulse;
-
       package ThyristorCenterTap2mPulse
       "2*m pulse thyristor rectifier with center tap"
         extends Modelica.Icons.ExamplesPackage;
@@ -1624,7 +1674,7 @@ A freely available book is available in
               pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (
@@ -1645,7 +1695,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorCenterTap2mPulse_R;
 
         model ThyristorCenterTap2mPulse_RL
@@ -1655,7 +1708,7 @@ A freely available book is available in
               pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -1687,7 +1740,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorCenterTap2mPulse_RL;
 
         model ThyristorCenterTap2mPulse_RLV
@@ -1697,7 +1753,7 @@ A freely available book is available in
               pulse2m(constantFiringAngle=constantFiringAngle));
           extends Modelica.Icons.Example;
           import Modelica.Constants.pi;
-          parameter Modelica.SIunits.Angle constantFiringAngle=90*pi/180
+          parameter Modelica.SIunits.Angle constantFiringAngle=30*pi/180
           "Firing angle";
           parameter Modelica.SIunits.Resistance R=20 "Load resistance";
           parameter Modelica.SIunits.Inductance L=1 "Load resistance"
@@ -1739,7 +1795,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ThyristorCenterTap2mPulse_RLV;
 
         model ThyristorCenterTap2mPulse_RLV_Characteristic
@@ -1798,7 +1857,10 @@ A freely available book is available in
                   extent={{-100,-100},{100,100}}), graphics), experiment(
               StopTime=10,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2m.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
+</html>"));
         end ThyristorCenterTap2mPulse_RLV_Characteristic;
       end ThyristorCenterTap2mPulse;
 
@@ -1914,7 +1976,7 @@ A freely available book is available in
                 initialScale=0.1,
                 grid={2,2}), graphics),
             Documentation(info="<html>
-<p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor. </p>
+<p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor.</p>
 </html>"));
         end Thyristor1Pulse;
         extends Modelica.Icons.Package;
@@ -2034,7 +2096,10 @@ A freely available book is available in
                 extent={{-100,-100},{100,100}},
                 preserveAspectRatio=false,
                 initialScale=0.1,
-                grid={2,2}), graphics));
+                grid={2,2}), graphics),
+            Documentation(info="<html>
+<p>Two pulse thyristor bridge example template.</p>
+</html>"));
         end ThyristorBridge2Pulse;
 
         model ThyristorCenterTap2Pulse
@@ -2163,7 +2228,10 @@ A freely available book is available in
                 extent={{-100,-100},{100,100}},
                 preserveAspectRatio=false,
                 initialScale=0.1,
-                grid={2,2}), graphics));
+                grid={2,2}), graphics),
+            Documentation(info="<html>
+<p>Two pulse thyristor center tap example template.</p>
+</html>"));
         end ThyristorCenterTap2Pulse;
 
         partial model ThyristorBridge2mPulse
@@ -2280,7 +2348,10 @@ A freely available book is available in
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                    {100,100}}), graphics));
+                    {100,100}}), graphics),
+            Documentation(info="<html>
+<p><code>2*m</code> pulse thyristor bridge example template, where <code>m</code> is the number of phases.</p>
+</html>"));
         end ThyristorBridge2mPulse;
 
         partial model ThyristorCenterTapmPulse
@@ -2396,7 +2467,10 @@ A freely available book is available in
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                    {100,100}}), graphics));
+                    {100,100}}), graphics),
+            Documentation(info="<html>
+<p><code>m</code> pulse thyristor center tap example template, where <code>m</code> is the number of phases.</p>
+</html>"));
         end ThyristorCenterTapmPulse;
 
         partial model ThyristorCenterTap2mPulse
@@ -2534,7 +2608,10 @@ A freely available book is available in
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Icon(
                 coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                    {100,100}}), graphics));
+                    {100,100}}), graphics),
+            Documentation(info="<html>
+<p><code>2*m</code> pulse thyristor center tap example template, where <code>m</code> is the number of phases.</p>
+</html>"));
         end ThyristorCenterTap2mPulse;
       end ExampleTemplates;
     end ACDC;
@@ -2612,7 +2689,7 @@ A freely available book is available in
         end SinglePhaseTwoLevel_RL;
       end SinglePhaseTwoLevel;
 
-      package ExampleTemplates "Templates for examples"
+      package ExampleTemplates "Templates of examples"
         extends Modelica.Icons.Package;
         partial model SinglePhaseTwoLevel
         "Single phas two level inverter including control"
@@ -2642,21 +2719,21 @@ A freely available book is available in
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-60,-30})));
+                origin={-40,-30})));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage1(V=
                50) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
                 origin={-70,50})));
           Modelica.Blocks.Sources.Sine sine(freqHz=50) annotation (Placement(
-                transformation(extent={{-50,-64},{-70,-44}})));
+                transformation(extent={{-30,-64},{-50,-44}})));
         equation
           connect(voltageSensor.n, currentSensor.p) annotation (Line(
               points={{70,-20},{70,-70},{10,-70}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-              points={{-66,-19},{-46,-19},{-46,18}},
+              points={{-46,-19},{-46,18}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(constantVoltage1.n, constantVoltage2.p) annotation (Line(
@@ -2684,15 +2761,17 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(sine.y, signalPWM.dutyCycle) annotation (Line(
-              points={{-71,-54},{-80,-54},{-80,-30},{-72,-30}},
+              points={{-51,-54},{-60,-54},{-60,-30},{-52,-30}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(inverter.fire_n, signalPWM.notFire) annotation (Line(
-              points={{-34,18},{-34,-19},{-54,-19}},
+              points={{-34,18},{-34,-19}},
               color={255,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics));
+                  extent={{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>Single phase two level example template including suppy and sensors; load is not yet included.</p>
+</html>"));
         end SinglePhaseTwoLevel;
       end ExampleTemplates;
     annotation (Documentation(info="<html>
@@ -2711,14 +2790,14 @@ A freely available book is available in
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={30,40})));
+                origin={30,50})));
         equation
           connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
-              points={{-40,6},{-30,6},{-30,50},{30,50}},
+              points={{-40,6},{-30,6},{-30,70},{30,70},{30,60}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.n, currentSensor.p) annotation (Line(
-              points={{30,30},{30,-6},{0,-6}},
+              points={{30,40},{30,-6},{0,-6}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -2726,7 +2805,12 @@ A freely available book is available in
               StartTime=0,
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>This example demonstrates the switching on of a resistive load operated by a step down chopper.
+DC output voltage is equal to <code>dutyCycle</code> times the input voltage.
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ChopperStepDown_R;
 
         model ChopperStepDown_RL "Step down chopper with R-L load"
@@ -2738,7 +2822,7 @@ A freely available book is available in
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={30,40})));
+                origin={30,50})));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L=L) annotation (
               Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2746,15 +2830,15 @@ A freely available book is available in
                 origin={30,10})));
         equation
           connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
-              points={{-40,6},{-30,6},{-30,50},{30,50}},
+              points={{-40,6},{-30,6},{-30,70},{30,70},{30,60}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(resistor.n, inductor.p) annotation (Line(
-              points={{30,30},{30,20}},
+              points={{30,40},{30,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(inductor.n, currentSensor.p) annotation (Line(
-              points={{30,0},{30,-6},{0,-6}},
+              points={{30,1.33227e-15},{30,-6},{0,-6}},
               color={0,0,255},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
@@ -2762,14 +2846,225 @@ A freely available book is available in
               StartTime=0,
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+            Documentation(info="<html>
+<p>This example demonstrates the switching on of an R-L load operated by a step down chopper.
+DC output voltage is equal to <code>dutyCycle</code> times the input voltage.
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+</html>"));
         end ChopperStepDown_RL;
       end ChopperStepDown;
 
-      package ExampleTemplates "Templates for examples"
+      package HBridge "H bridge converter"
+      extends Modelica.Icons.ExamplesPackage;
+        model HBridge_R "H bridge DC/DC converter with resistive load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.DCDC.ExampleTemplates.HBridge;
+          extends Modelica.Icons.Example;
+          parameter Modelica.SIunits.Resistance R=100 "Resistance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={20,50})));
+        equation
+
+          connect(resistor.p, hbridge.dc_p2) annotation (Line(
+              points={{20,60},{20,70},{-30,70},{-30,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.n, currentSensor.p) annotation (Line(
+              points={{20,40},{20,-6},{0,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics),
+            experiment(
+              StopTime=0.1,
+              Interval=0.0002,
+              Tolerance=1e-06),
+            Documentation(info="<html>
+<p>This example demonstrates the switching on of a resistive load operated by an H bridge.
+DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+</html>"));
+        end HBridge_R;
+
+        model HBridge_RL "H bridge DC/DC converter with R-L load"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.DCDC.ExampleTemplates.HBridge;
+          extends Modelica.Icons.Example;
+          parameter Modelica.SIunits.Resistance R=100 "Resistance";
+          parameter Modelica.SIunits.Inductance L=1 "Inductance";
+          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={20,50})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(i(fixed=true, start=0), L=
+                L) annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={20,10})));
+        equation
+
+          connect(resistor.n, inductor.p) annotation (Line(
+              points={{20,40},{20,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(inductor.n, currentSensor.p) annotation (Line(
+              points={{20,0},{20,-6},{4.44089e-16,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(resistor.p, hbridge.dc_p2) annotation (Line(
+              points={{20,60},{20,70},{-30,70},{-30,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics),
+            Documentation(info="<html>
+<p>This example demonstrates the switching on of an R-L load operated by an H bridge.
+DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+</html>"),  experiment(
+              StopTime=0.1,
+              Interval=0.0002,
+              Tolerance=1e-06));
+        end HBridge_RL;
+
+        model HBridge_DC_Drive "H bridge DC/DC converter with DC drive"
+          extends
+          Modelica_Electrical_PowerConverters.Examples.DCDC.ExampleTemplates.HBridge(
+              signalPWM(useConstantDutyCycle=false), constantVoltage(V=120));
+          extends Modelica.Icons.Example;
+          parameter Modelica.SIunits.Inductance Ld=3*dcpmData.La
+          "Smoothing inductance";
+          final parameter Modelica.SIunits.Torque tauNominal=dcpmData.ViNominal
+              *dcpmData.IaNominal/dcpmData.wNominal "Nominal torque";
+          parameter Real dMin=0.2 "Minimum duty cycle";
+          parameter Real dMax=1-dMin "Maximum duty cycle";
+          Modelica.Electrical.Machines.BasicMachines.DCMachines.DC_PermanentMagnet
+            dcpm(
+            VaNominal=dcpmData.VaNominal,
+            IaNominal=dcpmData.IaNominal,
+            wNominal=dcpmData.wNominal,
+            TaNominal=dcpmData.TaNominal,
+            Ra=dcpmData.Ra,
+            TaRef=dcpmData.TaRef,
+            La=dcpmData.La,
+            Jr=dcpmData.Jr,
+            useSupport=false,
+            Js=dcpmData.Js,
+            frictionParameters=dcpmData.frictionParameters,
+            coreParameters=dcpmData.coreParameters,
+            strayLoadParameters=dcpmData.strayLoadParameters,
+            brushParameters=dcpmData.brushParameters,
+            ia(start=0, fixed=true),
+            TaOperational=293.15,
+            alpha20a=dcpmData.alpha20a,
+            phiMechanical(fixed=true, start=0),
+            wMechanical(fixed=true, start=0))
+                                     annotation (Placement(transformation(
+                  extent={{20,-80},{40,-60}}, rotation=0)));
+          parameter
+          Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData
+            dcpmData
+            annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
+          Modelica.Mechanics.Rotational.Sources.Torque torque
+            annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
+          Modelica.Blocks.Sources.TimeTable torqueTable(table=[0,0; 6,0; 7,-tauNominal;
+                9,-tauNominal; 10,+tauNominal; 15,tauNominal; 16,-tauNominal; 18,-
+                tauNominal; 19,0; 24,0])
+            annotation (Placement(transformation(extent={{100,-80},{80,-60}})));
+          Modelica.Blocks.Sources.TimeTable dutyCycleTable(table=[0,0.5; 3,0.5; 4,dMax;
+                12,dMax; 13,dMin; 21,dMin; 22,0.5; 24,0.5])
+            annotation (Placement(transformation(extent={{-100,-70},{-80,-50}})));
+          Modelica.Electrical.Analog.Basic.Inductor inductor(L=Ld) annotation (
+              Placement(visible=true, transformation(
+                origin={40,30},
+                extent={{10,-10},{-10,10}},
+                rotation=90)));
+        equation
+
+          connect(inductor.n,dcpm. pin_ap) annotation (Line(
+              points={{40,20},{40,-60},{36,-60}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(dcpm.pin_an, currentSensor.p) annotation (Line(
+              points={{24,-60},{24,-6},{4.44089e-16,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(dcpm.flange, torque.flange) annotation (Line(
+              points={{40,-70},{50,-70}},
+              color={0,0,0},
+              smooth=Smooth.None));
+          connect(torque.tau, torqueTable.y) annotation (Line(
+              points={{72,-70},{79,-70}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(inductor.p, hbridge.dc_p2) annotation (Line(
+              points={{40,40},{40,70},{-30,70},{-30,6},{-40,6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(dutyCycleTable.y, signalPWM.dutyCycle) annotation (Line(
+              points={{-79,-60},{-62,-60}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                    -100},{100,100}}), graphics),
+            experiment(
+              StopTime=24,
+              Interval=0.0002,
+              Tolerance=1e-06),
+            Documentation(info="<html>
+<p>This example of am H brdge with DC drive demonstrates the operation of the DC machine in four quadrants. 
+DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.</p>
+
+<p>
+<table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
+  <tr>
+    <th><b>start time (s)</b></th>
+    <th><b>machine speed</b>
+    <th><b>machine torque</b>
+    <th><b>mode</b></th>
+  </tr>
+  <tr>
+    <td>0</td> <td>zero</td> <td>zero</td> <td></td>
+  </tr>
+  <tr>
+    <td>3</td> <td>positive</td> <td>zero</td> <td></td>
+  </tr>
+  <tr>
+    <td>6</td> <td>positive</td> <td>positive</td> <td>motor</td>
+  </tr>
+  <tr>
+    <td>9.5</td> <td>positive</td> <td>negative</td> <td>generator</td>
+  </tr>
+  <tr>
+    <td>12.5</td> <td>negative</td> <td>negative</td> <td>motor</td>
+  </tr>
+  <tr>
+    <td>15.5</td> <td>negative</td> <td>positive</td> <td>generator</td>
+  </tr>
+  <tr>
+    <td>19</td> <td>negative</td> <td>zero</td> <td></td>
+  </tr>
+  <tr>
+    <td>22</td> <td>zero</td> <td>zero</td> <td></td>
+  </tr>
+</table></p>
+
+<p>
+Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y</code>, machine speed <code>dcpm.wMechanical</code>, avderage machine speed <code>dcpm.va</code> and torque <code>dcpm.tauElectrical</code>.</p>
+</html>"));
+        end HBridge_DC_Drive;
+      end HBridge;
+
+      package ExampleTemplates "Templates of examples"
         extends Modelica.Icons.Package;
         partial model ChopperStepDown "Step down chopper including control"
           extends Icons.ExampleTemplate;
+          parameter Modelica.SIunits.Frequency f = 1000 "Switching frequency";
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=
                 100) annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -2788,11 +3083,21 @@ A freely available book is available in
           Modelica.Electrical.Analog.Basic.Ground ground annotation (Placement(
                 transformation(extent={{-90,-40},{-70,-20}})));
           Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM signalPWM(
-              constantDutyCycle=0.25, f=1000) annotation (Placement(
+              constantDutyCycle=0.25, f=f)    annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
-                origin={-50,40})));
+                origin={-50,-60})));
+          Modelica.Blocks.Math.Mean meanCurrent(f=f, x0=0)
+                                                annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-10,-40})));
+          Modelica.Blocks.Math.Mean meanVoltage(f=f, x0=0) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={90,10})));
         equation
           connect(constantVoltage.p, chopperStepDown.dc_p1) annotation (Line(
               points={{-80,10},{-70,10},{-70,6},{-60,6}},
@@ -2803,7 +3108,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(chopperStepDown.dc_p2, voltageSensor.p) annotation (Line(
-              points={{-40,6},{-30,6},{-30,50},{60,50},{60,20}},
+              points={{-40,6},{-30,6},{-30,70},{60,70},{60,20}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(voltageSensor.n, currentSensor.p) annotation (Line(
@@ -2819,75 +3124,104 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(signalPWM.fire, chopperStepDown.fire) annotation (Line(
-              points={{-56,51},{-56,20},{-56,20},{-56,-12}},
+              points={{-56,-49},{-56,-12}},
               color={255,0,255},
               smooth=Smooth.None));
+          connect(voltageSensor.v, meanVoltage.u) annotation (Line(
+              points={{70,10},{78,10}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(currentSensor.i, meanCurrent.u) annotation (Line(
+              points={{-10,-16},{-10,-28}},
+              color={0,0,127},
+              smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
-                  extent={{-100,-100},{100,100}}), graphics));
+                  extent={{-100,-100},{100,100}}), graphics), Documentation(info="<html>
+<p>Step down chopper example template including suppy and sensors; load is not yet included</p>
+</html>"));
         end ChopperStepDown;
-      end ExampleTemplates;
 
-      package HBridge
-      extends Modelica.Icons.ExamplesPackage;
-        model HBridge "H bridge DC/DC converter"
-        import Modelica_Electrical_PowerConverters;
-          extends Modelica.Icons.Example;
-          parameter Modelica.SIunits.Resistance R=100 "Resistance";
-          parameter Modelica.SIunits.Inductance L=1 "Inductance";
-          Modelica_Electrical_PowerConverters.DCDC.HBridge hbridge
-          annotation (Placement(transformation(extent={{-60,40},{-40,60}})));
+        partial model HBridge "H bridge DC/DC converter"
+          extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
+          parameter Modelica.SIunits.Frequency f = 1000 "Switching frequency";
+          Modelica_Electrical_PowerConverters.DCDC.HBridge hbridge(useHeatPort=false)
+          annotation (Placement(transformation(extent={{-60,-10},{-40,10}})));
           Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage(V=100)
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=270,
-                origin={-80,50})));
+                origin={-80,0})));
           Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM signalPWM(
-            constantDutyCycle=0.6)
-            annotation (Placement(transformation(extent={{-60,0},{-40,20}})));
-          Modelica.Electrical.Analog.Basic.Resistor resistor(R=R)
-            annotation (Placement(transformation(extent={{-20,50},{0,70}})));
-          Modelica.Electrical.Analog.Basic.Inductor inductor(L=L)
-            annotation (Placement(transformation(extent={{20,50},{40,70}})));
-        Modelica.Electrical.Analog.Basic.Ground ground
-          annotation (Placement(transformation(extent={{-90,-20},{-70,0}})));
+            constantDutyCycle=0.6, f=f)
+            annotation (Placement(transformation(extent={{-60,-70},{-40,-50}})));
+          Modelica.Electrical.Analog.Basic.Ground ground
+          annotation (Placement(transformation(extent={{-90,-40},{-70,-20}})));
+          Modelica.Electrical.Analog.Sensors.CurrentSensor currentSensor
+            annotation (Placement(transformation(extent={{0,-16},{-20,4}})));
+          Modelica.Electrical.Analog.Sensors.VoltageSensor voltageSensor
+            annotation (Placement(transformation(
+                extent={{-10,10},{10,-10}},
+                rotation=270,
+                origin={60,10})));
+          Modelica.Blocks.Math.Mean meanCurrent(f=f, x0=0)
+                                                annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=270,
+                origin={-10,-40})));
+          Modelica.Blocks.Math.Mean meanVoltage(f=f, x0=0) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={90,10})));
         equation
 
         connect(hbridge.fire_p, signalPWM.fire) annotation (Line(
-            points={{-56.2,38},{-56.2,20},{-56,20},{-56,21}},
+            points={{-56,-12},{-56,-49}},
             color={255,0,255},
             smooth=Smooth.None));
-        connect(signalPWM.notFire, hbridge.fire_n) annotation (Line(
-            points={{-44,21},{-44,38},{-44.2,38}},
-            color={255,0,255},
-            smooth=Smooth.None));
-          connect(resistor.n, inductor.p) annotation (Line(
-              points={{0,60},{20,60}},
-              color={0,0,255},
-              smooth=Smooth.None));
         connect(ground.p, constantVoltage.n) annotation (Line(
-            points={{-80,0},{-80,40}},
+            points={{-80,-20},{-80,-10}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(constantVoltage.p, hbridge.dc_p1) annotation (Line(
-            points={{-80,60},{-68,60},{-68,56},{-60,56}},
+            points={{-80,10},{-68,10},{-68,6},{-60,6}},
             color={0,0,255},
             smooth=Smooth.None));
         connect(constantVoltage.n, hbridge.dc_n1) annotation (Line(
-            points={{-80,40},{-68,40},{-68,44},{-60,44}},
+            points={{-80,-10},{-68,-10},{-68,-6},{-60,-6}},
             color={0,0,255},
             smooth=Smooth.None));
-        connect(hbridge.dc_p2, resistor.p) annotation (Line(
-            points={{-40,56},{-30,56},{-30,60},{-20,60}},
-            color={0,0,255},
-            smooth=Smooth.None));
-        connect(hbridge.dc_n2, inductor.n) annotation (Line(
-            points={{-40,44},{-30,44},{-30,40},{60,40},{60,60},{40,60}},
-            color={0,0,255},
-            smooth=Smooth.None));
+          connect(voltageSensor.n,currentSensor. p) annotation (Line(
+              points={{60,0},{60,-6},{0,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(voltageSensor.v,meanVoltage. u) annotation (Line(
+              points={{70,10},{78,10}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(currentSensor.i,meanCurrent. u) annotation (Line(
+              points={{-10,-16},{-10,-28}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(hbridge.dc_p2, voltageSensor.p) annotation (Line(
+              points={{-40,6},{-30,6},{-30,70},{60,70},{60,20}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(currentSensor.n, hbridge.dc_n2) annotation (Line(
+              points={{-20,-6},{-40,-6}},
+              color={0,0,255},
+              smooth=Smooth.None));
+          connect(signalPWM.notFire, hbridge.fire_n) annotation (Line(
+              points={{-44,-49},{-44,-12}},
+              color={255,0,255},
+              smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                  -100},{100,100}}),   graphics));
+                    -100},{100,100}}), graphics), Documentation(info="<html>
+<p>H bridge example template including suppy and sensors; load is not yet included</p>
+</html>"));
         end HBridge;
-      end HBridge;
+      end ExampleTemplates;
+
     end DCDC;
   end Examples;
 
@@ -2897,6 +3231,7 @@ A freely available book is available in
       extends Modelica.Icons.Package;
       block Signal2mPulse "Generic control of 2*m pulse rectifiers"
         import Modelica.Constants.pi;
+        extends Modelica_Electrical_PowerConverters.Icons.Control;
         parameter Integer m(final min=1) = 3 "Number of phases";
         parameter Boolean useConstantFiringAngle=true
         "Use constant firing angle instead of signal input";
@@ -3077,7 +3412,6 @@ A freely available book is available in
                   -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
-              Rectangle(extent={{-100,100},{100,-100}}, lineColor={0,0,255}),
               Line(
                 points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
                     -60}},
@@ -3105,6 +3439,7 @@ General information about controllers is summarized in
 
       model VoltageBridge2Pulse "Control of 2 pulse bridge rectifier"
         import Modelica.Constants.pi;
+        extends Modelica_Electrical_PowerConverters.Icons.Control;
         parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Boolean useConstantFiringAngle=true
         "Use constant firing angle instead of signal input";
@@ -3228,15 +3563,6 @@ General information about controllers is summarized in
                   -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255}),
               Line(
                 points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
                     -60}},
@@ -3271,7 +3597,7 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
 
       model VoltageBridge2mPulse "Control of 2*m pulse bridge rectifier"
         import Modelica.Constants.pi;
-
+        extends Modelica_Electrical_PowerConverters.Icons.Control;
         parameter Integer m(final min=3) = 3 "Number of phases";
         parameter Modelica.SIunits.Frequency f=50 "Frequency";
         parameter Boolean useConstantFiringAngle=true
@@ -3413,15 +3739,6 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
                   -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255}),
               Line(
                 points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
                     -60}},
@@ -3452,6 +3769,7 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
       end VoltageBridge2mPulse;
 
       model VoltageCenterTap2mPulse "Control of 2*m pulse cetner tap rectifier"
+        extends Modelica_Electrical_PowerConverters.Icons.Control;
         import Modelica.Constants.pi;
         parameter Integer m(final min=3) = 3 "Number of phases";
         parameter Modelica.SIunits.Frequency f=50 "Frequency";
@@ -3594,15 +3912,6 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
                   -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
               graphics={
-              Rectangle(
-                extent={{-100,100},{100,-100}},
-                lineColor={0,0,127},
-                fillColor={255,255,255},
-                fillPattern=FillPattern.Solid),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255}),
               Line(
                 points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,
                     -60}},
@@ -4624,6 +4933,247 @@ General information about AC/DC converters can be found at the
 </html>"));
     end ThyristorCenterTap2Pulse;
 
+    model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
+      import Modelica.Constants.pi;
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
+      parameter Integer m(final min=3) = 3 "Number of phases";
+      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
+      "Closed diode resistance";
+      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1e-05
+      "Opened diode conductance";
+      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+      "Diode forward threshold voltage";
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+      "Positive DC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+      "AC input"
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC=dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m]=ac.pin[:].i "AC currents";
+      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode(
+        final m=m,
+        final Ron=fill(RonDiode, m),
+        final Goff=fill(GoffDiode, m),
+        final Vknee=fill(VkneeDiode, m),
+        each final useHeatPort=useHeatPort)
+      "Diodes connected to positive DC potential"   annotation (Placement(
+            visible=true, transformation(
+            origin={-10,0},
+            extent={{10,10},{-10,-10}},
+            rotation=180)));
+      Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
+        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
+        thermalCollector(final m=m) if useHeatPort
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
+    equation
+      assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
+      if not useHeatPort then
+        LossPower = sum(diode.idealDiode.LossPower);
+      end if;
+      connect(diode.plug_n, star.plug_p) annotation (Line(
+          points={{0,0},{22,0},{22,-6.66134e-16},{70,-6.66134e-16}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star.pin_n, dc_p) annotation (Line(
+          points={{90,-6.66134e-16},{100,-6.66134e-16},{100,4.44089e-16}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(heatPort, thermalCollector.port_b) annotation (Line(
+          points={{4.44089e-16,-100},{30,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(diode.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(ac, diode.plug_p) annotation (Line(
+          points={{-100,0},{-20,0}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics={
+            Text(
+              extent={{-100,70},{0,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="AC"),
+            Text(
+              extent={{0,-50},{100,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC"),
+            Rectangle(
+              extent={{-40,24},{40,-24}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,0},{40,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{20,24},{20,-24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
+              color={0,0,255},
+              smooth=Smooth.None)}),
+        Documentation(info="<html>
+<p>
+General information about AC/DC converters can be found at the
+<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.ACDCConcept\">AC/DC converter concept</a>.
+</p>
+
+<p>
+This is a m pulse diode rectifier with center tap. All voltage sources must have one interconnected plug (tap). This rectifiers works only with odd number of phases due the symmetry constrains of even phase numbers implemented in
+<a href=\"modelica://Modelica.Electrical.MultiPhase.Functions.symmetricOrientation\">symmetricOrientation</a>. 
+The circuit topology is the same as in 
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
+</p>
+</html>"));
+    end DiodeCenterTapmPulse;
+
+    model ThyristorCenterTapmPulse
+    "m pulse thyristor rectifier with center tap"
+      extends Modelica_Electrical_PowerConverters.Icons.Converter;
+      import Modelica.Constants.pi;
+      parameter Integer m(final min=3) = 3 "Number of phases";
+      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
+      "Closed thyristor resistance";
+      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1e-05
+      "Opened thyristor conductance";
+      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
+      "Thyristor forward threshold voltage";
+      parameter Boolean offStart[m]=fill(true, m)
+      "Boolean start value of variable thyristor_p[:].off"
+        annotation(choices(checkBox=true));
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+           293.15);
+      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
+      "Positive DC output"
+        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
+      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
+      "AC input"
+        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
+      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
+      "Fire signals for positive potential semiconductors"   annotation (
+          Placement(transformation(
+            extent={{-20,-20},{20,20}},
+            rotation=90,
+            origin={-60,-120})));
+      Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
+      Modelica.SIunits.Current iDC=dc_p.i "DC current";
+      Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
+      Modelica.SIunits.Current iAC[m]=ac.pin[:].i "AC currents";
+      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor(
+        final m=m,
+        final Ron=fill(RonThyristor, m),
+        final Goff=fill(GoffThyristor, m),
+        final Vknee=fill(VkneeThyristor, m),
+        each final useHeatPort=useHeatPort,
+        final off(start=offStart,fixed=true))
+      "Thyristors conducting AC potentials"
+        annotation (Placement(visible=true, transformation(
+            origin={-10,0},
+            extent={{10,10},{-10,-10}},
+            rotation=180)));
+      Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
+        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
+        thermalCollector(final m=m) if useHeatPort
+        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
+    equation
+      assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
+      if not useHeatPort then
+        LossPower = sum(thyristor.idealThyristor.LossPower);
+      end if;
+      connect(thyristor.plug_n, star.plug_p) annotation (Line(
+          points={{0,0},{70,0}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(star.pin_n, dc_p) annotation (Line(
+          points={{90,4.44089e-16},{100,4.44089e-16}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      connect(heatPort, thermalCollector.port_b) annotation (Line(
+          points={{4.44089e-16,-100},{30,-100}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(thyristor.heatPort, thermalCollector.port_a) annotation (Line(
+          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
+          color={191,0,0},
+          smooth=Smooth.None));
+      connect(fire_p, thyristor.fire) annotation (Line(
+          points={{-60,-120},{-60,20},{-2,20},{-2,11},{-3,11}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(ac, thyristor.plug_p) annotation (Line(
+          points={{-100,0},{-20,0}},
+          color={0,0,255},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),      graphics), Icon(coordinateSystem(
+              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
+            graphics={
+            Text(
+              extent={{-100,70},{0,50}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="AC"),
+            Text(
+              extent={{0,-50},{100,-70}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid,
+              textString="DC"),
+            Rectangle(
+              extent={{-40,24},{40,-24}},
+              lineColor={255,255,255},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Line(
+              points={{-40,0},{40,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{20,24},{20,-24}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{20,0},{-20,24},{-20,-24},{20,0}},
+              color={0,0,255},
+              smooth=Smooth.None),
+            Line(
+              points={{0,12},{0,28}},
+              color={0,0,255},
+              smooth=Smooth.None)}),
+        Documentation(info="<html>
+<p>
+General information about AC/DC converters can be found at the
+<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.ACDCConcept\">AC/DC converter concept</a>
+</p>
+
+<p>
+This is a m pulse thyristor rectifier with center tap. All voltage sources must have one interconnected plug (tap). This rectifiers works only with odd number of phases due the symmetry constrains of even phase numbers implemented in
+<a href=\"modelica://Modelica.Electrical.MultiPhase.Functions.symmetricOrientation\">symmetricOrientation</a>. 
+See example
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
+</p>
+</html>"));
+    end ThyristorCenterTapmPulse;
+
     model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
       extends Modelica_Electrical_PowerConverters.Icons.Converter;
       import Modelica.Constants.pi;
@@ -4635,13 +5185,13 @@ General information about AC/DC converters can be found at the
       parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
       "Diode forward threshold voltage";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
+        293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
       "Postive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
       Modelica.Electrical.Analog.Interfaces.NegativePin dc_n
       "Negative DC output"
-        annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+        annotation (Placement(transformation(extent={{90,-70},{110,-50}})));
       Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
       "AC input"
         annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
@@ -4675,19 +5225,23 @@ General information about AC/DC converters can be found at the
         annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
         annotation (Placement(transformation(extent={{70,-50},{90,-70}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-        thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(final m=m)
+      if   useHeatPort
+      annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
     equation
       if not useHeatPort then
         LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
+      else
+        for k in 1:m loop
+
+        end for;
       end if;
       connect(ac, diode_p.plug_p) annotation (Line(
           points={{-100,4.44089e-16},{-100,0},{0,0},{0,30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_p.plug_p, diode_n.plug_n) annotation (Line(
-          points={{0,30},{0,-30}},
+          points={{0,30},{0,-30},{1.11022e-15,-30}},
           color={0,0,255},
           smooth=Smooth.None));
       connect(diode_p.plug_n, star_p.plug_p) annotation (Line(
@@ -4703,23 +5257,23 @@ General information about AC/DC converters can be found at the
           color={0,0,255},
           smooth=Smooth.None));
       connect(star_n.pin_n, dc_n) annotation (Line(
-          points={{90,-60},{102,-60}},
+          points={{90,-60},{100,-60}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{20,-100}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(thermalCollector.port_a, diode_n.heatPort) annotation (Line(
-          points={{20,-80},{20,-40},{10,-40}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{10,40},{20,40},{20,-80}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
+    connect(thermalCollector.port_a, diode_n.heatPort) annotation (Line(
+        points={{20,-80},{20,-40},{10,-40}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(thermalCollector.port_b, heatPort) annotation (Line(
+        points={{20,-100},{0,-100}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(diode_p.heatPort, thermalCollector.port_a) annotation (Line(
+        points={{10,40},{20,40},{20,-80}},
+        color={191,0,0},
+        smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+              -100},{100,100}}),        graphics), Icon(coordinateSystem(
               preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
             graphics={
             Text(
@@ -4834,8 +5388,8 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
         annotation (Placement(transformation(extent={{70,70},{90,50}})));
       Modelica.Electrical.MultiPhase.Basic.Star star_n(final m=m)
         annotation (Placement(transformation(extent={{70,-50},{90,-70}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-        thermalCollector(final m=m) if useHeatPort
+      Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalConnector(final m=m) if
+                                       useHeatPort
         annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
     equation
       if not useHeatPort then
@@ -4866,16 +5420,12 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
           points={{90,-60},{100,-60}},
           color={0,0,255},
           smooth=Smooth.None));
-      connect(heatPort, thermalCollector.port_b) annotation (Line(
+      connect(heatPort, thermalConnector.port_b) annotation (Line(
           points={{4.44089e-16,-100},{20,-100}},
           color={191,0,0},
           smooth=Smooth.None));
-      connect(thermalCollector.port_a, thyristor_n.heatPort) annotation (Line(
+      connect(thermalConnector.port_a, thyristor_n.heatPort) annotation (Line(
           points={{20,-80},{20,-40},{10,-40}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(thyristor_p.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{10,40},{20,40},{20,-80}},
           color={191,0,0},
           smooth=Smooth.None));
       connect(fire_p, thyristor_p.fire) annotation (Line(
@@ -4886,6 +5436,10 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
           points={{60,-120},{60,-20},{-20,-20},{-20,-28},{-20,-28},{-20,-33},{
             -11,-33}},
           color={255,0,255},
+          smooth=Smooth.None));
+      connect(thyristor_p.heatPort, thermalConnector.port_a) annotation (Line(
+          points={{10,40},{20,40},{20,-80}},
+          color={191,0,0},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}),      graphics), Icon(coordinateSystem(
@@ -4960,7 +5514,7 @@ See example
       "Boolean start value of variable thyristor_p[:].off"
         annotation(choices(checkBox=true));
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15,useHeatPort=true);
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
       "Positive DC output"
         annotation (Placement(transformation(extent={{90,50},{110,70}})));
@@ -5440,246 +5994,6 @@ This is a 2*m pulse thyristor rectifier with center tap. In order to operate thi
 </html>"));
     end ThyristorCenterTap2mPulse;
 
-    model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
-      import Modelica.Constants.pi;
-      extends Modelica_Electrical_PowerConverters.Icons.Converter;
-      parameter Integer m(final min=3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
-      "Closed diode resistance";
-      parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1e-05
-      "Opened diode conductance";
-      parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
-      "Diode forward threshold voltage";
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-      "Positive DC output"
-        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
-      "AC input"
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
-      Modelica.SIunits.Current iDC=dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
-      Modelica.SIunits.Current iAC[m]=ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealDiode diode(
-        final m=m,
-        final Ron=fill(RonDiode, m),
-        final Goff=fill(GoffDiode, m),
-        final Vknee=fill(VkneeDiode, m),
-        each final useHeatPort=useHeatPort)
-      "Diodes connected to positive DC potential"   annotation (Placement(
-            visible=true, transformation(
-            origin={-10,0},
-            extent={{10,10},{-10,-10}},
-            rotation=180)));
-      Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
-        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-        thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-    equation
-      assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
-      if not useHeatPort then
-        LossPower = sum(diode.idealDiode.LossPower);
-      end if;
-      connect(diode.plug_n, star.plug_p) annotation (Line(
-          points={{0,0},{22,0},{22,-6.66134e-16},{70,-6.66134e-16}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      connect(star.pin_n, dc_p) annotation (Line(
-          points={{90,-6.66134e-16},{100,-6.66134e-16},{100,4.44089e-16}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{30,-100}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(diode.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(ac, diode.plug_p) annotation (Line(
-          points={{-100,0},{-20,0}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics), Icon(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics={
-            Text(
-              extent={{-100,70},{0,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="AC"),
-            Text(
-              extent={{0,-50},{100,-70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="DC"),
-            Rectangle(
-              extent={{-40,24},{40,-24}},
-              lineColor={255,255,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,0},{40,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,24},{20,-24}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{-20,24},{-20,-24},{20,0}},
-              color={0,0,255},
-              smooth=Smooth.None)}),
-        Documentation(info="<html>
-<p>
-General information about AC/DC converters can be found at the
-<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.ACDCConcept\">AC/DC converter concept</a>.
-</p>
-
-<p>
-This is a m pulse diode rectifier with center tap. All voltage sources must have one interconnected plug (tap). This rectifiers works only with odd number of phases due the symmetry contrains of even phase numbers implemented in
-<a href=\"modelica://Modelica.Electrical.MultiPhase.Functions.symmetricOrientation\">symmetricOrientation</a>. 
-The circuit topology is the same as in 
-<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
-</p>
-</html>"));
-    end DiodeCenterTapmPulse;
-
-    model ThyristorCenterTapmPulse
-    "m pulse thyristor rectifier with center tap"
-      extends Modelica_Electrical_PowerConverters.Icons.Converter;
-      import Modelica.Constants.pi;
-      parameter Integer m(final min=3) = 3 "Number of phases";
-      parameter Modelica.SIunits.Resistance RonThyristor(final min=0) = 1e-05
-      "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance GoffThyristor(final min=0) = 1e-05
-      "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage VkneeThyristor(final min=0) = 0
-      "Thyristor forward threshold voltage";
-      parameter Boolean offStart[m]=fill(true, m)
-      "Boolean start value of variable thyristor_p[:].off"
-        annotation(choices(checkBox=true));
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15);
-      Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
-      "Positive DC output"
-        annotation (Placement(transformation(extent={{90,-10},{110,10}})));
-      Modelica.Electrical.MultiPhase.Interfaces.PositivePlug ac(final m=m)
-      "AC input"
-        annotation (Placement(transformation(extent={{-110,-10},{-90,10}})));
-      Modelica.Blocks.Interfaces.BooleanInput fire_p[m]
-      "Fire signals for positive potential semiconductors"   annotation (
-          Placement(transformation(
-            extent={{-20,-20},{20,20}},
-            rotation=90,
-            origin={-60,-120})));
-      Modelica.SIunits.Voltage vDC=dc_p.v "DC voltage";
-      Modelica.SIunits.Current iDC=dc_p.i "DC current";
-      Modelica.SIunits.Voltage vAC[m]=ac.pin[:].v "AC voltages";
-      Modelica.SIunits.Current iAC[m]=ac.pin[:].i "AC currents";
-      Modelica.Electrical.MultiPhase.Ideal.IdealThyristor thyristor(
-        final m=m,
-        final Ron=fill(RonThyristor, m),
-        final Goff=fill(GoffThyristor, m),
-        final Vknee=fill(VkneeThyristor, m),
-        each final useHeatPort=useHeatPort,
-        final off(start=offStart,fixed=true))
-      "Thyristors conducting AC potentials"
-        annotation (Placement(visible=true, transformation(
-            origin={-10,0},
-            extent={{10,10},{-10,-10}},
-            rotation=180)));
-      Modelica.Electrical.MultiPhase.Basic.Star star(final m=m)
-        annotation (Placement(transformation(extent={{70,10},{90,-10}})));
-      Modelica.Thermal.HeatTransfer.Components.ThermalCollector
-        thermalCollector(final m=m) if useHeatPort
-        annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-    equation
-      assert(mod(m,2)==1,"DiodeCenterTapmPulse: only odd phase numbers are allowed");
-      if not useHeatPort then
-        LossPower = sum(thyristor.idealThyristor.LossPower);
-      end if;
-      connect(thyristor.plug_n, star.plug_p) annotation (Line(
-          points={{0,0},{70,0}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      connect(star.pin_n, dc_p) annotation (Line(
-          points={{90,4.44089e-16},{100,4.44089e-16}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      connect(heatPort, thermalCollector.port_b) annotation (Line(
-          points={{4.44089e-16,-100},{30,-100}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(thyristor.heatPort, thermalCollector.port_a) annotation (Line(
-          points={{-10,-10},{-10,-20},{30,-20},{30,-80}},
-          color={191,0,0},
-          smooth=Smooth.None));
-      connect(fire_p, thyristor.fire) annotation (Line(
-          points={{-60,-120},{-60,20},{-2,20},{-2,11},{-3,11}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(ac, thyristor.plug_p) annotation (Line(
-          points={{-100,0},{-20,0}},
-          color={0,0,255},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
-                -100},{100,100}}),      graphics), Icon(coordinateSystem(
-              preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-            graphics={
-            Text(
-              extent={{-100,70},{0,50}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="AC"),
-            Text(
-              extent={{0,-50},{100,-70}},
-              lineColor={0,0,127},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid,
-              textString="DC"),
-            Rectangle(
-              extent={{-40,24},{40,-24}},
-              lineColor={255,255,255},
-              fillColor={255,255,255},
-              fillPattern=FillPattern.Solid),
-            Line(
-              points={{-40,0},{40,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,24},{20,-24}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,0},{-20,24},{-20,-24},{20,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{0,12},{0,28}},
-              color={0,0,255},
-              smooth=Smooth.None)}),
-        Documentation(info="<html>
-<p>
-General information about AC/DC converters can be found at the
-<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.ACDCConcept\">AC/DC converter concept</a>
-</p>
-
-<p>
-This is a m pulse thyristor rectifier with center tap. All voltage sources must have one interconnected plug (tap). This rectifiers works only with odd number of phases due the symmetry contrains of even phase numbers implemented in
-<a href=\"modelica://Modelica.Electrical.MultiPhase.Functions.symmetricOrientation\">symmetricOrientation</a>. 
-See example
-<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
-</p>
-</html>"));
-    end ThyristorCenterTapmPulse;
     annotation (Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
@@ -5825,8 +6139,8 @@ General information about AC/DC converters can be found at the
           color={191,0,0},
           smooth=Smooth.None));
       annotation (
-        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-                100}}),      graphics),
+        Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+              {100,100}}),   graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
                 100,100}}), graphics={Line(
                   points={{-100,-100},{100,100}},
@@ -5901,7 +6215,7 @@ An example of a single phase inverter with PWM voltage control is included in
       parameter Modelica.SIunits.Voltage VkneeDiode=0 "Diode threshold voltage";
       // parameter Boolean useEnable "Enables enable signal connector";
       extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
-           293.15,useHeatPort=true);
+           293.15);
       Modelica.Electrical.Analog.Interfaces.PositivePin dc_p
       "Positive DC input"
         annotation (Placement(transformation(extent={{-110,110},{-90,90}})));
@@ -6052,7 +6366,7 @@ An example of a single phase inverter with PWM voltage control is included in
           smooth=Smooth.None));
       annotation (
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
-                {100,100}}), graphics),
+              {100,100}}),   graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
                 100,100}}), graphics={Line(
                   points={{-100,-100},{100,100}},
@@ -6120,6 +6434,7 @@ General information about DC/AC converters can be found at the
       extends Modelica.Icons.Package;
       model SignalPWM
       "Generates a pulse width modulated (PWM) boolean fire signal"
+        extends Modelica_Electrical_PowerConverters.Icons.Control;
         parameter Boolean useConstantDutyCycle = true
         "Enables constant duty cycle";
         parameter Real constantDutyCycle=0 "Constant duty cycle"
@@ -6232,11 +6547,7 @@ General information about DC/AC converters can be found at the
         annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                   -100},{100,100}}),        graphics), Icon(coordinateSystem(
                 preserveAspectRatio=false, extent={{-100,-100},{100,100}}),
-              graphics={Rectangle(
-                      extent={{-100,100},{100,-100}},
-                      lineColor={0,0,0},
-                      fillColor={255,255,255},
-                      fillPattern=FillPattern.Solid),Line(
+              graphics={                             Line(
                       points={{-100,0},{-98,0},{12,0}},
                       color={0,0,255},
                       smooth=Smooth.None),Line(
@@ -6262,11 +6573,7 @@ General information about DC/AC converters can be found at the
                       points={{60,-20},{62,-20},{64,-20},{64,20},{84,20},{84,-20},{84,
                     -20},{88,-20}},
                       color={255,0,255},
-                      smooth=Smooth.None),
-              Text(
-                extent={{-150,150},{150,110}},
-                textString="%name",
-                lineColor={0,0,255})}),
+                      smooth=Smooth.None)}),
           Documentation(info="<html>
 <p>
 This controller can be used both for DC/DC and AC/DC converters. 
@@ -6441,15 +6748,10 @@ This is a conventional step down chopper model. It consists of a transistor and 
 </p>
 </html>"));
     end ChopperStepDown;
-    annotation (Documentation(info="<html>
-<p>
-General information about DC/DC converters can be found at the
-<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCDCConcept\">DC/DC converter concept</a>
-</p>
-</html>"));
+
     model HBridge "H bridge (four quadrant converter)"
       extends Modelica_Electrical_PowerConverters.Icons.Converter;
-      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=293.15,useHeatPort=true);
+      extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=293.15);
       parameter Modelica.SIunits.Resistance RonTransistor=1e-05
       "Transistor closed resistance";
       parameter Modelica.SIunits.Conductance GoffTransistor=1e-05
@@ -6493,17 +6795,17 @@ General information about DC/DC converters can be found at the
         final useHeatPort=useHeatPort)
         annotation (Placement(transformation(extent={{-60,-60},{-40,-40}})));
       Modelica.Blocks.Interfaces.BooleanInput fire_p
-      "Firing signals of positive potential transistors"   annotation (
+      "Firing signals of positive potential leg"           annotation (
           Placement(transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={-62,-120})));
+            origin={-60,-120})));
       Modelica.Blocks.Interfaces.BooleanInput fire_n
-      "Firing signals of negative potential transistors"   annotation (
-          Placement(transformation(
+      "Firing signals of negative potential leg"   annotation (Placement(
+            transformation(
             extent={{-20,-20},{20,20}},
             rotation=90,
-            origin={58,-120})));
+            origin={60,-120})));
     equation
       if not useHeatPort then
         LossPower = inverter_p.LossPower + inverter_n.LossPower;
@@ -6515,22 +6817,6 @@ General information about DC/DC converters can be found at the
       connect(inverter_p.heatPort, heatPort) annotation (Line(
           points={{-10,40},{-10,-100},{0,-100}},
           color={191,0,0},
-          smooth=Smooth.None));
-      connect(fire_p, inverter_n.fire_p) annotation (Line(
-          points={{-62,-120},{-62,-80},{-56,-80},{-56,-62}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(fire_p, inverter_p.fire_n) annotation (Line(
-          points={{-62,-120},{-62,-80},{-4,-80},{-4,38}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(fire_n, inverter_n.fire_n) annotation (Line(
-          points={{58,-120},{58,-70},{-44,-70},{-44,-62}},
-          color={255,0,255},
-          smooth=Smooth.None));
-      connect(fire_n, inverter_p.fire_p) annotation (Line(
-          points={{58,-120},{58,-70},{-16,-70},{-16,38}},
-          color={255,0,255},
           smooth=Smooth.None));
       connect(dc_p1, inverter_p.dc_p) annotation (Line(
           points={{-100,60},{-20,60}},
@@ -6555,6 +6841,22 @@ General information about DC/DC converters can be found at the
       connect(inverter_n.ac, dc_n2) annotation (Line(
           points={{-40,-50},{100,-50},{100,-60}},
           color={0,0,255},
+          smooth=Smooth.None));
+      connect(fire_p, inverter_n.fire_n) annotation (Line(
+          points={{-60,-120},{-60,-80},{-44,-80},{-44,-62}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_p, inverter_p.fire_p) annotation (Line(
+          points={{-60,-120},{-60,-80},{-16,-80},{-16,38}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_n, inverter_n.fire_p) annotation (Line(
+          points={{60,-120},{60,-70},{-56,-70},{-56,-62}},
+          color={255,0,255},
+          smooth=Smooth.None));
+      connect(fire_n, inverter_p.fire_n) annotation (Line(
+          points={{60,-120},{60,-70},{-4,-70},{-4,38}},
+          color={255,0,255},
           smooth=Smooth.None));
       annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
                 -100},{100,100}}), graphics), Icon(graphics={
@@ -6586,8 +6888,31 @@ General information about DC/DC converters can be found at the
             Line(
               points={{-20,0},{20,0}},
               color={0,0,127},
-              smooth=Smooth.None)}));
+              smooth=Smooth.None)}),
+        Documentation(info="<html>
+<p>
+The H bridge is a four quadrant DC/DC converter. It consists of two single phase DC/AC converters which are controlled differently; see Fig.&nbsp;1.</p>
+
+<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
+  <caption align=\"bottom\"><b>Fig. 1:</b> H bridge</caption>
+  <tr>
+    <td>
+      <img src=\"modelica://Modelica_Electrical_PowerConverters/Resources/Images/Hbridge.png\">
+    </td>
+  </tr>
+</table>
+
+<p>If the firing inputs <code>fire_p</code> and <code>fire_n</code> are inverse, the two legs are controlled symmetrically so that full positive or negative output voltage can be generated. See examples
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCDC.HBridge\">DCDC.HBridge</a>.
+</p>
+</html>"));
     end HBridge;
+    annotation (Documentation(info="<html>
+<p>
+General information about DC/DC converters can be found at the
+<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCDCConcept\">DC/DC converter concept</a>
+</p>
+</html>"));
   end DCDC;
 
 
@@ -6644,7 +6969,7 @@ is equal to the optional signal input <code>enable</code>.
 
   package Icons "Icons"
     extends Modelica.Icons.Package;
-    model ExampleTemplate "Example template"
+    partial model ExampleTemplate "Example template"
 
       annotation (Icon(graphics={
             Ellipse(
@@ -6665,7 +6990,8 @@ is equal to the optional signal input <code>enable</code>.
               fillPattern=FillPattern.Solid)}));
     end ExampleTemplate;
 
-    model Converter "Converter icon"
+    partial model Converter "Converter icon"
+
       annotation (Icon(graphics={
             Rectangle(
               extent={{-100,100},{100,-100}},
@@ -6681,6 +7007,20 @@ is equal to the optional signal input <code>enable</code>.
               textString="%name",
               lineColor={0,0,255})}));
     end Converter;
+
+    partial block Control "Control icon"
+
+      annotation (Icon(graphics={
+            Rectangle(
+              extent={{-100,100},{100,-100}},
+              lineColor={0,0,127},
+              fillColor={255,255,255},
+              fillPattern=FillPattern.Solid),
+            Text(
+              extent={{-150,-140},{150,-180}},
+              textString="%name",
+              lineColor={0,0,255})}));
+    end Control;
   end Icons;
 
 
