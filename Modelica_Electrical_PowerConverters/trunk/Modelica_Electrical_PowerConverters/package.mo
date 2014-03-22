@@ -75,7 +75,7 @@ is provided.
 
 <p>There are currently no space phasor pulse width modulation (PWM) models provided. However, for operating the single 
 and multi phase inverter the PWM 
-<a href=\"modelica://Modelica_Electrical_PowerConverters.DCDC.Control\">controller</a> 
+<a href=\"modelica://Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM\">controller</a> 
 can be used. 
 </p>
 
@@ -199,9 +199,8 @@ General background knowledge on power converters and power electronics can be fo
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">[Skvarenina01]</a> and 
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">[Luo05]</a>. 
 A freely available book is available in 
-<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">[Williams2006]</a>.</p>
-
-
+<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">[Williams2006]</a>.
+</p>
 </html>"));
   end UsersGuide;
 
@@ -618,7 +617,7 @@ A freely available book is available in
                 transformation(
                 extent={{10,10},{-10,-10}},
                 rotation=180,
-                origin={-30,30})));
+                origin={-30,-30})));
           Modelica.Electrical.Analog.Basic.Inductor inductor(L=Ld) annotation (
               Placement(visible=true, transformation(
                 origin={30,-10},
@@ -648,7 +647,7 @@ A freely available book is available in
                   extent={{10,-90},{30,-70}}, rotation=0)));
           parameter
           Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData
-            dcpmData
+            dcpmData "Data record of PM excited DC machine"
             annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
           Modelica.Mechanics.Rotational.Sources.Torque torque
             annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
@@ -660,9 +659,9 @@ A freely available book is available in
             annotation (Placement(transformation(extent={{90,-90},{70,-70}})));
           Modelica.Blocks.Sources.Constant const(k=0) annotation (Placement(
                 transformation(
-                extent={{-10,-10},{10,10}},
+                extent={{10,-10},{-10,10}},
                 rotation=270,
-                origin={-30,70})));
+                origin={-30,-60})));
           Modelica.Electrical.Analog.Basic.Resistor rMains(R=RMains)
             annotation (Placement(transformation(
                 extent={{-10,-10},{10,10}},
@@ -710,19 +709,19 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_p, rectifier.fire_p) annotation (Line(
-              points={{-36,41},{-36,22},{-38,22},{-38,2},{-34,2},{-34,12}},
+              points={{-36,-19},{-36,-12}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.fire_n, rectifier.fire_n) annotation (Line(
-              points={{-24,41},{-24,22},{-22,22},{-22,2},{-26,2},{-26,12}},
+              points={{-24,-19},{-24,-12}},
               color={255,0,255},
               smooth=Smooth.None));
           connect(pulse2.ac_p, rectifier.ac_p) annotation (Line(
-              points={{-40,36},{-60,36},{-60,6},{-40,6}},
+              points={{-40,-24},{-54,-24},{-54,6},{-40,6}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(rectifier.ac_n, pulse2.ac_n) annotation (Line(
-              points={{-40,-6},{-50,-6},{-50,24},{-40,24}},
+              points={{-40,-6},{-50,-6},{-50,-36},{-40,-36}},
               color={0,0,255},
               smooth=Smooth.None));
           connect(inductor.n, dcpm.pin_ap) annotation (Line(
@@ -746,7 +745,7 @@ A freely available book is available in
               color={0,0,255},
               smooth=Smooth.None));
           connect(const.y, pulse2.firingAngle) annotation (Line(
-              points={{-30,59},{-30,18}},
+              points={{-30,-49},{-30,-42}},
               color={0,0,127},
               smooth=Smooth.None));
           connect(rMains.n, lMains.p) annotation (Line(
@@ -776,7 +775,15 @@ A freely available book is available in
               StopTime=15,
               Interval=0.0002,
               Tolerance=1e-006),
-            __Dymola_experimentSetupOutput);
+            __Dymola_experimentSetupOutput,
+          Documentation(info="<html>
+<p>
+In this example a PM excited DC machine is started with nominal torque at nominal speed. After 5 seconds, load torque is reduced to zero over a period of additional 10 seconds. At 15 seconds, the machine is operating at no load.
+</p>
+
+<p>
+Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average current <code>meanCurrent.y</code>. Also plot speed <code>w</code>, voltage <code>voltageSensor.v</code> and the average voltage <code>meanVoltage.y</code>.</p>  
+</html>"));
         end ThyristorBridge2Pulse_DC_Drive;
       end ThyristorBridge2Pulse;
 
@@ -1529,7 +1536,7 @@ A freely available book is available in
                   extent={{10,-90},{30,-70}}, rotation=0)));
           parameter
           Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData
-            dcpmData
+            dcpmData "Data record of PM excited DC machine"
             annotation (Placement(transformation(extent={{-20,-90},{0,-70}})));
           Modelica.Mechanics.Rotational.Sources.Torque torque
             annotation (Placement(transformation(extent={{60,-90},{40,-70}})));
@@ -2117,18 +2124,18 @@ A freely available book is available in
                 origin={-90,-50},
                 extent={{-10,-10},{10,10}},
                 rotation=0)));
-          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage2(V=sqrt(2)
-                *Vrms, freqHz=f) annotation (Placement(visible=true,
-                transformation(
-                origin={-80,-13.9999},
-                extent={{-9.999890000000001,-10},{10,10}},
-                rotation=-90)));
-          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage1(V=sqrt(2)
-                *Vrms, freqHz=f) annotation (Placement(visible=true,
-                transformation(
-                origin={-80,14},
-                extent={{-10,-10},{10,10}},
-                rotation=-90)));
+          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_n(V=sqrt(2)
+              *Vrms, freqHz=f) annotation (Placement(visible=true,
+              transformation(
+              origin={-80,-13.9999},
+              extent={{-9.999890000000001,-10},{10,10}},
+              rotation=-90)));
+          Modelica.Electrical.Analog.Sources.SineVoltage sinevoltage_p(V=sqrt(2)
+              *Vrms, freqHz=f) annotation (Placement(visible=true,
+              transformation(
+              origin={-80,14},
+              extent={{-10,-10},{10,10}},
+              rotation=-90)));
           Modelica_Electrical_PowerConverters.ACDC.ThyristorCenterTap2Pulse
             rectifier
             annotation (Placement(transformation(extent={{-40,30},{-20,50}})));
@@ -2176,22 +2183,22 @@ A freely available book is available in
               points={{60,10},{68,10}},
               color={0,0,127},
               smooth=Smooth.None));
-          connect(sinevoltage1.n, sinevoltage2.p) annotation (Line(
-              points={{-80,4},{-80,-4.00001}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(ground.p, sinevoltage1.n) annotation (Line(
-              points={{-90,-40},{-90,0},{-80,0},{-80,4}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(sinevoltage1.p, rectifier.ac_p) annotation (Line(
-              points={{-80,24},{-80,46},{-40,46}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(sinevoltage2.n, rectifier.ac_n) annotation (Line(
-              points={{-80,-23.9999},{-80,-32},{-50,-32},{-50,34},{-40,34}},
-              color={0,0,255},
-              smooth=Smooth.None));
+        connect(sinevoltage_p.n, sinevoltage_n.p) annotation (Line(
+            points={{-80,4},{-80,-4.00001}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(ground.p, sinevoltage_p.n) annotation (Line(
+            points={{-90,-40},{-90,0},{-80,0},{-80,4}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(sinevoltage_p.p, rectifier.ac_p) annotation (Line(
+            points={{-80,24},{-80,46},{-40,46}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(sinevoltage_n.n, rectifier.ac_n) annotation (Line(
+            points={{-80,-23.9999},{-80,-32},{-50,-32},{-50,34},{-40,34}},
+            color={0,0,255},
+            smooth=Smooth.None));
           connect(ground.p, currentSensor.n) annotation (Line(
               points={{-90,-40},{-10,-40}},
               color={0,0,255},
@@ -2646,7 +2653,10 @@ A freely available book is available in
               StartTime=0,
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+          Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>. The instantaneous voltage and current directly show the switch pattern of the inverter. The average voltage and average current reveal the fundamental wave of the voltage and current, each of them being basically in phase with the command <code>sine.y</code>.</p>
+</html>"));
         end SinglePhaseTwoLevel_R;
 
         model SinglePhaseTwoLevel_RL
@@ -2685,7 +2695,10 @@ A freely available book is available in
               StartTime=0,
               StopTime=0.1,
               Tolerance=1e-06,
-              Interval=0.0002));
+              Interval=0.0002),
+          Documentation(info="<html>
+<p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>. The instantaneous voltage directly show the switch pattern of the inverter. The current shows a particular ripple determined by the input voltage and the switching frequency. The average voltage is basically in phase with the command <code>sine.y</code>. The average current has a phase shift due to the R-L load.</p>
+</html>"));
         end SinglePhaseTwoLevel_RL;
       end SinglePhaseTwoLevel;
 
@@ -2694,11 +2707,12 @@ A freely available book is available in
         partial model SinglePhaseTwoLevel
         "Single phas two level inverter including control"
           extends Icons.ExampleTemplate;
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage2(V=
-               50) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-70,10})));
+          parameter Modelica.SIunits.Frequency f = 1000 "Switching frequency";
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_n(V=50)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-70,10})));
           Modelica_Electrical_PowerConverters.DCAC.SinglePhase2Level inverter(
               useHeatPort=false)
             annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
@@ -2715,18 +2729,29 @@ A freely available book is available in
                 rotation=180,
                 origin={-90,40})));
           Modelica_Electrical_PowerConverters.DCDC.Control.SignalPWM signalPWM(
-              f=1000, useConstantDutyCycle=false) annotation (Placement(
+                      useConstantDutyCycle=false, f=f)
+                                                  annotation (Placement(
                 transformation(
                 extent={{-10,-10},{10,10}},
                 rotation=0,
                 origin={-40,-30})));
-          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage1(V=
-               50) annotation (Placement(transformation(
-                extent={{-10,-10},{10,10}},
-                rotation=270,
-                origin={-70,50})));
+          Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_p(V=50)
+          annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-70,50})));
           Modelica.Blocks.Sources.Sine sine(freqHz=50) annotation (Placement(
                 transformation(extent={{-30,-64},{-50,-44}})));
+          Modelica.Blocks.Math.Mean meanCurrent(f=f, x0=0)
+                                                annotation (Placement(transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=0,
+                origin={30,-90})));
+          Modelica.Blocks.Math.Mean meanVoltage(f=f, x0=0) annotation (Placement(
+                transformation(
+                extent={{-10,-10},{10,10}},
+                rotation=90,
+                origin={82,50})));
         equation
           connect(voltageSensor.n, currentSensor.p) annotation (Line(
               points={{70,-20},{70,-70},{10,-70}},
@@ -2736,22 +2761,22 @@ A freely available book is available in
               points={{-46,-19},{-46,18}},
               color={255,0,255},
               smooth=Smooth.None));
-          connect(constantVoltage1.n, constantVoltage2.p) annotation (Line(
-              points={{-70,40},{-70,20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(constantVoltage1.p, inverter.dc_p) annotation (Line(
-              points={{-70,60},{-50,60},{-50,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(constantVoltage2.n, inverter.dc_n) annotation (Line(
-              points={{-70,0},{-50,0},{-50,20}},
-              color={0,0,255},
-              smooth=Smooth.None));
-          connect(ground.p, constantVoltage1.n) annotation (Line(
-              points={{-90,30},{-70,30},{-70,40}},
-              color={0,0,255},
-              smooth=Smooth.None));
+        connect(constantVoltage_p.n, constantVoltage_n.p) annotation (Line(
+            points={{-70,40},{-70,20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage_p.p, inverter.dc_p) annotation (Line(
+            points={{-70,60},{-50,60},{-50,40}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(constantVoltage_n.n, inverter.dc_n) annotation (Line(
+            points={{-70,0},{-50,0},{-50,20}},
+            color={0,0,255},
+            smooth=Smooth.None));
+        connect(ground.p, constantVoltage_p.n) annotation (Line(
+            points={{-90,30},{-70,30},{-70,40}},
+            color={0,0,255},
+            smooth=Smooth.None));
           connect(currentSensor.n, ground.p) annotation (Line(
               points={{-10,-70},{-90,-70},{-90,30}},
               color={0,0,255},
@@ -2767,6 +2792,14 @@ A freely available book is available in
           connect(inverter.fire_n, signalPWM.notFire) annotation (Line(
               points={{-34,18},{-34,-19}},
               color={255,0,255},
+              smooth=Smooth.None));
+          connect(voltageSensor.v, meanVoltage.u) annotation (Line(
+              points={{80,-10},{82,-10},{82,-8},{82,-8},{82,38},{82,38}},
+              color={0,0,127},
+              smooth=Smooth.None));
+          connect(meanCurrent.u, currentSensor.i) annotation (Line(
+              points={{18,-90},{0,-90},{0,-80}},
+              color={0,0,127},
               smooth=Smooth.None));
           annotation (Diagram(coordinateSystem(preserveAspectRatio=false,
                   extent={{-100,-100},{100,100}}), graphics), Documentation(info="<html>
@@ -2850,7 +2883,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
             Documentation(info="<html>
 <p>This example demonstrates the switching on of an R-L load operated by a step down chopper.
 DC output voltage is equal to <code>dutyCycle</code> times the input voltage.
-Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>. The waveform the average current is determined by the time constant <code>L/R</code> of the load.</p>
 </html>"));
         end ChopperStepDown_RL;
       end ChopperStepDown;
@@ -2925,7 +2958,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
             Documentation(info="<html>
 <p>This example demonstrates the switching on of an R-L load operated by an H bridge.
 DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.
-Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
+Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>. The waveform the average current is determined by the time constant <code>L/R</code> of the load.</p>
 </html>"),  experiment(
               StopTime=0.1,
               Interval=0.0002,
@@ -2968,7 +3001,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
                   extent={{20,-80},{40,-60}}, rotation=0)));
           parameter
           Modelica.Electrical.Machines.Utilities.ParameterRecords.DcPermanentMagnetData
-            dcpmData
+            dcpmData "Data record of PM excited DC machine"
             annotation (Placement(transformation(extent={{-10,-80},{10,-60}})));
           Modelica.Mechanics.Rotational.Sources.Torque torque
             annotation (Placement(transformation(extent={{70,-80},{50,-60}})));
@@ -3018,7 +3051,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
               Tolerance=1e-06),
             Documentation(info="<html>
 <p>This example of am H brdge with DC drive demonstrates the operation of the DC machine in four quadrants. 
-DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.</p>
+The DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.</p>
 
 <p>
 <table border=\"1\" cellspacing=\"0\" cellpadding=\"2\">
@@ -3223,6 +3256,9 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
       end ExampleTemplates;
 
     end DCDC;
+  annotation (Documentation(info="<html>
+<p>This is a collection of AC/DC, DC/DC and DC/AC converters.</p>
+</html>"));
   end Examples;
 
 
@@ -4424,7 +4460,6 @@ The firing signal <code>fire_n</code> are connected
 with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See example 
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
-
 </html>"));
     end ThyristorBridge2Pulse;
 
@@ -4649,7 +4684,6 @@ with thyristor <code>thyristor_p2</code>.
 The circuit topology is the same as in 
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
-
 </html>"));
     end HalfControlledBridge2Pulse;
 
@@ -6591,7 +6625,7 @@ to the switching period. The output firing signal is strictly determined by the 
 </table>
 
 <p>
-The firing signal is generated by comparing the sampled duty cycle input with a periodic saw tooth signal [Williams2006]. 
+The firing signal is generated by comparing the sampled duty cycle input with a periodic saw tooth signal [<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">Williams2006</a>]. 
 </p>
 </html>"));
       end SignalPWM;
@@ -6961,7 +6995,7 @@ General information about DC/DC converters can be found at the
 This model provides an internal enable signal derived either from a parameter or an optional signal input. 
 For <code>useConstantEnable = true</code> the internal signal is equal to the parameter <code>constantEnable</code>. 
 For <code>useConstantEnable = false</code> the internal signal 
-is equal to the optional signal input <code>enable</code>.
+is equal to the external signal input <code>enable</code>.
 </html>"));
     end Enable;
   end Interfaces;
