@@ -1,0 +1,358 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Sat Mar 22 19:48:07 CET 2014
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="0" x-max="60" y-min="0" y-max="32" auto-bounding="true">
+%<g>
+%<g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(16,12.5);(16,12.5);(16,14);(16,14)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,10);(12,10);(12,6);(12,6)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,8.5);(12,8.5);(16,12.5);(16,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,7.5);(12,7.5);(16,3.5);(16,3.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16,3.5);(16,3.5);(16,2);(16,2)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(8,8);(8,8);(11,8);(11,8)"
+%	 />
+%<multicurve fill-style= "none"
+%	 arrow-global-scale-length= "1.5"
+%	 right-arrow= "head"
+%	 points= "(13.5,6);(13.5,6);(15.5,4);(15.5,4)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(11,10);(11,10);(11,6);(11,6)"
+%	 />
+%</g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(18,3.5);(18,3.5);(18,12.5);(18,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,9);(16.5,9);(19.5,9);(19.5,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,7);(16.5,7);(19.5,7);(19.5,7)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,7);(16.5,7);(18,9);(18,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(19.5,7);(19.5,7);(18,9);(18,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16,12.5);(16,12.5);(18,12.5);(18,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(18,3.5);(18,3.5);(16,3.5);(16,3.5)"
+%	 />
+%</g>
+%</g>
+%<g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(16,28.5);(16,28.5);(16,30);(16,30)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,26);(12,26);(12,22);(12,22)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,24.5);(12,24.5);(16,28.5);(16,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(12,23.5);(12,23.5);(16,19.5);(16,19.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16,19.5);(16,19.5);(16,18);(16,18)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(8,24);(8,24);(11,24);(11,24)"
+%	 />
+%<multicurve fill-style= "none"
+%	 arrow-global-scale-length= "1.5"
+%	 right-arrow= "head"
+%	 points= "(13.5,22);(13.5,22);(15.5,20);(15.5,20)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(11,26);(11,26);(11,22);(11,22)"
+%	 />
+%</g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(18,19.5);(18,19.5);(18,28.5);(18,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,25);(16.5,25);(19.5,25);(19.5,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,23);(16.5,23);(19.5,23);(19.5,23)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16.5,23);(16.5,23);(18,25);(18,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(19.5,23);(19.5,23);(18,25);(18,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(16,28.5);(16,28.5);(18,28.5);(18,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(18,19.5);(18,19.5);(16,19.5);(16,19.5)"
+%	 />
+%</g>
+%</g>
+%<multicurve fill-style= "none"
+%	 points= "(16,18);(16,18);(16,14);(16,14)"
+%	 />
+%<multicurve fill-style= "none"
+%	 left-arrow= "disk-centered"
+%	 right-arrow= "disk-centered"
+%	 points= "(16,16);(16,16);(24,16);(24,16)"
+%	 />
+%<multicurve fill-style= "none"
+%	 right-arrow= "disk-centered"
+%	 points= "(16,2);(16,2);(16,0);(16,0)"
+%	 />
+%<multicurve fill-style= "none"
+%	 right-arrow= "disk-centered"
+%	 points= "(16,30);(16,30);(16,32);(16,32)"
+%	 />
+%</g>
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
+%	 anchor-point= "(0,16)"
+%	 text-rotation= "90"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%dc input
+%</text>
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
+%	 anchor-point= "(34,16)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%dc output
+%</text>
+%<g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(52,12.5);(52,12.5);(52,14);(52,14)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,10);(56,10);(56,6);(56,6)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,8.5);(56,8.5);(52,12.5);(52,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,7.5);(56,7.5);(52,3.5);(52,3.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,3.5);(52,3.5);(52,2);(52,2)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(60,8);(60,8);(57,8);(57,8)"
+%	 />
+%<multicurve fill-style= "none"
+%	 arrow-global-scale-length= "1.5"
+%	 right-arrow= "head"
+%	 points= "(54.5,6);(54.5,6);(52.5,4);(52.5,4)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(57,10);(57,10);(57,6);(57,6)"
+%	 />
+%</g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(50,3.5);(50,3.5);(50,12.5);(50,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,9);(51.5,9);(48.5,9);(48.5,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,7);(51.5,7);(48.5,7);(48.5,7)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,7);(51.5,7);(50,9);(50,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(48.5,7);(48.5,7);(50,9);(50,9)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,12.5);(52,12.5);(50,12.5);(50,12.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(50,3.5);(50,3.5);(52,3.5);(52,3.5)"
+%	 />
+%</g>
+%</g>
+%<g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(52,28.5);(52,28.5);(52,30);(52,30)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,26);(56,26);(56,22);(56,22)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,24.5);(56,24.5);(52,28.5);(52,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(56,23.5);(56,23.5);(52,19.5);(52,19.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,19.5);(52,19.5);(52,18);(52,18)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(60,24);(60,24);(57,24);(57,24)"
+%	 />
+%<multicurve fill-style= "none"
+%	 arrow-global-scale-length= "1.5"
+%	 right-arrow= "head"
+%	 points= "(54.5,22);(54.5,22);(52.5,20);(52.5,20)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(57,26);(57,26);(57,22);(57,22)"
+%	 />
+%</g>
+%<g>
+%<multicurve fill-style= "none"
+%	 points= "(50,19.5);(50,19.5);(50,28.5);(50,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,25);(51.5,25);(48.5,25);(48.5,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,23);(51.5,23);(48.5,23);(48.5,23)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,23);(51.5,23);(50,25);(50,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(48.5,23);(48.5,23);(50,25);(50,25)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,28.5);(52,28.5);(50,28.5);(50,28.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(50,19.5);(50,19.5);(52,19.5);(52,19.5)"
+%	 />
+%</g>
+%</g>
+%<multicurve fill-style= "none"
+%	 points= "(52,18);(52,18);(52,14);(52,14)"
+%	 />
+%<multicurve fill-style= "none"
+%	 left-arrow= "disk-centered"
+%	 right-arrow= "disk-centered"
+%	 points= "(52,16);(52,16);(44,16);(44,16)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,2);(52,2);(52,0);(52,0)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(52,30);(52,30);(52,32);(52,32)"
+%	 />
+%<multicurve fill-style= "none"
+%	 right-arrow= "disk-centered"
+%	 points= "(52,32);(52,32);(0,32);(0,32)"
+%	 />
+%<multicurve fill-style= "none"
+%	 right-arrow= "disk-centered"
+%	 points= "(52,0);(52,0);(0,0);(0,0)"
+%	 />
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(60,32)
+\psline(16,12.5)(16,14)
+\psline(12,10)(12,6)
+\psline(12,8.5)(16,12.5)
+\psline(12,7.5)(16,3.5)
+\psline(16,3.5)(16,2)
+\psline(8,8)(11,8)
+\psline[arrowscale=1 1.5]{->}(13.5,6)(15.5,4)
+\psline(11,10)(11,6)
+\psline(18,3.5)(18,12.5)
+\psline(16.5,9)(19.5,9)
+\psline(16.5,7)(19.5,7)
+\psline(16.5,7)(18,9)
+\psline(19.5,7)(18,9)
+\psline(16,12.5)(18,12.5)
+\psline(18,3.5)(16,3.5)
+\psline(16,28.5)(16,30)
+\psline(12,26)(12,22)
+\psline(12,24.5)(16,28.5)
+\psline(12,23.5)(16,19.5)
+\psline(16,19.5)(16,18)
+\psline(8,24)(11,24)
+\psline[arrowscale=1 1.5]{->}(13.5,22)(15.5,20)
+\psline(11,26)(11,22)
+\psline(18,19.5)(18,28.5)
+\psline(16.5,25)(19.5,25)
+\psline(16.5,23)(19.5,23)
+\psline(16.5,23)(18,25)
+\psline(19.5,23)(18,25)
+\psline(16,28.5)(18,28.5)
+\psline(18,19.5)(16,19.5)
+\psline(16,18)(16,14)
+\psline{*-*}(16,16)(24,16)
+\psline{-*}(16,2)(16,0)
+\psline{-*}(16,30)(16,32)
+\rput{90}(0,16){dc input}
+\rput(34,16){dc output}
+\psline(52,12.5)(52,14)
+\psline(56,10)(56,6)
+\psline(56,8.5)(52,12.5)
+\psline(56,7.5)(52,3.5)
+\psline(52,3.5)(52,2)
+\psline(60,8)(57,8)
+\psline[arrowscale=1 1.5]{->}(54.5,6)(52.5,4)
+\psline(57,10)(57,6)
+\psline(50,3.5)(50,12.5)
+\psline(51.5,9)(48.5,9)
+\psline(51.5,7)(48.5,7)
+\psline(51.5,7)(50,9)
+\psline(48.5,7)(50,9)
+\psline(52,12.5)(50,12.5)
+\psline(50,3.5)(52,3.5)
+\psline(52,28.5)(52,30)
+\psline(56,26)(56,22)
+\psline(56,24.5)(52,28.5)
+\psline(56,23.5)(52,19.5)
+\psline(52,19.5)(52,18)
+\psline(60,24)(57,24)
+\psline[arrowscale=1 1.5]{->}(54.5,22)(52.5,20)
+\psline(57,26)(57,22)
+\psline(50,19.5)(50,28.5)
+\psline(51.5,25)(48.5,25)
+\psline(51.5,23)(48.5,23)
+\psline(51.5,23)(50,25)
+\psline(48.5,23)(50,25)
+\psline(52,28.5)(50,28.5)
+\psline(50,19.5)(52,19.5)
+\psline(52,18)(52,14)
+\psline{*-*}(52,16)(44,16)
+\psline(52,2)(52,0)
+\psline(52,30)(52,32)
+\psline{-*}(52,32)(0,32)
+\psline{-*}(52,0)(0,0)
+\end{pspicture}
