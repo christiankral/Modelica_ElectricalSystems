@@ -1458,7 +1458,6 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
 
       model ThyristorBridge2mPulse_DC_Drive
         "2m pulse thyristor bridge feeding a DC drive"
-        import Modelica_Electrical_PowerConverters;
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Integer m(final min=3) = 3 "Number of phases";
