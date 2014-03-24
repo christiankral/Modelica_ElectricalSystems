@@ -6413,6 +6413,7 @@ General information about DC/AC converters can be found at the
 </html>"));
 end DCAC;
 
+
 package DCDC "DC to DC converters"
   extends Modelica.Icons.Package;
   package Control "Control components for DC to DC converters"
@@ -7082,7 +7083,6 @@ General information about DC/DC converters can be found at the
 end DCDC;
 
 
-
 package Interfaces "Interfaces and partial models"
   extends Modelica.Icons.InterfacesPackage;
   model Enable
@@ -7193,7 +7193,10 @@ annotation (
       preserveAspectRatio=true,
       initialScale=0.1,
       grid={2,2})),
+  preferredView="info",
   version="1.0.0",
+  versionBuild=0,
+  versionDate="2014-03-24",
   uses(Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p>
