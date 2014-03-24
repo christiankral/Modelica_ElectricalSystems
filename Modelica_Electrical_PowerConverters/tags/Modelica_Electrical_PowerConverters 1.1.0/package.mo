@@ -6959,7 +6959,7 @@ annotation (
       initialScale=0.1,
       grid={2,2})),
   preferredView="info",
-  version="1.0.0",
+  version="1.1.0",
   versionBuild=0,
   versionDate="2014-03-24",
   uses(Modelica(version="3.2.2")),
