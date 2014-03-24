@@ -2,6 +2,7 @@ within ;
 package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC converters"
 extends Modelica.Icons.Package;
 
+
 package UsersGuide "User's Guide"
   extends Modelica.Icons.Information;
   class ACDCConcept "AC/DC converter concept"
@@ -43,32 +44,12 @@ contain <code>_Characteristic</code>.
 </html>"));
   end ACDCConcept;
 
-  class DCDCConcept "DC/DC converter concept"
-    extends Modelica.Icons.Information;
-    annotation (DocumentationClass=true, Documentation(info="<html>
-
-<p>Currently there is only a step down chopper model included in the PowerConverters libraray.</p>
-
-<h4>Control</h4>
-
-<p>A pulse width modulation (PWM) 
-<a href=\"modelica://Modelica_Electrical_PowerConverters.DCDC.Control\">controller</a> 
-is provided. 
-</p>
-
-<h4>Examples</h4>
-
-<p>Some examples are provided at
-<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCDC\">Examples.DCDC</a>.
-</p>
-</html>"));
-  end DCDCConcept;
 
   class DCACConcept "DC/AC converter concept"
     extends Modelica.Icons.Information;
     annotation (DocumentationClass=true, Documentation(info="<html>
 
-<p>There are a single and multi phase DC/AC converter model provided by the PowerConverters libraray.</p>
+<p>There are a single and multi phase DC/AC converter model provided by the PowerConverters library.</p>
 
 <h4>Control</h4>
 
@@ -85,6 +66,35 @@ can be used.
 </p>
 </html>"));
   end DCACConcept;
+
+  class DCDCConcept "DC/DC converter concept"
+    extends Modelica.Icons.Information;
+    annotation (DocumentationClass=true, Documentation(info="<html>
+
+<p>The following DC/DC converter topologies are currently included in the PowerConverters libraray.</p>
+
+<p>
+<ul>
+<li>Chopper step down converter</li>
+<li>Chopper step up converter</li>
+<li>H bridge converter; four quadrant operation</li>
+</ul>
+</p>
+
+<h4>Control</h4>
+
+<p>A pulse width modulation (PWM) 
+<a href=\"modelica://Modelica_Electrical_PowerConverters.DCDC.Control\">controller</a> 
+is provided. 
+</p>
+
+<h4>Examples</h4>
+
+<p>Some examples are provided at
+<a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCDC\">Examples.DCDC</a>.
+</p>
+</html>"));
+  end DCDCConcept;
 
   class Contact "Contact"
     extends Modelica.Icons.Contact;
@@ -112,12 +122,10 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
     extends Modelica.Icons.ReleaseNotes;
     annotation (Documentation(info="<html>
 
-<h5>Version 1.0.0, 2014-XX-XX</h5>
+<h5>Version 1.0.0, 2014-03-24</h5>
 <ul>
-<li>Initial version before inclusion into MSL</li>
+<li>First tagged version</li>
 </ul>
-
-
 </html>"));
   end ReleaseNotes;
 
@@ -202,6 +210,7 @@ A freely available book is available in
 </p>
 </html>"));
 end UsersGuide;
+
 
 package Examples "Examples"
   extends Modelica.Icons.ExamplesPackage;
@@ -2641,7 +2650,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
     end ExampleTemplates;
   end ACDC;
 
-  package DCAC "DC to AC converters examples"
+  package DCAC "DC to AC converter examples"
     extends Modelica.Icons.ExamplesPackage;
     package SinglePhaseTwoLevel "Single phase two level inverter examples"
       extends Modelica.Icons.ExamplesPackage;
@@ -3279,10 +3288,12 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
       end HBridge;
     end ExampleTemplates;
   end DCDC;
+
   annotation (Documentation(info="<html>
 <p>This is a collection of AC/DC, DC/DC and DC/AC converters.</p>
 </html>"));
 end Examples;
+
 
 package ACDC "AC to DC converter"
   package Control "Control components for rectifiers"
@@ -5969,6 +5980,7 @@ General information about AC/DC converters can be found at the
 </html>"));
 end ACDC;
 
+
 package DCAC "DC to AC converters"
   extends Modelica.Icons.Package;
   model SinglePhase2Level "Single phase DC to AC converter"
@@ -6741,6 +6753,168 @@ This is a conventional step down chopper model. It consists of a transistor and 
 </html>"));
   end ChopperStepDown;
 
+  model ChopperStepUp "Step up chopper"
+    import Modelica.Constants.pi;
+    extends Modelica_Electrical_PowerConverters.Icons.Converter;
+    parameter Modelica.SIunits.Resistance RonTransistor=1e-05
+      "Transistor closed resistance";
+    parameter Modelica.SIunits.Conductance GoffTransistor=1e-05
+      "Transistor opened conductance";
+    parameter Modelica.SIunits.Voltage VkneeTransistor=0
+      "Transistor threshold voltage";
+    parameter Modelica.SIunits.Resistance RonDiode(final min=0) = 1e-05
+      "Closed diode resistance";
+    parameter Modelica.SIunits.Conductance GoffDiode(final min=0) = 1e-05
+      "Opened diode conductance";
+    parameter Modelica.SIunits.Voltage VkneeDiode(final min=0) = 0
+      "Diode forward threshold voltage";
+    extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
+          293.15);
+    Modelica.Electrical.Analog.Interfaces.PositivePin dc_p1 "Positive DC input"
+      annotation (Placement(transformation(extent={{-110,50},{-90,70}})));
+    Modelica.Electrical.Analog.Interfaces.NegativePin dc_n1 "Negative DC input"
+      annotation (Placement(transformation(extent={{-110,-70},{-90,-50}})));
+    Modelica.Electrical.Analog.Interfaces.PositivePin dc_p2 "Postive DC output"
+      annotation (Placement(transformation(extent={{90,50},{110,70}})));
+    Modelica.Electrical.Analog.Interfaces.NegativePin dc_n2
+      "Negative DC output"
+      annotation (Placement(transformation(extent={{92,-70},{112,-50}})));
+    Modelica.SIunits.Voltage vDCi=dc_p1.v - dc_n1.v "DC voltage side 1";
+    Modelica.SIunits.Current iDCi=dc_p1.i "DC current side 1";
+    Modelica.SIunits.Voltage vDCo=dc_p2.v - dc_n2.v "DC voltages side 2";
+    Modelica.SIunits.Current iDCo=dc_p2.i "DC current side 2";
+    Modelica.Electrical.Analog.Ideal.IdealGTOThyristor transistor(
+      useHeatPort=useHeatPort,
+      Ron=RonTransistor,
+      Goff=GoffTransistor,
+      Vknee=VkneeTransistor) "Switching transistor" annotation (Placement(
+          visible=true, transformation(
+          origin={-20,0},
+          extent={{-10,10},{10,-10}},
+          rotation=270)));
+    Modelica.Electrical.Analog.Ideal.IdealDiode diode(
+      Ron=RonDiode,
+      Goff=GoffDiode,
+      Vknee=VkneeDiode,
+      useHeatPort=useHeatPort) "Free wheeling diode" annotation (Placement(
+          visible=true, transformation(
+          origin={0,60},
+          extent={{-10,-10},{10,10}},
+          rotation=0)));
+    Modelica.Blocks.Interfaces.BooleanInput fire annotation (Placement(
+          transformation(
+          extent={{-20,-20},{20,20}},
+          rotation=90,
+          origin={-60,-120})));
+  equation
+    if not useHeatPort then
+      LossPower = diode.LossPower + transistor.LossPower;
+    end if;
+    connect(dc_n1, dc_n2) annotation (Line(
+        points={{-100,-60},{102,-60}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(dc_p1, diode.p) annotation (Line(
+        points={{-100,60},{-10,60}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(diode.n, dc_p2) annotation (Line(
+        points={{10,60},{100,60}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(transistor.fire, fire) annotation (Line(
+        points={{-31,-7},{-60,-7},{-60,-120}},
+        color={255,0,255},
+        smooth=Smooth.None));
+    connect(heatPort, heatPort) annotation (Line(
+        points={{0,-100},{0,-100}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(heatPort, transistor.heatPort) annotation (Line(
+        points={{0,-100},{0,0},{-10,0}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(heatPort, diode.heatPort) annotation (Line(
+        points={{0,-100},{0,50}},
+        color={191,0,0},
+        smooth=Smooth.None));
+    connect(dc_p1, transistor.p) annotation (Line(
+        points={{-100,60},{-20,60},{-20,10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    connect(dc_n1, transistor.n) annotation (Line(
+        points={{-100,-60},{-20,-60},{-20,-10}},
+        color={0,0,255},
+        smooth=Smooth.None));
+    annotation (
+      Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
+              100,100}}), graphics),
+      Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+              100}}), graphics={
+          Text(
+            extent={{-100,70},{0,50}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="DC in"),
+          Text(
+            extent={{0,-50},{100,-70}},
+            lineColor={0,0,127},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid,
+            textString="DC out"),
+          Text(
+            extent={{-150,150},{150,110}},
+            textString="%name",
+            lineColor={0,0,255}),
+          Rectangle(
+            extent={{-40,40},{40,-40}},
+            lineColor={255,255,255},
+            fillColor={255,255,255},
+            fillPattern=FillPattern.Solid),
+          Line(
+            points={{-20,20},{-20,-20}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{-28,20},{-28,-20}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{-40,0},{-28,0}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,4},{0,24},{0,40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{-20,-4},{0,-24},{0,-40}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,-24},{10,-24},{10,24},{0,24}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{0,8},{20,8}},
+            color={0,0,255},
+            smooth=Smooth.None),
+          Line(
+            points={{10,8},{0,-8},{20,-8},{10,8}},
+            color={0,0,255},
+            smooth=Smooth.None)}),
+      Documentation(info="<html>
+<p>
+This is a conventional step up chopper model. It consists of a transistor and free wheeling diode. 
+</p>
+</html>"));
+  end ChopperStepUp;
+
   model HBridge "H bridge (four quadrant converter)"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
     extends Modelica.Electrical.Analog.Interfaces.ConditionalHeatPort(final T=
@@ -6907,6 +7081,8 @@ General information about DC/DC converters can be found at the
 </html>"));
 end DCDC;
 
+
+
 package Interfaces "Interfaces and partial models"
   extends Modelica.Icons.InterfacesPackage;
   model Enable
@@ -6952,6 +7128,7 @@ is equal to the external signal input <code>enable</code>.
 </html>"));
   end Enable;
 end Interfaces;
+
 
 package Icons "Icons"
   extends Modelica.Icons.Package;
@@ -7003,6 +7180,7 @@ package Icons "Icons"
             lineColor={0,0,255})}));
   end Control;
 end Icons;
+
 
 annotation (
   Icon(coordinateSystem(
