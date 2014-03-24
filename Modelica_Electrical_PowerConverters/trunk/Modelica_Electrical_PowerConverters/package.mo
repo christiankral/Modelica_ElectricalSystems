@@ -42,8 +42,7 @@ of the rectifiers can be obtained experimentally; the names of these models
 contain <code>_Characteristic</code>.
 </p>
 </html>"));
-  end ACDCConcept;
-
+    end ACDCConcept;
 
   class DCACConcept "DC/AC converter concept"
     extends Modelica.Icons.Information;
@@ -65,7 +64,7 @@ can be used.
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCAC\">Examples.DCAC</a>.
 </p>
 </html>"));
-  end DCACConcept;
+    end DCACConcept;
 
   class DCDCConcept "DC/DC converter concept"
     extends Modelica.Icons.Information;
@@ -94,7 +93,7 @@ is provided.
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCDC\">Examples.DCDC</a>.
 </p>
 </html>"));
-  end DCDCConcept;
+    end DCDCConcept;
 
   class Contact "Contact"
     extends Modelica.Icons.Contact;
@@ -116,7 +115,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 </p>
 
 </html>"));
-  end Contact;
+    end Contact;
 
   class ReleaseNotes "Release Notes"
     extends Modelica.Icons.ReleaseNotes;
@@ -127,7 +126,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 <li>First tagged version</li>
 </ul>
 </html>"));
-  end ReleaseNotes;
+    end ReleaseNotes;
 
   class References "References"
     extends Modelica.Icons.References;
@@ -159,7 +158,7 @@ email: <a HREF=\"mailto:a.haumer@haumer.at\">a.haumer@haumer.at</a><br>
 </table>
 </p>
 </html>"));
-  end References;
+    end References;
   annotation (DocumentationClass=true, Documentation(info="<html>
 <p>
 This library provides power converters for DC and AC single and multi phase electrical systems. The PowerConverters library contains three types of converters.
@@ -209,7 +208,7 @@ A freely available book is available in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">[Williams2006]</a>.
 </p>
 </html>"));
-end UsersGuide;
+  end UsersGuide;
 
 
 package Examples "Examples"
@@ -235,7 +234,7 @@ package Examples "Examples"
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(idealthyristor.n, resistor.p) annotation (Line(
             points={{4.44089e-16,40},{30,40}},
             color={0,0,255},
@@ -262,7 +261,7 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end Thyristor1Pulse_R;
+        end Thyristor1Pulse_R;
 
       model Thyristor1Pulse_R_Characteristic
         "Control characteristic of one pulse rectifier with resitive load"
@@ -282,7 +281,7 @@ package Examples "Examples"
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={-40,-70})));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-40},{10,-40}},
             color={0,0,255},
@@ -313,8 +312,8 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with resistive load.</p>
 </html>"));
-      end Thyristor1Pulse_R_Characteristic;
-    end Thyristor1Pulse;
+        end Thyristor1Pulse_R_Characteristic;
+      end Thyristor1Pulse;
 
     package ThyristorBridge2Pulse "Two pulse Graetz bridge"
       extends Modelica.Icons.ExamplesPackage;
@@ -333,7 +332,7 @@ package Examples "Examples"
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-40},{10,-40}},
             color={0,0,255},
@@ -360,7 +359,7 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2Pulse_R;
+        end ThyristorBridge2Pulse_R;
 
       model ThyristorBridge2Pulse_RL
         "Graetz thyristor bridge rectifier with R-L load"
@@ -384,7 +383,7 @@ package Examples "Examples"
               origin={30,0},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -415,7 +414,7 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2Pulse_RL;
+        end ThyristorBridge2Pulse_RL;
 
       model ThyristorBridge2Pulse_RLV
         "Graetz thyristor bridge rectifier with R-L load and voltage"
@@ -445,7 +444,7 @@ package Examples "Examples"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,-30})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -480,7 +479,7 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2Pulse_RLV;
+        end ThyristorBridge2Pulse_RLV;
 
       model ThyristorBridge2Pulse_RLV_Characteristic
         "Characteristic of Graetz thyristor bridge rectifier with R-L load and voltage"
@@ -515,7 +514,7 @@ package Examples "Examples"
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-30,70})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -554,7 +553,7 @@ package Examples "Examples"
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
 </html>"));
-      end ThyristorBridge2Pulse_RLV_Characteristic;
+        end ThyristorBridge2Pulse_RLV_Characteristic;
 
       model ThyristorBridge2Pulse_DC_Drive
         "Graetz thyristor bridge feeding a DC drive"
@@ -677,9 +676,9 @@ package Examples "Examples"
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={-80,60})));
-      initial equation
+        initial equation
         lMains.i = 0;
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
             color={0,0,127},
@@ -787,8 +786,8 @@ In this example a PM excited DC machine is started with nominal torque at nomina
 <p>
 Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average current <code>meanCurrent.y</code>. Also plot speed <code>w</code>, voltage <code>voltageSensor.v</code> and the average voltage <code>meanVoltage.y</code>.</p>  
 </html>"));
-      end ThyristorBridge2Pulse_DC_Drive;
-    end ThyristorBridge2Pulse;
+        end ThyristorBridge2Pulse_DC_Drive;
+      end ThyristorBridge2Pulse;
 
     package ThyristorCenterTap2Pulse "Examples of Power Electronics with M2C"
       extends Modelica.Icons.ExamplesPackage;
@@ -807,7 +806,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-40},{10,-40}},
             color={0,0,255},
@@ -834,7 +833,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2Pulse_R;
+        end ThyristorCenterTap2Pulse_R;
 
       model ThyristorCenterTap2Pulse_RL
         "Two pulse thyristor rectifier with center tap and R-L load"
@@ -858,7 +857,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,0},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -889,7 +888,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2Pulse_RL;
+        end ThyristorCenterTap2Pulse_RL;
 
       model ThyristorCenterTap2Pulse_RLV
         "Two pulse thyristor rectifier with center tap and R-L load and voltage"
@@ -919,7 +918,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,-30})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -954,7 +953,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2Pulse_RLV;
+        end ThyristorCenterTap2Pulse_RLV;
 
       model ThyristorCenterTap2Pulse_RLV_Characteristic
         "Characteristic of two pulse thyristor rectifier with center tap and R-L load and voltage"
@@ -987,7 +986,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={-30,-60})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1026,7 +1025,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
 </html>"));
-      end ThyristorCenterTap2Pulse_RLV_Characteristic;
+        end ThyristorCenterTap2Pulse_RLV_Characteristic;
       annotation (Icon(coordinateSystem(
             extent={{-100,-100},{100,100}},
             preserveAspectRatio=true,
@@ -1036,7 +1035,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             preserveAspectRatio=true,
             initialScale=0.1,
             grid={2,2})));
-    end ThyristorCenterTap2Pulse;
+      end ThyristorCenterTap2Pulse;
 
     package ThyristorCenterTapmPulse
       "m pulse thyristor rectifier with center tap"
@@ -1056,7 +1055,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-50},{10,-50}},
             color={0,0,255},
@@ -1075,7 +1074,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTapmPulse_R;
+        end ThyristorCenterTapmPulse_R;
 
       model ThyristorCenterTapmPulse_RL
         "2*m pulse thyristor rectifier with center tap and R-L load"
@@ -1099,7 +1098,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,0},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1122,7 +1121,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTapmPulse_RL;
+        end ThyristorCenterTapmPulse_RL;
 
       model ThyristorCenterTapmPulse_RLV
         "2*m pulse thyristor rectifier with center tap and R-L load and voltage"
@@ -1152,7 +1151,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,-30})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1179,7 +1178,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTapmPulse_RLV;
+        end ThyristorCenterTapmPulse_RLV;
 
       model ThyristorCenterTapmPulse_RLV_Characteristic
         "Characteristic of 2*m pulse thyristor rectifier with center tap and R-L load and voltage"
@@ -1212,7 +1211,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={-30,-70})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1243,8 +1242,8 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulsem.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
 </html>"));
-      end ThyristorCenterTapmPulse_RLV_Characteristic;
-    end ThyristorCenterTapmPulse;
+        end ThyristorCenterTapmPulse_RLV_Characteristic;
+      end ThyristorCenterTapmPulse;
 
     package ThyristorBridge2mPulse "2*m pulse thyristor bridge"
       extends Modelica.Icons.ExamplesPackage;
@@ -1263,7 +1262,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-40},{10,-40}},
             color={0,0,255},
@@ -1282,7 +1281,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2mPulse_R;
+        end ThyristorBridge2mPulse_R;
 
       model ThyristorBridge2mPulse_RL
         "2*m pulse thyristor rectifier bridge with R-L load"
@@ -1307,7 +1306,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,0},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1330,7 +1329,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2mPulse_RL;
+        end ThyristorBridge2mPulse_RL;
 
       model ThyristorBridge2mPulse_RLV
         "2*m pulse thyristor rectifier bridge with R-L load and voltage"
@@ -1360,7 +1359,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,-30})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1387,7 +1386,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorBridge2mPulse_RLV;
+        end ThyristorBridge2mPulse_RLV;
 
       model ThyristorBridge2mPulse_RLV_Characteristic
         "Characteristic of 2*m pulse thyristor rectifier bridge with R-L load and voltage"
@@ -1423,7 +1422,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={-30,-50})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1454,11 +1453,10 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2m.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
 </html>"));
-      end ThyristorBridge2mPulse_RLV_Characteristic;
+        end ThyristorBridge2mPulse_RLV_Characteristic;
 
       model ThyristorBridge2mPulse_DC_Drive
         "2m pulse thyristor bridge feeding a DC drive"
-        import Modelica_Electrical_PowerConverters;
         extends Modelica.Icons.Example;
         import Modelica.Constants.pi;
         parameter Integer m(final min=3) = 3 "Number of phases";
@@ -1586,9 +1584,9 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={-80,-30})));
         Modelica.Electrical.Analog.Basic.Ground ground
           annotation (Placement(transformation(extent={{-30,-60},{-10,-40}})));
-      initial equation
+        initial equation
         lMains.i[1:m - 1] = zeros(m - 1);
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
             color={0,0,127},
@@ -1684,8 +1682,8 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             StopTime=15,
             Interval=0.0002,
             Tolerance=1e-006));
-      end ThyristorBridge2mPulse_DC_Drive;
-    end ThyristorBridge2mPulse;
+        end ThyristorBridge2mPulse_DC_Drive;
+      end ThyristorBridge2mPulse;
 
     package ThyristorCenterTap2mPulse
       "2*m pulse thyristor rectifier with center tap"
@@ -1705,7 +1703,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, currentSensor.p) annotation (Line(
             points={{30,20},{30,-50},{10,-50}},
             color={0,0,255},
@@ -1724,7 +1722,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2mPulse_R;
+        end ThyristorCenterTap2mPulse_R;
 
       model ThyristorCenterTap2mPulse_RL
         "m pulse thyristor rectifier bridge with R-L load"
@@ -1748,7 +1746,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={30,0},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1771,7 +1769,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2mPulse_RL;
+        end ThyristorCenterTap2mPulse_RL;
 
       model ThyristorCenterTap2mPulse_RLV
         "m pulse thyristor rectifier bridge with R-L load and voltage"
@@ -1801,7 +1799,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,-30})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1828,7 +1826,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ThyristorCenterTap2mPulse_RLV;
+        end ThyristorCenterTap2mPulse_RLV;
 
       model ThyristorCenterTap2mPulse_RLV_Characteristic
         "Characteristic of m pulse thyristor rectifier bridge with R-L load and voltage"
@@ -1861,7 +1859,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,-10},{-10,10}},
               rotation=270,
               origin={-30,-70})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{30,20},{30,10}},
             color={0,0,255},
@@ -1892,8 +1890,8 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot average voltage <code>meanVoltage.v</code> versus firingAngle <code>pulse2m.firingAngle</code> to see control characteristic of this type of rectifier with R-L load including active voltage.</p>
 </html>"));
-      end ThyristorCenterTap2mPulse_RLV_Characteristic;
-    end ThyristorCenterTap2mPulse;
+        end ThyristorCenterTap2mPulse_RLV_Characteristic;
+      end ThyristorCenterTap2mPulse;
 
     package ExampleTemplates "Templates of examples"
       partial model Thyristor1Pulse "Template of single pulse rectifier"
@@ -1949,7 +1947,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={-10,40},
               extent={{-10,10},{10,-10}},
               rotation=0)));
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
             color={0,0,127},
@@ -1992,6 +1990,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             smooth=Smooth.None));
         connect(sinevoltage.n, pulse2.ac_n) annotation (Line(
             points={{-80,-10},{-80,-10},{-80,-20},{-60,-20},{-60,-6},{-50,-6}},
+
             color={0,0,255},
             smooth=Smooth.None));
         annotation (
@@ -2008,7 +2007,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Inductive load does not make sense, since average DC voltage is very low due to long conduction period of the thyristor.</p>
 </html>"));
-      end Thyristor1Pulse;
+        end Thyristor1Pulse;
       extends Modelica.Icons.Package;
       partial model ThyristorBridge2Pulse
         "Template of two pulse Graetz thyristor bridge"
@@ -2064,7 +2063,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,10},{-10,-10}},
               rotation=180,
               origin={-30,-2})));
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
             color={0,0,127},
@@ -2131,7 +2130,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Two pulse thyristor bridge example template.</p>
 </html>"));
-      end ThyristorBridge2Pulse;
+        end ThyristorBridge2Pulse;
 
       model ThyristorCenterTap2Pulse
         "Template of two pulse thyristor rectifier with center tap"
@@ -2193,7 +2192,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,10},{-10,-10}},
               rotation=180,
               origin={-30,0})));
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{-4.44089e-16,-60},{-4.44089e-16,-50}},
             color={0,0,127},
@@ -2264,7 +2263,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Two pulse thyristor center tap example template.</p>
 </html>"));
-      end ThyristorCenterTap2Pulse;
+        end ThyristorCenterTap2Pulse;
 
       partial model ThyristorBridge2mPulse
         "Template of 2*m pulse thyristor rectifier"
@@ -2329,7 +2328,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               origin={-80,-60})));
         Modelica.Electrical.Analog.Basic.Ground ground
           annotation (Placement(transformation(extent={{-90,-100},{-70,-80}})));
-      equation
+        equation
         connect(meanCurrent.u, currentSensor.i) annotation (Line(
             points={{68,-60},{0,-60},{0,-50}},
             color={0,0,127},
@@ -2386,7 +2385,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p><code>2*m</code> pulse thyristor bridge example template, where <code>m</code> is the number of phases.</p>
 </html>"));
-      end ThyristorBridge2mPulse;
+        end ThyristorBridge2mPulse;
 
       partial model ThyristorCenterTapmPulse
         "Template of 2*m pulse rectifier with center tap"
@@ -2451,7 +2450,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{10,10},{-10,-10}},
               rotation=180,
               origin={-30,0})));
-      equation
+        equation
         connect(star.pin_n, ground.p) annotation (Line(
             points={{-70,-40},{-70,-80}},
             color={0,0,255},
@@ -2505,7 +2504,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p><code>m</code> pulse thyristor center tap example template, where <code>m</code> is the number of phases.</p>
 </html>"));
-      end ThyristorCenterTapmPulse;
+        end ThyristorCenterTapmPulse;
 
       partial model ThyristorCenterTap2mPulse
         "Template of 2*m pulse rectifier with center tap"
@@ -2579,7 +2578,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-70,-20})));
-      equation
+        equation
         connect(star.pin_n, ground.p) annotation (Line(
             points={{-100,-20},{-100,-50},{-80,-50},{-80,-80}},
             color={0,0,255},
@@ -2646,9 +2645,9 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p><code>2*m</code> pulse thyristor center tap example template, where <code>m</code> is the number of phases.</p>
 </html>"));
-      end ThyristorCenterTap2mPulse;
-    end ExampleTemplates;
-  end ACDC;
+        end ThyristorCenterTap2mPulse;
+      end ExampleTemplates;
+    end ACDC;
 
   package DCAC "DC to AC converter examples"
     extends Modelica.Icons.ExamplesPackage;
@@ -2666,7 +2665,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,10})));
-      equation
+        equation
         connect(resistor.p, inverter.ac) annotation (Line(
             points={{40,20},{40,30},{-30,30}},
             color={0,0,255},
@@ -2686,7 +2685,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>. The instantaneous voltage and current directly show the switch pattern of the inverter. The average voltage and average current reveal the fundamental wave of the voltage and current, each of them being basically in phase with the command <code>sine.y</code>.</p>
 </html>"));
-      end SinglePhaseTwoLevel_R;
+        end SinglePhaseTwoLevel_R;
 
       model SinglePhaseTwoLevel_RL
         "Single phase DC to AC converter with R-L load"
@@ -2706,7 +2705,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={40,-22})));
-      equation
+        equation
         connect(resistor.p, inverter.ac) annotation (Line(
             points={{40,20},{40,30},{-30,30}},
             color={0,0,255},
@@ -2730,8 +2729,8 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
           Documentation(info="<html>
 <p>Plot current <code>currentSensor.i</code>, avarage current <code>meanCurrent.y</code>, voltage <code>voltageSensor.v</code> and average voltage <code>meanVoltage.v</code>. The instantaneous voltage directly show the switch pattern of the inverter. The current shows a particular ripple determined by the input voltage and the switching frequency. The average voltage is basically in phase with the command <code>sine.y</code>. The average current has a phase shift due to the R-L load.</p>
 </html>"));
-      end SinglePhaseTwoLevel_RL;
-    end SinglePhaseTwoLevel;
+        end SinglePhaseTwoLevel_RL;
+      end SinglePhaseTwoLevel;
 
     package ExampleTemplates "Templates of examples"
       extends Modelica.Icons.Package;
@@ -2782,7 +2781,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=90,
               origin={82,50})));
-      equation
+        equation
         connect(voltageSensor.n, currentSensor.p) annotation (Line(
             points={{70,-20},{70,-70},{10,-70}},
             color={0,0,255},
@@ -2835,11 +2834,11 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
                   {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>Single phase two level example template including supply and sensors; load is not yet included.</p>
 </html>"));
-      end SinglePhaseTwoLevel;
-    end ExampleTemplates;
+        end SinglePhaseTwoLevel;
+      end ExampleTemplates;
     annotation (Documentation(info="<html>
 </html>"));
-  end DCAC;
+    end DCAC;
 
   package DCDC "DC to DC converter examples"
     extends Modelica.Icons.ExamplesPackage;
@@ -2854,7 +2853,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,50})));
-      equation
+        equation
         connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
             points={{-40,6},{-30,6},{-30,70},{30,70},{30,60}},
             color={0,0,255},
@@ -2876,7 +2875,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
 DC output voltage is equal to <code>dutyCycle</code> times the input voltage.
 Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end ChopperStepDown_R;
+        end ChopperStepDown_R;
 
       model ChopperStepDown_RL "Step down chopper with R-L load"
         extends ExampleTemplates.ChopperStepDown;
@@ -2889,12 +2888,11 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
               rotation=270,
               origin={30,50})));
         Modelica.Electrical.Analog.Basic.Inductor inductor(L=L, i(fixed=true,
-              start=0))                                         annotation (
-            Placement(transformation(
+              start=0)) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={30,10})));
-      equation
+        equation
         connect(chopperStepDown.dc_p2, resistor.p) annotation (Line(
             points={{-40,6},{-30,6},{-30,70},{30,70},{30,60}},
             color={0,0,255},
@@ -2920,8 +2918,8 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
 DC output voltage is equal to <code>dutyCycle</code> times the input voltage.
 Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>. The waveform the average current is determined by the time constant <code>L/R</code> of the load.</p>
 </html>"));
-      end ChopperStepDown_RL;
-    end ChopperStepDown;
+        end ChopperStepDown_RL;
+      end ChopperStepDown;
 
     package HBridge "H bridge converter"
       extends Modelica.Icons.ExamplesPackage;
@@ -2935,7 +2933,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={20,50})));
-      equation
+        equation
         connect(resistor.p, hbridge.dc_p2) annotation (Line(
             points={{20,60},{20,70},{-30,70},{-30,6},{-40,6}},
             color={0,0,255},
@@ -2956,7 +2954,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
 DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.
 Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>.</p>
 </html>"));
-      end HBridge_R;
+        end HBridge_R;
 
       model HBridge_RL "H bridge DC/DC converter with R-L load"
         extends
@@ -2974,7 +2972,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={20,10})));
-      equation
+        equation
         connect(resistor.n, inductor.p) annotation (Line(
             points={{20,40},{20,20}},
             color={0,0,255},
@@ -2994,11 +2992,12 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
 <p>This example demonstrates the switching on of an R-L load operated by an H bridge.
 DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the input voltage.
 Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y</code>, total voltage <code>voltageSensor.v</code> and voltage <code>meanVoltage.v</code>. The waveform the average current is determined by the time constant <code>L/R</code> of the load.</p>
-</html>"),experiment(
+</html>"),
+          experiment(
             StopTime=0.1,
             Interval=0.0002,
             Tolerance=1e-06));
-      end HBridge_RL;
+        end HBridge_RL;
 
       model HBridge_DC_Drive "H bridge DC/DC converter with DC drive"
         extends
@@ -3051,7 +3050,7 @@ Plot current <code>currentSensor.i</code>, averaged current <code>meanCurrent.y<
               origin={40,30},
               extent={{10,-10},{-10,10}},
               rotation=90)));
-      equation
+        equation
         connect(inductor.n, dcpm.pin_ap) annotation (Line(
             points={{40,20},{40,-60},{36,-60}},
             color={0,0,255},
@@ -3124,8 +3123,8 @@ The DC output voltage is equal to <code>2 * (dutyCycle - 0.5)</code> times the i
 <p>
 Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y</code>, machine speed <code>dcpm.wMechanical</code>, avderage machine speed <code>dcpm.va</code> and torque <code>dcpm.tauElectrical</code>.</p>
 </html>"));
-      end HBridge_DC_Drive;
-    end HBridge;
+        end HBridge_DC_Drive;
+      end HBridge;
 
     package ExampleTemplates "Templates of examples"
       extends Modelica.Icons.Package;
@@ -3164,7 +3163,7 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={90,10})));
-      equation
+        equation
         connect(constantVoltage.p, chopperStepDown.dc_p1) annotation (Line(
             points={{-80,10},{-70,10},{-70,6},{-60,6}},
             color={0,0,255},
@@ -3205,7 +3204,7 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
                   {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>Step down chopper example template including supply and sensors; load is not yet included</p>
 </html>"));
-      end ChopperStepDown;
+        end ChopperStepDown;
 
       partial model HBridge "H bridge DC/DC converter"
         extends Modelica_Electrical_PowerConverters.Icons.ExampleTemplate;
@@ -3240,7 +3239,7 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
               extent={{-10,-10},{10,10}},
               rotation=0,
               origin={90,10})));
-      equation
+        equation
         connect(hbridge.fire_p, signalPWM.fire) annotation (Line(
             points={{-56,-12},{-56,-49}},
             color={255,0,255},
@@ -3285,14 +3284,14 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
                   {{-100,-100},{100,100}}), graphics), Documentation(info="<html>
 <p>H bridge example template including suppy and sensors; load is not yet included</p>
 </html>"));
-      end HBridge;
-    end ExampleTemplates;
-  end DCDC;
+        end HBridge;
+      end ExampleTemplates;
+    end DCDC;
 
   annotation (Documentation(info="<html>
 <p>This is a collection of AC/DC, DC/DC and DC/AC converters.</p>
 </html>"));
-end Examples;
+  end Examples;
 
 
 package ACDC "AC to DC converter"
@@ -3402,7 +3401,7 @@ package ACDC "AC to DC converter"
       Modelica.Blocks.Routing.RealPassThrough realPassThrough[m] if not
         useFilter "Pass through in case filter is off"
         annotation (Placement(transformation(extent={{-90,-60},{-70,-40}})));
-    equation
+      equation
       connect(positiveThreshold.y, timerPositive.u) annotation (Line(
           points={{-60,21},{-60,28}},
           color={255,0,255},
@@ -3502,7 +3501,7 @@ General information about controllers is summarized in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.ACDC.Control\">Control</a>.
 </p>
 </html>"));
-    end Signal2mPulse;
+      end Signal2mPulse;
 
     model VoltageBridge2Pulse "Control of 2 pulse bridge rectifier"
       import Modelica.Constants.pi;
@@ -3580,7 +3579,7 @@ General information about controllers is summarized in
             extent={{10,-10},{-10,10}},
             rotation=270,
             origin={60,70})));
-    equation
+      equation
       connect(voltageSensor.v, twoPulse.v[1]) annotation (Line(
           points={{-70,-2.22045e-15},{-60,-2.22045e-15},{-60,0},{-12,0},{-12,
               8.88178e-16}},
@@ -3626,21 +3625,19 @@ General information about controllers is summarized in
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-40,60},{40,0}},
-              lineColor={255,0,255},
-              fillColor={0,0,255},
-              fillPattern=FillPattern.Solid,
-              textString="2")}),
+                100,100}}), graphics={Line(
+                    points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{
+                -40,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Text(
+                    extent={{-40,60},{40,0}},
+                    lineColor={255,0,255},
+                    fillColor={0,0,255},
+                    fillPattern=FillPattern.Solid,
+                    textString="2")}),
         Documentation(revisions="<html>
 </html>", info="<html>
 
@@ -3656,7 +3653,7 @@ The boolean
 signal <code>fire_n</code> is assigned to the thyristors connected with the negative DC output pin.  
 </p>
 </html>"));
-    end VoltageBridge2Pulse;
+      end VoltageBridge2Pulse;
 
     model VoltageBridge2mPulse "Control of 2*m pulse bridge rectifier"
       import Modelica.Constants.pi;
@@ -3743,7 +3740,7 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
             extent={{10,-10},{-10,10}},
             rotation=270,
             origin={80,0})));
-    equation
+      equation
       connect(ac, voltageSensor.plug_p) annotation (Line(
           points={{-100,4.44089e-16},{-100,-4.44089e-16},{-44,-4.44089e-16}},
           color={0,0,255},
@@ -3798,21 +3795,19 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-40,60},{40,0}},
-              lineColor={255,0,255},
-              fillColor={0,0,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}),
+                100,100}}), graphics={Line(
+                    points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{
+                -40,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Text(
+                    extent={{-40,60},{40,0}},
+                    lineColor={255,0,255},
+                    fillColor={0,0,255},
+                    fillPattern=FillPattern.Solid,
+                    textString="2*%m%")}),
         Documentation(info="<html>
 
 <p>
@@ -3825,7 +3820,7 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
 </p>
 </html>", revisions="<html>
 </html>"));
-    end VoltageBridge2mPulse;
+      end VoltageBridge2mPulse;
 
     model VoltageCenterTap2mPulse "Control of 2*m pulse cetner tap rectifier"
       extends Modelica_Electrical_PowerConverters.Icons.Control;
@@ -3912,7 +3907,7 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
             extent={{10,-10},{-10,10}},
             rotation=270,
             origin={60,70})));
-    equation
+      equation
       connect(firingAngle, twomPulse.firingAngle) annotation (Line(
           points={{8.88178e-16,-120},{8.88178e-16,-80},{10,-80},{10,-12}},
           color={0,0,127},
@@ -3966,21 +3961,19 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{-40,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Text(
-              extent={{-40,60},{40,0}},
-              lineColor={255,0,255},
-              fillColor={0,0,255},
-              fillPattern=FillPattern.Solid,
-              textString="2*%m%")}),
+                100,100}}), graphics={Line(
+                    points={{-40,-20},{-40,-24},{-20,-24},{-20,-40},{-40,-40},{
+                -40,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{20,-20},{20,-44},{40,-44},{40,-60},{20,-60},{20,-60}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Text(
+                    extent={{-40,60},{40,0}},
+                    lineColor={255,0,255},
+                    fillColor={0,0,255},
+                    fillPattern=FillPattern.Solid,
+                    textString="2*%m%")}),
         Documentation(revisions="<html>
 </html>", info="<html>
 
@@ -3989,7 +3982,7 @@ General information about controllers is summarized in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.ACDC.Control\">Control</a>.
 </p>
 </html>"));
-    end VoltageCenterTap2mPulse;
+      end VoltageCenterTap2mPulse;
 
     block Filter "PT1 + allpass filter"
       extends Modelica.Blocks.Interfaces.SISO;
@@ -4013,7 +4006,7 @@ General information about controllers is summarized in
         each initType=Modelica.Blocks.Types.Init.InitialOutput,
         each y_start=yStart)
         annotation (Placement(transformation(extent={{40,-10},{60,10}})));
-    equation
+      equation
       for j in 1:na - 1 loop
         connect(transferFunction[j].y, transferFunction[j + 1].u);
       end for;
@@ -4062,7 +4055,7 @@ General information about controllers is summarized in
                     points={{-83.333,34.667},{24.667,34.667},{42.667,-71.333}},
                     color={0,0,127},
                     smooth=Smooth.Bezier)}));
-    end Filter;
+      end Filter;
     annotation (Documentation(info="<html>
 <p>
 A generic controller with signal input and <code>2*m</code> firing signals is provided in 
@@ -4094,7 +4087,7 @@ if <code>useConstantEnable = true</code>. For if <code>useConstantEnable = false
 enabling signal is taken from the optional signal input <code>enable</code>. 
 </p>
 </html>"));
-  end Control;
+    end Control;
   extends Modelica.Icons.Package;
   model DiodeBridge2Pulse "Two pulse Graetz diode rectifier bridge"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -4159,7 +4152,7 @@ enabling signal is taken from the optional signal input <code>enable</code>.
           origin={40,-50},
           extent={{-10,-10},{10,10}},
           rotation=90)));
-  equation
+    equation
     if not useHeatPort then
       LossPower = diode_p1.LossPower + diode_p2.LossPower + diode_n1.LossPower
          + diode_n2.LossPower;
@@ -4251,7 +4244,7 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
 </html>"));
-  end DiodeBridge2Pulse;
+    end DiodeBridge2Pulse;
 
   model ThyristorBridge2Pulse "Two pulse Graetz thyristor rectifier bridge"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -4344,7 +4337,7 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
           origin={20,-50},
           extent={{-10,10},{10,-10}},
           rotation=90)));
-  equation
+    equation
     if not useHeatPort then
       LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower +
         thyristor_n1.LossPower + thyristor_n2.LossPower;
@@ -4417,40 +4410,33 @@ This is a two pulse Graetz diode rectifier bridge. The circuit topology is the s
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Rectangle(
-            extent={{-40,24},{40,-24}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,0},{40,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,24},{20,-24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,0},{-20,24},{-20,-24},{20,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,12},{0,28}},
-            color={0,0,255},
-            smooth=Smooth.None)}),
+              100}}), graphics={Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Rectangle(
+                extent={{-40,24},{40,-24}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-40,0},{40,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,24},{20,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,0},{-20,24},{-20,-24},{20,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,12},{0,28}},
+                color={0,0,255},
+                smooth=Smooth.None)}),
       Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
@@ -4465,7 +4451,7 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
 </html>"));
-  end ThyristorBridge2Pulse;
+    end ThyristorBridge2Pulse;
 
   model HalfControlledBridge2Pulse
     "Two pulse Graetz half controlled rectifier bridge"
@@ -4553,7 +4539,7 @@ with thyristor <code>thyristor_p2</code> and <code>thyristor_n1</code>. See exam
           origin={20,-50},
           extent={{-10,10},{10,-10}},
           rotation=90)));
-  equation
+    equation
     if not useHeatPort then
       LossPower = thyristor_p1.LossPower + thyristor_p2.LossPower + diode_n1.LossPower
          + diode_n2.LossPower;
@@ -4673,7 +4659,7 @@ The circuit topology is the same as in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
 </html>"));
-  end HalfControlledBridge2Pulse;
+    end HalfControlledBridge2Pulse;
 
   model DiodeCenterTap2Pulse "Two pulse diode rectifier with center tap"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -4716,7 +4702,7 @@ The circuit topology is the same as in
           origin={0,-60},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-  equation
+    equation
     if not useHeatPort then
       LossPower = diode_p.LossPower + diode_n.LossPower;
     end if;
@@ -4790,7 +4776,7 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
 </html>"));
-  end DiodeCenterTap2Pulse;
+    end DiodeCenterTap2Pulse;
 
   model ThyristorCenterTap2Pulse
     "Two pulse thyristor rectifier with center tap"
@@ -4854,7 +4840,7 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
           origin={0,-60},
           extent={{-10,-10},{10,10}},
           rotation=0)));
-  equation
+    equation
     if not useHeatPort then
       LossPower = thyristor_p.LossPower + thyristor_n.LossPower;
     end if;
@@ -4896,40 +4882,33 @@ This is a two pulse diode rectifier with center tap. In order to operate this re
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=true,
           initialScale=0.1,
-          grid={2,2}), graphics={
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Rectangle(
-            extent={{-40,24},{40,-24}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,0},{40,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,24},{20,-24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,0},{-20,24},{-20,-24},{20,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,12},{0,28}},
-            color={0,0,255},
-            smooth=Smooth.None)}),
+          grid={2,2}), graphics={Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Rectangle(
+                extent={{-40,24},{40,-24}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-40,0},{40,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,24},{20,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,0},{-20,24},{-20,-24},{20,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,12},{0,28}},
+                color={0,0,255},
+                smooth=Smooth.None)}),
       Diagram(coordinateSystem(
           extent={{-100,-100},{100,100}},
           preserveAspectRatio=false,
@@ -4945,7 +4924,7 @@ General information about AC/DC converters can be found at the
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2Pulse\">Examples.ACDC.ThyristorCenterTap2Pulse</a>.
 </p>
 </html>"));
-  end ThyristorCenterTap2Pulse;
+    end ThyristorCenterTap2Pulse;
 
   model DiodeCenterTapmPulse "m pulse diode rectifier with center tap"
     import Modelica.Constants.pi;
@@ -4974,8 +4953,8 @@ General information about AC/DC converters can be found at the
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to positive DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to positive DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={-10,0},
           extent={{10,10},{-10,-10}},
           rotation=180)));
@@ -4984,7 +4963,7 @@ General information about AC/DC converters can be found at the
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-  equation
+    equation
     assert(mod(m, 2) == 1,
       "DiodeCenterTapmPulse: only odd phase numbers are allowed");
     if not useHeatPort then
@@ -5051,7 +5030,7 @@ The circuit topology is the same as in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
 </p>
 </html>"));
-  end DiodeCenterTapmPulse;
+    end DiodeCenterTapmPulse;
 
   model ThyristorCenterTapmPulse "m pulse thyristor rectifier with center tap"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -5100,7 +5079,7 @@ The circuit topology is the same as in
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-  equation
+    equation
     assert(mod(m, 2) == 1,
       "DiodeCenterTapmPulse: only odd phase numbers are allowed");
     if not useHeatPort then
@@ -5134,40 +5113,33 @@ The circuit topology is the same as in
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Rectangle(
-            extent={{-40,24},{40,-24}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,0},{40,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,24},{20,-24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,0},{-20,24},{-20,-24},{20,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,12},{0,28}},
-            color={0,0,255},
-            smooth=Smooth.None)}),
+              100}}), graphics={Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Rectangle(
+                extent={{-40,24},{40,-24}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-40,0},{40,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,24},{20,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,0},{-20,24},{-20,-24},{20,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,12},{0,28}},
+                color={0,0,255},
+                smooth=Smooth.None)}),
       Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
@@ -5181,7 +5153,7 @@ See example
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTapmPulse\">Examples.ACDC.ThyristorCenterTapmPulse</a>.
 </p>
 </html>"));
-  end ThyristorCenterTapmPulse;
+    end ThyristorCenterTapmPulse;
 
   model DiodeBridge2mPulse "2*m pulse diode rectifier bridge"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -5212,8 +5184,8 @@ See example
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to positive DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to positive DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={0,40},
           extent={{-10,-10},{10,10}},
           rotation=90)));
@@ -5223,8 +5195,8 @@ See example
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to negative DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to negative DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={0,-40},
           extent={{-10,-10},{10,10}},
           rotation=90)));
@@ -5235,7 +5207,7 @@ See example
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
     else
@@ -5318,7 +5290,7 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
 <a href=\"modelica://Modelica.Electrical.MultiPhase.Basic.MultiStarResistance\">MultiStarResistance</a> shall be used for grounding the voltage sources. 
 </p>
 </html>"));
-  end DiodeBridge2mPulse;
+    end DiodeBridge2mPulse;
 
   model ThyristorBridge2mPulse "2*m pulse thyristor rectifier bridge"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -5391,7 +5363,7 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalConnector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(thyristor_n.idealThyristor.LossPower);
     end if;
@@ -5445,40 +5417,33 @@ This is a 2*m pulse diode rectifier bridge. In order to operate this rectifier a
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Rectangle(
-            extent={{-40,24},{40,-24}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,0},{40,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,24},{20,-24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,0},{-20,24},{-20,-24},{20,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,12},{0,28}},
-            color={0,0,255},
-            smooth=Smooth.None)}),
+              100}}), graphics={Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Rectangle(
+                extent={{-40,24},{40,-24}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-40,0},{40,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,24},{20,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,0},{-20,24},{-20,-24},{20,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,12},{0,28}},
+                color={0,0,255},
+                smooth=Smooth.None)}),
       Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
@@ -5492,7 +5457,7 @@ See example
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorBridge2mPulse\">Examples.ACDC.ThyristorBridge2mPulse</a>.
 </p>
 </html>"));
-  end ThyristorBridge2mPulse;
+    end ThyristorBridge2mPulse;
 
   model HalfControlledBridge2mPulse
     "2*m pulse half controlled rectifier bridge"
@@ -5555,15 +5520,15 @@ See example
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to negative DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to negative DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={0,-40},
           extent={{-10,-10},{10,10}},
           rotation=90)));
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{10,-100},{30,-80}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(diode_n.idealDiode.LossPower);
     end if;
@@ -5605,6 +5570,7 @@ See example
         smooth=Smooth.None));
     connect(fire_p, thyristor_p.fire) annotation (Line(
         points={{-60,-120},{-60,46},{-60,46},{-60,46},{-60,47},{-36,47},{-11,47}},
+
         color={255,0,255},
         smooth=Smooth.None));
     annotation (
@@ -5664,7 +5630,7 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
 <a href=\"modelica://Modelica.Electrical.MultiPhase.Basic.MultiStarResistance\">MultiStarResistance</a> shall be used for grounding the voltage sources. 
 </p>
 </html>"));
-  end HalfControlledBridge2mPulse;
+    end HalfControlledBridge2mPulse;
 
   model DiodeCenterTap2mPulse "2*m pulse diode rectifier with center tap"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -5696,8 +5662,8 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to positive DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to positive DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={-10,60},
           extent={{10,10},{-10,-10}},
           rotation=180)));
@@ -5707,8 +5673,8 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
       final Goff=fill(GoffDiode, m),
       final Vknee=fill(VkneeDiode, m),
       each final useHeatPort=useHeatPort)
-      "Diodes connected to negative DC potential" annotation (Placement(visible=
-           true, transformation(
+      "Diodes connected to negative DC potential" annotation (Placement(visible
+          =true, transformation(
           origin={-10,-60},
           extent={{10,10},{-10,-10}},
           rotation=180)));
@@ -5719,7 +5685,7 @@ This is a 2*m pulse half controlled rectifier bridge. In order to operate this r
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(diode_p.idealDiode.LossPower) + sum(diode_n.idealDiode.LossPower);
     end if;
@@ -5798,7 +5764,7 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2mPulse\">Examples.ACDC.ThyristorCenterTap2mPulse</a>.
 </p>
 </html>"));
-  end DiodeCenterTap2mPulse;
+    end DiodeCenterTap2mPulse;
 
   model ThyristorCenterTap2mPulse
     "2*m pulse thyristor rectifier with center tap"
@@ -5874,7 +5840,7 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{20,-100},{40,-80}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(thyristor_p.idealThyristor.LossPower) + sum(thyristor_n.idealThyristor.LossPower);
     end if;
@@ -5926,40 +5892,33 @@ This is a 2*m pulse diode rectifier with center tap. In order to operate this re
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Rectangle(
-            extent={{-40,24},{40,-24}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-40,0},{40,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,24},{20,-24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{20,0},{-20,24},{-20,-24},{20,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,12},{0,28}},
-            color={0,0,255},
-            smooth=Smooth.None)}),
+              100}}), graphics={Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Rectangle(
+                extent={{-40,24},{40,-24}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-40,0},{40,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,24},{20,-24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{20,0},{-20,24},{-20,-24},{20,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,12},{0,28}},
+                color={0,0,255},
+                smooth=Smooth.None)}),
       Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
@@ -5971,14 +5930,14 @@ This is a 2*m pulse thyristor rectifier with center tap. In order to operate thi
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.ACDC.ThyristorCenterTap2mPulse\">Examples.ACDC.ThyristorCenterTap2mPulse</a>.
 </p>
 </html>"));
-  end ThyristorCenterTap2mPulse;
+    end ThyristorCenterTap2mPulse;
   annotation (Documentation(info="<html>
 <p>
 General information about AC/DC converters can be found at the
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.ACDCConcept\">AC/DC converter concept</a>
 </p>
 </html>"));
-end ACDC;
+  end ACDC;
 
 
 package DCAC "DC to AC converters"
@@ -6053,7 +6012,7 @@ package DCAC "DC to AC converters"
           extent={{-10,-10},{10,10}},
           rotation=90,
           origin={60,-20})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = transistor_p.LossPower + diode_n.LossPower + transistor_n.LossPower
          + diode_n.LossPower;
@@ -6118,64 +6077,51 @@ package DCAC "DC to AC converters"
       Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
               100,100}}), graphics),
       Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
-              100}}), graphics={
-          Line(
-            points={{-100,-100},{100,100}},
-            color={0,0,127},
-            smooth=Smooth.None),
-          Rectangle(
-            extent={{-40,40},{40,-40}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Line(
-            points={{-20,20},{-20,-20}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{-28,20},{-28,-20}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{-40,0},{-28,0}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,4},{0,24},{0,40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{-20,-4},{0,-24},{0,-40}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,-24},{10,-24},{10,24},{0,24}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{0,8},{20,8}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Line(
-            points={{10,8},{0,-8},{20,-8},{10,8}},
-            color={0,0,255},
-            smooth=Smooth.None),
-          Text(
-            extent={{-100,70},{0,50}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="DC"),
-          Text(
-            extent={{0,-50},{100,-70}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid,
-            textString="AC")}),
+              100}}), graphics={Line(
+                points={{-100,-100},{100,100}},
+                color={0,0,127},
+                smooth=Smooth.None),Rectangle(
+                extent={{-40,40},{40,-40}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Line(
+                points={{-20,20},{-20,-20}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{-28,20},{-28,-20}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{-40,0},{-28,0}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{-20,4},{0,24},{0,40}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{-20,-4},{0,-24},{0,-40}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,-24},{10,-24},{10,24},{0,24}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{0,8},{20,8}},
+                color={0,0,255},
+                smooth=Smooth.None),Line(
+                points={{10,8},{0,-8},{20,-8},{10,8}},
+                color={0,0,255},
+                smooth=Smooth.None),Text(
+                extent={{-100,70},{0,50}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="DC"),Text(
+                extent={{0,-50},{100,-70}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid,
+                textString="AC")}),
       Documentation(info="<html>
 <p>
 This is a single phase two level inverter. The boolean signals <code>fire_p</code> and <code>fire_n</code> shall not be <code>true</code> at the same time to avoid DC bus short circuits. The inverter consists of two transistors and two anti parallel free wheeling diodes.
@@ -6186,7 +6132,7 @@ An example of a single phase inverter with PWM voltage control is included in
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCAC.SinglePhaseTwoLevel\">Examples.DCAC.SinglePhaseTwoLevel</a>.
 </p>
 </html>"));
-  end SinglePhase2Level;
+    end SinglePhase2Level;
 
   model MultiPhase2Level "Multi phase DC to AC converter"
     extends Modelica.Blocks.Icons.Block;
@@ -6277,7 +6223,7 @@ An example of a single phase inverter with PWM voltage control is included in
     Modelica.Thermal.HeatTransfer.Components.ThermalCollector thermalCollector(
         final m=m) if useHeatPort
       annotation (Placement(transformation(extent={{-10,-60},{10,-40}})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = sum(transistor_p.idealGTOThyristor.LossPower) + sum(diode_n.idealDiode.LossPower)
          + sum(transistor_n.idealGTOThyristor.LossPower) + sum(diode_n.idealDiode.LossPower);
@@ -6308,6 +6254,7 @@ An example of a single phase inverter with PWM voltage control is included in
         smooth=Smooth.None));
     connect(star_n.pin_n, dc_n) annotation (Line(
         points={{40,-60},{40,-60},{40,-66},{40,-66},{40,-70},{-100,-70},{-100,-100}},
+
         color={0,0,255},
         smooth=Smooth.None));
     connect(dc_p, star_p.pin_n) annotation (Line(
@@ -6404,14 +6351,14 @@ An example of a single phase inverter with PWM voltage control is included in
 This is a multi phase two level inverter. The boolean signals <code>fire_p[k]</code> and <code>fire_n[k]</code> for any phase <code>k</code> shall not be <code>true</code> at the same time to avoid DC bus short circuits. The inverter consists of <code>2*m</code> transistors and two anti parallel free wheeling diodes, respectively, where <code>m</code> is the number of phases.
 </p>
 </html>"));
-  end MultiPhase2Level;
+    end MultiPhase2Level;
   annotation (Documentation(info="<html>
 <p>
 General information about DC/AC converters can be found at the
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCACConcept\">DC/AC converter concept</a> 
 </p>
 </html>"));
-end DCAC;
+  end DCAC;
 
 
 package DCDC "DC to DC converters"
@@ -6477,7 +6424,7 @@ package DCDC "DC to DC converters"
             extent={{-10,10},{10,-10}},
             rotation=90,
             origin={60,70})));
-    equation
+      equation
       connect(const.y, limiter.u) annotation (Line(
           points={{-79,-50},{-70,-50},{-70,0},{-62,0}},
           color={0,0,127},
@@ -6533,41 +6480,33 @@ package DCDC "DC to DC converters"
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
                 {100,100}}), graphics),
         Icon(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{
-                100,100}}), graphics={
-            Line(
-              points={{-100,0},{-98,0},{12,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-60,-22},{-60,-64},{44,-64},{44,-36}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-62,0},{-76,4},{-76,-4},{-62,0}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{44,-36},{44,-36},{40,-50},{44,-50},{48,-50},{44,-36}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{20,-20},{22,-20},{24,-20},{24,20},{44,20},{44,-20},{64,-20},
-                  {64,-16}},
-              color={255,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{-40,-16},{-40,-20},{0,20},{0,-20},{4,-16}},
-              color={0,0,255},
-              smooth=Smooth.None),
-            Line(
-              points={{60,-20},{62,-20},{64,-20},{64,20},{84,20},{84,-20},{84,-20},
-                  {88,-20}},
-              color={255,0,255},
-              smooth=Smooth.None)}),
+                100,100}}), graphics={Line(
+                    points={{-100,0},{-98,0},{12,0}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{-60,-22},{-60,-64},{44,-64},{44,-36}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{-80,-16},{-80,-20},{-40,20},{-40,-20},{-36,-16}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{-62,0},{-76,4},{-76,-4},{-62,0}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{44,-36},{44,-36},{40,-50},{44,-50},{48,-50},{44,-36}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{20,-20},{22,-20},{24,-20},{24,20},{44,20},{44,-20},
+                {64,-20},{64,-16}},
+                    color={255,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{-40,-16},{-40,-20},{0,20},{0,-20},{4,-16}},
+                    color={0,0,255},
+                    smooth=Smooth.None),Line(
+                    points={{60,-20},{62,-20},{64,-20},{64,20},{84,20},{84,-20},
+                {84,-20},{88,-20}},
+                    color={255,0,255},
+                    smooth=Smooth.None)}),
         Documentation(info="<html>
 <p>
 This controller can be used both for DC/DC and AC/DC converters. 
@@ -6588,13 +6527,13 @@ to the switching period. The output firing signal is strictly determined by the 
 The firing signal is generated by comparing the sampled duty cycle input with a periodic saw tooth signal [<a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.References\">Williams2006</a>]. 
 </p>
 </html>"));
-    end SignalPWM;
+      end SignalPWM;
     annotation (Documentation(info="<html>
 <p>
 Currently there is only one PWM method provided in this library.
 </p>
 </html>"));
-  end Control;
+    end Control;
 
   model ChopperStepDown "Step down chopper"
     import Modelica.Constants.pi;
@@ -6649,7 +6588,7 @@ Currently there is only one PWM method provided in this library.
           extent={{-20,-20},{20,20}},
           rotation=90,
           origin={-60,-120})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = diode.LossPower + transistor.LossPower;
     end if;
@@ -6752,7 +6691,7 @@ Currently there is only one PWM method provided in this library.
 This is a conventional step down chopper model. It consists of a transistor and free wheeling diode. 
 </p>
 </html>"));
-  end ChopperStepDown;
+    end ChopperStepDown;
 
   model ChopperStepUp "Step up chopper"
     import Modelica.Constants.pi;
@@ -6807,7 +6746,7 @@ This is a conventional step down chopper model. It consists of a transistor and 
           extent={{-20,-20},{20,20}},
           rotation=90,
           origin={-60,-120})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = diode.LossPower + transistor.LossPower;
     end if;
@@ -6869,7 +6808,7 @@ This is a conventional step down chopper model. It consists of a transistor and 
             textString="%name",
             lineColor={0,0,255}),
           Rectangle(
-            extent={{-40,40},{40,-40}},
+            extent={{-42,40},{38,-40}},
             lineColor={255,255,255},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid),
@@ -6894,9 +6833,11 @@ This is a conventional step down chopper model. It consists of a transistor and 
             color={0,0,255},
             smooth=Smooth.None),
           Line(
-            points={{-4,-20},{-10,-8},{-16,-14},{-4,-20}},
+            points={{6,-6},{0,6},{-6,0},{6,-6}},
             color={0,0,255},
-            smooth=Smooth.None),
+            smooth=Smooth.None,
+            origin={-10,14},
+            rotation=90),
           Line(
             points={{0,-24},{10,-24},{10,24},{0,24}},
             color={0,0,255},
@@ -6914,7 +6855,7 @@ This is a conventional step down chopper model. It consists of a transistor and 
 This is a conventional step up chopper model. It consists of a transistor and free wheeling diode. 
 </p>
 </html>"));
-  end ChopperStepUp;
+    end ChopperStepUp;
 
   model HBridge "H bridge (four quadrant converter)"
     extends Modelica_Electrical_PowerConverters.Icons.Converter;
@@ -6971,7 +6912,7 @@ This is a conventional step up chopper model. It consists of a transistor and fr
           extent={{-20,-20},{20,20}},
           rotation=90,
           origin={60,-120})));
-  equation
+    equation
     if not useHeatPort then
       LossPower = inverter_p.LossPower + inverter_n.LossPower;
     end if;
@@ -7073,14 +7014,14 @@ The H bridge is a four quadrant DC/DC converter. It consists of two single phase
 <a href=\"modelica://Modelica_Electrical_PowerConverters.Examples.DCDC.HBridge\">DCDC.HBridge</a>.
 </p>
 </html>"));
-  end HBridge;
+    end HBridge;
   annotation (Documentation(info="<html>
 <p>
 General information about DC/DC converters can be found at the
 <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.DCDCConcept\">DC/DC converter concept</a>
 </p>
 </html>"));
-end DCDC;
+  end DCDC;
 
 
 package Interfaces "Interfaces and partial models"
@@ -7110,7 +7051,7 @@ package Interfaces "Interfaces and partial models"
           extent={{-6,-6},{6,6}},
           rotation=90,
           origin={80,-60})));
-  equation
+    equation
     connect(enable, internalEnable) annotation (Line(
         points={{60,-120},{60,-64},{80,-64},{80,-60},{80,-60}},
         color={255,0,255},
@@ -7126,31 +7067,28 @@ For <code>useConstantEnable = true</code> the internal signal is equal to the pa
 For <code>useConstantEnable = false</code> the internal signal 
 is equal to the external signal input <code>enable</code>.
 </html>"));
-  end Enable;
-end Interfaces;
+    end Enable;
+  end Interfaces;
 
 
 package Icons "Icons"
   extends Modelica.Icons.Package;
   partial model ExampleTemplate "Example template"
-    annotation (Icon(graphics={
-          Ellipse(
-            extent={{-100,100},{100,-100}},
-            lineColor={175,175,175},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid),
-          Polygon(
-            points={{-36,-60},{-36,60},{64,0},{-36,-60}},
-            lineColor={175,175,175},
-            smooth=Smooth.None,
-            fillColor={175,175,175},
-            fillPattern=FillPattern.Solid),
-          Rectangle(
-            extent={{-4,46},{14,-44}},
-            lineColor={255,255,255},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid)}));
-  end ExampleTemplate;
+    annotation (Icon(graphics={Ellipse(
+                extent={{-100,100},{100,-100}},
+                lineColor={175,175,175},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Polygon(
+                points={{-36,-60},{-36,60},{64,0},{-36,-60}},
+                lineColor={175,175,175},
+                smooth=Smooth.None,
+                fillColor={175,175,175},
+                fillPattern=FillPattern.Solid),Rectangle(
+                extent={{-4,46},{14,-44}},
+                lineColor={255,255,255},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid)}));
+    end ExampleTemplate;
 
   partial model Converter "Converter icon"
     annotation (Icon(graphics={
@@ -7167,19 +7105,19 @@ package Icons "Icons"
             extent={{-150,150},{150,110}},
             textString="%name",
             lineColor={0,0,255})}));
-  end Converter;
+    end Converter;
 
   partial block Control "Control icon"
     annotation (Icon(graphics={Rectangle(
-            extent={{-100,100},{100,-100}},
-            lineColor={0,0,127},
-            fillColor={255,255,255},
-            fillPattern=FillPattern.Solid), Text(
-            extent={{-150,-140},{150,-180}},
-            textString="%name",
-            lineColor={0,0,255})}));
-  end Control;
-end Icons;
+                extent={{-100,100},{100,-100}},
+                lineColor={0,0,127},
+                fillColor={255,255,255},
+                fillPattern=FillPattern.Solid),Text(
+                extent={{-150,-140},{150,-180}},
+                textString="%name",
+                lineColor={0,0,255})}));
+    end Control;
+  end Icons;
 
 
 annotation (
