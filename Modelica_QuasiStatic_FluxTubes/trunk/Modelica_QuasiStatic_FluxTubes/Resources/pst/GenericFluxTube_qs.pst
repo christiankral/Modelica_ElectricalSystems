@@ -1,0 +1,209 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Sun May 04 09:28:09 CEST 2014
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="5" x-max="61.54" y-min="2.82" y-max="27.5" auto-bounding="true">
+%<parallelogram p3= "(56,14)"
+%	 p2= "(56,24)"
+%	 p1= "(51.5,19.5)"
+%	 fill-color= "#99ff99"
+%	 fill-style= "solid"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(60.5,16.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%\color[rgb]{0,0.6,0}$\underline{\Phi}$
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(61,22.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<pscurve right-arrow= "disk-centered"
+%	 polydots-size-minimum= "0.35"
+%	 arrow-head-width-linewidth-scale= "1"
+%	 stroke-width= "0.15"
+%	 closed= "false"
+%	 arrow-head-width-minimum= "0.5"
+%	 fill-style= "none"
+%	 curvature= "1;0.1;0"
+%	 points= "(58.94,4.14);(58.94,4.14);(55.5,7);(54.76,8.2);(55.73,7.97);(56.7,7.74);
+%	(55.96,8.95);(52.52,11.81);(52.52,11.81)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(60,4)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%area
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(61.54,2.82)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<multicurve right-arrow= "head"
+%	 stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(53.79,16.5);(53.79,16.5);(59.5,16.5);(59.5,16.5)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(23,16.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "right"
+%	 >
+%\color[rgb]{0,0.6,0}$\underline{\Phi}$
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(5,22.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(5.54,2.82)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<parallelogram p3= "(32,14)"
+%	 p2= "(32,24)"
+%	 p1= "(27.5,19.5)"
+%	 fill-color= "#99ff99"
+%	 stroke-style= "none"
+%	 fill-style= "solid"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(32,24);(32,24);(27.5,19.5);(27.5,19.5);(27.5,19.5);(27.5,9.5);
+%	(27.5,9.5)"
+%	 />
+%<multicurve stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 fill-style= "none"
+%	 points= "(32,24);(32,24);(32,14);(32,14);(32,14);(27.5,9.5);
+%	(27.5,9.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(32,24);(32,24);(56,24);(56,24)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(27.5,19.5);(27.5,19.5);(51.5,19.5);(51.5,19.5)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(51.5,9.5);(51.5,9.5);(27.5,9.5);(27.5,9.5)"
+%	 />
+%<multicurve stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 fill-style= "none"
+%	 points= "(32,14);(32,14);(56,14);(56,14)"
+%	 />
+%<multicurve right-arrow= "head"
+%	 stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(24,16.5);(24,16.5);(29.71,16.5);(29.71,16.5)"
+%	 />
+%<multicurve stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(24,16.5);(24,16.5);(27.5,16.5);(27.5,16.5)"
+%	 />
+%<g>
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(27.5,5.75);(27.5,5.75);(27.5,8.25);(27.5,8.25)"
+%	 />
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(51.5,5.75);(51.5,5.75);(51.5,8.25);(51.5,8.25)"
+%	 />
+%<text text-vert-align= "top"
+%	 anchor-point= "(39.75,6)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$l$
+%</text>
+%<multicurve right-arrow= "head"
+%	 left-arrow= "head"
+%	 stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(51.5,7);(51.5,7);(27.5,7);(27.5,7)"
+%	 />
+%</g>
+%<text text-vert-align= "baseline"
+%	 anchor-point= "(44,27.5)"
+%	 stroke-color= "#6600ff"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%\color[rgb]{0.4,0,1}$\underline{V}_m$
+%</text>
+%<multicurve right-arrow= "head"
+%	 stroke-color= "#6600ff"
+%	 fill-style= "none"
+%	 points= "(32.25,26);(32.25,26);(56.25,26);(56.25,26)"
+%	 />
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(61.54,27.5)
+\newrgbcolor{userFillColour}{0.6 1 0.6}
+\pspolygon[fillcolor=userFillColour,fillstyle=solid](51.5,19.5)(56,24)(56,14)(51.5,9.5)
+\rput[l](60.5,16.5){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
+\rput(61,22.5){}
+\psecurve[linewidth=0.15,arrowsize=0.5 1,dotsize=0.35 2.5,curvature=1.0 0.1 0.0]{-*}(58.94,4.14)(58.94,4.14)(55.5,7)(54.76,8.2)(55.73,7.97)(56.7,7.74)(55.96,8.95)(52.52,11.81)(52.52,11.81)
+\rput[l](60,4){area}
+\rput(61.54,2.82){}
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour]{->}(53.79,16.5)(59.5,16.5)
+\rput[r](23,16.5){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
+\rput(5,22.5){}
+\rput(5.54,2.82){}
+\newrgbcolor{userFillColour}{0.6 1 0.6}
+\pspolygon[linestyle=none,fillcolor=userFillColour,fillstyle=solid](27.5,19.5)(32,24)(32,14)(27.5,9.5)
+\psline(32,24)
+(27.5,19.5)(27.5,9.5)
+\psline[linestyle=dashed,dash=1 1](32,24)
+(32,14)(27.5,9.5)
+\psline(32,24)(56,24)
+\psline(27.5,19.5)(51.5,19.5)
+\psline(51.5,9.5)(27.5,9.5)
+\psline[linestyle=dashed,dash=1 1](32,14)(56,14)
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour,linestyle=dashed,dash=1 1]{->}(24,16.5)(29.71,16.5)
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour](24,16.5)(27.5,16.5)
+\psline[linewidth=0.15](27.5,5.75)(27.5,8.25)
+\psline[linewidth=0.15](51.5,5.75)(51.5,8.25)
+\rput[t](39.75,6){$l$}
+\psline[linewidth=0.15]{<->}(51.5,7)(27.5,7)
+\newrgbcolor{userLineColour}{0.4 0 1}
+\rput[B](44,27.5){\color[rgb]{0.4,0,1}$\underline{V}_m$}
+\newrgbcolor{userLineColour}{0.4 0 1}
+\psline[linecolor=userLineColour]{->}(32.25,26)(56.25,26)
+\end{pspicture}

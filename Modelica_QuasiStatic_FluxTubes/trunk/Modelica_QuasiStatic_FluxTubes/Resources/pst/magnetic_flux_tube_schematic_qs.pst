@@ -1,0 +1,242 @@
+%%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
+%%Sun May 04 09:36:10 CEST 2014
+%%Begin JPIC-XML
+%<?xml version="1.0" standalone="yes"?>
+%<jpic x-min="5" x-max="61.54" y-min="2.82" y-max="26.75" auto-bounding="true">
+%<parallelogram p3= "(32.97,10.76)"
+%	 p2= "(32.97,19)"
+%	 p1= "(29,15.29)"
+%	 fill-color= "#99ff99"
+%	 stroke-style= "none"
+%	 fill-style= "solid"
+%	 />
+%<smoothpolygon closed= "false"
+%	 fill-style= "none"
+%	 points= "(29,7);(39.5,10);(51.5,9.5)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<smoothpolygon closed= "false"
+%	 fill-style= "none"
+%	 points= "(32.98,18.99);(43,24.5);(56,24)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<smoothpolygon stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 closed= "false"
+%	 fill-style= "none"
+%	 points= "(33,11);(43,13.5);(56,14)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<parallelogram p3= "(56,14)"
+%	 p2= "(56,24)"
+%	 p1= "(51.5,19.5)"
+%	 fill-color= "#99ff99"
+%	 fill-style= "solid"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(60.5,16.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%\color[rgb]{0,0.6,0}$\underline{\Phi}$
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(61,22.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<pscurve right-arrow= "disk-centered"
+%	 polydots-size-minimum= "0.35"
+%	 arrow-head-width-linewidth-scale= "1"
+%	 stroke-width= "0.15"
+%	 closed= "false"
+%	 arrow-head-width-minimum= "0.5"
+%	 fill-style= "none"
+%	 curvature= "1;0.1;0"
+%	 points= "(58.94,4.14);(58.94,4.14);(55.5,7);(54.76,8.2);(55.73,7.97);(56.7,7.74);
+%	(55.96,8.95);(52.52,11.81);(52.52,11.81)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(60,4)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%$\mathcal{A}_2$
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(61.54,2.82)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<smoothpolygon closed= "false"
+%	 fill-style= "none"
+%	 points= "(29.11,15.25);(43,19.5);(51.41,19.53)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(29,4);(29,4);(29,6);(29,6)"
+%	 />
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(51.5,6.25);(51.5,6.25);(51.5,8.5);(51.5,8.5)"
+%	 />
+%<smoothpolygon right-arrow= "head"
+%	 stroke-color= "#6600ff"
+%	 closed= "false"
+%	 fill-style= "none"
+%	 points= "(33.12,20.93);(43,26.5);(56,26)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<text text-vert-align= "top"
+%	 anchor-point= "(40.25,5.75)"
+%	 fill-style= "none"
+%	 text-rotation= "5"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$l$
+%</text>
+%<smoothpolygon right-arrow= "head"
+%	 left-arrow= "head"
+%	 stroke-width= "0.15"
+%	 closed= "false"
+%	 fill-style= "none"
+%	 points= "(29,5);(39.5,8);(51.5,7.5)"
+%	 smoothness= "0.7;0.7;0.7"
+%	 />
+%<text text-vert-align= "baseline"
+%	 anchor-point= "(43.5,26.75)"
+%	 stroke-color= "#6600ff"
+%	 fill-style= "none"
+%	 text-rotation= "14"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%\color[rgb]{0.4,0,1}$\underline{V}_m$
+%</text>
+%<multicurve right-arrow= "head"
+%	 stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(25.29,13);(25.29,13);(31,13);(31,13)"
+%	 />
+%<multicurve right-arrow= "head"
+%	 stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(53.79,16.5);(53.79,16.5);(59.5,16.5);(59.5,16.5)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(24,13)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "right"
+%	 >
+%\color[rgb]{0,0.6,0}$\underline{\Phi}$
+%</text>
+%<multicurve stroke-color= "#009900"
+%	 fill-style= "none"
+%	 points= "(25.5,13);(25.5,13);(29,13);(29,13)"
+%	 />
+%<pscurve right-arrow= "disk-centered"
+%	 polydots-size-minimum= "0.35"
+%	 arrow-head-width-linewidth-scale= "1"
+%	 stroke-width= "0.15"
+%	 closed= "false"
+%	 arrow-head-width-minimum= "0.5"
+%	 fill-style= "none"
+%	 curvature= "1;0.1;0"
+%	 points= "(20.15,8.25);(20.15,8.25);(24.44,9.52);(25.86,9.47);(25.12,8.79);(24.39,8.11);
+%	(25.81,8.06);(30.1,9.33);(30.1,9.33)"
+%	 />
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(19,8)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "right"
+%	 >
+%$\mathcal{A}_1$
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(5,22.5)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<text text-vert-align= "center-v"
+%	 anchor-point= "(5.54,2.82)"
+%	 fill-style= "none"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%
+%</text>
+%<multicurve fill-style= "none"
+%	 points= "(33,19);(33,19);(29,15.25);(29,15.25);(29,15.25);(29,7);
+%	(29,7)"
+%	 />
+%<multicurve stroke-dasharray= "1;1"
+%	 stroke-style= "dashed"
+%	 fill-style= "none"
+%	 points= "(33,19);(33,19);(33,11);(33,11);(33,11);(29,7);
+%	(29,7)"
+%	 />
+%</jpic>
+%%End JPIC-XML
+%PSTricks content-type (pstricks.sty package needed)
+%Add \usepackage{pstricks} in the preamble of your LaTeX file
+%You can rescale the whole picture (to 80% for instance) by using the command \def\JPicScale{0.8}
+\ifx\JPicScale\undefined\def\JPicScale{1}\fi
+\psset{unit=\JPicScale mm}
+\psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
+\psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
+\psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
+\begin{pspicture}(0,0)(61.54,26.75)
+\newrgbcolor{userFillColour}{0.6 1 0.6}
+\pspolygon[linestyle=none,fillcolor=userFillColour,fillstyle=solid](29,15.29)(32.97,19)(32.97,10.76)(29,7.05)
+\psbezier(29,7)(36.35,9.1)(43.1,9.85)(51.5,9.5)
+\psbezier(32.98,18.99)(39.99,22.85)(46.9,24.35)(56,24)
+\psbezier[linestyle=dashed,dash=1 1](33,11)(40,12.75)(46.9,13.65)(56,14)
+\newrgbcolor{userFillColour}{0.6 1 0.6}
+\pspolygon[fillcolor=userFillColour,fillstyle=solid](51.5,19.5)(56,24)(56,14)(51.5,9.5)
+\rput[l](60.5,16.5){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
+\rput(61,22.5){}
+\psecurve[linewidth=0.15,arrowsize=0.5 1,dotsize=0.35 2.5,curvature=1.0 0.1 0.0]{-*}(58.94,4.14)(58.94,4.14)(55.5,7)(54.76,8.2)(55.73,7.97)(56.7,7.74)(55.96,8.95)(52.52,11.81)(52.52,11.81)
+\rput[l](60,4){$\mathcal{A}_2$}
+\rput(61.54,2.82){}
+\psbezier(29.11,15.25)(38.83,18.22)(45.52,19.51)(51.41,19.53)
+\psline[linewidth=0.15](29,4)(29,6)
+\psline[linewidth=0.15](51.5,6.25)(51.5,8.5)
+\newrgbcolor{userLineColour}{0.4 0 1}
+\psbezier[linecolor=userLineColour]{->}(33.12,20.93)(40.04,24.83)(46.9,26.35)(56,26)
+\rput[t]{5}(40.25,5.75){$l$}
+\psbezier[linewidth=0.15]{<->}(29,5)(36.35,7.1)(43.1,7.85)(51.5,7.5)
+\newrgbcolor{userLineColour}{0.4 0 1}
+\rput[B]{14}(43.5,26.75){\color[rgb]{0.4,0,1}$\underline{V}_m$}
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour,linestyle=dashed,dash=1 1]{->}(25.29,13)(31,13)
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour]{->}(53.79,16.5)(59.5,16.5)
+\rput[r](24,13){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
+\newrgbcolor{userLineColour}{0 0.6 0}
+\psline[linecolor=userLineColour](25.5,13)(29,13)
+\psecurve[linewidth=0.15,arrowsize=0.5 1,dotsize=0.35 2.5,curvature=1.0 0.1 0.0]{-*}(20.15,8.25)(20.15,8.25)(24.44,9.52)(25.86,9.47)(25.12,8.79)(24.39,8.11)(25.81,8.06)(30.1,9.33)(30.1,9.33)
+\rput[r](19,8){$\mathcal{A}_1$}
+\rput(5,22.5){}
+\rput(5.54,2.82){}
+\psline(33,19)
+(29,15.25)(29,7)
+\psline[linestyle=dashed,dash=1 1](33,19)
+(33,11)(29,7)
+\end{pspicture}
