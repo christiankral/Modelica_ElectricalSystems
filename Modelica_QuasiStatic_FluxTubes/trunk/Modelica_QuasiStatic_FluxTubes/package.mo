@@ -16,57 +16,70 @@ package Modelica_QuasiStatic_FluxTubes "Library for modelling of quasi static el
       extends Modelica.Icons.Information;
 
       annotation (Documentation(info="<html>
-<p><b>NEEDS REVISION</b></p>
-<h4>Overview of the Concept of Magnetic Flux Tubes</h4>
+<h4>Overview of the concept of quasi static magnetic flux tubes</h4>
 <p>
-Following below, the concept of magnetic flux tubes is outlined in short. For a detailed description of flux tube elements, please have a look at the listed literature. Magnetic flux tubes enable for modeling of magnetic fields with lumped networks. The figure below and the following equations illustrate the transition from the original magnetic field quantities described by <i>Maxwell</i>'s equations to network elements with a flow variable and an across variable:
+Following below, the concept of magnetic flux tubes is outlined in short. For a detailed description of flux tube elements, please have a look at the listed literature. Magnetic flux tubes enable the modeling of magnetic fields with lumped equivalent circuit networks. The figure below and the following equations illustrate the relationships between
+<ul>
+<li>the normal component of flux density and field strength, and</li>
+<li>the normal component of field strength and magnetic potential difference.</li>
+</ul></p>
+
+<p>Since quasi static conditions are assumed, each field quanitity can be represented by a complex phasor -- which is indicated by underlining the respective variable:
 </p>
 
 <p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/magnetic_flux_tube_schematic.png\" ALT=\"Magnetic flux tube\">
+<ul>
+<li>Normal component of magnetic flux density, 
+    <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/B_n.png\"> </li>
+<li>Normal component of magnetic field strength, 
+    <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/H_n.png\"> </li>
+<li>Magnetic flux,
+    <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/Phi.png\"> </li>
+<li>Magnetic potential difference,
+    <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/V_m.png\"> </li>
+</ul>
 </p>
 
 <p>
-For a region with an approximately homogeneous distribution of the magnetic field strength <b>H</b> and the magnetic flux density <b>B</b> through cross sectional area <i>A</i> at each length coordinate <i>s</i>  (<i>A</i> perpendicular to the direction of the magnetic field lines), a magnetic reluctance <i>R<sub>m</sub></i> can be defined:</p>
-
-<p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/eq_transition_reluctance_flowAcross_IntegralQuantities.png\" ALT=\"Transition from field quantities to flow- and across variables\">
+<IMG src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/magnetic_flux_tube_schematic_qs.png\" ALT=\"Magnetic flux tube\">
 </p>
 
+<p>A <b>flux tube</b> confines the magnetic flux. Flied lines, and flux tubes, respectively are always closed. So there is no flux entering or leaving a flux tube. This fact is considered by connecting the elements of a lumped circuit model, such that the sum of all fluxes of a connection is equivalent to zero. </p>
+
 <p>
-With the definition of the magnetic potential difference <i>V<sub>m</sub></i> as an across variable and the magnetic flux <i>&Phi;</i> as flow variable, a reluctance element <i>R<sub>m</sub></i> can be defined similar to resistive network elements in other physical domains. Using <i>Maxwell</i>'s constitutive equation
+For a section of a flux tube with length 
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\"> 
+the magnetic potential difference is determined by the length integral over the magnetic field strength:</p>
+<dd>
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/V_m-H_n.png\">
+</dd>
+<p>
+The magnetic flux entering, and leaving a flux tube, respectively, is determined by the surface integral of the normal component
+of the magnetic field strength: 
 </p>
+<dd>
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/Phi-B_n.png\">
+</dd>
+<p>The magnetic potential difference and the magnetic flux have the same angle, so the raluctance a real (non complex) quantity:</p>
+<dd>
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m-V_m-Phi.png\">
+</dd>
 
 <p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/eq_MaxwellConstitutive.png\" ALT=\"Maxwell's constitutive equation\">
-</p>
-
-<p>the general formula for the calculation of a magnetic reluctance <i>R<sub>m</sub></i> from its geometric and material properties is:</p>
-
-<p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/eq_reluctance_general.png\" ALT=\"General formula for calculation of a magnetic reluctance\">
-</p>
-
-<p>
-For a prismatic or cylindrical volume of length <i>l</i> and cross sectional area <i>A</i> with the magnetic flux entering and leaving the region through its end planes, the above equation simplifies to:</p>
-
-<p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/eq_reluctance_prismatic.png\" ALT=\"Magnetic reluctance of a prismatic or cylindrical volume\">
-</p>
+For a 
+<a href=\"modelica://Modelica_QuasiStatic_FluxTubes.Shapes.FixedShape.GenericFluxTube\">generic flux tube</a> reluctance with constant 
+area of cross section, 
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/A.png\">, 
+and length,
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\">,
+the magnetic</p>
+<dd>
+<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_generic.png\">,
+</dd>
 
 <p>
-Similar equations can be derived for other geometries. In cases where a direct integration is not possible, the reluctance can be calculated on base of average length, average cross sectional area and volume <i>V</i> respectively:
-</p>
-
-<p>
-<IMG src=\"modelica://Modelica/Resources/Images/Magnetic/FluxTubes/UsersGuide/FluxTubeConcept/eq_reluctanceFromAverageGeometry.png\" ALT=\"Reluctance calculation from average geometric quantities\">
-</p>
-
-<p>
-Network elements for sources of a magnetic potential difference or magnetomotive force, i.e., coils or permanent magnets can be formulated as well. The resulting magnetic network models of actuators reflect the main dimensions of these devices as well as the normally nonlinear characteristics of their magnetically active materials.
-</p>
-
-</html>"));
+In the current implementation of the quasi static flux tubes library quasi static force interaction is not considered.
+</p></html>"));
     end FluxTubeConcept;
 
     class Literature "Literature"
@@ -158,7 +171,9 @@ Copyright &copy; 1998-2014, Modelica Association, Christian Kral and Anton Haume
 
     annotation (DocumentationClass=true, Documentation(info="<html>
 <p>The quasi static flux tubes libray is based on the transient library 
-<a href=\"modelica://Modelica.Magnetic.FluxTubes\">Magnetic.FluxTubes</a>. The main principles of confined flux and flux tubes apply, too. The quasi static flux tubes library contains components for modelling of electromagnetic devices with lumped magnetic networks based on quasi static theory. Models based on this library are suited for both rough design of the magnetic subsystem of a device as well as for efficient quasi static simulation at system level together with neighbouring subsystems. The quasi static components of this library do not consider saturation since <b>linearity</b> is strictly assumed. 
+<a href=\"modelica://Modelica.Magnetic.FluxTubes\">Magnetic.FluxTubes</a>. The main principles of confined flux and flux tubes apply, too. The quasi static flux tubes library contains components for modelling of electromagnetic devices with lumped magnetic networks based on quasi static theory. Models based on this library are suited for quasi static simulation of transformers at component and system level.</p>
+<p>The quasi static components of this library do not consider saturation since <b>linearity</b> is strictly assumed. In case that the permeability of a saturated circuit needs to be considered, a 
+<a href=\"modelica://Modelica_QuasiStatic_FluxTubes.Sensors.Transient.FundamentalWavePermabilitySensor\">transient permeability estimation sensor</a> is provided. 
 </p>
 <p>
 This user's guide gives a short introduction to the underlying concept of <b>quasi static magnetic flux tubes</b>, summarizes basic relationships and equations.
@@ -2490,7 +2505,6 @@ See <a href=\"modelica://Modelica.Magnetic.FluxTubes.UsersGuide.ReleaseNotes\">r
         extent={{-12.5,-50.0},{12.5,50.0}}),
       Line(
         points={{-86,4},{-84,8},{-80,10},{-76,8},{-72,2},{-68,0},{-64,2},{-62,6}},
-
         color={85,170,255},
         smooth=Smooth.None)}),
     uses(Modelica(version="3.2.2"), Complex(version="3.2.1")));

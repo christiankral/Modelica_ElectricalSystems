@@ -1,53 +1,53 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Sun May 04 09:29:29 CEST 2014
+%%Sat May 10 22:37:34 CEST 2014
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
 %<jpic x-min="5" x-max="62.25" y-min="2.82" y-max="27.5" auto-bounding="true">
-%<ellipse p3= "(32,9.5)"
+%<ellipse fill-style= "solid"
+%	 p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
-%	 fill-color= "#99ff99"
 %	 stroke-style= "none"
 %	 closure= "open"
-%	 fill-style= "solid"
 %	 angle-end= "0"
+%	 fill-color= "#99ff99"
 %	 angle-start= "0"
 %	 />
-%<text text-vert-align= "center-v"
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
 %	 anchor-point= "(62.25,22)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
 %	 >
 %\color[rgb]{0,0.6,0}$\underline{\Phi}$
 %</text>
-%<text text-vert-align= "center-v"
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
 %	 anchor-point= "(61.54,2.82)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %
 %</text>
-%<text text-vert-align= "center-v"
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
 %	 anchor-point= "(22,22.25)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "right"
 %	 >
 %\color[rgb]{0,0.6,0}$\underline{\Phi}$
 %</text>
-%<text text-vert-align= "center-v"
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
 %	 anchor-point= "(5,22.5)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %
 %</text>
-%<text text-vert-align= "center-v"
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
 %	 anchor-point= "(5.54,2.82)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
@@ -59,154 +59,154 @@
 %<multicurve fill-style= "none"
 %	 points= "(54,9.5);(54,9.5);(30,9.5);(30,9.5)"
 %	 />
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(57.75,19)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
 %	 >
 %$r_i$
 %</text>
-%<ellipse p3= "(32,9.5)"
+%<ellipse fill-style= "none"
+%	 p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
 %	 closure= "open"
-%	 fill-style= "none"
 %	 angle-end= "270"
 %	 angle-start= "90"
 %	 />
-%<ellipse p3= "(32,9.5)"
+%<ellipse fill-style= "none"
+%	 p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
-%	 stroke-dasharray= "1;1"
 %	 stroke-style= "dashed"
+%	 stroke-dasharray= "1;1"
 %	 closure= "open"
-%	 fill-style= "none"
 %	 angle-end= "90"
 %	 angle-start= "-90"
 %	 />
-%<ellipse p3= "(56.25,9.5)"
+%<ellipse fill-style= "solid"
+%	 p3= "(56.25,9.5)"
 %	 p2= "(56.25,24)"
 %	 p1= "(51.75,24)"
-%	 fill-color= "#99ff99"
 %	 closure= "open"
-%	 fill-style= "solid"
 %	 angle-end= "0"
+%	 fill-color= "#99ff99"
 %	 angle-start= "0"
 %	 />
-%<ellipse p3= "(55.12,13.38)"
+%<ellipse fill-style= "solid"
+%	 p3= "(55.12,13.38)"
 %	 p2= "(55.12,20.62)"
 %	 p1= "(52.88,20.62)"
-%	 fill-color= "#ffffff"
 %	 closure= "open"
-%	 fill-style= "solid"
 %	 angle-end= "0"
+%	 fill-color= "#ffffff"
 %	 angle-start= "0"
 %	 />
-%<ellipse p3= "(30.88,13.12)"
+%<ellipse fill-style= "solid"
+%	 p3= "(30.88,13.12)"
 %	 p2= "(30.88,20.38)"
 %	 p1= "(28.62,20.38)"
-%	 fill-color= "#ffffff"
-%	 stroke-dasharray= "1;1"
 %	 stroke-style= "dashed"
+%	 stroke-dasharray= "1;1"
 %	 closure= "open"
-%	 fill-style= "solid"
 %	 angle-end= "0"
+%	 fill-color= "#ffffff"
 %	 angle-start= "0"
 %	 />
-%<multicurve stroke-dasharray= "1;1"
+%<multicurve fill-style= "none"
 %	 stroke-style= "dashed"
-%	 fill-style= "none"
+%	 stroke-dasharray= "1;1"
 %	 points= "(29.75,20.5);(29.75,20.5);(53.75,20.5);(53.75,20.5)"
 %	 />
-%<multicurve stroke-dasharray= "1;1"
+%<multicurve fill-style= "none"
 %	 stroke-style= "dashed"
-%	 fill-style= "none"
+%	 stroke-dasharray= "1;1"
 %	 points= "(30,13.25);(30,13.25);(54,13.25);(54,13.25)"
 %	 />
-%<multicurve right-arrow= "head"
-%	 stroke-dasharray= "1;1"
+%<multicurve fill-style= "none"
 %	 stroke-style= "dashed"
-%	 stroke-color= "#009900"
-%	 fill-style= "none"
+%	 stroke-dasharray= "1;1"
 %	 points= "(24.04,22.25);(24.04,22.25);(29.75,22.25);(29.75,22.25)"
-%	 />
-%<multicurve stroke-color= "#009900"
-%	 fill-style= "none"
-%	 points= "(23.04,22.25);(23.04,22.25);(28.25,22.25);(28.25,22.25)"
-%	 />
-%<multicurve right-arrow= "head"
+%	 right-arrow= "head"
 %	 stroke-color= "#009900"
-%	 fill-style= "none"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(23.04,22.25);(23.04,22.25);(28.25,22.25);(28.25,22.25)"
+%	 stroke-color= "#009900"
+%	 />
+%<multicurve fill-style= "none"
 %	 points= "(54.25,22);(54.25,22);(60.96,22);(60.96,22)"
+%	 right-arrow= "head"
+%	 stroke-color= "#009900"
 %	 />
 %<multicurve polydots-size-minimum= "0.35"
+%	 fill-style= "none"
 %	 left-arrow= "disk-centered"
 %	 stroke-width= "0.15"
-%	 fill-style= "none"
 %	 points= "(54,17);(54,17);(57.5,20.25);(57.5,20.25)"
 %	 />
-%<multicurve right-arrow= "head"
+%<multicurve fill-style= "none"
 %	 stroke-style= "none"
-%	 fill-style= "none"
 %	 points= "(58.5,21.5);(58.5,21.5);(55.17,18.09);(55.17,18.09)"
+%	 right-arrow= "head"
 %	 />
 %<multicurve polydots-size-minimum= "0.35"
+%	 fill-style= "none"
 %	 left-arrow= "disk-centered"
 %	 stroke-width= "0.15"
-%	 fill-style= "none"
 %	 points= "(54,17);(54,17);(55.75,7.75);(55.75,7.75)"
 %	 />
-%<multicurve right-arrow= "head"
+%<multicurve fill-style= "none"
 %	 stroke-style= "none"
-%	 fill-style= "none"
-%	 points= "(55.75,7.75);(55.75,7.75);(54.5,14);(54.5,14)"
+%	 points= "(55.75,7.75);(55.75,7.75);(55.23,10.62);(55.23,10.62)"
+%	 right-arrow= "head"
 %	 />
-%<text text-vert-align= "baseline"
-%	 anchor-point= "(56.25,9.25)"
-%	 fill-style= "none"
+%<text fill-style= "none"
+%	 text-vert-align= "baseline"
+%	 anchor-point= "(57,8)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
 %	 >
 %$r_o$
 %</text>
 %<g>
-%<multicurve stroke-width= "0.15"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 stroke-width= "0.15"
 %	 points= "(29.5,5.5);(29.5,5.5);(29.5,8);(29.5,8)"
 %	 />
-%<multicurve stroke-width= "0.15"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 stroke-width= "0.15"
 %	 points= "(53.5,5.5);(53.5,5.5);(53.5,8);(53.5,8)"
 %	 />
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(41.75,5.75)"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %$l$
 %</text>
-%<multicurve right-arrow= "head"
+%<multicurve fill-style= "none"
 %	 left-arrow= "head"
 %	 stroke-width= "0.15"
-%	 fill-style= "none"
 %	 points= "(53.5,6.75);(53.5,6.75);(29.5,6.75);(29.5,6.75)"
+%	 right-arrow= "head"
 %	 />
 %</g>
-%<text text-vert-align= "baseline"
+%<text fill-style= "none"
+%	 text-vert-align= "baseline"
 %	 anchor-point= "(42,27.5)"
-%	 stroke-color= "#6600ff"
-%	 fill-style= "none"
 %	 text-frame= "noframe"
+%	 stroke-color= "#6600ff"
 %	 text-hor-align= "center-h"
 %	 >
-%\color[rgb]{0.4,0,1}$\underline{V}_m$
+%\color[rgb]{1,0.667,0.333}$\underline{V}_m$
 %</text>
-%<multicurve right-arrow= "head"
-%	 stroke-color= "#6600ff"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
 %	 points= "(29.75,26);(29.75,26);(53.75,26);(53.75,26)"
+%	 right-arrow= "head"
+%	 stroke-color= "#ffaa55"
 %	 />
 %</jpic>
 %%End JPIC-XML
@@ -246,14 +246,14 @@
 \psline[linewidth=0.15,dotsize=0.35 2.5]{*-}(54,17)(57.5,20.25)
 \psline[linestyle=none]{->}(58.5,21.5)(55.17,18.09)
 \psline[linewidth=0.15,dotsize=0.35 2.5]{*-}(54,17)(55.75,7.75)
-\psline[linestyle=none]{->}(55.75,7.75)(54.5,14)
-\rput[Bl](56.25,9.25){$r_o$}
+\psline[linestyle=none]{->}(55.75,7.75)(55.23,10.62)
+\rput[Bl](57,8){$r_o$}
 \psline[linewidth=0.15](29.5,5.5)(29.5,8)
 \psline[linewidth=0.15](53.5,5.5)(53.5,8)
 \rput[t](41.75,5.75){$l$}
 \psline[linewidth=0.15]{<->}(53.5,6.75)(29.5,6.75)
 \newrgbcolor{userLineColour}{0.4 0 1}
-\rput[B](42,27.5){\color[rgb]{0.4,0,1}$\underline{V}_m$}
-\newrgbcolor{userLineColour}{0.4 0 1}
+\rput[B](42,27.5){\color[rgb]{1,0.667,0.333}$\underline{V}_m$}
+\newrgbcolor{userLineColour}{1 0.67 0.33}
 \psline[linecolor=userLineColour]{->}(29.75,26)(53.75,26)
 \end{pspicture}
