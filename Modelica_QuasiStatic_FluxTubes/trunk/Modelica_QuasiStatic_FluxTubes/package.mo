@@ -91,6 +91,11 @@ the magnetic reluctance is:</p>
 see example 
 <a href=\"modelica://Modelica_QuasiStatic_FluxTubes.Examples.NonLinearInductor\">NonLinearInductor</a></li>
 </ul>
+
+<h4>Notes</h4>
+
+<p>The parameter and variable names are chosen as close as possible to the transient 
+<a href=\"modelica://Modelica.Magnetic.FluxTubes\">FluxTubes</a> library, to avoid additional effort when converting transient into quasi static flux tubes models.</p>
 </html>"));
     end FluxTubeConcept;
 
