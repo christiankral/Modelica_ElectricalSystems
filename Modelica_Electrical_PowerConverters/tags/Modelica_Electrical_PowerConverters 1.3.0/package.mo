@@ -7107,9 +7107,9 @@ annotation (
       initialScale=0.1,
       grid={2,2})),
   preferredView="info",
-  version="X.X.0",
+  version="1.3.0",
   versionBuild=0,
-  versionDate="2014-XX-XX",
+  versionDate="2014-06-14",
   uses(Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p>
