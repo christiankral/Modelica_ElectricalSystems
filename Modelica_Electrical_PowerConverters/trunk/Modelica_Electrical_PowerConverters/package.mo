@@ -3659,14 +3659,14 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
         parameter Modelica.SIunits.Frequency f1=50
           "Fundamental wave AC frequency";
         parameter Modelica.SIunits.Resistance R=100 "Resistance";
-        parameter Modelica.SIunits.Inductance L=1 "Inductance";
+
         Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_n(V=
               50) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
               rotation=270,
               origin={-70,10})));
         Modelica_Electrical_PowerConverters.DCAC.MultiPhase2Level  inverter(
-            useHeatPort=false)
+            useHeatPort=false, m=m)
           annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
         Modelica.Electrical.MultiPhase.Sensors.CurrentSensor
                                                          currentSensor(m=m)
@@ -3689,7 +3689,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-40,-28})));
+              origin={-40,-20})));
         Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_p(V=
               50) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -3747,7 +3747,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,255},
             smooth=Smooth.None));
         connect(sine.y, signalPWM.dutyCycle) annotation (Line(
-            points={{-51,-54},{-60,-54},{-60,-28},{-52,-28}},
+            points={{-51,-54},{-60,-54},{-60,-20},{-52,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSensor.v, fundamentalWaveVoltage.u) annotation (Line(
@@ -3759,11 +3759,11 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,127},
             smooth=Smooth.None));
         connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-            points={{-46,-17},{-46,18}},
+            points={{-46,-9},{-46,18}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(signalPWM.notFire, inverter.fire_n) annotation (Line(
-            points={{-34,-17},{-34,18}},
+            points={{-34,-9},{-34,18}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(inverter.ac, resistor.plug_p) annotation (Line(
@@ -3795,16 +3795,15 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             Tolerance=1e-06,
             Interval=0.00002),
           Documentation(info="<html>
-            <p>Multi phase two level example with R-L load </p>
+<p>Plot current <code>currentSensor.i[:]</code>, harmonic current magnitude <code>fundamentalWaveCurrent[:].y_RMS</code>, harmonic voltage magnitude <code>fundamentalWaveVoltage[:].y_RMS</code>. The instantaneous voltages <code>voltageSensor.i[:]</code> and currents <code>currentSensor.i[:]</code> directly show the switching pattern of the inverter. There is not smoothing effect due to an inductance in this example; see <a href=\"Modelica_Electrical_PowerConverters.Examples.DCAC.MultiPhaseTwoLevel.MultiPhaseTwoLevel_RL\">MultiPhaseTwoLevel_RL</a>.</p>
 </html>"));
-
       end MultiPhaseTwoLevel_R;
 
       model MultiPhaseTwoLevel_RL
         "Multi phase DC to AC converter with R-L load"
         import Modelica_Electrical_PowerConverters;
         extends Modelica.Icons.Example;
-        parameter Integer m=3 "Number of phases";
+        parameter Integer m=6 "Number of phases";
         parameter Modelica.SIunits.Frequency f=1000 "Switching frequency";
         parameter Modelica.SIunits.Frequency f1=50
           "Fundamental wave AC frequency";
@@ -3816,7 +3815,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               rotation=270,
               origin={-70,10})));
         Modelica_Electrical_PowerConverters.DCAC.MultiPhase2Level  inverter(
-            useHeatPort=false)
+            useHeatPort=false, m=m)
           annotation (Placement(transformation(extent={{-50,20},{-30,40}})));
         Modelica.Electrical.MultiPhase.Sensors.CurrentSensor
                                                          currentSensor(m=m)
@@ -3839,7 +3838,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-40,-28})));
+              origin={-40,-20})));
         Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_p(V=
               50) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -3904,7 +3903,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,255},
             smooth=Smooth.None));
         connect(sine.y, signalPWM.dutyCycle) annotation (Line(
-            points={{-51,-54},{-60,-54},{-60,-28},{-52,-28}},
+            points={{-51,-54},{-60,-54},{-60,-20},{-52,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(voltageSensor.v, fundamentalWaveVoltage.u) annotation (Line(
@@ -3916,11 +3915,11 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,127},
             smooth=Smooth.None));
         connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-            points={{-46,-17},{-46,18}},
+            points={{-46,-9},{-46,18}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(signalPWM.notFire, inverter.fire_n) annotation (Line(
-            points={{-34,-17},{-34,18}},
+            points={{-34,-9},{-34,18}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(inverter.ac, resistor.plug_p) annotation (Line(
@@ -3956,9 +3955,8 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             Tolerance=1e-06,
             Interval=0.00002),
           Documentation(info="<html>
-            <p>Multi phase two level example with R-L load </p>
+<p>Plot current <code>currentSensor.i[:]</code>, harmonic current magnitude <code>fundamentalWaveCurrent[:].y_RMS</code>, harmonic voltage magnitude <code>fundamentalWaveVoltage[:].y_RMS</code>. The instantaneous voltages <code>voltageSensor.i[:]</code> directly show the switching pattern of the inverter.</p>
 </html>"));
-
       end MultiPhaseTwoLevel_RL;
     end MultiPhaseTwoLevel;
 
@@ -3993,7 +3991,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
               transformation(
               extent={{-10,-10},{10,10}},
               rotation=0,
-              origin={-40,-30})));
+              origin={-40,-20})));
         Modelica.Electrical.Analog.Sources.ConstantVoltage constantVoltage_p(V=
               50) annotation (Placement(transformation(
               extent={{-10,-10},{10,10}},
@@ -4017,7 +4015,7 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,255},
             smooth=Smooth.None));
         connect(signalPWM.fire, inverter.fire_p) annotation (Line(
-            points={{-46,-19},{-46,18}},
+            points={{-46,-9},{-46,18}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(constantVoltage_p.n, constantVoltage_n.p) annotation (Line(
@@ -4045,11 +4043,11 @@ Plot torque <code>tau</code>, current <code>currentSensor.i</code> and average c
             color={0,0,255},
             smooth=Smooth.None));
         connect(sine.y, signalPWM.dutyCycle) annotation (Line(
-            points={{-51,-54},{-60,-54},{-60,-30},{-52,-30}},
+            points={{-51,-54},{-60,-54},{-60,-20},{-52,-20}},
             color={0,0,127},
             smooth=Smooth.None));
         connect(inverter.fire_n, signalPWM.notFire) annotation (Line(
-            points={{-34,18},{-34,-19}},
+            points={{-34,18},{-34,-9}},
             color={255,0,255},
             smooth=Smooth.None));
         connect(currentSensor.i, fundamentalWaveCurrent.u) annotation (Line(
