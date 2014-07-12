@@ -1,4 +1,4 @@
- ;
+within ;
 package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC converters"
 extends Modelica.Icons.Package;
 
