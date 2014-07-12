@@ -1,4 +1,4 @@
-within ;
+ ;
 package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC converters"
 extends Modelica.Icons.Package;
 
@@ -8332,9 +8332,9 @@ annotation (
       initialScale=0.1,
       grid={2,2})),
   preferredView="info",
-  version="X.X.0",
+  version="1.4.0",
   versionBuild=0,
-  versionDate="2014-XX-XX",
+  versionDate="2014-07-12",
   uses(Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p>
