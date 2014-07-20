@@ -4520,7 +4520,7 @@ Plot machine current <code>dcpm.ia</code>, averaged current <code>meanCurrent.y<
 end Examples;
 
 
-package ACDC "AC to DC converter"
+package ACDC "AC to DC converters"
   package Control "Control components for rectifiers"
     extends Modelica.Icons.Package;
     block Signal2mPulse "Generic control of 2*m pulse rectifiers"
