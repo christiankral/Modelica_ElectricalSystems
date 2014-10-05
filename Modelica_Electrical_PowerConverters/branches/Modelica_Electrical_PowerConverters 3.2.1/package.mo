@@ -3164,7 +3164,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
   end MSL322;
 
 
-  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), preferredView = "info", version = "3.2.1", versionBuild = 1, versionDate = "2014-09-14", uses(Modelica(
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), preferredView = "info", version = "3.2.1", versionBuild = 2, versionDate = "2014-10-05", uses(Modelica(
           version="3.2.1")),                                                                                                    Documentation(info = "<html>
     <p>
     Copyright &copy; 2013-2014, <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.Contact\">Christian Kral</a> and
