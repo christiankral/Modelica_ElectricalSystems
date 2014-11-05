@@ -4741,12 +4741,6 @@ General information about controllers is summarized in
         min=0,
         max=Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1e-05
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1e-05
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
       parameter Boolean useFilter=true "Enable use of filter"
         annotation (Dialog(tab="Filter"));
       parameter Modelica.SIunits.Frequency fCut=2*f
@@ -4865,12 +4859,6 @@ signal <code>fire_n</code> is assigned to the thyristors connected with the nega
         min=0,
         max=Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1e-05
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1e-05
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
       parameter Boolean useFilter=true "Enable use of filter"
         annotation (Dialog(tab="Filter"));
       parameter Modelica.SIunits.Frequency fCut=2*f
@@ -4994,12 +4982,6 @@ Half of the semiconductors of the <code>2*m</code> pulse bridge rectifier are co
         min=0,
         max=Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-      parameter Modelica.SIunits.Resistance Ron(final min=0) = 1e-05
-        "Closed thyristor resistance";
-      parameter Modelica.SIunits.Conductance Goff(final min=0) = 1e-05
-        "Opened thyristor conductance";
-      parameter Modelica.SIunits.Voltage Vknee(final min=0) = 0
-        "Forward threshold voltage";
       parameter Boolean useFilter=true "Enable use of filter"
         annotation (Dialog(tab="Filter"));
       parameter Modelica.SIunits.Frequency fCut=2*f
@@ -8332,9 +8314,9 @@ annotation (
       initialScale=0.1,
       grid={2,2})),
   preferredView="info",
-  version="X.X.0",
+  version="3.2.2",
   versionBuild=0,
-  versionDate="2014-XX-XX",
+  versionDate="2014-11-05",
   uses(Modelica(version="3.2.2")),
   Documentation(info="<html>
 <p>

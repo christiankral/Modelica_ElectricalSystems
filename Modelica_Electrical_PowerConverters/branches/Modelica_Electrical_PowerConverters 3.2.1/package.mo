@@ -1537,12 +1537,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
                                                                                 annotation(Dialog(enable = useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
-        "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
-        "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
-        "Forward threshold voltage";
         parameter Boolean useFilter = true "Enable use of filter" annotation(Dialog(tab = "Filter"));
         parameter Modelica.SIunits.Frequency fCut = 2 * f
         "Cut off frequency of filter"                                                   annotation(Dialog(tab = "Filter", enable = useFilter));
@@ -1592,12 +1586,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
                                                                                 annotation(Dialog(enable = useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
-        "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
-        "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
-        "Forward threshold voltage";
         parameter Boolean useFilter = true "Enable use of filter" annotation(Dialog(tab = "Filter"));
         parameter Modelica.SIunits.Frequency fCut = 2 * f
         "Cut off frequency of filter"                                                   annotation(Dialog(tab = "Filter", enable = useFilter));
@@ -1646,12 +1634,6 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
                                                                                 annotation(Dialog(enable = useConstantFiringAngle));
         parameter Modelica.SIunits.Angle firingAngleMax(min = 0, max = Modelica.Constants.pi) = Modelica.Constants.pi
         "Maximum firing angle";
-        parameter Modelica.SIunits.Resistance Ron(final min = 0) = 1e-05
-        "Closed thyristor resistance";
-        parameter Modelica.SIunits.Conductance Goff(final min = 0) = 1e-05
-        "Opened thyristor conductance";
-        parameter Modelica.SIunits.Voltage Vknee(final min = 0) = 0
-        "Forward threshold voltage";
         parameter Boolean useFilter = true "Enable use of filter" annotation(Dialog(tab = "Filter"));
         parameter Modelica.SIunits.Frequency fCut = 2 * f
         "Cut off frequency of filter"                                                   annotation(Dialog(tab = "Filter", enable = useFilter));
@@ -3007,10 +2989,10 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
     extends Modelica.Icons.Package;
 
     partial model ExampleTemplate "Example template"
-      annotation(Icon(graphics={  Ellipse(extent = {{-100, 100}, {100, -100}}, lineColor = {175, 175, 175}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid), Polygon(points = {{-36, -60}, {-36, 60}, {64, 0}, {-36, -60}}, lineColor = {175, 175, 175}, smooth = Smooth.None, fillColor = {175, 175, 175},
-                fillPattern =                                                                                                    FillPattern.Solid), Rectangle(extent = {{-4, 46}, {14, -44}}, lineColor = {255, 255, 255}, fillColor = {255, 255, 255},
-                fillPattern =                                                                                                    FillPattern.Solid)}));
+      annotation(Icon(graphics={  Ellipse(extent=  {{-100, 100}, {100, -100}}, lineColor=  {175, 175, 175}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid), Polygon(points=  {{-36, -60}, {-36, 60}, {64, 0}, {-36, -60}}, lineColor=  {175, 175, 175}, smooth=  Smooth.None, fillColor=  {175, 175, 175},
+                fillPattern=                                                                                                    FillPattern.Solid), Rectangle(extent=  {{-4, 46}, {14, -44}}, lineColor=  {255, 255, 255}, fillColor=  {255, 255, 255},
+                fillPattern=                                                                                                    FillPattern.Solid)}));
     end ExampleTemplate;
 
     partial model Converter "Converter icon"
@@ -3119,7 +3101,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
       connect(multiStar.starpoints, resistor.plug_p) annotation(Line(points = {{-40, 0}, {-40, 0}, {-10, 0}}, color = {0, 0, 255}, smooth = Smooth.None));
       connect(resistor.plug_n, star.plug_p) annotation(Line(points = {{10, 0}, {10, 0}, {34, 0}, {34, 0}, {40, 0}, {40, 0}}, color = {0, 0, 255}, smooth = Smooth.None));
       connect(star.pin_n, pin) annotation(Line(points = {{60, 0}, {60, 0}, {98, 0}, {98, 0}, {100, 0}, {100, 0}}, color = {0, 0, 255}, smooth = Smooth.None));
-      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points = {{-40, 40}, {0, 0}, {40, 40}, {0, 0}, {0, -40}}, color = {0, 0, 255}, smooth = Smooth.None, origin = {-60, 0}, rotation = 90), Rectangle(extent = {{-10, 20}, {10, -20}}, lineColor = {0, 0, 255}, origin = {0, 0}, rotation = 90), Line(points = {{-40, 40}, {0, 0}, {40, 40}, {0, 0}, {0, -40}}, color = {0, 0, 255}, smooth = Smooth.None, origin = {60, 0}, rotation = 90)}), Documentation(info = "<html>
+      annotation(Diagram(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics), Icon(coordinateSystem(preserveAspectRatio = false, extent = {{-100, -100}, {100, 100}}), graphics={  Line(points=  {{-40, 40}, {0, 0}, {40, 40}, {0, 0}, {0, -40}}, color=  {0, 0, 255}, smooth=  Smooth.None, origin=  {-60, 0}, rotation=  90), Rectangle(extent=  {{-10, 20}, {10, -20}}, lineColor=  {0, 0, 255}, origin=  {0, 0}, rotation=  90), Line(points=  {{-40, 40}, {0, 0}, {40, 40}, {0, 0}, {0, -40}}, color=  {0, 0, 255}, smooth=  Smooth.None, origin=  {60, 0}, rotation=  90)}), Documentation(info = "<html>
     <p>
     Multi star points are connected by resistors. This model is required to operate multi phase systems with even phase numbers to avoid ideal connections of start points of base systems; see
     <a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.MultiPhase\">multi phase guidelines</a>.
@@ -3164,7 +3146,7 @@ package Modelica_Electrical_PowerConverters "Rectifiers, Inverters and DC/DC con
   end MSL322;
 
 
-  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), preferredView = "info", version = "3.2.1", versionBuild = 2, versionDate = "2014-10-05", uses(Modelica(
+  annotation(Icon(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2}), graphics), Diagram(coordinateSystem(extent = {{-100, -100}, {100, 100}}, preserveAspectRatio = true, initialScale = 0.1, grid = {2, 2})), preferredView = "info", version = "3.2.1", versionBuild = 3, versionDate = "2014-11-05", uses(Modelica(
           version="3.2.1")),                                                                                                    Documentation(info = "<html>
     <p>
     Copyright &copy; 2013-2014, <a href=\"modelica://Modelica_Electrical_PowerConverters.UsersGuide.Contact\">Christian Kral</a> and
