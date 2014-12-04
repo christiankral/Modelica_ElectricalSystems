@@ -113,7 +113,14 @@ Most literature on magnetic flux tubes is listed in
       extends Modelica.Icons.ReleaseNotes;
       annotation (Documentation(info="<html>
 
-<h5>Version 1.0.0, 2014-XX-XX (Christian Kral, Anton Haumer)</h5>
+<h5>Version 3.2.2, 2014-12-03</h5>
+<ul>
+<li>Version (to be) included in the MSL 3.2.2</li>
+<li>Added some more examples according to #1515</li>	
+</ul>
+
+ 
+<h5>Version 1.0.0, 2013-12-18</h5>
 <ul>
 <li>Initial version before inclusion in MSL</li>
 </ul>
@@ -642,6 +649,84 @@ This model compares a transient non-linear magnetic circuit with a linearized qu
 This package contains examples to demonstrate the usage of the quasi static flux tubes components.
 </p>
 </html>"));
+    package FixedShapes "Examples of fixed shape magnetic circuits"
+    extends Modelica.Icons.ExamplesPackage;
+      model CylinderSections
+      "Magnetic circuit using different cylinder sections"
+      extends Modelica.Icons.Example;
+      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialInner(
+        mu_rConst=100,
+        l=0.01,
+        r_o=0.02,
+        r_i=0.01)
+        annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
+      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadiaLRight(
+        l=0.02,
+        r_i=0.05,
+        r_o=0.06) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={20,10})));
+      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadialLeft(
+        l=0.02,
+        r_i=0.05,
+        r_o=0.06) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-60,10})));
+      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialOuter(
+        mu_rConst=100,
+        l=0.01,
+        r_i=0.05,
+        r_o=0.051) annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=180,
+            origin={-10,20})));
+      Basic.Ground ground
+        annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
+      Sources.ConstantMagneticPotentialDifference constantSource(f=50, V_m=
+            Complex(1000, 0)) annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=180,
+            origin={-40,0})));
+      equation
+      connect(hollowCylinderAxialInner.port_n, hollowCylinderRadiaLRight.port_p)
+        annotation (Line(
+          points={{0,0},{20,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderRadiaLRight.port_n, hollowCylinderAxialOuter.port_p)
+        annotation (Line(
+          points={{20,20},{4.44089e-16,20}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderAxialOuter.port_n, hollowCylinderRadialLeft.port_p)
+        annotation (Line(
+          points={{-20,20},{-60,20}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderRadialLeft.port_n, constantSource.port_n)
+        annotation (Line(
+          points={{-60,0},{-50,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(constantSource.port_p, hollowCylinderAxialInner.port_p)
+        annotation (Line(
+          points={{-30,0},{-20,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(constantSource.port_n, ground.port) annotation (Line(
+          points={{-50,0},{-50,-20}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
+                -100,-100},{100,100}}), graphics));
+      end CylinderSections;
+    end FixedShapes;
+
+    package Leakage "Examples of magnetic circuits with leakage"
+    extends Modelica.Icons.ExamplesPackage;
+    end Leakage;
   end Examples;
 
 
@@ -1280,40 +1365,20 @@ the magnetic reluctance by:</p>
           annotation (Dialog(group="Fixed geometry"));
         parameter SI.Radius r_o=0.01 "Outer radius of (hollow) cylinder"
           annotation (Dialog(group="Fixed geometry"));
-
+        parameter Modelica.SIunits.Angle alpha=2*Modelica.Constants.pi
+        "Central angle";
       equation
-        A = pi*(r_o^2 - r_i^2);
+        A = pi*(r_o^2 - r_i^2)*alpha/(2*Modelica.Constants.pi);
         G_m = (mu_0*mu_r*A)/l;
 
         annotation (Documentation(info="<html>
-<p>
-The axial cylinder models has an outer diameter,
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_o.png\">, 
-inner diameter, 
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\">,
-and length, 
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\">,
-the magnetic reluctance by:</p>
-<p>
-<dd>
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_cuboid.png\">
-</dd>
-</p>
-
-<p>The area of cross section is determined by:
-<dd>
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/A_axial.png\">
-</dd>
-</p>
-
-<p>
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderAxialFlux_qs.png\">
-</p>
-
-<p>
-A solid cylindric flux tube an be considered by setting the inner radius, 
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\">, 
-equal to zero.</p>
+<p>The axial cylinder models is characteriued by the outer diameter, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_o.png\"/>, the inner diameter, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\"/>, length, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\"/>. The magnetic reluctance is determined by:</p>
+<p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_cuboid.png\"/> </p>
+<p>The area of cross section yields: </p>
+<p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/A_axial.png\"/> </p>
+<p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderAxialFlux_qs.png\"/> </p>
+<p>A hollow cylinder is depcided in the above figure left for <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha2pi.png\"/>. A solid cylindric flux tube an be considered by setting the inner radius, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\"/>, equal to zero.</p>
+<p>A circular sector of the area of cross section with central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha\"/>, is depicted in the above figure right; the central angle alpha is inducated. </p>
 </html>"));
       end HollowCylinderAxialFlux;
 
@@ -1330,33 +1395,20 @@ equal to zero.</p>
           annotation (Dialog(group="Fixed geometry"));
         parameter SI.Radius r_o=0.02 "Outer radius of hollow cylinder"
           annotation (Dialog(group="Fixed geometry"));
-
+        parameter Modelica.SIunits.Angle alpha=2*Modelica.Constants.pi
+        "Central angle";
       equation
         A = l*pi*(r_o + r_i);
         // Area at arithmetic mean radius for calculation of average flux density
-        G_m = 2*pi*mu_0*mu_r*l/Modelica.Math.log(r_o/r_i);
+        G_m = 2*pi*mu_0*mu_r*l/Modelica.Math.log(r_o/r_i)*alpha/(2*Modelica.Constants.pi);
 
         annotation (Documentation(info="<html>
-<p>
-The radial cylinder models has an outer diameter,
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_o.png\">, 
-inner diameter, 
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\">,
-and length, 
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\">,
-the magnetic reluctance by:</p>
-<p>
-<dd>
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_radial.png\">
-</dd>
-</p>
-
-<p>
-In this model the magnetic flux and the magnetic potential difference, respectively, are radially oriented.
-</p>
-<p>
-<img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderRadialFlux_qs.png\">
-</p></html>"));
+<p>The radial cylinder model is characterized by the outer diameter, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_o.png\"/>, the inner diameter, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\"/>, length, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/l.png\"/>, and the angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha.png\"/>. The magnetic reluctance is determined by:</p>
+<p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_radial.png\"/> </p>
+<p>In this model the magnetic flux and the magnetic potential difference, respectively, are radially oriented. </p>
+<p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderRadialFlux_qs.png\"/></p>
+<p>The above figure left shows a radial flux cylinder with <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha2pi.png\"/>. The figure on the right indicates the central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha.png\"/> in case the cyclinder.</p>
+</html>"));
       end HollowCylinderRadialFlux;
 
       annotation (Documentation(info="<html>
@@ -1978,10 +2030,6 @@ This package contains connectors for the magnetic domain and partial models for 
             extent={{80,-20},{80,-40}},
             lineColor={255,128,0},
             textString="-"),
-          Text(
-            extent={{-150,-110},{150,-70}},
-            textString="%name",
-            lineColor={0,0,255}),
           Line(points={{-50,0},{50,0}}, color={255,127,0})}),
         Documentation(info="<html>
 <p>
@@ -2029,10 +2077,6 @@ at fixed frequency, <code>f</code>.
             lineColor={255,128,0},
             textString="-"),
           Line(points={{0,100},{0,50}}, color={255,127,0}),
-          Text(
-            extent={{-150,-110},{150,-70}},
-            textString="%name",
-            lineColor={0,0,255}),
           Ellipse(
             extent={{-50,-50},{50,50}},
             lineColor={255,127,0},
@@ -2069,10 +2113,6 @@ This source provides a quasi static magnetic potential difference or magnetomoti
         Icon(coordinateSystem(
           preserveAspectRatio=false,
           extent={{-100,-100},{100,100}}), graphics={
-          Text(
-            extent={{-150,-110},{150,-70}},
-            textString="%name",
-            lineColor={0,0,255}),
           Polygon(
             points={{80,0},{60,6},{60,-6},{80,0}},
             lineColor={255,128,0},
@@ -2129,10 +2169,6 @@ This source provides a constant quasi static magnetic flux <code>Phi</code> at f
             lineColor={255,128,0},
             fillColor={255,128,0},
             fillPattern=FillPattern.Solid),
-          Text(
-            extent={{-150,-110},{150,-70}},
-            textString="%name",
-            lineColor={0,0,255}),
           Line(points={{-100,0},{-50,0}}, color={255,127,0}),
           Line(points={{50,0},{100,0}}, color={255,127,0}),
           Line(points={{0,100},{0,50}}, color={255,127,0}),

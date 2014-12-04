@@ -1,52 +1,44 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Sat May 10 22:37:34 CEST 2014
+%%Thu Dec 04 12:58:07 CET 2014
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
-%<jpic x-min="5" x-max="62.25" y-min="2.82" y-max="27.5" auto-bounding="true">
-%<ellipse fill-style= "solid"
+%<jpic x-min="5" x-max="112" y-min="2.82" y-max="27.5" auto-bounding="true">
+%<ellipse stroke-style= "none"
 %	 p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
-%	 stroke-style= "none"
+%	 fill-style= "solid"
 %	 closure= "open"
 %	 angle-end= "0"
-%	 fill-color= "#99ff99"
 %	 angle-start= "0"
+%	 fill-color= "#99ff99"
 %	 />
-%<text fill-style= "none"
-%	 text-vert-align= "center-v"
-%	 anchor-point= "(62.25,22)"
-%	 text-frame= "noframe"
-%	 text-hor-align= "left"
-%	 >
-%\color[rgb]{0,0.6,0}$\underline{\Phi}$
-%</text>
-%<text fill-style= "none"
-%	 text-vert-align= "center-v"
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
 %	 anchor-point= "(61.54,2.82)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %
 %</text>
-%<text fill-style= "none"
-%	 text-vert-align= "center-v"
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
 %	 anchor-point= "(22,22.25)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "right"
 %	 >
 %\color[rgb]{0,0.6,0}$\underline{\Phi}$
 %</text>
-%<text fill-style= "none"
-%	 text-vert-align= "center-v"
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
 %	 anchor-point= "(5,22.5)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %
 %</text>
-%<text fill-style= "none"
-%	 text-vert-align= "center-v"
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
 %	 anchor-point= "(5.54,2.82)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
@@ -59,111 +51,111 @@
 %<multicurve fill-style= "none"
 %	 points= "(54,9.5);(54,9.5);(30,9.5);(30,9.5)"
 %	 />
-%<text fill-style= "none"
-%	 text-vert-align= "top"
+%<text text-vert-align= "top"
+%	 fill-style= "none"
 %	 anchor-point= "(57.75,19)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
 %	 >
 %$r_i$
 %</text>
-%<ellipse fill-style= "none"
-%	 p3= "(32,9.5)"
+%<ellipse p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
+%	 fill-style= "none"
 %	 closure= "open"
 %	 angle-end= "270"
 %	 angle-start= "90"
 %	 />
-%<ellipse fill-style= "none"
+%<ellipse stroke-style= "dashed"
 %	 p3= "(32,9.5)"
 %	 p2= "(32,24)"
 %	 p1= "(27.5,24)"
-%	 stroke-style= "dashed"
+%	 fill-style= "none"
 %	 stroke-dasharray= "1;1"
 %	 closure= "open"
 %	 angle-end= "90"
 %	 angle-start= "-90"
 %	 />
-%<ellipse fill-style= "solid"
-%	 p3= "(56.25,9.5)"
-%	 p2= "(56.25,24)"
-%	 p1= "(51.75,24)"
+%<ellipse p3= "(56.28,9.5)"
+%	 p2= "(56.28,24)"
+%	 p1= "(51.78,24)"
+%	 fill-style= "solid"
 %	 closure= "open"
 %	 angle-end= "0"
-%	 fill-color= "#99ff99"
 %	 angle-start= "0"
+%	 fill-color= "#99ff99"
 %	 />
-%<ellipse fill-style= "solid"
-%	 p3= "(55.12,13.38)"
+%<ellipse p3= "(55.12,13.38)"
 %	 p2= "(55.12,20.62)"
 %	 p1= "(52.88,20.62)"
+%	 fill-style= "solid"
 %	 closure= "open"
 %	 angle-end= "0"
-%	 fill-color= "#ffffff"
 %	 angle-start= "0"
+%	 fill-color= "#ffffff"
 %	 />
-%<ellipse fill-style= "solid"
+%<ellipse stroke-style= "dashed"
 %	 p3= "(30.88,13.12)"
 %	 p2= "(30.88,20.38)"
 %	 p1= "(28.62,20.38)"
-%	 stroke-style= "dashed"
+%	 fill-style= "solid"
 %	 stroke-dasharray= "1;1"
 %	 closure= "open"
 %	 angle-end= "0"
-%	 fill-color= "#ffffff"
 %	 angle-start= "0"
+%	 fill-color= "#ffffff"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-style= "dashed"
+%<multicurve stroke-style= "dashed"
+%	 fill-style= "none"
 %	 stroke-dasharray= "1;1"
 %	 points= "(29.75,20.5);(29.75,20.5);(53.75,20.5);(53.75,20.5)"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-style= "dashed"
+%<multicurve stroke-style= "dashed"
+%	 fill-style= "none"
 %	 stroke-dasharray= "1;1"
 %	 points= "(30,13.25);(30,13.25);(54,13.25);(54,13.25)"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-style= "dashed"
+%<multicurve stroke-style= "dashed"
+%	 stroke-color= "#009900"
+%	 fill-style= "none"
 %	 stroke-dasharray= "1;1"
 %	 points= "(24.04,22.25);(24.04,22.25);(29.75,22.25);(29.75,22.25)"
 %	 right-arrow= "head"
-%	 stroke-color= "#009900"
 %	 />
-%<multicurve fill-style= "none"
+%<multicurve stroke-color= "#009900"
+%	 fill-style= "none"
 %	 points= "(23.04,22.25);(23.04,22.25);(28.25,22.25);(28.25,22.25)"
-%	 stroke-color= "#009900"
 %	 />
-%<multicurve fill-style= "none"
+%<multicurve stroke-color= "#009900"
+%	 fill-style= "none"
 %	 points= "(54.25,22);(54.25,22);(60.96,22);(60.96,22)"
 %	 right-arrow= "head"
-%	 stroke-color= "#009900"
 %	 />
-%<multicurve polydots-size-minimum= "0.35"
+%<multicurve stroke-width= "0.15"
+%	 polydots-size-minimum= "0.35"
 %	 fill-style= "none"
-%	 left-arrow= "disk-centered"
-%	 stroke-width= "0.15"
 %	 points= "(54,17);(54,17);(57.5,20.25);(57.5,20.25)"
+%	 left-arrow= "disk-centered"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-style= "none"
+%<multicurve stroke-style= "none"
+%	 fill-style= "none"
 %	 points= "(58.5,21.5);(58.5,21.5);(55.17,18.09);(55.17,18.09)"
 %	 right-arrow= "head"
 %	 />
-%<multicurve polydots-size-minimum= "0.35"
+%<multicurve stroke-width= "0.15"
+%	 polydots-size-minimum= "0.35"
 %	 fill-style= "none"
-%	 left-arrow= "disk-centered"
-%	 stroke-width= "0.15"
 %	 points= "(54,17);(54,17);(55.75,7.75);(55.75,7.75)"
+%	 left-arrow= "disk-centered"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-style= "none"
+%<multicurve stroke-style= "none"
+%	 fill-style= "none"
 %	 points= "(55.75,7.75);(55.75,7.75);(55.23,10.62);(55.23,10.62)"
 %	 right-arrow= "head"
 %	 />
-%<text fill-style= "none"
-%	 text-vert-align= "baseline"
+%<text text-vert-align= "baseline"
+%	 fill-style= "none"
 %	 anchor-point= "(57,8)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
@@ -171,43 +163,115 @@
 %$r_o$
 %</text>
 %<g>
-%<multicurve fill-style= "none"
-%	 stroke-width= "0.15"
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
 %	 points= "(29.5,5.5);(29.5,5.5);(29.5,8);(29.5,8)"
 %	 />
-%<multicurve fill-style= "none"
-%	 stroke-width= "0.15"
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
 %	 points= "(53.5,5.5);(53.5,5.5);(53.5,8);(53.5,8)"
 %	 />
-%<text fill-style= "none"
-%	 text-vert-align= "top"
+%<text text-vert-align= "top"
+%	 fill-style= "none"
 %	 anchor-point= "(41.75,5.75)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
 %$l$
 %</text>
-%<multicurve fill-style= "none"
-%	 left-arrow= "head"
-%	 stroke-width= "0.15"
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
 %	 points= "(53.5,6.75);(53.5,6.75);(29.5,6.75);(29.5,6.75)"
 %	 right-arrow= "head"
+%	 left-arrow= "head"
 %	 />
 %</g>
-%<text fill-style= "none"
-%	 text-vert-align= "baseline"
+%<text text-vert-align= "baseline"
+%	 stroke-color= "#6600ff"
+%	 fill-style= "none"
 %	 anchor-point= "(42,27.5)"
 %	 text-frame= "noframe"
-%	 stroke-color= "#6600ff"
 %	 text-hor-align= "center-h"
 %	 >
 %\color[rgb]{1,0.667,0.333}$\underline{V}_m$
 %</text>
-%<multicurve fill-style= "none"
+%<multicurve stroke-color= "#ffaa55"
+%	 fill-style= "none"
 %	 points= "(29.75,26);(29.75,26);(53.75,26);(53.75,26)"
 %	 right-arrow= "head"
-%	 stroke-color= "#ffaa55"
 %	 />
+%<text text-vert-align= "center-v"
+%	 fill-style= "none"
+%	 anchor-point= "(63,18)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "left"
+%	 >
+%\color[rgb]{0,0.6,0}$\underline{\Phi}$
+%</text>
+%<g>
+%<multicurve stroke-style= "none"
+%	 fill-style= "solid"
+%	 points= "(105.2,20.24);(105.2,20.24);(106.15,19.49);(106.15,19.49);(106.15,19.49);(108.55,21.11);
+%	(108.55,21.11);(108.55,21.11);(107.53,22.2);(107.53,22.2);(107.53,22.2);(106.35,23.07);
+%	(106.35,23.07);(106.35,23.07);(105.2,23.51);(105.2,23.51);(105.2,23.51);(104.32,23.85);
+%	(104.32,23.85);(104.32,23.85);(103.45,23.92);(103.45,23.92);(103.45,23.92);(102.6,23.92);
+%	(102.6,23.92);(102.6,23.92);(101.52,23.75);(101.52,23.75);(101.52,23.75);(100.61,23.51);
+%	(100.61,23.51);(100.61,23.51);(99.66,23.11);(99.66,23.11);(99.66,23.11);(98.72,22.53);
+%	(98.72,22.53);(98.72,22.53);(97.5,21.18);(97.5,21.18);(97.5,21.18);(99.76,19.49);
+%	(99.76,19.49);(99.76,19.49);(100.95,20.44);(100.95,20.44);(100.95,20.44);(102.26,20.84);
+%	(102.26,20.84);(102.26,20.84);(103.99,20.78);(103.99,20.78);(103.99,20.78);(105.2,20.24)"
+%	 fill-color= "#99ff99"
+%	 />
+%<ellipse p3= "(110,10)"
+%	 p2= "(110,24)"
+%	 p1= "(96,24)"
+%	 fill-style= "none"
+%	 closure= "open"
+%	 angle-end= "-36.87"
+%	 angle-start= "-143.13"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(99.9,19.39);(99.9,19.39);(97.43,21.18);(97.43,21.18)"
+%	 />
+%<multicurve fill-style= "none"
+%	 points= "(106.15,19.36);(106.15,19.36);(108.61,21.15);(108.61,21.15)"
+%	 />
+%<ellipse stroke-width= "0.15"
+%	 p3= "(112,8)"
+%	 p2= "(112,26)"
+%	 p1= "(94,26)"
+%	 fill-style= "none"
+%	 closure= "open"
+%	 angle-end= "-33.69"
+%	 angle-start= "-144.46"
+%	 right-arrow= "head"
+%	 left-arrow= "head"
+%	 />
+%<text text-vert-align= "baseline"
+%	 fill-style= "none"
+%	 anchor-point= "(103,27)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$\alpha$
+%</text>
+%<ellipse p3= "(106.93,13.05)"
+%	 p2= "(106.93,20.95)"
+%	 p1= "(99.08,20.95)"
+%	 fill-style= "none"
+%	 closure= "open"
+%	 angle-end= "-36.87"
+%	 angle-start= "-143.13"
+%	 />
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(103.01,16.99);(103.01,16.99);(99.9,19.36);(99.9,19.36)"
+%	 />
+%<multicurve stroke-width= "0.15"
+%	 fill-style= "none"
+%	 points= "(102.97,16.99);(102.97,16.99);(106.15,19.32);(106.15,19.32)"
+%	 />
+%</g>
 %</jpic>
 %%End JPIC-XML
 %PSTricks content-type (pstricks.sty package needed)
@@ -218,10 +282,9 @@
 \psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
 \psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
 \psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
-\begin{pspicture}(0,0)(62.25,27.5)
+\begin{pspicture}(0,0)(112,27.5)
 \newrgbcolor{userFillColour}{0.6 1 0.6}
 \rput{90}(29.75,16.75){\psellipse[linestyle=none,fillcolor=userFillColour,fillstyle=solid](0,0)(7.25,-2.25)}
-\rput[l](62.25,22){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
 \rput(61.54,2.82){}
 \rput[r](22,22.25){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
 \rput(5,22.5){}
@@ -232,7 +295,7 @@
 \rput{90}(29.75,16.75){\psellipticarc[](0,0)(7.25,-2.25){180}{360}}
 \rput{90}(29.75,16.75){\psellipticarc[linestyle=dashed,dash=1 1](0,0)(7.25,-2.25){-0}{180}}
 \newrgbcolor{userFillColour}{0.6 1 0.6}
-\rput{90}(54,16.75){\psellipse[fillcolor=userFillColour,fillstyle=solid](0,0)(7.25,-2.25)}
+\rput{90}(54.03,16.75){\psellipse[fillcolor=userFillColour,fillstyle=solid](0,0)(7.25,-2.25)}
 \rput{90}(54,17){\psellipse[fillcolor=white,fillstyle=solid](0,0)(3.62,-1.12)}
 \rput{90}(29.75,16.75){\psellipse[linestyle=dashed,dash=1 1,fillcolor=white,fillstyle=solid](0,0)(3.63,-1.13)}
 \psline[linestyle=dashed,dash=1 1](29.75,20.5)(53.75,20.5)
@@ -256,4 +319,32 @@
 \rput[B](42,27.5){\color[rgb]{1,0.667,0.333}$\underline{V}_m$}
 \newrgbcolor{userLineColour}{1 0.67 0.33}
 \psline[linecolor=userLineColour]{->}(29.75,26)(53.75,26)
+\rput[l](63,18){\color[rgb]{0,0.6,0}$\underline{\Phi}$}
+\newrgbcolor{userFillColour}{0.6 1 0.6}
+\pspolygon[linestyle=none,fillcolor=userFillColour,fillstyle=solid](105.2,20.24)
+(106.15,19.49)
+(108.55,21.11)
+(107.53,22.2)
+(106.35,23.07)
+(105.2,23.51)
+(104.32,23.85)
+(103.45,23.92)
+(102.6,23.92)
+(101.52,23.75)
+(100.61,23.51)
+(99.66,23.11)
+(98.72,22.53)
+(97.5,21.18)
+(99.76,19.49)
+(100.95,20.44)
+(102.26,20.84)
+(103.99,20.78)(105.2,20.24)
+\rput{0}(103,17){\psellipticarc[](0,0)(7,-7){-143.13}{-36.87}}
+\psline(99.9,19.39)(97.43,21.18)
+\psline(106.15,19.36)(108.61,21.15)
+\rput{0}(103,17){\psellipticarc[linewidth=0.15]{<->}(0,0)(9,-9){-144.46}{-33.69}}
+\rput[B](103,27){$\alpha$}
+\rput{90}(103,17){\psellipticarc[](0,0)(3.95,-3.93){-53.13}{53.13}}
+\psline[linewidth=0.15](103.01,16.99)(99.9,19.36)
+\psline[linewidth=0.15](102.97,16.99)(106.15,19.32)
 \end{pspicture}
