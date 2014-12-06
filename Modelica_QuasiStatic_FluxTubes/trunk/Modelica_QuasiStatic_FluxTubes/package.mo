@@ -116,7 +116,8 @@ Most literature on magnetic flux tubes is listed in
 <h5>Version 3.2.2, 2014-12-03</h5>
 <ul>
 <li>Version (to be) included in the MSL 3.2.2</li>
-<li>Added some more examples according to #1515</li>	
+<li>Added some more examples according to #1515</li>
+<li>Added magnitudes and angles of complex quantities for better result interpretation</li>
 </ul>
 
  
@@ -644,89 +645,436 @@ This model compares a transient non-linear magnetic circuit with a linearized qu
               {100,100}}),
                         graphics));
     end NonLinearInductor;
+
+    package FixedShapes "Examples of fixed shape magnetic circuits"
+    extends Modelica.Icons.ExamplesPackage;
+      model CylinderSections
+      "Magnetic circuit using different cylinder sections"
+        extends Modelica.Icons.Example;
+        parameter Modelica.SIunits.RelativePermeability mu_rConst = 100
+        "Relative permeability";
+      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialInner(
+        l=0.01,
+        r_o=0.02,
+        r_i=0.01,
+          mu_rConst=mu_rConst)
+        annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadiaLRight(
+          mu_rConst=mu_rConst,
+          l=0.02,
+          r_i=0.015,
+          r_o=0.055)
+                  annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=90,
+            origin={40,38})));
+      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadialLeft(
+          mu_rConst=mu_rConst,
+          l=0.02,
+          r_i=0.015,
+          r_o=0.055)
+                  annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-60,40})));
+      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialOuter(
+        l=0.01,
+        r_i=0.05,
+          mu_rConst=mu_rConst,
+          r_o=0.06)
+                   annotation (Placement(transformation(
+            extent={{-10,10},{10,-10}},
+            rotation=180,
+            origin={-10,60})));
+      Basic.Ground ground
+        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
+        Modelica.Blocks.Sources.Constant constFrequency(k=50)
+          annotation (Placement(transformation(extent={{-80,-80},{-60,-60}})));
+        Modelica.ComplexBlocks.ComplexMath.PolarToComplex polarToComplex
+          annotation (Placement(transformation(extent={{0,-80},{-20,-60}})));
+        Modelica.Blocks.Sources.Ramp rampAbs(
+          duration=1,
+          offset=0,
+          height=0.0008)
+          annotation (Placement(transformation(extent={{40,-60},{20,-40}})));
+        Modelica.Blocks.Sources.Constant constArg(k=0)
+          annotation (Placement(transformation(extent={{40,-100},{20,-80}})));
+      Sources.SignalMagneticFlux source annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-40,-10})));
+        Basic.Crossing crossing
+          annotation (Placement(transformation(extent={{-50,0},{-30,20}})));
+      equation
+      connect(hollowCylinderAxialInner.port_n, hollowCylinderRadiaLRight.port_p)
+        annotation (Line(
+          points={{4.44089e-16,20},{40,20},{40,28}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderRadiaLRight.port_n, hollowCylinderAxialOuter.port_p)
+        annotation (Line(
+          points={{40,48},{40,60},{4.44089e-16,60}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderAxialOuter.port_n, hollowCylinderRadialLeft.port_p)
+        annotation (Line(
+          points={{-20,60},{-60,60},{-60,50}},
+          color={255,170,85},
+          smooth=Smooth.None));
+        connect(constFrequency.y, source.f) annotation (Line(
+            points={{-59,-70},{-44,-70},{-44,-20}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(rampAbs.y, polarToComplex.len) annotation (Line(
+            points={{19,-50},{10,-50},{10,-64},{2,-64}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(constArg.y, polarToComplex.phi) annotation (Line(
+            points={{19,-90},{12,-90},{12,-76},{2,-76}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(hollowCylinderRadialLeft.port_n, ground.port) annotation (Line(
+            points={{-60,30},{-60,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(source.Phi, polarToComplex.y) annotation (Line(
+            points={{-36,-20},{-36,-70},{-21,-70}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(source.port_p, crossing.port_p2) annotation (Line(
+            points={{-30,-10},{-30,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(source.port_n, crossing.port_n1) annotation (Line(
+            points={{-50,-10},{-50,-10},{-50,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(crossing.port_n2, hollowCylinderAxialInner.port_p) annotation (Line(
+            points={{-30,20},{-20,20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(crossing.port_p1, ground.port) annotation (Line(
+            points={{-50,20},{-60,20},{-60,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}),          graphics),
+          Documentation(info="<html>
+<p>This model tests different types of cylinder sections in one example. The circuit is operated at 50Hz and variable magnetic flux. </p>
+</html>"),experiment(StopTime=1,Interval=0.001));
+      end CylinderSections;
+
+      model CuboidSections "Magnetic circuit using different cuboid sections"
+        extends Modelica.Icons.Example;
+        parameter Modelica.SIunits.RelativePermeability mu_rConst = 100
+        "Relative permeability";
+      Basic.Ground ground
+        annotation (Placement(transformation(extent={{-70,-30},{-50,-10}})));
+      Sources.SignalMagneticPotentialDifference source annotation (Placement(
+              transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=180,
+              origin={-40,20})));
+        Shapes.FixedShape.Cuboid cuboidBottom(
+          mu_rConst=mu_rConst,
+          l=0.1,
+          a=0.01,
+          b=0.01) annotation (Placement(transformation(extent={{-20,10},{0,30}})));
+        Shapes.FixedShape.Cuboid cuboidTop(
+          mu_rConst=mu_rConst,
+          a=0.01,
+          l=0.1,
+          b=0.01) annotation (Placement(transformation(extent={{-20,50},{0,70}})));
+        Shapes.FixedShape.Cuboid cuboidRight(
+          mu_rConst=mu_rConst,
+          a=0.01,
+          l=0.005,
+          b=0.01) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=90,
+              origin={40,40})));
+        Shapes.FixedShape.Cuboid cuboidLeft(
+          mu_rConst=mu_rConst,
+          a=0.01,
+          l=0.005,
+          b=0.01) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-60,40})));
+        Modelica.Blocks.Sources.Constant constFrequency(k=50)
+          annotation (Placement(transformation(extent={{-80,-70},{-60,-50}})));
+        Modelica.ComplexBlocks.ComplexMath.PolarToComplex polarToComplex
+          annotation (Placement(transformation(extent={{0,-70},{-20,-50}})));
+        Modelica.Blocks.Sources.Ramp rampAbs(
+          height=800,
+          duration=1,
+          offset=0) annotation (Placement(transformation(extent={{40,-50},{20,-30}})));
+        Modelica.Blocks.Sources.Constant constArg(k=0)
+          annotation (Placement(transformation(extent={{40,-90},{20,-70}})));
+        Basic.Short short
+          annotation (Placement(transformation(extent={{12,10},{32,30}})));
+        Basic.Idle idle annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={80,40})));
+      equation
+        connect(source.port_n, ground.port) annotation (Line(
+            points={{-50,20},{-60,20},{-60,-10}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(cuboidLeft.port_p, cuboidTop.port_p) annotation (Line(
+            points={{-60,50},{-60,60},{-20,60}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(cuboidTop.port_n, cuboidRight.port_n) annotation (Line(
+            points={{4.44089e-16,60},{40,60},{40,50}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(cuboidBottom.port_p, source.port_p) annotation (Line(
+            points={{-20,20},{-30,20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(source.port_n, cuboidLeft.port_n) annotation (Line(
+            points={{-50,20},{-60,20},{-60,30}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constFrequency.y, source.f) annotation (Line(
+            points={{-59,-60},{-44,-60},{-44,10}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(rampAbs.y, polarToComplex.len) annotation (Line(
+            points={{19,-40},{10,-40},{10,-54},{2,-54}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(constArg.y, polarToComplex.phi) annotation (Line(
+            points={{19,-80},{12,-80},{12,-66},{2,-66}},
+            color={0,0,127},
+            smooth=Smooth.None));
+        connect(polarToComplex.y, source.V_m) annotation (Line(
+            points={{-21,-60},{-36,-60},{-36,10}},
+            color={85,170,255},
+            smooth=Smooth.None));
+        connect(cuboidBottom.port_n, short.port_p) annotation (Line(
+            points={{4.44089e-16,20},{12,20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(short.port_n, cuboidRight.port_p) annotation (Line(
+            points={{32,20},{40,20},{40,30}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(idle.port_p, cuboidTop.port_n) annotation (Line(
+            points={{80,50},{80,60},{0,60}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(idle.port_n, short.port_n) annotation (Line(
+            points={{80,30},{80,20},{32,20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
+                  {100,100}}),          graphics={Text(
+                extent={{-100,100},{100,80}},
+                lineColor={0,0,255},
+                pattern=LinePattern.Dash,
+                textString="Added short and idle model for testing purposes only")}),
+          Documentation(info="<html>
+<p>This model investigates a magnetic circuit consisting of four different cuboid sections. The circuit is operated at 50Hz and variable magnetic potential difference. </p>
+</html>"),experiment(StopTime=1,Interval=0.001));
+      end CuboidSections;
+    end FixedShapes;
+
+    package Leakage "Examples of magnetic circuits with leakage"
+    extends Modelica.Icons.ExamplesPackage;
+      model CylinderLeakage "Testing cylinder leakage models"
+        extends Modelica.Icons.Example;
+        import Modelica.Constants.pi;
+        parameter Modelica.SIunits.RelativePermeability mu_rConst = 100
+        "Relative permeability";
+        Shapes.Leakage.QuarterCylinder quarterCylinder1(l=2*pi*0.1)
+          annotation (Placement(transformation(extent={{-10,-10},{10,10}})));
+        Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialFlux1(
+          r_i=0,
+          r_o=0.04,
+          l=0.1,
+          mu_rConst=mu_rConst)
+          annotation (Placement(transformation(extent={{-40,-10},{-20,10}})));
+        Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialFlux2(
+          r_i=0,
+          l=0.1,
+          r_o=0.05,
+          mu_rConst=mu_rConst)
+                 annotation (Placement(transformation(extent={{20,-10},{40,10}})));
+        Shapes.Leakage.QuarterCylinder quarterCylinder2(l=2*pi*0.1)
+          annotation (Placement(transformation(extent={{50,-10},{70,10}})));
+        Sources.ConstantMagneticFlux constantSource(f=50, Phi=Complex(re=5E-3,
+            im=0))
+        annotation (Placement(transformation(extent={{-50,-10},{-70,10}})));
+        Basic.Ground ground1 annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-90,0})));
+        Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialAir1(
+          r_i=0,
+          r_o=0.04,
+          l=0.01) annotation (Placement(transformation(extent={{-10,-30},{10,-10}})));
+        Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialAir2(
+          r_i=0,
+          r_o=0.04,
+          l=0.01) annotation (Placement(transformation(extent={{50,-30},{70,-10}})));
+      Sensors.MagneticPotentialSensor magneticPotentialSensor annotation (
+          Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=270,
+            origin={-40,-80})));
+      Sensors.MagneticPotentialDifferenceSensor
+        magneticPotentialDifferenceSensor
+        annotation (Placement(transformation(extent={{-50,-40},{-70,-20}})));
+      Sensors.MagneticFluxSensor magneticFluxSensor
+        annotation (Placement(transformation(extent={{-50,40},{-70,20}})));
+      Sensors.ReferenceSensor referenceSensor
+        annotation (Placement(transformation(extent={{-20,-70},{0,-50}})));
+      Sensors.FrequencySensor frequencySensor
+        annotation (Placement(transformation(extent={{-60,-70},{-80,-50}})));
+      equation
+        connect(quarterCylinder2.port_p, hollowCylinderAxialFlux2.port_n) annotation (
+           Line(
+            points={{50,0},{40,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(hollowCylinderAxialFlux2.port_p, quarterCylinder1.port_n) annotation (
+           Line(
+            points={{20,0},{10,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(quarterCylinder1.port_p, hollowCylinderAxialFlux1.port_n) annotation (
+           Line(
+            points={{-10,0},{-20,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(hollowCylinderAxialAir2.port_n, quarterCylinder2.port_n) annotation (
+            Line(
+            points={{70,-20},{80,-20},{80,0},{70,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(hollowCylinderAxialAir2.port_p, hollowCylinderAxialFlux2.port_n)
+          annotation (Line(
+            points={{50,-20},{40,-20},{40,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(hollowCylinderAxialAir1.port_n, hollowCylinderAxialFlux2.port_p)
+          annotation (Line(
+            points={{10,-20},{20,-20},{20,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(hollowCylinderAxialAir1.port_p, hollowCylinderAxialFlux1.port_n)
+          annotation (Line(
+            points={{-10,-20},{-20,-20},{-20,0}},
+            color={255,170,85},
+            smooth=Smooth.None));
+      connect(ground1.port, constantSource.port_n) annotation (Line(
+          points={{-80,-1.33227e-15},{-76,-1.33227e-15},{-76,0},{-70,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(constantSource.port_p, hollowCylinderAxialFlux1.port_p)
+        annotation (Line(
+          points={{-50,0},{-40,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(ground1.port, magneticPotentialDifferenceSensor.port_n)
+        annotation (Line(
+          points={{-80,-1.33227e-15},{-80,-30},{-70,-30}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(magneticPotentialDifferenceSensor.port_p,
+        hollowCylinderAxialFlux1.port_p) annotation (Line(
+          points={{-50,-30},{-40,-30},{-40,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(hollowCylinderAxialFlux1.port_p, magneticPotentialSensor.port)
+        annotation (Line(
+          points={{-40,0},{-40,-70}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(magneticFluxSensor.port_n, ground1.port) annotation (Line(
+          points={{-70,30},{-80,30},{-80,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(magneticFluxSensor.port_p, quarterCylinder2.port_n) annotation (
+          Line(
+          points={{-50,30},{80,30},{80,0},{70,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(frequencySensor.port, hollowCylinderAxialFlux1.port_p)
+        annotation (Line(
+          points={{-60,-60},{-40,-60},{-40,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(referenceSensor.port, hollowCylinderAxialFlux1.port_p)
+        annotation (Line(
+          points={{-20,-60},{-40,-60},{-40,0}},
+          color={255,170,85},
+          smooth=Smooth.None));
+        annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}),   graphics),
+          experiment(StopTime=1,Interval=0.001),
+        Documentation(info="<html>
+<p>Test of cylindrical compoents with leakage and sensors.</p>
+</html>"));
+      end CylinderLeakage;
+
+      model GeneralLeakage "Magnetic circuit with generic leakage mode"
+        extends Modelica.Icons.Example;
+        Basic.ConstantReluctance constantReluctance(R_m=1E-5)
+          annotation (Placement(transformation(extent={{0,50},{20,70}})));
+        Basic.LeakageWithCoefficient leakageWithCoefficient(R_mUsefulTot=1E-5)
+          annotation (Placement(transformation(extent={{20,10},{0,30}})));
+        Basic.EddyCurrent eddyCurrent(useConductance=true, G=10000) annotation (
+            Placement(transformation(
+              extent={{10,-10},{-10,10}},
+              rotation=90,
+              origin={40,40})));
+        Sources.ConstantMagneticPotentialDifference constantSource(f=50, V_m(re=100,
+              im=0)) annotation (Placement(transformation(
+              extent={{-10,-10},{10,10}},
+              rotation=270,
+              origin={-20,40})));
+        Basic.Ground ground
+          annotation (Placement(transformation(extent={{-30,-20},{-10,0}})));
+      equation
+        connect(constantReluctance.port_p, constantSource.port_p) annotation (Line(
+            points={{-4.44089e-16,60},{-20,60},{-20,50}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(constantReluctance.port_n, eddyCurrent.port_p) annotation (Line(
+            points={{20,60},{40,60},{40,50}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(eddyCurrent.port_n, leakageWithCoefficient.port_p) annotation (Line(
+            points={{40,30},{40,20},{20,20}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(leakageWithCoefficient.port_n, constantSource.port_n) annotation (
+            Line(
+            points={{0,20},{-20,20},{-20,30}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        connect(ground.port, constantSource.port_n) annotation (Line(
+            points={{-20,0},{-20,30}},
+            color={255,170,85},
+            smooth=Smooth.None));
+        annotation (
+          Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},{100,
+                  100}}), graphics),
+          experiment(StartTime=1,Interval=0.001),
+        Documentation(info="<html>
+<p>Magnetic circuit with two reluctances, leakage reluctance,  and eddy current loss.</p>
+</html>"));
+      end GeneralLeakage;
+    end Leakage;
     annotation (Documentation(info="<html>
 <p>
 This package contains examples to demonstrate the usage of the quasi static flux tubes components.
 </p>
 </html>"));
-    package FixedShapes "Examples of fixed shape magnetic circuits"
-    extends Modelica.Icons.ExamplesPackage;
-      model CylinderSections
-      "Magnetic circuit using different cylinder sections"
-      extends Modelica.Icons.Example;
-      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialInner(
-        mu_rConst=100,
-        l=0.01,
-        r_o=0.02,
-        r_i=0.01)
-        annotation (Placement(transformation(extent={{-20,-10},{0,10}})));
-      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadiaLRight(
-        l=0.02,
-        r_i=0.05,
-        r_o=0.06) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=90,
-            origin={20,10})));
-      Shapes.FixedShape.HollowCylinderRadialFlux hollowCylinderRadialLeft(
-        l=0.02,
-        r_i=0.05,
-        r_o=0.06) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=270,
-            origin={-60,10})));
-      Shapes.FixedShape.HollowCylinderAxialFlux hollowCylinderAxialOuter(
-        mu_rConst=100,
-        l=0.01,
-        r_i=0.05,
-        r_o=0.051) annotation (Placement(transformation(
-            extent={{-10,-10},{10,10}},
-            rotation=180,
-            origin={-10,20})));
-      Basic.Ground ground
-        annotation (Placement(transformation(extent={{-60,-40},{-40,-20}})));
-      Sources.ConstantMagneticPotentialDifference constantSource(f=50, V_m=
-            Complex(1000, 0)) annotation (Placement(transformation(
-            extent={{-10,10},{10,-10}},
-            rotation=180,
-            origin={-40,0})));
-      equation
-      connect(hollowCylinderAxialInner.port_n, hollowCylinderRadiaLRight.port_p)
-        annotation (Line(
-          points={{0,0},{20,0}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      connect(hollowCylinderRadiaLRight.port_n, hollowCylinderAxialOuter.port_p)
-        annotation (Line(
-          points={{20,20},{4.44089e-16,20}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      connect(hollowCylinderAxialOuter.port_n, hollowCylinderRadialLeft.port_p)
-        annotation (Line(
-          points={{-20,20},{-60,20}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      connect(hollowCylinderRadialLeft.port_n, constantSource.port_n)
-        annotation (Line(
-          points={{-60,0},{-50,0}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      connect(constantSource.port_p, hollowCylinderAxialInner.port_p)
-        annotation (Line(
-          points={{-30,0},{-20,0}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      connect(constantSource.port_n, ground.port) annotation (Line(
-          points={{-50,0},{-50,-20}},
-          color={255,170,85},
-          smooth=Smooth.None));
-      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{
-                -100,-100},{100,100}}), graphics));
-      end CylinderSections;
-    end FixedShapes;
-
-    package Leakage "Examples of magnetic circuits with leakage"
-    extends Modelica.Icons.ExamplesPackage;
-    end Leakage;
   end Examples;
 
 
@@ -1770,8 +2118,16 @@ Additionally the reference angle is specified in the connector. The time derivat
               -10},{110,10}}, rotation=0)));
       Modelica.SIunits.ComplexMagneticPotentialDifference V_m
       "Magnetic potential difference between both ports";
+      Modelica.SIunits.MagneticPotentialDifference abs_V_m = Modelica.ComplexMath.'abs'(V_m)
+      "Magnitude of complex magnetic potential difference";
+      Modelica.SIunits.Angle arg_V_m=Modelica.ComplexMath.arg(V_m)
+      "Argument of complex magnetic potential difference";
       Modelica.SIunits.ComplexMagneticFlux Phi(re(start=0),im(start=0))
       "Magnetic flux from port_p to port_n";
+      Modelica.SIunits.MagneticFlux abs_Phi=
+          Modelica.ComplexMath.'abs'(Phi) "Magnitude of complex magnetic flux";
+      Modelica.SIunits.Angle arg_Phi=Modelica.ComplexMath.arg(Phi)
+      "Argument of complex magnetic flux";
       Modelica.SIunits.AngularVelocity omega;
     equation
       Connections.branch(port_p.reference, port_n.reference);
@@ -1819,9 +2175,17 @@ It is assumed that the magnetic flux flowing into <code>port_p</code> is identic
       Modelica.SIunits.Permeance G_m "Magnetic permeance";
       Modelica.SIunits.ComplexMagneticFluxDensity B
       "Magnetic flux density (normal component)";
+      Modelica.SIunits.MagneticFluxDensity abs_B = Modelica.ComplexMath.'abs'(B)
+      "Magnitude of complex magnetic flux density";
+      Modelica.SIunits.Angle arg_B=Modelica.ComplexMath.arg(B)
+      "Argument of complex magnetic flux density";
       SI.CrossSection A "Area of cross section penetrated by magnetic flux";
       Modelica.SIunits.ComplexMagneticFieldStrength H
       "Magnetic field strength (normal component)";
+      Modelica.SIunits.MagneticFieldStrength abs_H = Modelica.ComplexMath.'abs'(H)
+      "Magnitude of complex magnetic field strength";
+      Modelica.SIunits.Angle arg_H=Modelica.ComplexMath.arg(H)
+      "Argument of complex magnetic field strength";
 
       SI.RelativePermeability mu_r "Relative magnetic permeability";
 
@@ -2076,13 +2440,17 @@ at fixed frequency, <code>f</code>.
             extent={{80,-20},{80,-40}},
             lineColor={255,128,0},
             textString="-"),
-          Line(points={{0,100},{0,50}}, color={255,127,0}),
+          Line(points={{40,80},{40,30}},color={255,127,0},
+            pattern=LinePattern.Dash),
           Ellipse(
             extent={{-50,-50},{50,50}},
             lineColor={255,127,0},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid),
-          Line(points={{-50,0},{50,0}}, color={255,127,0})}),
+          Line(points={{-50,0},{50,0}}, color={255,127,0}),
+          Line(points={{-40,80},{-40,30}},
+                                        color={255,127,0},
+            pattern=LinePattern.Dash)}),
         Documentation(info="<html>
 <p>
 This source provides a quasi static magnetic potential difference or magnetomotive force (mmf) with signal inputs for:
@@ -2171,13 +2539,17 @@ This source provides a constant quasi static magnetic flux <code>Phi</code> at f
             fillPattern=FillPattern.Solid),
           Line(points={{-100,0},{-50,0}}, color={255,127,0}),
           Line(points={{50,0},{100,0}}, color={255,127,0}),
-          Line(points={{0,100},{0,50}}, color={255,127,0}),
           Ellipse(
             extent={{-50,-50},{50,50}},
             lineColor={255,127,0},
             fillColor={255,255,255},
             fillPattern=FillPattern.Solid),
-          Line(points={{0,50},{0,-50}}, color={255,127,0})}),
+          Line(points={{0,50},{0,-50}}, color={255,127,0}),
+          Line(points={{40,80},{40,30}},color={255,127,0},
+            pattern=LinePattern.Dash),
+          Line(points={{-40,80},{-40,30}},
+                                        color={255,127,0},
+            pattern=LinePattern.Dash)}),
         Documentation(info="<html>
 <p>
 This source provides a quasi static magnetic flux with inputs for:
@@ -2286,11 +2658,8 @@ This sensor can be used to measure the complex potential.
               textString="V_m"),
             Line(points={{-70,0},{-90,0}}, color={0,0,0}),
             Line(points={{70,0},{90,0}}, color={0,0,0}),
-            Line(points={{0,-90},{0,-70}}, color={0,0,0}),
-            Text(
-              extent={{-150,120},{150,80}},
-              textString="%name",
-              lineColor={0,0,255})}), Diagram(coordinateSystem(
+            Line(points={{0,-90},{0,-70}}, color={0,0,0})}),
+                                      Diagram(coordinateSystem(
             preserveAspectRatio=false,
             extent={{-100,-100},{100,100}}), graphics));
     end MagneticPotentialDifferenceSensor;
@@ -2306,10 +2675,7 @@ This sensor can be used to measure the complex potential.
                 -100},{100,100}}), graphics={Line(points={{0,-100},{0,-70}},
               color={0,0,0}),Line(points={{-70,0},{-90,0}}, color={0,0,0}),Line(
               points={{70,0},{90,0}}, color={0,0,0}),Text(extent={{-29,-11},{30,
-              -70}}, textString="Phi"),Text(
-                  extent={{-150,120},{150,80}},
-                  textString="%name",
-                  lineColor={0,0,255}),Line(points={{0,-90},{0,-70}})}),
+              -70}}, textString="Phi"),Line(points={{0,-90},{0,-70}})}),
         Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,-100},
               {100,100}}), graphics));
     end MagneticFluxSensor;
@@ -2533,6 +2899,104 @@ For analysis of magnetic networks, only magnetic potential differences and magne
   end Sensors;
 
 
+
+  package MoveToModelicaTest "Example to be moved to ModelicaTest"
+  extends Modelica.Icons.Package;
+    model NoPhysicalTestLeakage "Testing cylinder leakage models"
+      extends Modelica.Icons.Example;
+      import Modelica.Constants.pi;
+      parameter Modelica.SIunits.RelativePermeability mu_rConst = 100
+      "Relative permeability";
+      Sources.ConstantMagneticPotentialDifference constantSource1(f=50, V_m(re=200,
+            im=0))
+        annotation (Placement(transformation(extent={{-80,30},{-60,50}})));
+      Basic.Ground ground1 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={-90,10})));
+      Shapes.Leakage.QuarterHollowCylinder quarterHollowCylinder(ratio=0.3, l=0.1)
+        annotation (Placement(transformation(extent={{-50,30},{-30,50}})));
+      Shapes.Leakage.HalfCylinder halfCylinder(l=0.1)
+        annotation (Placement(transformation(extent={{-20,30},{0,50}})));
+      Shapes.Leakage.HalfHollowCylinder halfHollowCylinder(ratio=0.3, l=0.1)
+        annotation (Placement(transformation(extent={{10,30},{30,50}})));
+      Sources.ConstantMagneticPotentialDifference constantSource2(f=50, V_m(re=200,
+            im=0))
+        annotation (Placement(transformation(extent={{-80,-50},{-60,-30}})));
+      Basic.Ground ground2 annotation (Placement(transformation(
+            extent={{-10,-10},{10,10}},
+            rotation=0,
+            origin={-90,-70})));
+      Shapes.Leakage.QuarterSphere quarterSphere(r=0.005)
+        annotation (Placement(transformation(extent={{-50,-50},{-30,-30}})));
+      Shapes.Leakage.QuarterHollowSphere quarterHollowSphere(t=0.2)
+        annotation (Placement(transformation(extent={{-20,-50},{0,-30}})));
+      Shapes.Leakage.EighthOfSphere eighthOfSphere(r=0.01)
+        annotation (Placement(transformation(extent={{10,-50},{30,-30}})));
+      Shapes.Leakage.EighthOfHollowSphere eighthOfHollowSphere(t=0.2)
+        annotation (Placement(transformation(extent={{40,-50},{60,-30}})));
+      Shapes.Leakage.CoaxCylindersEndFaces coaxCylindersEndFaces(
+      r_0=10e-3,
+      r_1=17e-3,
+      r_2=20e-3)
+        annotation (Placement(transformation(extent={{70,-50},{90,-30}})));
+    equation
+      connect(ground1.port, constantSource1.port_p) annotation (Line(
+          points={{-90,20},{-90,40},{-80,40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(constantSource1.port_n, quarterHollowCylinder.port_p) annotation (
+          Line(
+          points={{-60,40},{-50,40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(quarterHollowCylinder.port_n, halfCylinder.port_p) annotation (Line(
+          points={{-30,40},{-20,40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(halfCylinder.port_n, halfHollowCylinder.port_p) annotation (Line(
+          points={{0,40},{10,40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(halfHollowCylinder.port_n, ground1.port) annotation (Line(
+          points={{30,40},{40,40},{40,60},{-90,60},{-90,20}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(ground2.port, constantSource2.port_p) annotation (Line(
+          points={{-90,-60},{-90,-40},{-80,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(constantSource2.port_n, quarterSphere.port_p) annotation (Line(
+          points={{-60,-40},{-50,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(quarterSphere.port_n, quarterHollowSphere.port_p) annotation (Line(
+          points={{-30,-40},{-20,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(quarterHollowSphere.port_n, eighthOfSphere.port_p) annotation (Line(
+          points={{0,-40},{10,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(eighthOfSphere.port_n, eighthOfHollowSphere.port_p) annotation (Line(
+          points={{30,-40},{40,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(eighthOfHollowSphere.port_n, coaxCylindersEndFaces.port_p)
+        annotation (Line(
+          points={{60,-40},{70,-40}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      connect(coaxCylindersEndFaces.port_n, ground2.port) annotation (Line(
+          points={{90,-40},{90,-40},{100,-40},{100,-20},{-90,-20},{-90,-60}},
+          color={255,170,85},
+          smooth=Smooth.None));
+      annotation (Diagram(coordinateSystem(preserveAspectRatio=false, extent={{-100,
+                -100},{100,100}}), graphics),
+        experiment(StopTime=1, Interval=0.001));
+    end NoPhysicalTestLeakage;
+  end MoveToModelicaTest;
+
   annotation (Documentation(info="<html>
 <p>
 Copyright &copy; 2013-2014, <a href=\"modelica://Modelica.Magnetic.FundamentalWave.UsersGuide.Contact\">Christian Kral</a> and
@@ -2584,5 +3048,4 @@ Copyright &copy; 2013-2014, <a href=\"modelica://Modelica.Magnetic.FundamentalWa
         color={85,170,255},
         smooth=Smooth.None)}),
     uses(Modelica(version="3.2.2"), Complex(version="3.2.1")));
-
 end Modelica_QuasiStatic_FluxTubes;
