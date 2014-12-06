@@ -96,6 +96,11 @@ see example
 
 <p>The parameter and variable names are chosen as close as possible to the transient 
 <a href=\"modelica://Modelica.Magnetic.FluxTubes\">FluxTubes</a> library, to avoid additional effort when converting transient into quasi static flux tubes models.</p>
+
+<h4>Reference Note</h4>
+
+<p>A similar approach on quasi static flux tube models is published in 
+[<a href=\"Modelica_QuasiStatic_FluxTubes.UsersGuide.Literature\">Raabe2012</a>].</p>
 </html>"));
     end FluxTubeConcept;
 
@@ -103,10 +108,25 @@ see example
       extends Modelica.Icons.References;
 
       annotation (Documentation(info="<html>
+<h4>References</h4>
+
+<table border=\"0\" cellspacing=\"0\" cellpadding=\"2\">
+    <tr>
+      <td valign=\"top\">[Raabe2012]</td>
+      <td valign=\"top\">N. Raabe,
+        &quot;<a href=\"http://www.ep.liu.se/ecp/076/016/ecp12076016.pdf\">
+        An approach for modelling quasi-stationary magnetic circuits</a>,&quot;
+        <i>Modelica Conference</i>,
+        pp. 167-172, 2012.</td>
+    </tr>
+</table>
+
+<h4>Additional References</h4>
 <p>
-Most literature on magnetic flux tubes is listed in
-<a href=\"modelica://Modelica.Magnetic.FluxTubes.UsersGuide.Literature\">Modelica.Magnetic.FluxTubes</a>.
-</p></html>"));
+Additional reference on magnetic flux tubes are listed in
+<a href=\"modelica://Modelica.Magnetic.FluxTubes.UsersGuide.Literature\">Modelica.Magnetic.FluxTubes</a>. 
+</p>
+</html>"));
     end Literature;
 
     class ReleaseNotes "Release Notes"
