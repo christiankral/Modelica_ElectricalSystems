@@ -1746,7 +1746,7 @@ the magnetic reluctance by:</p>
 <p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/A_axial.png\"/> </p>
 <p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderAxialFlux_qs.png\"/> </p>
 <p>A hollow cylinder is depcided in the above figure left for <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha2pi.png\"/>. A solid cylindric flux tube an be considered by setting the inner radius, <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/r_i.png\"/>, equal to zero.</p>
-<p>A circular sector of the area of cross section with central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha\"/>, is depicted in the above figure right; the central angle alpha is inducated. </p>
+<p>A circular sector of the area of cross section with central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha\"/> is depicted in the above figure right. </p>
 </html>"));
       end HollowCylinderAxialFlux;
 
@@ -1775,7 +1775,7 @@ the magnetic reluctance by:</p>
 <p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/R_m_radial.png\"/> </p>
 <p>In this model the magnetic flux and the magnetic potential difference, respectively, are radially oriented. </p>
 <p><img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/HollowCylinderRadialFlux_qs.png\"/></p>
-<p>The above figure left shows a radial flux cylinder with <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha2pi.png\"/>. The figure on the right indicates the central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha.png\"/> in case the cyclinder.</p>
+<p>The above figure left shows a radial flux cylinder with <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha2pi.png\"/>. The figure on the right indicates the central angle <img src=\"modelica://Modelica_QuasiStatic_FluxTubes/Resources/Images/Magnetic/QuasiStatic/FluxTubes/alpha.png\"/> in case a cyclinder section shall be considered.</p>
 </html>"));
       end HollowCylinderRadialFlux;
 
@@ -2919,7 +2919,6 @@ For analysis of magnetic networks, only magnetic potential differences and magne
   end Sensors;
 
 
-
   package MoveToModelicaTest "Example to be moved to ModelicaTest"
   extends Modelica.Icons.Package;
     model NoPhysicalTestLeakage "Testing cylinder leakage models"
@@ -3016,6 +3015,7 @@ For analysis of magnetic networks, only magnetic potential differences and magne
         experiment(StopTime=1, Interval=0.001));
     end NoPhysicalTestLeakage;
   end MoveToModelicaTest;
+
 
   annotation (Documentation(info="<html>
 <p>
