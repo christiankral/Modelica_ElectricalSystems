@@ -1,5 +1,5 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Sat Mar 22 19:48:07 CET 2014
+%%Mon Feb 02 15:11:13 CET 2015
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
 %<jpic x-min="0" x-max="60" y-min="0" y-max="32" auto-bounding="true">
@@ -26,8 +26,8 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 arrow-global-scale-length= "1.5"
-%	 right-arrow= "head"
 %	 points= "(13.5,6);(13.5,6);(15.5,4);(15.5,4)"
+%	 right-arrow= "head"
 %	 />
 %<multicurve fill-style= "none"
 %	 points= "(11,10);(11,10);(11,6);(11,6)"
@@ -79,8 +79,8 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 arrow-global-scale-length= "1.5"
-%	 right-arrow= "head"
 %	 points= "(13.5,22);(13.5,22);(15.5,20);(15.5,20)"
+%	 right-arrow= "head"
 %	 />
 %<multicurve fill-style= "none"
 %	 points= "(11,26);(11,26);(11,22);(11,22)"
@@ -115,16 +115,16 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 left-arrow= "disk-centered"
-%	 right-arrow= "disk-centered"
 %	 points= "(16,16);(16,16);(24,16);(24,16)"
+%	 right-arrow= "disk-centered"
 %	 />
 %<multicurve fill-style= "none"
-%	 right-arrow= "disk-centered"
 %	 points= "(16,2);(16,2);(16,0);(16,0)"
+%	 right-arrow= "disk-centered"
 %	 />
 %<multicurve fill-style= "none"
-%	 right-arrow= "disk-centered"
 %	 points= "(16,30);(16,30);(16,32);(16,32)"
+%	 right-arrow= "disk-centered"
 %	 />
 %</g>
 %<text fill-style= "none"
@@ -134,7 +134,7 @@
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
-%dc input
+%dc 1
 %</text>
 %<text fill-style= "none"
 %	 text-vert-align= "center-v"
@@ -142,7 +142,7 @@
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
 %	 >
-%dc output
+%dc 2
 %</text>
 %<g>
 %<g>
@@ -166,8 +166,8 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 arrow-global-scale-length= "1.5"
-%	 right-arrow= "head"
 %	 points= "(54.5,6);(54.5,6);(52.5,4);(52.5,4)"
+%	 right-arrow= "head"
 %	 />
 %<multicurve fill-style= "none"
 %	 points= "(57,10);(57,10);(57,6);(57,6)"
@@ -219,8 +219,8 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 arrow-global-scale-length= "1.5"
-%	 right-arrow= "head"
 %	 points= "(54.5,22);(54.5,22);(52.5,20);(52.5,20)"
+%	 right-arrow= "head"
 %	 />
 %<multicurve fill-style= "none"
 %	 points= "(57,26);(57,26);(57,22);(57,22)"
@@ -255,8 +255,8 @@
 %	 />
 %<multicurve fill-style= "none"
 %	 left-arrow= "disk-centered"
-%	 right-arrow= "disk-centered"
 %	 points= "(52,16);(52,16);(44,16);(44,16)"
+%	 right-arrow= "disk-centered"
 %	 />
 %<multicurve fill-style= "none"
 %	 points= "(52,2);(52,2);(52,0);(52,0)"
@@ -265,12 +265,12 @@
 %	 points= "(52,30);(52,30);(52,32);(52,32)"
 %	 />
 %<multicurve fill-style= "none"
-%	 right-arrow= "disk-centered"
 %	 points= "(52,32);(52,32);(0,32);(0,32)"
+%	 right-arrow= "disk-centered"
 %	 />
 %<multicurve fill-style= "none"
-%	 right-arrow= "disk-centered"
 %	 points= "(52,0);(52,0);(0,0);(0,0)"
+%	 right-arrow= "disk-centered"
 %	 />
 %</jpic>
 %%End JPIC-XML
@@ -317,8 +317,8 @@
 \psline{*-*}(16,16)(24,16)
 \psline{-*}(16,2)(16,0)
 \psline{-*}(16,30)(16,32)
-\rput{90}(0,16){dc input}
-\rput(34,16){dc output}
+\rput{90}(0,16){dc 1}
+\rput(34,16){dc 2}
 \psline(52,12.5)(52,14)
 \psline(56,10)(56,6)
 \psline(56,8.5)(52,12.5)

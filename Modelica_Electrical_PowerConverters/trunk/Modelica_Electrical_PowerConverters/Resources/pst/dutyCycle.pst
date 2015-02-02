@@ -1,92 +1,108 @@
 %%Created by jPicEdt 1.4.1_03: mixed JPIC-XML/LaTeX format
-%%Sun Mar 16 21:49:48 CET 2014
+%%Mon Feb 02 15:24:03 CET 2015
 %%Begin JPIC-XML
 %<?xml version="1.0" standalone="yes"?>
-%<jpic x-min="6" x-max="36" y-min="-2" y-max="37" auto-bounding="true">
-%<multicurve points= "(7,0);(7,0);(36,0);(36,0)"
+%<jpic x-min="6" x-max="38" y-min="-2" y-max="37" auto-bounding="true">
+%<multicurve fill-style= "none"
+%	 points= "(7,0);(7,0);(36,0);(36,0)"
 %	 right-arrow= "head"
-%	 fill-style= "none"
 %	 />
-%<multicurve points= "(8,-1);(8,-1);(8,16);(8,16)"
+%<multicurve fill-style= "none"
+%	 points= "(8,-1);(8,-1);(8,16);(8,16)"
 %	 right-arrow= "head"
-%	 fill-style= "none"
 %	 />
-%<multicurve points= "(7,21);(7,21);(36,21);(36,21)"
+%<multicurve fill-style= "none"
+%	 points= "(7,21);(7,21);(36,21);(36,21)"
 %	 right-arrow= "head"
-%	 fill-style= "none"
 %	 />
-%<multicurve points= "(8,20);(8,20);(8,37);(8,37)"
+%<multicurve fill-style= "none"
+%	 points= "(8,20);(8,20);(8,37);(8,37)"
 %	 right-arrow= "head"
-%	 fill-style= "none"
 %	 />
-%<multicurve stroke-width= "0.6"
+%<multicurve fill-style= "none"
+%	 stroke-width= "0.6"
 %	 points= "(6,0);(6,0);(8,0);(8,0);(8,0);(8,8);
 %	(8,8);(8,8);(13,8);(13,8);(13,8);(13,0);
 %	(13,0);(13,0);(24,0);(24,0);(24,0);(24,8);
 %	(24,8);(24,8);(29,8);(29,8);(29,8);(29,0);
 %	(29,0);(29,0);(32,0);(32,0)"
-%	 fill-style= "none"
 %	 />
-%<multicurve stroke-width= "0.6"
+%<multicurve fill-style= "none"
+%	 stroke-width= "0.6"
 %	 points= "(6,28);(6,28);(8,28);(8,28);(8,28);(8,21);
 %	(8,21);(8,21);(13,21);(13,21);(13,21);(13,28);
 %	(13,28);(13,28);(24,28);(24,28);(24,28);(24,21);
 %	(24,21);(24,21);(29,21);(29,21);(29,21);(29,28);
 %	(29,28);(29,28);(32,28);(32,28)"
-%	 fill-style= "none"
 %	 />
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(10,16)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
-%	 fill-style= "none"
 %	 >
 %\texttt{fire}
 %</text>
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(10,37)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "left"
-%	 fill-style= "none"
 %	 >
 %\texttt{notFire}
 %</text>
-%<multicurve points= "(13,-1);(13,-1);(13,0);(13,0)"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 points= "(13,-1);(13,-1);(13,0);(13,0)"
 %	 />
-%<multicurve points= "(24,-1);(24,-1);(24,0);(24,0)"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 points= "(24,-1);(24,-1);(24,0);(24,0)"
 %	 />
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(8,-2)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
-%	 fill-style= "none"
 %	 >
 %$0$
 %</text>
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(13,-2)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
-%	 fill-style= "none"
 %	 >
 %$d/f$
 %</text>
-%<text text-vert-align= "top"
+%<text fill-style= "none"
+%	 text-vert-align= "top"
 %	 anchor-point= "(24,-2)"
 %	 text-frame= "noframe"
 %	 text-hor-align= "center-h"
-%	 fill-style= "none"
 %	 >
 %$1/f$
 %</text>
-%<multicurve points= "(13,21);(13,21);(13,20);(13,20)"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 points= "(13,21);(13,21);(13,20);(13,20)"
 %	 />
-%<multicurve points= "(24,21);(24,21);(24,20);(24,20)"
-%	 fill-style= "none"
+%<multicurve fill-style= "none"
+%	 points= "(24,21);(24,21);(24,20);(24,20)"
 %	 />
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
+%	 anchor-point= "(38,21)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$t$
+%</text>
+%<text fill-style= "none"
+%	 text-vert-align= "center-v"
+%	 anchor-point= "(38,0)"
+%	 text-frame= "noframe"
+%	 text-hor-align= "center-h"
+%	 >
+%$t$
+%</text>
 %</jpic>
 %%End JPIC-XML
 %PSTricks content-type (pstricks.sty package needed)
@@ -97,7 +113,7 @@
 \psset{linewidth=0.3,dotsep=1,hatchwidth=0.3,hatchsep=1.5,shadowsize=1,dimen=middle}
 \psset{dotsize=0.7 2.5,dotscale=1 1,fillcolor=black}
 \psset{arrowsize=1 2,arrowlength=1,arrowinset=0.25,tbarsize=0.7 5,bracketlength=0.15,rbracketlength=0.15}
-\begin{pspicture}(0,0)(36,37)
+\begin{pspicture}(0,0)(38,37)
 \psline{->}(7,0)(36,0)
 \psline{->}(8,-1)(8,16)
 \psline{->}(7,21)(36,21)
@@ -129,4 +145,6 @@
 \rput[t](24,-2){$1/f$}
 \psline(13,21)(13,20)
 \psline(24,21)(24,20)
+\rput(38,21){$t$}
+\rput(38,0){$t$}
 \end{pspicture}
